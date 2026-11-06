@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-c="bleu">
+<html lang="fr" data-c="blanc">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap">
-<script>(()=>{const c=new URLSearchParams(location.search).get('c');if(['noir','bleu','corail','rose'].includes(c))document.documentElement.dataset.c=c})()</script>
+<script>(()=>{let c=new URLSearchParams(location.search).get('c');try{c=c||localStorage.getItem('roam-c')}catch(e){}if(['blanc','sable','ardoise','nuit'].includes(c))document.documentElement.dataset.c=c})()</script>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -29,14 +29,7 @@
     <p>Nous créons vos campagnes, habillons des véhicules et les faisons circuler dans vos zones.</p>
     <a class="btn" href="#contact">Créer ma campagne</a>
   </div>
-  <div class="hart" aria-hidden="true">
-    <img class="map" src="img/map.svg" alt="" width="1200" height="900">
-    <i class="d d1"></i><i class="d d2"></i><i class="d d3"></i><i class="d d4"></i><i class="d d5"></i><b class="ar"></b>
-    <img class="hc noir" src="img/hc_noir.webp" alt="" width="1800" height="616">
-    <img class="hc bleu" src="img/hc_bleu.webp" alt="" width="1800" height="616">
-    <img class="hc corail" src="img/hc_corail.webp" alt="" width="1800" height="616">
-    <img class="hc rose" src="img/hc_rose.webp" alt="" width="1800" height="616">
-  </div>
+  <div class="hart"><img src="img/hero.webp" alt="Berline habillée d'une composition noire et blanche" width="2600" height="1188"></div>
   <ul class="serv" aria-label="Nos métiers">
     <li><svg viewBox="0 0 24 24"><path d="M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3"/></svg>Création</li>
     <li><svg viewBox="0 0 24 24"><path d="M4 8h16v9H4zM4 12h16M8 8V5h8v3"/></svg>Covering</li>
@@ -52,7 +45,7 @@
   <h2 id="c-t">Nos styles de campagne</h2>
   <p class="lead">Choisissez un style pour voir comment la campagne vit sur le véhicule.</p>
   <div class="pills" role="group" aria-label="Filtrer par véhicule" id="pills"></div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid"><a class="tile" data-g="Familiale" href="campagnes/arcs/"><img loading="lazy" src="img/c1.webp" alt="Campagne Arcs" width="1600" height="896"><span><b>Arcs</b>Grandes formes</span></a><a class="tile" data-g="Citadine" href="campagnes/vague/"><img loading="lazy" src="img/c2.webp" alt="Campagne Vague" width="1600" height="896"><span><b>Vague</b>Formes organiques</span></a><a class="tile" data-g="Utilitaire" href="campagnes/cadence/"><img loading="lazy" src="img/c3.webp" alt="Campagne Cadence" width="1600" height="896"><span><b>Cadence</b>Rythme graphique</span></a><a class="tile" data-g="Citadine" href="campagnes/degrade/"><img loading="lazy" src="img/c4.webp" alt="Campagne Dégradé" width="1600" height="896"><span><b>Dégradé</b>Couleur</span></a><a class="tile" data-g="Familiale" href="campagnes/mosaique/"><img loading="lazy" src="img/c5.webp" alt="Campagne Mosaïque" width="1600" height="896"><span><b>Mosaïque</b>Géométrie</span></a><a class="tile" data-g="Utilitaire" href="campagnes/diagonales/"><img loading="lazy" src="img/c6.webp" alt="Campagne Diagonales" width="1600" height="896"><span><b>Diagonales</b>Lignes</span></a></div>
   <p class="fine">Démonstrations : concepts graphiques fictifs, sans marque ni client.</p>
 </section>
 
@@ -78,10 +71,10 @@
   </div>
   <div id="fp" role="tabpanel" aria-labelledby="ft1" tabindex="0">
     <div class="fcar">
-      <img src="img/car_base.webp" alt="" aria-hidden="true" width="1800" height="616" loading="lazy">
-      <img class="fi" data-fi data-k="classique" src="img/nf_bleu_classique.webp" alt="Format Classique : les deux portières" width="1800" height="616" loading="lazy">
-      <img class="fi on" data-fi data-k="medium" src="img/nf_bleu_medium.webp" alt="Format Medium : portières, avant et rétroviseurs" width="1800" height="616" loading="lazy">
-      <img class="fi" data-fi data-k="complet" src="img/nf_bleu_complet.webp" alt="Format Complet : toute la carrosserie, hors vitres" width="1800" height="616" loading="lazy">
+      <img src="img/car_base.webp" alt="" aria-hidden="true" width="1800" height="683" loading="lazy">
+      <img class="fi" data-fi src="img/f_classique.webp" alt="Format Classique : les deux portières" width="1800" height="683" loading="lazy">
+      <img class="fi on" data-fi src="img/f_medium.webp" alt="Format Medium : portières, avant et rétroviseurs" width="1800" height="683" loading="lazy">
+      <img class="fi" data-fi src="img/f_complet.webp" alt="Format Complet : toute la carrosserie, hors vitres" width="1800" height="683" loading="lazy">
     </div>
     <h3 data-fdesc data-d0="Le message sur les deux portières." data-d1="Les portières, l'avant et les rétroviseurs." data-d2="Toute la carrosserie, hors vitres.">Les portières, l'avant et les rétroviseurs.</h3>
     <ul class="incl"><li data-z="012" class="on">Portières</li><li data-z="12" class="on">Avant</li><li data-z="12" class="on">Rétroviseurs</li><li data-z="2">Arrière</li><li data-z="2">Toit</li></ul>
@@ -89,22 +82,19 @@
   </div>
 </section>
 
-<section class="zon" id="zones" data-zones data-dot="rgba(12,12,16,.13)" data-on="#2340FF" data-pill="#2340FF" data-pilltx="#fff" data-mark="#15151A" data-halo="#fff" data-font="Outfit,sans-serif" aria-labelledby="z-t">
+<section class="zon" id="zones" aria-labelledby="z-t">
   <div class="zt">
     <p class="eye">Ciblage</p>
     <h2 id="z-t">Votre campagne, vos zones</h2>
     <p class="lead">Composez une simulation : les villes, la zone, le nombre de véhicules et la durée.</p>
-    <div class="only-m"></div>
-    <fieldset><legend>Villes</legend><div class="chips" id="z-cities"><label><input type="checkbox" name="z-cities" value="Bruxelles" checked><span>Bruxelles</span></label><label><input type="checkbox" name="z-cities" value="Anvers"><span>Anvers</span></label><label><input type="checkbox" name="z-cities" value="Gand" checked><span>Gand</span></label><label><input type="checkbox" name="z-cities" value="Liège"><span>Liège</span></label><label><input type="checkbox" name="z-cities" value="Charleroi"><span>Charleroi</span></label><label><input type="checkbox" name="z-cities" value="Namur"><span>Namur</span></label></div></fieldset>
-    <fieldset><legend>Zone ciblée</legend><div class="chips" id="z-scope"><label><input type="radio" name="z-scope" value="Centre-ville"><span>Centre-ville</span></label><label><input type="radio" name="z-scope" value="Agglomération" checked><span>Agglomération</span></label></div></fieldset>
-    <fieldset><legend>Véhicules</legend><div class="chips" id="z-cars"><label><input type="radio" name="z-cars" value="5"><span>5</span></label><label><input type="radio" name="z-cars" value="10" checked><span>10</span></label><label><input type="radio" name="z-cars" value="20"><span>20</span></label><label><input type="radio" name="z-cars" value="40"><span>40</span></label></div></fieldset>
-    <fieldset><legend>Durée</legend><div class="chips" id="z-dur"><label><input type="radio" name="z-dur" value="3 mois" checked><span>3 mois</span></label><label><input type="radio" name="z-dur" value="4 mois"><span>4 mois</span></label><label><input type="radio" name="z-dur" value="6 mois"><span>6 mois</span></label></div></fieldset>
-    <div class="sr-f" id="z-fmt"><input type="radio" name="z-fmt" value="Classique"><input type="radio" name="z-fmt" value="Medium" checked><input type="radio" name="z-fmt" value="Complet"></div>
+    <fieldset><legend>Villes</legend><div class="chips" id="z-cities"></div></fieldset>
+    <fieldset><legend>Zone ciblée</legend><div class="chips" id="z-scope"></div></fieldset>
+    <fieldset><legend>Véhicules</legend><div class="chips" id="z-cars"></div></fieldset>
+    <fieldset><legend>Durée</legend><div class="chips" id="z-dur"></div></fieldset>
   </div>
   <div class="zm">
-    <canvas role="img" aria-label="Carte de Belgique : simulation des zones choisies"></canvas>
-    <p class="sum" data-zsum aria-live="polite"></p>
-    <a class="btn" data-zuse href="#contact">Créer cette campagne</a>
+    <svg id="zmap" viewBox="0 0 256 210" role="img" aria-label="Carte de Belgique : simulation des zones choisies"><path id="bepath" class="be" d="M113.9 16.4L118.9 18.8L123.2 19.4L125.3 18.3L123.9 12.2L127.6 9.1L131.4 7.6L133.3 10.2L136.9 12.8L139.9 12.9L147.7 6.0L149.3 7.4L151.1 9.8L151.3 11.7L151.8 13.8L153.4 14.7L159.6 14.3L162.5 10.5L165.0 8.1L166.9 9.8L167.8 14.3L169.4 20.4L176.7 27.2L182.9 29.1L190.4 27.7L193.4 26.5L195.4 27.5L197.3 31.2L201.6 35.2L210.7 38.1L213.7 39.7L215.5 42.5L215.1 46.4L210.7 56.2L210.1 59.1L210.7 60.0L209.8 61.9L204.1 68.3L203.7 70.8L205.5 74.4L207.1 77.5L210.5 79.1L213.7 79.6L219.7 79.8L226.1 80.0L226.1 80.0L227.0 81.9L234.0 87.1L236.3 91.2L241.6 95.4L237.2 100.4L237.9 102.9L239.5 105.1L245.2 106.5L248.2 109.8L248.4 115.0L249.6 123.4L237.7 131.9L234.3 141.1L234.0 143.0L234.0 143.0L233.6 142.6L232.2 139.7L229.9 139.7L225.1 138.3L218.1 146.8L214.9 153.7L213.0 158.9L210.3 163.1L209.8 167.4L210.1 169.4L209.1 171.8L209.1 174.2L213.0 179.1L214.2 181.9L219.0 190.5L217.4 193.8L216.2 197.1L214.9 199.7L213.3 201.3L213.3 201.3L208.2 201.1L201.8 202.2L197.5 203.9L195.2 203.9L190.6 199.6L185.6 193.1L182.2 190.0L180.8 187.2L176.7 186.2L171.0 182.9L166.9 179.4L163.4 177.2L158.6 176.1L154.8 176.3L153.4 170.4L152.9 163.6L149.7 159.1L154.3 141.4L151.6 139.7L148.6 141.1L144.5 145.4L142.4 150.4L141.3 154.8L134.2 158.9L123.0 160.5L110.9 158.9L109.1 157.9L108.4 156.7L108.4 155.1L109.1 152.7L111.3 149.7L111.8 145.6L109.5 142.1L108.1 140.7L108.8 137.2L110.4 132.9L110.7 130.5L102.4 122.8L96.5 121.4L90.5 121.3L86.2 120.4L83.7 120.7L81.9 122.8L79.8 124.4L78.4 122.5L75.9 109.3L73.9 107.4L66.3 105.1L56.3 104.3L53.5 101.8L51.9 95.9L51.0 88.8L47.6 81.9L46.0 80.1L43.0 77.2L37.5 78.4L31.1 82.4L27.5 83.4L25.9 83.9L20.9 80.0L15.1 73.9L10.6 67.5L9.4 63.8L10.8 59.5L9.2 56.2L6.7 50.1L6.0 45.4L6.0 45.4L33.6 28.6L50.3 19.9L58.3 17.3L58.3 17.3L60.2 26.0L61.8 28.7L63.6 30.5L66.1 30.8L68.8 28.7L73.0 26.5L79.4 27.5L84.1 29.6L85.7 31.7L88.9 33.8L93.3 34.3L102.2 30.3L110.7 24.4L112.9 20.2L113.9 16.4Z"/><g id="zzones"></g><g id="zcities"></g></svg>
+    <p class="sum" id="zsum" aria-live="polite"></p>
     <p class="fine">Simulation sans données de diffusion. Aucune ville n'est présentée comme couverte aujourd'hui : les zones disponibles sont confirmées dans le devis.</p>
   </div>
 </section>
@@ -112,7 +102,7 @@
 <section class="app" id="suivi" aria-labelledby="a-t">
   <div class="phones" aria-hidden="true">
     <div class="ph p1"><div class="sc">
-      <div class="mapui"><img src="img/map.svg" alt=""><b>Bruxelles</b></div>
+      <div class="mapui"><svg viewBox="0 0 256 210"><use href="#bepath"/></svg><i></i><b>Bruxelles</b></div>
       <div class="card dark"><span>Campagne</span><strong>Démonstration</strong><div class="r"><em>— km</em><em>— jours</em></div></div>
       <div class="pbtn">Voir le rapport</div>
     </div></div>
@@ -159,21 +149,9 @@
   <div><a class="logo" href="#top" aria-label="roam, nom provisoire, retour en haut"><i></i>roam</a><p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p></div>
 </footer>
 
-<dialog id="dlg" aria-labelledby="d-t">
-  <button class="x" id="dx" aria-label="Fermer">×</button>
-  <div class="dm"><img id="dmain" alt=""></div>
-  <div class="dside">
-    <p class="eye" id="d-k"></p>
-    <h3 id="d-t"></h3>
-    <p id="d-p"></p>
-    <div class="th" id="dth"></div>
-    <p class="fine">Démonstration, sans marque ni client.</p>
-  </div>
-</dialog>
-
-<div class="pal" role="group" aria-label="Palette de couleurs" id="pal"><span>Couleur</span><button data-v="noir" aria-label="Noir"></button><button data-v="bleu" aria-label="Bleu"></button><button data-v="corail" aria-label="Corail"></button><button data-v="rose" aria-label="Fuchsia"></button></div>
+<div class="pal" role="group" aria-label="Couleurs du site" id="pal"><span>Couleurs</span><button data-v="blanc">Blanc</button><button data-v="sable">Sable</button><button data-v="ardoise">Ardoise</button><button data-v="nuit">Nuit</button></div>
 
 <script>window.SITE_T={lang:'fr',m:{sim:'Simulation : {cars} véhicules, {dur}, {cities} ({scope}).',none:'Choisissez au moins une ville.'}}</script>
-<script src="../shared/be.js"></script><script src="../shared/site.js"></script><script src="app.js"></script>
+<script src="../shared/site.js"></script><script src="app.js"></script>
 </body>
 </html>
