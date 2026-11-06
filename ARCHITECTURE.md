@@ -14,4 +14,4 @@
 
 **Applications futures.** L'espace annonceur, l'espace conducteur et le CRM restent dans le dépôt produit `Agence-Com`. Ils partageront la table `leads` et les textes de marque, sans dépendre de ce site statique.
 
-**Maquette en cours.** `site/` est généré par `python3 src/site_build.py` depuis `src/site_index.html`. Une page par campagne dans `site/campagnes/`.
+**Maquette en cours.** `site/` est généré par `python3 src/site_build.py` depuis `src/site_index.html`.
