@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>C · Branding premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<script>if(!/still=1/.test(location.search)&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('mo')</script>
+<style>
+:root{--ci:#D6EA12;--ink:#0B0C06;--g:clamp(16px,2.2vw,32px);--f:"Archivo",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ci);color:var(--ink);font:500 16px/1.35 var(--f);-webkit-font-smoothing:antialiased}
+h1,p,ul{margin:0;padding:0}ul{list-style:none}
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--ink);outline-offset:3px}
+.page{position:relative;height:100svh;min-height:600px;overflow:hidden}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 100%}
+.mob{display:none}
+header{position:absolute;z-index:3;left:var(--g);right:var(--g);top:clamp(14px,2vw,26px);display:flex;justify-content:space-between;align-items:center}
+.logo{font:900 30px/1 var(--f);font-variation-settings:"wdth" 125;letter-spacing:-.06em;text-decoration:none}
+.go{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;background:var(--ink);color:var(--ci);font-weight:600;font-size:15px;text-decoration:none;border-radius:999px}
+h1{position:absolute;z-index:2;left:var(--g);top:20svh;white-space:nowrap;font:800 min(6.1vw,14svh)/.96 var(--f);font-variation-settings:"wdth" 118;letter-spacing:-.055em}
+h1 span{display:block}
+.dot{display:inline-block;width:.2em;height:.2em;margin-left:.04em;border-radius:50%;background:currentColor;vertical-align:baseline}
+.mo .dot{animation:roll 1.5s cubic-bezier(.16,.84,.3,1) .35s both}
+@keyframes roll{from{transform:translateX(var(--from,70vw))}to{transform:none}}
+.foot{position:absolute;z-index:2;left:var(--g);bottom:clamp(18px,3vh,32px);width:min(46vw,640px);display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:12px;padding-top:12px;border-top:1.5px solid var(--ink)}
+.foot li{font-weight:600;font-size:clamp(14px,1.15vw,17px)}
+@media (max-aspect-ratio:1/1){
+  .wide{display:none}.mob{display:block}
+  h1{top:84px;font-size:11.8vw}
+  .dot{--from:62vw}
+  .foot{top:calc(84px + 11.8vw*.96*2 + 22px);bottom:auto;right:var(--g);width:auto}
+  .foot li{font-size:14px}
+  .logo{font-size:26px}
+  .go{min-height:44px;padding:0 16px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <img class="ph wide" src="../assets/c_w.webp" alt="Berline habillée de citron mat dans un studio de la même couleur" width="2800" height="1568">
+  <img class="ph mob" src="../assets/c_m.webp" alt="Berline habillée de citron mat dans un studio de la même couleur" width="1200" height="2144">
+  <header>
+    <a class="logo" href="#" aria-label="roam, nom provisoire">roam.</a>
+    <a class="go" href="#">Demander un devis</a>
+  </header>
+  <h1><span>Votre marque,</span><span>en circulation<i class="dot" aria-hidden="true"></i></span></h1>
+  <ul class="foot" aria-label="Nos métiers"><li>Création</li><li>Covering</li><li>Diffusion</li><li>Suivi</li></ul>
+</main>
+</body>
+</html>

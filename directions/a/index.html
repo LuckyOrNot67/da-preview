@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>A · Studio éditorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<script>if(!/still=1/.test(location.search)&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('mo')</script>
+<style>
+:root{--paper:#F1EDE4;--ink:#15130F;--red:#E2430F;--g:clamp(16px,1.7vw,24px);--gap:clamp(10px,1.1vw,16px);--s:"Instrument Serif",Georgia,serif;--b:"Instrument Sans",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.42 var(--b);-webkit-font-smoothing:antialiased}
+h1,p,figure{margin:0}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.page{position:relative;height:100svh;min-height:620px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr) 27svh;column-gap:var(--gap);padding:0 var(--g) var(--g);overflow:hidden}
+.lines{position:absolute;inset:0 var(--g);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);pointer-events:none;z-index:0}
+.lines i{border-left:1px solid rgba(21,19,15,.13);transform-origin:top}
+header{grid-column:1/9;grid-row:1;position:relative;z-index:3;display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 0}
+.logo{font:italic 400 34px/1 var(--s);letter-spacing:-.02em;text-decoration:none}
+.logo sup{font:400 10px/1 var(--b);letter-spacing:0;margin-left:3px}
+nav{display:flex;gap:clamp(14px,1.8vw,26px);font-size:14px}
+nav a{text-decoration:none}
+nav a:hover{text-decoration:underline;text-underline-offset:3px}
+h1{grid-column:1/-1;grid-row:2;align-self:center;position:relative;z-index:2;font:400 min(11.6vw,24.5svh)/.9 var(--s);letter-spacing:-.025em}
+h1 span{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+h1 span>span{display:block;overflow:visible;padding:0;margin:0}
+h1 em{font-style:italic;color:var(--red)}
+.f1{grid-column:9/13;grid-row:1/4;margin:0 calc(var(--g)*-1) calc(var(--g)*-1) 0;position:relative;z-index:1;background:#ddd}
+.f1 img{object-position:64% 50%}
+.f2{grid-column:4/6;grid-row:3;position:relative;z-index:1;min-height:0}
+.f2 img{object-position:50% 30%}
+.f3{grid-column:1/4;grid-row:3;position:relative;z-index:1;min-height:0}
+.f3 img{object-position:62% 62%}
+figure{overflow:hidden}
+.txt{grid-column:6/9;grid-row:3;align-self:end;position:relative;z-index:2;padding-right:8px}
+.txt p{font-size:clamp(15px,1.15vw,17px)}
+.cta{display:inline-block;margin-top:10px;font:italic 400 clamp(24px,2.1vw,32px)/1.1 var(--s);text-decoration:none;border-bottom:1.5px solid var(--red);color:var(--ink)}
+.cta:after{content:" →";font-style:normal}
+.mo .lines i{animation:draw 1s cubic-bezier(.7,0,.2,1) both}
+.mo .lines i:nth-child(n){animation-delay:calc(var(--i)*25ms)}
+.mo figure{animation:open 1.15s cubic-bezier(.7,0,.15,1) both}
+.mo .f3{animation-delay:.25s}.mo .f2{animation-delay:.4s}.mo .f1{animation-delay:.55s}
+.mo h1 span>span{animation:rise 1s cubic-bezier(.2,.8,.2,1) .55s both}
+.mo h1 span+span>span{animation-delay:.68s}
+@keyframes draw{from{transform:scaleY(0)}}
+@keyframes open{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+@keyframes rise{from{transform:translateY(105%)}}
+@media (max-aspect-ratio:1/1){
+  .page{height:auto;min-height:0;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:none;padding-bottom:var(--g)}
+  .lines{grid-template-columns:repeat(6,minmax(0,1fr))}.lines i:nth-child(n+7){display:none}
+  header{grid-column:1/-1;grid-row:auto;padding-bottom:22px}
+  nav a:not(:last-child){display:none}
+  h1{grid-column:1/-1;grid-row:auto;font-size:19.4vw;margin-bottom:18px}
+  .f1{grid-column:1/-1;grid-row:auto;margin:0 calc(var(--g)*-1) var(--gap);aspect-ratio:4/4.3}
+  .f1 img{object-position:40% 75%}
+  .txt{grid-column:1/-1;grid-row:auto;margin-bottom:18px;padding:0}
+  .f3{grid-column:1/5;grid-row:auto;aspect-ratio:4/3}
+  .f2{grid-column:5/7;grid-row:auto}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="lines" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i></div>
+  <header>
+    <a class="logo" href="#" aria-label="roam, nom provisoire">roam<sup>prov.</sup></a>
+    <nav aria-label="Navigation"><a href="#">Studio</a><a href="#">Formats</a><a href="#">Zones</a><a href="#">Demander un devis</a></nav>
+  </header>
+  <h1><span><span>L'affiche a</span></span><span><span><em>quitté</em> le mur.</span></span></h1>
+  <figure class="f1"><img src="../assets/a1.webp" alt="Citadine habillée d'un grand cercle vermillon, garée devant un mur clair" width="1600" height="2000"></figure>
+  <figure class="f3"><img src="../assets/a3.webp" alt="Petite fourgonnette habillée, sur un boulevard de Bruxelles" width="2000" height="1120"></figure>
+  <figure class="f2"><img src="../assets/a2.webp" alt="Épreuves de covering affichées au mur d'un studio" width="1400" height="1750"></figure>
+  <div class="txt">
+    <p>Studio de création et régie de publicité sur véhicules. Nous concevons la campagne, posons le covering, la diffusons dans vos zones et en rendons compte.</p>
+    <a class="cta" href="#">Parlons de votre campagne</a>
+  </div>
+</main>
+</body>
+</html>

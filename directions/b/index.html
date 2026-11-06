@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>B · Expérience immersive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&family=Geist:wght@400;500&display=swap">
+<style>
+:root{--ink:#05060C;--rose:#FF2E8B;--w:#EDEEF7;--g:clamp(16px,2.6vw,38px);--f:"Geist",system-ui,sans-serif;--m:"Geist Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--w);font:400 16px/1.45 var(--f);-webkit-font-smoothing:antialiased}
+h1,p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.page{position:relative;height:100svh;min-height:600px;overflow:hidden;touch-action:pan-y}
+.st,#gl{position:absolute;inset:0;width:100%;height:100%}
+.st{object-fit:cover;object-position:62% 50%}
+.st.mob{display:none}
+#gl{opacity:0}
+header{position:absolute;z-index:3;left:var(--g);right:var(--g);top:clamp(16px,2.2vw,30px);display:flex;justify-content:space-between;align-items:center}
+.logo{display:block;height:26px}
+.logo img{height:100%;width:auto;display:block}
+nav{display:flex;gap:clamp(14px,2vw,30px);font:400 13px/1 var(--m)}
+nav a{text-decoration:none}
+nav a:hover{color:var(--rose)}
+.page:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(5,6,12,.9) 0,rgba(5,6,12,.72) 34%,rgba(5,6,12,0) 60%)}
+.txt{position:absolute;z-index:2;left:var(--g);bottom:clamp(26px,7.6vh,70px);width:min(56vw,860px)}
+.tag{display:inline-block;margin-bottom:16px;padding:4px 8px;background:var(--rose);color:var(--ink);font:400 clamp(13px,1vw,15px)/1.2 var(--m)}
+h1{font:500 min(5.5vw,11.4svh)/1.02 var(--f);letter-spacing:-.045em}
+.s{margin-top:14px;max-width:42ch;font-size:clamp(16px,1.2vw,18px);color:#C4C6D6}
+.go{display:inline-block;margin-top:20px;padding:13px 16px;background:var(--w);color:var(--ink);font:400 14px/1 var(--m);text-decoration:none;transition:background .2s}
+.go:hover{background:var(--rose)}
+@media (max-aspect-ratio:1/1){
+  .page:after{background:linear-gradient(180deg,rgba(5,6,12,.92) 0,rgba(5,6,12,.8) 42%,rgba(5,6,12,0) 62%)}
+  .st.wide{display:none}.st.mob{display:block}
+  .st{object-position:50% 100%}
+  nav a:not(:last-child){display:none}
+  .txt{left:var(--g);right:var(--g);bottom:auto;top:78px;width:auto}
+  h1{font-size:11.6vw}
+  .s{font-size:16px}
+}
+</style>
+</head>
+<body>
+<main class="page" id="page">
+  <img class="st wide" src="../assets/b_static.webp" alt="Rue pavée d'Anvers la nuit, en trame d'impression. Seule la voiture habillée de rose est en couleur." width="1920" height="1080">
+  <img class="st mob" src="../assets/b_static_m.webp" alt="Rue pavée d'Anvers la nuit, en trame d'impression. Seule la voiture habillée de rose est en couleur." width="900" height="1600">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <header>
+    <a class="logo" href="#" aria-label="roam, nom provisoire"><img src="../assets/logo_b.svg" alt="" width="136" height="26"></a>
+    <nav aria-label="Navigation"><a href="#">Concept</a><a href="#">Formats</a><a href="#">Zones</a><a href="#">Devis</a></nav>
+  </header>
+  <div class="txt">
+    <p class="tag">Agence de publicité sur véhicules</p>
+    <h1>La ville bouge.<br>Votre marque aussi.</h1>
+    <p class="s">Création graphique, covering et diffusion de vos campagnes sur un réseau de véhicules.</p>
+    <a class="go" href="#">Demander un devis</a>
+  </div>
+</main>
+<script>
+(()=>{
+if(/still=1/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const cv=document.getElementById('gl'),gl=cv.getContext('webgl',{antialias:false,alpha:false,preserveDrawingBuffer:/shot=1/.test(location.search)});
+if(!gl)return;
+const port=innerWidth<=innerHeight,F=port?{p:'../assets/b_photo_m.webp',m:'../assets/b_mask_m.webp',a:752/1344,c:[.5,.73],fx:.5,fy:1}:{p:'../assets/b_photo.webp',m:'../assets/b_mask.webp',a:1344/752,c:[.77,.48],fx:.62,fy:.5};
+const vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+const fs=`precision highp float;
+uniform sampler2D T,M;uniform vec2 R,C,Ms,Fc;uniform float A,P,L,S;
+vec2 cov(vec2 p){float r=R.x/R.y;vec2 u=p/R;if(r>A){float s=A/r;u.y=u.y*s+(1.-s)*Fc.y;}else{float s=r/A;u.x=u.x*s+(1.-s)*Fc.x;}return u;}
+void main(){
+ vec2 px=vec2(gl_FragCoord.x,R.y-gl_FragCoord.y);
+ const float c=.7071;mat2 Rt=mat2(c,-c,c,c),Ri=mat2(c,c,-c,c);
+ vec2 q=Rt*px/S,id=floor(q)+.5,f=fract(q)-.5;
+ vec2 cp=Ri*id*S,uc=cov(cp),uv=cov(px);
+ vec3 s=texture2D(T,uc).rgb,ph=texture2D(T,uv).rgb;
+ float l=dot(s,vec3(.3,.59,.11));
+ float d=distance(uc*vec2(A,1.),C*vec2(A,1.));
+ float w=smoothstep(P*2.1,P*2.1-.35,d);
+ float r=sqrt(l)*.78*w,dd=length(f);
+ float o=smoothstep(r+.07,r-.07,dd);
+ float rose=smoothstep(.1,.32,s.r-s.g);
+ vec3 dc=mix(vec3(.84,.86,.98),vec3(1.,.18,.55),rose);
+ vec3 col=vec3(.02,.024,.047)+o*dc*(.2+.68*sqrt(l));
+ float m=texture2D(M,uv).r*smoothstep(0.,.3,P);
+ col=mix(col,ph,m);
+ float ll=smoothstep(.2,.09,distance(cp/R.y,Ms/R.y))*L*.95;
+ col=mix(col,ph,smoothstep(ll+.05,ll-.05,dd)*step(.01,ll));
+ gl_FragColor=vec4(col,1.);
+}`;
+const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};
+const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return;
+gl.useProgram(pr);
+gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const a=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+const u=n=>gl.getUniformLocation(pr,n);
+const load=src=>new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=src});
+const tex=(i,n)=>{const t=gl.createTexture();gl.activeTexture(gl.TEXTURE0+n);gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,i);for(const[k,v]of[[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]])gl.texParameteri(gl.TEXTURE_2D,k,v)};
+const FZ=new URLSearchParams(location.search).get('P');let P=0,L=0,LT=0,mx=[0,0],tx=[0,0],t0=0,dp=1,raf=0,run=false;
+function size(){dp=Math.min(devicePixelRatio||1,2);cv.width=cv.clientWidth*dp;cv.height=cv.clientHeight*dp;gl.viewport(0,0,cv.width,cv.height);gl.uniform2f(u('R'),cv.width,cv.height);gl.uniform1f(u('S'),(port?4.4:5.4)*dp);kick()}
+function draw(){gl.uniform1f(u('P'),P);gl.uniform1f(u('L'),L);gl.uniform2f(u('Ms'),mx[0]*dp,mx[1]*dp);gl.drawArrays(gl.TRIANGLES,0,3)}
+function tick(t){
+  if(!t0)t0=t;
+  P=FZ!==null?FZ:Math.min(1,(t-t0)/2200);const e=1-Math.pow(1-P,3);
+  mx[0]+=(tx[0]-mx[0])*.14;mx[1]+=(tx[1]-mx[1])*.14;L+=(LT-L)*.1;
+  const keep=P<1||Math.abs(LT-L)>.003||Math.hypot(tx[0]-mx[0],tx[1]-mx[1])>.5;
+  const pp=P;P=e;draw();P=pp;
+  if(keep)raf=requestAnimationFrame(tick);else run=false;
+}
+function kick(){if(!run&&t0!==-1){run=true;raf=requestAnimationFrame(tick)}}
+const pg=document.getElementById('page');
+pg.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();tx=[e.clientX-r.left,e.clientY-r.top];if(!L)mx=[...tx];LT=1;kick()});
+pg.addEventListener('pointerleave',()=>{LT=0;kick()});
+pg.addEventListener('pointerup',e=>{if(e.pointerType==='touch'){LT=0;kick()}});
+addEventListener('resize',size);
+Promise.all([load(F.p),load(F.m)]).then(([p,m])=>{
+  tex(p,0);tex(m,1);gl.uniform1i(u('T'),0);gl.uniform1i(u('M'),1);gl.uniform1f(u('A'),F.a);gl.uniform2f(u('C'),F.c[0],F.c[1]);gl.uniform2f(u('Fc'),F.fx,F.fy);
+  size();cv.style.opacity=1;
+}).catch(()=>{});
+})();
+</script>
+</body>
+</html>
