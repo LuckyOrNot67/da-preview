@@ -10,17 +10,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&display=swap">
-<script>(()=>{const R=document.documentElement,u=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.getItem('roam-cfg4'))||{}}catch(e){}for(const k of ['c','m','f','expertise','app']){const v=u.get(k)||s[k];if(v)R.dataset[k]=v}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('mo')})()</script>
+<script>(()=>{const R=document.documentElement,u=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.getItem('roam-cfg5'))||{}}catch(e){}for(const k of ['c','m','f','expertise','app']){const v=u.get(k)||s[k];if(v)R.dataset[k]=v}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('mo')})()</script>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skip" href="#top">Aller au contenu</a>
 <header class="bar">
   <a class="logo" href="#top" aria-label="roam, nom provisoire"><i></i><span>roam</span></a>
-  <nav class="links" aria-label="Navigation principale"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Application">Application</span></a></nav>
-  <div class="acts"><a class="btn sm" href="#contact"><span class="rl" data-t="Créer ma campagne">Créer ma campagne</span></a><button class="menu" data-menu aria-expanded="false" aria-controls="sheet">Menu</button></div>
+  <nav class="links" aria-label="Navigation principale"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Suivi">Suivi</span></a></nav>
+  <div class="acts"><a class="drv" href="conducteur/"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a><a class="btn sm" href="demande/"><span class="rl" data-t="Créer ma campagne">Créer ma campagne</span></a><button class="menu" data-menu aria-expanded="false" aria-controls="sheet">Menu</button></div>
 </header>
-<div class="sheet" data-sheet id="sheet"><a href="#concept">Concept</a><a href="#formats">Styles</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a><a href="#contact">Créer ma campagne</a></div>
+<div class="sheet" data-sheet id="sheet"><a href="#concept">Concept</a><a href="#formats">Styles</a><a href="#expertise">Expertise</a><a href="#suivi">Suivi</a><a href="demande/">Créer ma campagne</a><a href="conducteur/">Devenir conducteur</a></div>
 
 <main id="top">
 <div data-sec="hero">
@@ -40,22 +40,24 @@
 {{APP}}
 </div>
 
+</main>
+
+<div class="endw">
 <section class="wrapc" id="contact" aria-labelledby="k-t">
   <div class="cta">
     <h2 id="k-t">Votre prochaine campagne prend la route&nbsp;?</h2>
     <p>Dites-nous ce que vous voulez faire connaître et où.</p>
-    <div class="ct2"><a class="btn inv" href="#contact"><span class="rl" data-t="Créer ma campagne">Créer ma campagne</span></a><a class="btn gh" href="#conducteur"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a></div>
+    <div class="ct2"><a class="btn inv" href="demande/"><span class="rl" data-t="Créer ma campagne">Créer ma campagne</span></a><a class="btn gh" href="conducteur/"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a></div>
   </div>
 </section>
-</main>
-
 <footer id="conducteur">
   <div class="ft">
-    <div class="fl"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Application">Application</span></a></div>
-    <div class="fl"><a href="#conducteur"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a><a href="../premium-v2/confidentialite/"><span class="rl" data-t="Données personnelles">Données personnelles</span></a></div>
+    <div class="fl"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Suivi">Suivi</span></a></div>
+    <div class="fl"><a href="conducteur/"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a><a href="../premium-v2/confidentialite/"><span class="rl" data-t="Données personnelles">Données personnelles</span></a></div>
   </div>
   <div class="fb2"><a class="wm" href="#top" aria-label="roam, nom provisoire, retour en haut">roam</a><p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p></div>
 </footer>
+</div>
 
 <button class="cfgb" id="cfgb" aria-expanded="false" aria-controls="cfg" aria-label="Ouvrir les réglages de la maquette"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
 <aside class="cfg" id="cfg" hidden aria-label="Réglages de la maquette"></aside>
