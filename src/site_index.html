@@ -9,8 +9,8 @@
 <link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800;900&family=Caveat:wght@500;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&display=swap">
-<script>(()=>{const R=document.documentElement,u=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.getItem('roam-cfg2'))||{}}catch(e){}for(const k of ['c','m','f','expertise','app']){const v=u.get(k)||s[k];if(v)R.dataset[k]=v}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('mo')})()</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&display=swap">
+<script>(()=>{const R=document.documentElement,u=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.getItem('roam-cfg3'))||{}}catch(e){}for(const k of ['c','m','f','expertise','app']){const v=u.get(k)||s[k];if(v)R.dataset[k]=v}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('mo')})()</script>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -41,7 +41,6 @@
 <div data-sec="app" id="suivi">
 <header class="sh"><p class="eye">Application mobile</p><h2 class="big">Votre campagne, vos zones, dans votre poche</h2></header>
 {{APP}}
-<p class="fine sf">Écrans de démonstration, sans données réelles. L'application n'est pas encore développée : les méthodes de mesure et la validation des trajets restent à définir.</p>
 </div>
 
 <section class="wrapc" id="contact" aria-labelledby="k-t">
@@ -54,9 +53,12 @@
 </main>
 
 <footer id="conducteur">
-  <div class="fl"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Application">Application</span></a></div>
-  <div class="fl"><a href="#conducteur"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a><a href="../premium-v2/confidentialite/"><span class="rl" data-t="Données personnelles">Données personnelles</span></a></div>
-  <div><a class="logo" href="#top" aria-label="roam, nom provisoire, retour en haut"><i></i><span>roam</span></a><p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p></div>
+  <div class="ft">
+    <div class="fl"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Application">Application</span></a></div>
+    <div class="fl"><a href="#conducteur"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a><a href="../premium-v2/confidentialite/"><span class="rl" data-t="Données personnelles">Données personnelles</span></a></div>
+    <p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p>
+  </div>
+  <a class="wm" href="#top" aria-label="roam, nom provisoire, retour en haut">roam</a>
 </footer>
 
 <button class="cfgb" id="cfgb" aria-expanded="false" aria-controls="cfg" aria-label="Ouvrir les réglages de la maquette"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
