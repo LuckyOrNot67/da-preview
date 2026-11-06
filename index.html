@@ -1,421 +1,519 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Salle de validation</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Trois idées de marque</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;700;800&family=League+Gothic&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;700&family=League+Gothic&display=swap">
 <style>
-/* Mise en page : une salle de validation sobre autour d'un studio vivant. La page reste neutre, le studio porte toute la couleur. */
+/* Trois concepts sur un même moteur de covering : image blanche + masque carrosserie + visuel multiplié. */
 @property --p{syntax:'<number>';inherits:true;initial-value:0}
-:root{
-  --bg:#F3F4F8;--fg:#0E1020;--mut:#5A5F75;--line:#D6D9E3;--panel:#FFFFFF;--acc:#1226FF;--ok:#0B7A4B;--warn:#A85A00;--no:#B3261E;
-  --disp:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--body:"Hanken Grotesk",system-ui,-apple-system,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,monospace;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C0E18;--fg:#EEF0F7;--mut:#A0A5BB;--line:#2A2E42;--panel:#14172A;--acc:#8C97FF;--ok:#4FD39A;--warn:#F1B061;--no:#FF8E85;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0C0E18;--fg:#EEF0F7;--mut:#A0A5BB;--line:#2A2E42;--panel:#14172A;--acc:#8C97FF;--ok:#4FD39A;--warn:#F1B061;--no:#FF8E85;color-scheme:dark}
+:root{--body:"Hanken Grotesk",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;--lg:"League Gothic",Impact,sans-serif;--br:"Bricolage Grotesque","Arial Black",sans-serif;--bc:"Barlow Condensed","Arial Narrow",sans-serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-a{color:var(--acc)}
-h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.025em;line-height:1.04;margin:0;text-wrap:balance}
-p{margin:0}
-.band{padding-block:clamp(44px,7vw,84px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:1180px;margin:0 auto;display:grid;gap:clamp(22px,3vw,34px);min-width:0}
-.eyebrow{font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
-.lead{font-size:clamp(17px,1.5vw,20px);max-width:62ch}
-.mut{color:var(--mut)}
-.top h1{font-size:clamp(42px,8vw,104px)}
-.asks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-top:1.5px solid var(--fg);list-style:none;margin:0;padding:0;counter-reset:a}
-.asks li{padding:14px 18px 14px 0;counter-increment:a;min-width:0}
-.asks li::before{content:"Décision " counter(a);display:block;font:500 12px var(--mono);color:var(--mut);margin-bottom:6px}
-.asks b{font-family:var(--disp);font-size:20px;display:block;line-height:1.15}
-h2{font-size:clamp(30px,4.4vw,54px)}
-h3{font-size:22px}
-.tbl{overflow-x:auto;border-top:1.5px solid var(--fg)}
-table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px}
-th{font:500 12px var(--mono);text-align:left;color:var(--mut);padding:10px 14px 10px 0;border-bottom:1px solid var(--line);vertical-align:bottom}
-td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
-td b{font-family:var(--disp)}
-.d{font:500 12px var(--mono);white-space:nowrap}.d.y{color:var(--ok)}.d.n{color:var(--mut)}
-.st{font:500 12px var(--mono);white-space:nowrap}.st.g{color:var(--ok)}.st.a{color:var(--warn)}.st.r{color:var(--no)}
-.pat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px 34px}
-.pat>div{min-width:0}
-.pat h3{margin-bottom:6px;font-size:21px}
-.refs{font-size:14px;color:var(--mut)}
-.note{border-left:3px solid var(--warn);padding:2px 0 2px 14px;max-width:80ch}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 
-/* Barre de réglages du studio */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-block:1px solid var(--line);padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.bar .in{max-width:1180px;margin:auto;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
-.seg{max-width:100%;overflow-x:auto;scrollbar-width:none;display:flex;gap:2px;background:var(--bg);padding:3px;border-radius:9px}
-.seg button{border:0;background:none;color:var(--fg);font:500 14px var(--body);padding:7px 11px;border-radius:7px;cursor:pointer;white-space:nowrap}
-.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
-button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+/* Jetons */
+body[data-d="d"]{--bg:#FAFAF7;--ink:#0A0A0A;--soft:#5E5E58;--rule:#DEDDD6;--acc:#FF3B00;--onacc:#0A0A0A;--d1:var(--lg);--cta:0px}
+body[data-d="d"][data-m="dark"]{--bg:#0A0A0A;--ink:#FAFAF7;--soft:#A9A8A0;--rule:#2B2B28;--acc:#FF3B00;--onacc:#0A0A0A}
+body[data-d="e"]{--bg:#E4E4E0;--ink:#101113;--soft:#55565A;--rule:#C4C4BF;--acc:#FFC400;--onacc:#101113;--sign:#0B4EA2;--d1:var(--bc);--cta:4px}
+body[data-d="e"][data-m="dark"]{--bg:#17181A;--ink:#F2F2EE;--soft:#A2A3A6;--rule:#333438;--acc:#FFC400;--onacc:#101113;--sign:#0B4EA2}
+body[data-d="f"]{--bg:#FFE600;--ink:#0B0B0B;--soft:#3E3A00;--rule:#0B0B0B;--acc:#0B0B0B;--onacc:#FFE600;--d1:var(--br);--cta:999px}
+body[data-d="f"][data-m="dark"]{--bg:#0B0B0B;--ink:#FFE600;--soft:#B8AE2E;--rule:#3A3700;--acc:#FFE600;--onacc:#0B0B0B}
 
-/* Studio : chaque territoire a ses jetons, clair et sombre */
-@property --sl{syntax:'<color>';inherits:true;initial-value:#C8A97E}
-#studio{--fs:var(--body);--paper:#FFFFFF;--ink:#0B0C10;--a1:#0B0C10;--a2:#1226FF;--soft:#5F6472;--rule:#E1E3E9;--on1:#fff;--dfont:"Hanken Grotesk",Arial,sans-serif;--dcase:none;--dtrack:-.04em;--dweight:800;--rad:999px;--radimg:22px;background:var(--paper);color:var(--ink);transition:background .35s,color .35s}
-#studio[data-m="dark"]{--paper:#0B0C10;--ink:#F5F6F8;--a1:#FFFFFF;--a2:#8C97FF;--soft:#A0A5B4;--rule:#262833;--on1:#0B0C10}
-#studio[data-t="b"]{--paper:#F7F2E9;--ink:#1B1712;--a1:#1B1712;--a2:#C8A97E;--soft:#6F6658;--rule:#E2D9C8;--on1:#F7F2E9;--dfont:"League Gothic",Impact,sans-serif;--dcase:uppercase;--dtrack:.005em;--dweight:400}
-#studio[data-t="b"][data-m="dark"]{--paper:#14120F;--ink:#F7F2E9;--a1:#F7F2E9;--a2:#C8A97E;--soft:#AFA696;--rule:#2F2B25;--on1:#14120F}
-#studio[data-t="c"]{--paper:#FDEDF5;--ink:#2B0A1D;--a1:#D4177F;--a2:#FF5FB0;--soft:#8A4A6C;--rule:#F2C9DF;--on1:#fff;--dfont:"League Gothic",Impact,sans-serif;--dcase:uppercase;--dtrack:.005em;--dweight:400;--deep:#7C0A4B}
-#studio[data-t="c"][data-m="dark"]{--paper:#0B0A0D;--ink:#FFFFFF;--a1:#FF6DB8;--a2:#D4177F;--soft:#B59DAC;--rule:#2B2230;--on1:#0B0A0D;--deep:#8E1560}
-#studio[data-t="a"] .only-b,#studio[data-t="a"] .only-c,#studio[data-t="b"] .only-a,#studio[data-t="b"] .only-c,#studio[data-t="c"] .only-a,#studio[data-t="c"] .only-b{display:none!important}
-.disp{font-family:var(--dfont);text-transform:var(--dcase);letter-spacing:var(--dtrack);font-weight:var(--dweight);line-height:.95}
-.sw{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* Barre de comparaison */
+.bar{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;display:flex;gap:6px;padding:5px;background:#0A0A0Af2;border:1px solid #333;border-radius:14px;max-width:calc(100vw - 16px);overflow-x:auto;scrollbar-width:none;font:500 13px var(--body)}
+.bar div{display:flex;gap:2px}
+.bar div+div{border-left:1px solid #333;padding-left:6px}
+.bar button{background:none;border:0;color:#F2F2EE;padding:8px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.bar button[aria-pressed="true"]{background:#F2F2EE;color:#0A0A0A}
+body.embed .bar,body.embed .fiche,body.embed .choice{display:none}
 
-/* Héros plein cadre : l'unité --u garde les proportions au bureau comme dans le téléphone */
+.dir{display:none}
+body[data-d="d"] .dir.d,body[data-d="e"] .dir.e,body[data-d="f"] .dir.f{display:block}
+body[data-d="d"] .only-e,body[data-d="d"] .only-f,body[data-d="e"] .only-d,body[data-d="e"] .only-f,body[data-d="f"] .only-d,body[data-d="f"] .only-e{display:none!important}
+
+/* Navigation */
+.nav{position:absolute;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,2.6vw,36px);font:500 14px var(--body)}
+.nav nav{display:flex;gap:24px}
+.logo{font:800 22px/1 var(--br);letter-spacing:-.05em}
+.cta{display:inline-block;background:var(--acc);color:var(--onacc);font:700 15px/1.1 var(--body);padding:12px 18px;text-decoration:none;border-radius:var(--cta);white-space:nowrap;border:0;cursor:pointer}
+body[data-d="e"] .cta{background:var(--sign);color:#fff;box-shadow:inset 0 0 0 2px #fff,0 0 0 2px var(--sign);font:700 18px/1 var(--bc);letter-spacing:.02em;text-transform:uppercase}
+.tlink{font:500 14px var(--body);text-underline-offset:.25em}
+
+/* Moteur de covering */
+.car{position:relative;aspect-ratio:var(--ar,2.7416);isolation:isolate;--w:100%}
+.car.golf{--ar:2.7416;--img:url(assets/golf_white.webp);--mask:url(assets/golf_mask.webp)}
+.car.r5{--ar:2.3662;--img:url(assets/r5_white.webp);--mask:url(assets/r5_mask.webp)}
+.car .base{position:absolute;inset:0;background:var(--img) center/100% 100% no-repeat}
+.car .skin{position:absolute;inset:0;-webkit-mask:var(--mask) center/100% 100% no-repeat;mask:var(--mask) center/100% 100% no-repeat;mix-blend-mode:multiply;overflow:hidden}
+.car .shade{position:absolute;left:2%;right:2%;bottom:-3%;height:9%;background:radial-gradient(closest-side,rgba(0,0,0,.5),transparent);filter:blur(5px);z-index:-1}
+.car .wh{position:absolute;width:13.09%;aspect-ratio:1;top:59.1%;border-radius:50%;background:var(--img) no-repeat;background-size:764% auto;z-index:2}
+.car .wh.a{left:13.7%;background-position:15.76% 92.2%}
+.car .wh.b{left:75.9%;background-position:87.35% 92.2%}
+.fit{container-type:inline-size}
+.fit>.art{padding-top:9cqw}
+.art{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;white-space:nowrap;line-height:1}
+
+/* D · Le Passage */
 .pin{position:relative}
-#studio[data-mo="imm"] .pin{height:320vh}
-.stick{position:sticky;top:46px;display:flex;justify-content:center}
-.hbox{container-type:size;width:100%;height:calc(100vh - 46px);position:relative;overflow:hidden;background:var(--paper)}
-.hero{--u:min(1cqw,1.78cqh);position:absolute;inset:0;color:var(--ink);overflow:hidden}
-.hnav{position:absolute;inset:calc(var(--u)*1.9) calc(var(--u)*3) auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font:700 calc(var(--u)*1.25) var(--body);z-index:7}
-.hnav nav{display:flex;gap:calc(var(--u)*2.2);font-weight:500}
-.hnav .r{justify-self:end}
-.pill{--_b:var(--a1);--_c:var(--on1);display:inline-block;white-space:nowrap;background:var(--_b);color:var(--_c);font:700 calc(var(--u)*1.3) var(--body);padding:calc(var(--u)*1) calc(var(--u)*2.1);border-radius:999px;text-decoration:none;border:1.5px solid var(--_b)}
-.pill.o{background:transparent;color:var(--_o,var(--ink));border-color:currentColor}
-.cw{position:relative;aspect-ratio:1146/419}
-.cw img{position:absolute;inset:0;width:100%;height:100%;display:block}
-.cw .on{clip-path:inset(0 calc((1 - var(--cov,var(--p)))*100%) 0 0)}
-.cw .sh{position:absolute;left:3%;right:3%;bottom:-3.5%;height:10%;background:radial-gradient(closest-side,rgba(0,0,0,.5),transparent);filter:blur(5px)}
-.cw .sq{position:absolute;inset:0;-webkit-mask:url(assets/car_white.webp) center/100% 100% no-repeat;mask:url(assets/car_white.webp) center/100% 100% no-repeat;pointer-events:none}
-.cw .sq::after{content:"";position:absolute;top:0;bottom:0;left:calc(var(--cov,var(--p))*100%);width:1.2%;background:linear-gradient(90deg,transparent,#fff 60%,transparent);opacity:calc(min(var(--cov,var(--p))*12,1)*min((1 - var(--cov,var(--p)))*12,1))}
+body[data-o="imm"] .pin.tall{height:380vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;container-type:size}
+body[data-o="ess"] .stage{position:relative}
+.wordset{position:absolute;inset:0;font-family:var(--lg);text-transform:uppercase}
+.wordset span{position:absolute;left:2.2cqw;white-space:nowrap;line-height:.84}
+.wordset .l1{top:8.5cqh;font-size:min(23.2cqw,44cqh)}
+.wordset .l2{top:calc(8.5cqh + min(20cqw,38cqh));font-size:min(23.2cqw,44cqh)}
+.pass .car{position:absolute;width:min(76cqw,134cqh);left:0;top:calc(100cqh - min(33.5cqw,59cqh));z-index:6;will-change:transform}
+.pass .skin .wordset{background:var(--camp,var(--acc));color:#FAFAF7;width:100cqw;height:100cqh;inset:auto;left:0;top:0;will-change:transform}
+.pass .flood{position:absolute;inset:0;background:var(--camp,var(--acc));clip-path:circle(calc(max(0,(var(--p) - .68)*3.2)*150%) at 50% 72%);z-index:5;color:#FAFAF7}
+.pass .flood .wordset{position:absolute}
+.pass .meta{position:absolute;left:2.4cqw;right:2.4cqw;bottom:2.6cqh;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;z-index:8;font:500 12px/1.4 var(--mono)}
+.pass .meta p{max-width:30ch}
+.pass .swatch{position:absolute;left:50%;transform:translateX(-50%);top:19px;z-index:9;display:flex;gap:6px}
+.pass .swatch button{width:22px;height:22px;border:2px solid var(--ink);padding:0;cursor:pointer}
 
-/* A : Showroom */
-.a-photo{position:absolute;inset:0;background:url(assets/street.webp) center 60%/cover;transform:scale(calc(1.03 + var(--p)*.07))}
-.a-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,26,.62),rgba(6,10,26,.08) 46%,rgba(6,10,26,.5))}
-.a-top{position:absolute;inset:0;color:#fff;display:grid;justify-items:center;align-content:space-between;padding:calc(var(--u)*6.8) calc(var(--u)*3) calc(var(--u)*2.6);text-align:center;z-index:2}
-.a-top h4{margin:0;font:700 calc(var(--u)*4.9)/1.02 var(--body);letter-spacing:-.04em;text-wrap:balance}
-.a-top .row{display:flex;gap:calc(var(--u)*1);justify-content:center}
-.a-top .pill{--_b:#fff;--_c:#0B0C10}
-.a-top .pill.o{--_o:#fff}
-.hero-a>.hnav{color:#fff;z-index:3}
-.hero-a>.hnav .pill{--_b:#fff;--_c:#0B0C10}
-.a-panel .hnav{color:var(--ink)}
-.a-panel .hnav .pill{--_b:var(--ink);--_c:var(--paper)}
-.a-panel{--q:min(1,calc(var(--p)*2.1));--cov:max(0,calc((var(--p) - .5)*2.1));position:absolute;inset:0;background:var(--paper);color:var(--ink);transform:translateY(calc((1 - var(--q))*101%));z-index:4;border-radius:calc((1 - var(--q))*var(--u)*3) calc((1 - var(--q))*var(--u)*3) 0 0;overflow:hidden}
-.a-word{position:absolute;left:0;right:0;top:calc(var(--u)*6);text-align:center;font:800 calc(var(--u)*38)/.8 var(--body);letter-spacing:-.055em;white-space:nowrap}
-.a-panel .main{position:absolute;width:calc(var(--u)*72);left:calc(50cqw - var(--u)*36);top:calc(var(--u)*21)}
-.a-panel .nb{position:absolute;width:calc(var(--u)*62);top:calc(var(--u)*25.6)}
-.a-panel .nb.l{right:calc(50cqw + var(--u)*40)}
-.a-panel .nb.r{left:calc(50cqw + var(--u)*40)}
-.a-info{position:absolute;left:0;right:0;bottom:calc(var(--u)*2.2);display:grid;gap:calc(var(--u)*.9);justify-items:center;text-align:center}
-.a-info b{font:700 calc(var(--u)*1.7)/1.2 var(--body);letter-spacing:-.015em}
-.a-info .row{display:flex;gap:calc(var(--u)*.8)}
-.a-info .pill{--_b:var(--ink);--_c:var(--paper)}
+/* Histoire D */
+.story{position:relative}
+body[data-o="imm"] .story.tall{height:420vh}
+.story .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr;padding:clamp(18px,3vw,40px)}
+body[data-o="ess"] .story .sticky{position:relative;height:auto}
+.step{font:400 clamp(58px,12.5vw,190px)/.86 var(--lg);text-transform:uppercase;max-width:14ch}
+.stack{position:relative;min-height:0}
+.st{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .35s}
+.st.on{opacity:1}
+.st .car{width:min(70vw,120vh)}
+.gridcars{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4vw 1.2vw;width:min(92vw,150vh)}
+.gridcars .car{width:auto}
+.report{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;width:min(92vw,1100px);align-items:center}
+.seen .car .skin{}
+.report ul{list-style:none;margin:0;padding:0;font:500 clamp(14px,1.3vw,17px)/1.4 var(--mono)}
+.report li{padding:10px 0;border-top:1px solid var(--rule)}
+.counter{font:500 12px var(--mono);color:var(--soft);position:absolute;right:clamp(18px,3vw,40px);top:clamp(18px,3vw,40px)}
+body[data-o="ess"] .stack{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:20px}
+body[data-o="ess"] .st{position:relative;opacity:1}
+body[data-o="ess"] .st .car,body[data-o="ess"] .gridcars,body[data-o="ess"] .report{width:100%}
 
-/* B : Carrousel couleur */
-.hero-b{--sl:#C8A97E;background:radial-gradient(70% 62% at 50% 56%,color-mix(in srgb,var(--sl) 78%,#fff),var(--sl) 72%);transition:--sl .8s;color:#FBF6EC}
-#studio[data-t="b"][data-m="dark"] .hero-b{background:radial-gradient(70% 62% at 50% 56%,color-mix(in srgb,var(--sl) 62%,#000),color-mix(in srgb,var(--sl) 28%,#000) 78%)}
-.hero-b .hnav .pill{--_b:#FBF6EC;--_c:#1B1712}
-.b-cap{position:absolute;top:calc(var(--u)*6.4);left:0;right:0;text-align:center;font:500 calc(var(--u)*1)/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;z-index:2}
-.b-words{position:absolute;left:50cqw;top:calc(var(--u)*8.2);display:flex;transform:translateX(calc(var(--u)*-55 - var(--i,0)*var(--u)*110));transition:transform .9s cubic-bezier(.65,0,.2,1);z-index:1}
-.b-words span{flex:none;width:calc(var(--u)*110);text-align:center;font:400 calc(var(--u)*30)/.9 "League Gothic",Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;color:#FBF6EC}
-.b-track{position:absolute;left:50cqw;top:calc(var(--u)*23.5);display:flex;transform:translateX(calc(var(--u)*-38 - var(--i,0)*var(--u)*76));transition:transform .9s cubic-bezier(.65,0,.2,1);z-index:3}
-.b-track .cw{flex:none;width:calc(var(--u)*76);padding-inline:calc(var(--u)*5)}
-.b-track .cw>div{position:relative;aspect-ratio:1146/419}
-.b-track .cw{aspect-ratio:auto}
-.b-tl{position:absolute;left:50cqw;bottom:calc(var(--u)*7);transform:translateX(-50%);width:calc(var(--u)*40);display:flex;justify-content:space-between;align-items:center;z-index:4}
-.b-tl::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor;opacity:.6}
-.b-tl button{position:relative;width:calc(var(--u)*1.3);height:calc(var(--u)*1.3);min-width:13px;min-height:13px;border-radius:50%;border:1.5px solid currentColor;background:var(--sl);color:inherit;padding:0;cursor:pointer}
-.b-tl button[aria-current="true"]{background:currentColor;box-shadow:0 0 0 calc(var(--u)*.35) color-mix(in srgb,#FBF6EC 30%,transparent)}
-.b-cta{position:absolute;left:50cqw;bottom:calc(var(--u)*1.9);transform:translateX(-50%);display:flex;gap:calc(var(--u)*.8);z-index:4}
-.b-cta .pill{--_b:#FBF6EC;--_c:#1B1712}
-.b-cta .pill.o{--_o:#FBF6EC}
+/* E · Le Convoi */
+.road{position:absolute;inset:0;background:#26282B url(assets/asphalt.webp) center/700px}
+body[data-m="light"] .road{background-blend-mode:screen;background-color:#9A9A95}
+body[data-d="e"][data-m="light"] .convoi{color:#fff}
+.lane{position:absolute;left:0;right:0;height:0;border-top:.5cqh dashed #ffffffd9;background:none}
+.lane.dash{border-top:0;height:.7cqh;background:repeating-linear-gradient(90deg,#fff 0 4cqw,transparent 4cqw 8cqw);opacity:.85}
+.lane.solid{height:.7cqh;background:#FFC400;border:0}
+.paint{position:absolute;left:3cqw;right:3cqw;font:800 min(9.4cqw,21cqh)/.82 var(--bc);text-transform:uppercase;color:#fff;opacity:.92;letter-spacing:-.005em;transform:scaleY(1.9);transform-origin:top left;mix-blend-mode:overlay;white-space:nowrap}
+.tcar{position:absolute;aspect-ratio:2.014;z-index:6}
+.tcar>i{position:absolute;left:50%;top:50%;width:49.65%;aspect-ratio:1/2.014;transform:translate(-50%,-50%) rotate(-90deg);background:url(assets/top_white.webp) center/100% 100%;isolation:isolate;display:block}
+.tcar>i::before{content:"";position:absolute;inset:-4%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);z-index:-1;filter:blur(6px)}
+.tcar .skin{position:absolute;inset:0;-webkit-mask:url(assets/top_mask.webp) center/100% 100%;mask:url(assets/top_mask.webp) center/100% 100%;mix-blend-mode:multiply;background:var(--t,#FFC400)}
+.tcar b{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%) rotate(90deg);font:800 1px/1 var(--bc);font-size:calc(var(--W)*.62);color:#101113;z-index:3}
+.convoi .row{position:absolute;inset:0}
+.convoi .signs{position:absolute;left:3cqw;right:3cqw;bottom:9cqh;display:flex;justify-content:space-between;align-items:flex-end;z-index:9;gap:20px;color:#fff}
+.convoi .signs p{font:700 clamp(19px,1.9cqw,30px)/1.05 var(--bc);text-transform:uppercase;max-width:24ch}
+.light{position:absolute;right:3cqw;top:12cqh;width:38px;padding:6px;background:#0a0a0a;border-radius:8px;display:grid;gap:5px;z-index:9}
+.light i{aspect-ratio:1;border-radius:50%;background:#333}
+.light[data-s="r"] i:nth-child(1){background:#FF3B30;box-shadow:0 0 16px #FF3B30}
+.light[data-s="g"] i:nth-child(3){background:#2DE073;box-shadow:0 0 16px #2DE073}
 
-/* C : Monochrome */
-.hero-c{background:radial-gradient(62% 56% at 50% 70%,color-mix(in srgb,var(--deep) 62%,transparent),transparent 74%),var(--paper)}
-.c-word{position:absolute;left:0;right:0;top:calc(var(--u)*5.6);text-align:center;font:400 calc(var(--u)*33)/1 "League Gothic",Impact,sans-serif;letter-spacing:.012em;text-transform:uppercase;white-space:nowrap;background:linear-gradient(180deg,var(--a1) 12%,var(--deep) 92%);-webkit-background-clip:text;background-clip:text;color:transparent;transform-origin:top;transform:scaleY(1.06) translateY(calc((1 - var(--p))*var(--u)*2))}
-.hero-c .main{position:absolute;width:calc(var(--u)*68);left:calc(50cqw - var(--u)*34);top:calc(var(--u)*21.4);z-index:3;transform:translateX(calc((1 - var(--p))*var(--u)*9))}
-.c-stats{position:absolute;left:calc(var(--u)*3);right:calc(var(--u)*3);bottom:calc(var(--u)*2.2);display:grid;grid-template-columns:repeat(3,auto) 1fr;gap:calc(var(--u)*4);align-items:end;z-index:4}
-.c-stats div b{display:block;font:500 calc(var(--u)*2.2)/1.1 var(--body);letter-spacing:-.02em}
-.c-stats div span{font-size:calc(var(--u)*1.1);color:var(--soft)}
-.c-stats .row{justify-self:end;display:flex;gap:calc(var(--u)*.8)}
+/* Histoire E */
+.map{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,4vw,60px);padding:clamp(24px,5vw,70px) clamp(16px,3vw,40px);align-items:center;background:#101113;color:#fff}
+.map svg{width:100%;height:auto;display:block}
+.map .pt{transition:r .3s}
+.mapsteps{display:grid;gap:14px;list-style:none;margin:0;padding:0}
+.mapsteps li{background:var(--sign);color:#fff;box-shadow:inset 0 0 0 3px #fff;padding:14px 18px;font:700 clamp(24px,3vw,44px)/1 var(--bc);text-transform:uppercase;border-radius:8px;opacity:.38;transition:opacity .3s}
+.mapsteps li.on{opacity:1}
+.mapsteps span{display:block;font:500 13px/1.3 var(--body);text-transform:none;margin-top:6px}
+body[data-o="ess"] .mapsteps li{opacity:1}
 
-@keyframes loop{0%,14%{--p:0}72%,100%{--p:1}}
-.phone{--p:1;width:280px;max-width:100%;flex:none;background:#0A0B10;border-radius:38px;padding:9px;box-shadow:0 1px 0 #3b3e4a inset,0 22px 50px -24px rgba(0,0,0,.55)}
-.phone .scr{border-radius:30px;overflow:hidden;height:560px;position:relative;background:var(--paper)}
-.phone .hbox{width:100%;height:100%}
-#studio[data-mo="imm"] .phone.hp{animation:loop 7s ease-in-out infinite alternate}
+/* F · La Contre-Affiche */
+.scene{position:absolute;inset:0;background:url(assets/bill_day.webp) center bottom/cover}
+body[data-m="dark"] .scene{background-image:url(assets/bill_night.webp)}
+.frame{position:absolute}
+.dir.f .nav nav{display:none}
+.dir.f .nav .logo{background:#FFE600;color:#0B0B0B;padding:8px 10px}
+.poster{position:absolute;inset:0;background:#FFE600;color:#0B0B0B;display:flex;align-items:center;padding:3cqw;font:800 min(7.2cqw,14cqh)/.9 var(--br);letter-spacing:-.05em;clip-path:inset(calc(var(--pw)*100%) 0 0 0)}
+.left{position:absolute;inset:0;display:grid;place-items:center;color:#222;font:500 clamp(11px,1cqw,14px) var(--mono);text-align:center;background:#fff}
+.bigw{position:absolute;left:2cqw;bottom:9cqh;z-index:4;font:800 min(15cqw,28cqh)/.82 var(--br);letter-spacing:-.06em;color:#FFE600;text-shadow:0 2px 30px rgba(0,0,0,.35);opacity:calc(min(1,var(--p)*2.6));transform:translateY(calc((1 - min(1,var(--p)*2.6))*5cqh))}
+.scene-car{position:absolute;width:min(62cqw,112cqh);bottom:3cqh;right:4cqw;z-index:5;will-change:transform}
+.scene-car .skin{clip-path:inset(0 0 calc((1 - var(--pw))*100%) 0)}
+.fyel{position:absolute;inset:0;background:#FFE600;display:grid;place-items:center;color:#0B0B0B;font:800 34cqw/.8 var(--br);letter-spacing:-.06em}
 
-@container (max-aspect-ratio:1/1){
-  .hero{--u:1cqw}
-  .hnav{grid-template-columns:1fr auto;inset:calc(var(--u)*5) calc(var(--u)*5) auto;font-size:calc(var(--u)*3.6)}
-  .hnav nav{display:none}.hnav .r{display:none}
-  .pill{font-size:calc(var(--u)*4.1);padding:calc(var(--u)*2.7) calc(var(--u)*4.6)}
-  .a-top{padding:calc(var(--u)*17) calc(var(--u)*5) calc(var(--u)*7)}
-  .a-top h4{font-size:calc(var(--u)*10.4)}
-  .a-top .row{flex-direction:column;gap:calc(var(--u)*2)}
-  .a-word{top:16cqh;font-size:calc(var(--u)*58)}
-  .a-panel .main{width:calc(var(--u)*104);left:calc(var(--u)*-2);top:32cqh}
-  .a-panel .nb{display:none}
-  .a-info{bottom:calc(var(--u)*7);padding-inline:calc(var(--u)*6);gap:calc(var(--u)*3)}.a-info b{font-size:calc(var(--u)*5)}
-  .a-info .row{flex-direction:column;gap:calc(var(--u)*2)}
-  .b-cap{top:12cqh;font-size:calc(var(--u)*2.7)}
-  .b-words{top:18cqh;transform:translateX(calc(var(--u)*-60 - var(--i,0)*var(--u)*120))}
-  .b-words span{width:calc(var(--u)*120);font-size:calc(var(--u)*33)}
-  .b-track{top:32cqh;transform:translateX(calc(var(--u)*-60 - var(--i,0)*var(--u)*120))}
-  .b-track .cw{width:calc(var(--u)*120);padding-inline:calc(var(--u)*11)}
-  .b-tl{bottom:calc(var(--u)*34);width:calc(var(--u)*62)}.b-tl button{width:calc(var(--u)*3.4);height:calc(var(--u)*3.4)}
-  .b-cta{bottom:calc(var(--u)*7);flex-direction:column;gap:calc(var(--u)*2);align-items:center}
-  .c-word{top:13cqh;font-size:calc(var(--u)*43);transform:scaleY(1.45)}
-  .hero-c .main{width:calc(var(--u)*104);left:calc(var(--u)*-2);top:36cqh}
-  .c-stats{left:calc(var(--u)*6);right:calc(var(--u)*6);bottom:calc(var(--u)*7);grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*3)}
-  .c-stats div b{font-size:calc(var(--u)*4.6)}.c-stats div span{font-size:calc(var(--u)*3)}
-  .c-stats .row{grid-column:1/-1;justify-self:stretch;flex-direction:column;gap:calc(var(--u)*2);text-align:center}
-}
+.posters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));min-height:90vh}
+.pst{padding:clamp(14px,1.8vw,26px);display:flex;flex-direction:column;justify-content:space-between;gap:16px;position:relative;overflow:hidden;min-height:440px}
+.pst h3{font:800 clamp(38px,5vw,84px)/.86 var(--br);letter-spacing:-.055em}
+.pst small{font:500 12px var(--mono)}
+.pst .car{width:150%;margin-left:-14%}
+.pst .gridcars{grid-template-columns:repeat(3,1fr);width:100%}
+.pst:nth-child(1){background:#fff;color:#0B0B0B}.pst:nth-child(2){background:#0B0B0B;color:#FFE600}.pst:nth-child(3){background:#FF3B00;color:#0B0B0B}.pst:nth-child(4){background:#1226FF;color:#fff}
+.seen{position:relative;overflow:hidden;background:#0B0B0B;padding:clamp(14px,2.4vw,36px);display:grid;align-content:space-between;gap:30px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5vw}
+.seen h2{font:800 clamp(52px,10.5vw,170px)/.84 var(--br);letter-spacing:-.06em;color:#FFE600;max-width:13ch}
 
-/* Sections communes du studio */
-.sec{max-width:1180px;margin:0 auto;padding-block:clamp(40px,6vw,76px);display:grid;gap:clamp(22px,3vw,36px)}
-.sec h3{font-family:var(--dfont);text-transform:var(--dcase);letter-spacing:var(--dtrack);font-weight:var(--dweight);font-size:clamp(36px,6vw,74px);line-height:.96}
-#studio .eyebrow{color:var(--soft)}
-.ann{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,52px);align-items:center}
-.ann img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;border-radius:var(--radimg,4px)}
-.ann .txt{display:grid;gap:16px;min-width:0;justify-items:start}
-.ann .pill,.drv .pill{font-size:16px;padding:13px 22px}
-.demo{display:grid;gap:16px}
-.demo .stage{background:radial-gradient(70% 90% at 50% 62%,color-mix(in srgb,var(--a2) 22%,var(--paper)),color-mix(in srgb,var(--a2) 8%,var(--paper)));border-radius:var(--radimg,4px);padding:clamp(18px,4vw,44px) clamp(14px,6vw,120px)}
-.demo .cw{max-width:760px;margin:auto}
-.demo .cw .on{clip-path:inset(0 0 0 calc((1 - var(--p))*100%))}
-.fmts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.fmts button{font:700 15px var(--fs);padding:10px 16px;border:1.5px solid var(--ink);background:none;color:var(--ink);border-radius:var(--rad);cursor:pointer}
-.fmts button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-#wrapR{width:100%;accent-color:var(--a1)}
+/* Atelier partagé */
+.sec{padding:clamp(44px,7vw,100px) clamp(16px,3vw,40px)}
+.sec h2{font-family:var(--d1);font-weight:400;font-size:clamp(50px,10vw,150px);line-height:.88;text-transform:uppercase;letter-spacing:0}
+body[data-d="e"] .sec h2{font-weight:800}
+body[data-d="f"] .sec h2{font-weight:800;text-transform:none;letter-spacing:-.055em;font-size:clamp(44px,8.6vw,130px)}
+.atelier{display:grid;gap:clamp(18px,3vw,30px)}
+.ain{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);gap:clamp(20px,4vw,50px);align-items:end}
+.ain .car{width:100%}
+.controls{display:grid;gap:14px}
+.controls label{font:500 12px var(--mono);color:var(--soft)}
+#brand{width:100%;border:0;border-bottom:3px solid var(--ink);background:none;font:400 clamp(38px,5vw,64px)/1.1 var(--d1);padding:4px 0;text-transform:uppercase;border-radius:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:2px solid var(--ink);background:none;padding:9px 13px;font-weight:700;cursor:pointer;border-radius:var(--cta)}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.dots{display:flex;gap:7px}
+.dots button{width:32px;height:32px;border:2px solid var(--ink);padding:0;cursor:pointer;border-radius:var(--cta)}
+#liveSkin{transition:clip-path .55s cubic-bezier(.7,0,.2,1)}
 
-/* Interface interne, plus calme, même famille */
-.dash{display:grid;grid-template-columns:190px minmax(0,1fr);border:1px solid var(--rule);border-radius:calc(var(--radimg,4px)*.6);overflow:hidden;font-size:14px;background:var(--paper)}
-.dash aside{border-right:1px solid var(--rule);padding:16px 12px;display:grid;gap:3px;align-content:start}
-.dash aside b{font:500 12px var(--mono);margin-bottom:10px;padding-left:8px}
-.dash aside span{padding:6px 8px;border-radius:6px;color:var(--soft)}
-.dash aside span.on{background:var(--ink);color:var(--paper)}
-.dash main{padding:18px;display:grid;gap:16px;min-width:0}
-.dash .hd{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
-.dash .hd b{font:var(--dweight) 24px var(--dfont);letter-spacing:var(--dtrack)}
-.demoT{font:500 11px var(--mono);border:1px solid var(--a1);color:var(--a1);padding:2px 7px;border-radius:99px}
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-block:1px solid var(--rule)}
-.kpis div{padding:10px 12px 10px 0}
-.kpis b{display:block;font:var(--dweight) 30px/1.1 var(--dfont);font-variant-numeric:tabular-nums}
-.kpis span{color:var(--soft);font-size:13px}
-.rows{display:grid}
-.rows>div{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);align-items:center}
-.chip{font:500 11px var(--mono);padding:3px 8px;border-radius:99px;background:color-mix(in srgb,var(--a2) 22%,transparent);white-space:nowrap}
-.chip.m{background:color-mix(in srgb,var(--a1) 18%,transparent)}
-.drv{display:flex;gap:clamp(20px,5vw,60px);flex-wrap:wrap;justify-content:center;align-items:center}
-.drv .txt{flex:1 1 280px;display:grid;gap:14px;justify-items:start;min-width:0}
-.app{position:absolute;inset:0;padding:44px 18px 18px;display:grid;gap:14px;align-content:start;color:var(--ink)}
-.app .st0{font:var(--dweight) 34px/1 var(--dfont);letter-spacing:var(--dtrack)}
-#studio[data-t="b"] .app .st0,#studio[data-t="c"] .app .st0{text-transform:uppercase;font-size:50px}
-.app .box{border:1.5px solid var(--ink);padding:12px;border-radius:12px;font-size:14px;display:grid;gap:4px}
-.app .bar2{height:7px;background:var(--rule);border-radius:9px;overflow:hidden}
-.app .bar2 i{display:block;height:100%;width:60%;background:var(--a1)}
-.app li{margin-bottom:6px}
+/* Campagnes */
+.gal{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(8px,1vw,14px);margin-top:26px}
+.tile{position:relative;padding:18px 14px 44px;display:flex;align-items:flex-end;min-height:260px;overflow:hidden;background:var(--tb)}
+.tile:nth-child(1){grid-column:span 7}.tile:nth-child(2){grid-column:span 5}.tile:nth-child(3){grid-column:span 5}.tile:nth-child(4){grid-column:span 7}
+.tile .car{width:100%;max-width:760px;margin:auto}
+.tile figcaption{position:absolute;left:14px;bottom:12px;right:14px;display:flex;justify-content:space-between;font:500 12px var(--mono);color:var(--tc,#0a0a0a)}
+.tile figure,figure.tile{margin:0}
+.tile .ghost{position:absolute;left:10px;top:6px;font:400 clamp(60px,10vw,150px)/.9 var(--lg);text-transform:uppercase;color:var(--tc,#0a0a0a);opacity:.95}
+
+/* Conducteur : la référence de qualité */
+.drv{display:flex;gap:clamp(18px,4vw,52px);align-items:center;flex-wrap:wrap;justify-content:center}
+.phone{width:286px;flex:none;background:#0A0B10;border-radius:40px;padding:9px;box-shadow:0 26px 60px -30px rgba(0,0,0,.6)}
+.scr{height:584px;border-radius:32px;overflow:hidden;position:relative;background:var(--bg);color:var(--ink);container-type:size}
+.ph1{position:absolute;inset:0}
+.ph1 .w{position:absolute;left:0;right:0;top:9cqh;text-align:center;font:400 53cqw/.8 var(--lg);text-transform:uppercase}
+.ph1 .w2{top:calc(9cqh + 44cqw)}
+.ph1 .car{position:absolute;width:128cqw;left:-14cqw;top:calc(9cqh + 74cqw)}
+.ph1 .foot{position:absolute;left:18px;right:18px;bottom:20px;display:grid;gap:8px}
+.ph1 .cta{text-align:center;font-size:15px}
+.app{position:absolute;inset:0;padding:48px 18px 18px;display:grid;gap:14px;align-content:start}
+.app .big{font:400 66px/.86 var(--lg);text-transform:uppercase}
+.app .box{border:2px solid var(--ink);padding:12px;font-size:14px;display:grid;gap:6px}
+.meter{height:8px;background:var(--rule)}.meter i{display:block;width:60%;height:100%;background:var(--acc)}
 .app ul{margin:0;padding-left:18px;font-size:14px}
-.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px 40px}
-.spec>div{min-width:0;display:grid;gap:10px;align-content:start}
-.sws{display:flex;gap:0}
-.sws i{flex:1;height:46px;display:block}
-.logos{font-family:"Bricolage Grotesque","Arial Black",sans-serif!important;font-weight:800!important;text-transform:none!important;letter-spacing:-.05em!important;display:flex;flex-wrap:wrap;gap:12px 38px;align-items:baseline;font-size:clamp(40px,6.4vw,76px)}
-.logos b{font-weight:inherit}
-.logos em{font-style:normal;color:var(--a2)}
-#studio[data-m="dark"] .logos em{color:var(--a1)}
-.logos .ll{display:inline-block;transform:skewX(-14deg);color:var(--a1)}
-.pick{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.pick select,.pick button{font:500 15px var(--body);padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
-.pick button{background:var(--fg);color:var(--bg);border-color:var(--fg);cursor:pointer}
-#ans{font:500 14px var(--mono);user-select:all;flex-basis:100%}
+.drv .txt{flex:1 1 300px;min-width:0;display:grid;gap:14px;justify-items:start}
+.drv h2{font-size:clamp(58px,10vw,150px)}
+
+/* Back-office */
+.dash{display:grid;grid-template-columns:190px minmax(0,1fr);border:1px solid var(--rule);font-size:14px;background:var(--bg);color:var(--ink);margin-top:22px}
+.dash aside{border-right:1px solid var(--rule);padding:14px 10px;display:grid;gap:2px;align-content:start}
+.dash aside .logo{padding:6px 8px 14px;font-size:18px}
+.dash aside span{padding:6px 8px;color:var(--soft)}
+.dash aside span.on{background:var(--ink);color:var(--bg)}
+.dash main{padding:18px;display:grid;gap:14px;min-width:0}
+.kp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--rule)}
+.kp div{padding:10px 8px 10px 0}.kp b{display:block;font:700 28px/1.1 var(--body);font-variant-numeric:tabular-nums}.kp span{color:var(--soft);font-size:13px}
+.rw{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);align-items:center}
+.tg{font:500 11px var(--mono);padding:3px 8px;border:1px solid var(--ink);white-space:nowrap}
+.dtag{font:500 11px var(--mono);color:var(--soft)}
+
+/* Fiche */
+.fiche{background:#F2F2EE;color:#101113;font:400 16px/1.5 var(--body);padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px) 110px}
+.fiche h2{font:800 clamp(34px,5vw,64px)/1 var(--br);letter-spacing:-.04em;margin-bottom:12px}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);max-width:1280px;margin:auto}
+.fgrid h3{font:500 12px var(--mono);color:#5e5e58;margin:22px 0 8px}
+.lg{display:flex;flex-wrap:wrap;gap:20px 34px;align-items:center}
+.lg-d{font:800 clamp(52px,7vw,92px)/1 var(--br);letter-spacing:-.055em;position:relative;display:inline-block;background:linear-gradient(90deg,#0a0a0a 0 34%,#FF3B00 34% 72%,#0a0a0a 72%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg-e{display:inline-flex;gap:5px}
+.lg-e i{font:800 clamp(30px,4vw,48px)/1 var(--bc);font-style:normal;width:1.3em;height:1.9em;display:grid;place-items:center;background:#FFC400;border-radius:.42em .42em .28em .28em;text-transform:uppercase}
+.lg-f{font:800 clamp(52px,7vw,92px)/1 var(--br);letter-spacing:-.055em;background:#FFE600;padding:.08em .26em .14em;clip-path:polygon(0 0,100% 0,100% 62%,84% 100%,0 100%);display:inline-block}
+.pal{display:flex}.pal i{flex:1;height:56px}
+.ty{display:grid;gap:4px}
+.phoneV{width:320px;max-width:100%;background:#0A0B10;border-radius:42px;padding:10px;justify-self:center;align-self:start}
+.phoneV iframe{width:100%;height:640px;border:0;border-radius:33px;background:#fff;display:block}
+.choice{max-width:1280px;margin:46px auto 0;display:grid;gap:12px}
+.cc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 22px}
+.cc label{display:flex;gap:8px;align-items:flex-start;font-size:15px}
+.choice button{justify-self:start;background:#101113;color:#fff;border:0;padding:12px 16px;font-weight:700;cursor:pointer}
+#ans{font:500 13px var(--mono);user-select:all}
+.note{font-size:13px;color:#5e5e58;max-width:78ch}
 
 @media (max-width:760px){
-  #studio[data-mo="imm"] .pin{height:280vh}
-  .stick{top:92px}
-  .hbox{height:calc(100vh - 92px)}
-  .ann{grid-template-columns:minmax(0,1fr)}
+  .nav nav,.nav .cta{display:none}
+  .wordset .l1,.wordset .l2{left:3cqw}
+  .wordset .m{display:block}
+  .wordset .l1{top:9cqh;font-size:39cqw}.wordset .l2{top:calc(9cqh + 33cqw);font-size:39cqw}
+  .wordset .l3{top:calc(9cqh + 66cqw);font-size:39cqw}.wordset .l4{top:calc(9cqh + 99cqw);font-size:39cqw}
+  .pass .car{width:128cqw;top:calc(9cqh + 82cqw)}
+  .pass .meta{flex-direction:column;align-items:stretch;bottom:74px}
+  .pass .meta .cta{text-align:center}
+  .pass .swatch{display:none}
+  .gridcars{grid-template-columns:repeat(3,1fr)}
+  .report,.map,.ain{grid-template-columns:minmax(0,1fr)}
+  .step{font-size:21vw}
+  .st .car{width:112vw}
+  .frame{width:88cqw;height:38cqh;top:11cqh;left:6cqw}
+  .scene{background-position:50% bottom}
+  .poster{font-size:13cqw;padding:5cqw}
+  .bigw{font-size:30cqw;bottom:96px;left:4cqw}
+  .scene-car{width:124cqw;right:-16cqw;bottom:calc(96px + 22cqw)}
+  .posters{grid-template-columns:minmax(0,1fr)}
+  .tile:nth-child(n){grid-column:span 12}
   .dash{grid-template-columns:minmax(0,1fr)}.dash aside{display:none}
-  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .deskphone{display:none!important}
+  .kp{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+  .rw{grid-template-columns:minmax(0,1fr) auto}.rw span:nth-child(2){display:none}
+  .sec{padding-bottom:64px}
+  .paint{font-size:16cqw;left:3cqw}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.lane{animation:none}.phone{animation:none!important}#studio{transition:none}}
+@media (min-width:761px){.wordset .l3,.wordset .l4{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+</head>
+<body data-d="d" data-m="light" data-o="imm">
+<h1 class="sr">Régie publicitaire sur voitures en Belgique, maquette de travail</h1>
 
-</head><body>
-<section class="band top"><div class="wrap">
-  <p class="eyebrow">Maquette de travail · Données de démonstration</p>
-  <h1>Trois directions. Une décision.</h1>
-  <p class="lead">Maquette de direction artistique pour une régie publicitaire sur voitures en Belgique. Trois directions à comparer avec la barre de réglages : scrolle pour voir les animations.</p>
-  
-</div></section>
+<!-- D -->
+<div class="dir d">
+  <section class="pin tall" id="pinD"><div class="stage pass" id="passD" style="--p:0">
+    <div class="nav"><span class="logo">PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
+    <div class="wordset" aria-hidden="true"><span class="l1 mq">Votre marque</span><span class="l2 mq">passe ici.</span><span class="l3"></span><span class="l4"></span></div>
+    <div class="swatch" role="group" aria-label="Changer de campagne"><button data-camp="#FF3B00" style="background:#FF3B00" aria-label="Orange signal"></button><button data-camp="#1226FF" style="background:#1226FF" aria-label="Bleu"></button><button data-camp="#FF2D8A" style="background:#FF2D8A" aria-label="Rose"></button><button data-camp="#0A8F5B" style="background:#0A8F5B" aria-label="Vert"></button></div>
+    <div class="flood" aria-hidden="true"><div class="wordset"><span class="l1 mq">Votre marque</span><span class="l2 mq">passe ici.</span><span class="l3"></span><span class="l4"></span></div></div>
+    <div class="car golf" id="carD"><div class="shade"></div><div class="base"></div><div class="skin"><div class="wordset" id="artD" aria-hidden="true"><span class="l1 mq">Votre marque</span><span class="l2 mq">passe ici.</span><span class="l3"></span><span class="l4"></span></div></div><div class="wh a"></div><div class="wh b"></div></div>
+    <div class="meta"><p>Publicité sur voitures, en Belgique. Vous choisissez les zones et la durée, nous gérons tout le reste.</p><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
+  </div></section>
 
-<section class="band" style="padding-top:0"><div class="wrap">
-  <h2>Ce que tes références disent</h2>
-  <p class="lead">Un motif revient dans 6 images aimées sur 12 : la voiture passe devant un mot immense. Les deux images rejetées ont autre chose en commun : du pastel, des motifs décoratifs et une interface en petites cartes flottantes.</p>
-  <div class="pat">
-    <div><h3>La voiture devant le mot</h3><p class="mut">Le mot donne la marque, la voiture donne la profondeur. Vu dans les références 1, 5, 7, 10, 11 et l'exemple vinyle.</p></div>
-    <div><h3>Une couleur par écran</h3><p class="mut">Le fond change avec chaque voiture dans le GIF. La référence 10 tient sur le seul rose. Pour nous, la couleur est le produit.</p></div>
-    <div><h3>Le cercle</h3><p class="mut">Forme derrière la voiture en référence 3. C'est aussi une roue, un point sur la carte et le point final de tes logos préférés.</p></div>
-    <div><h3>Le logo à une seule idée</h3><p class="mut">Bas de casse, très gras, très serré, avec une seule intervention : la route dans le double N de CONNECT, le demi-cercle de willo.</p></div>
-    <div><h3>Le plan de ville discret</h3><p class="mut">Le pin prioritaire place une carte avec des points derrière la voiture. C'est la bonne façon de parler de zones sans promettre de GPS.</p></div>
-    <div><h3>Ce que je retiens du rejet</h3><p class="mut">Le rose n'est pas le problème, puisque la référence 10 te plaît. J'en déduis, à confirmer, que tu rejettes le pastel et le décoratif.</p></div>
-  </div>
-  <p class="note">Les voitures sont de vrais modèles, ici une Volkswagen Golf GTI, avec tous les logos retirés. Ce sont des images de démonstration créées par IA, et le constructeur n'a aucun lien avec le projet. Avant la mise en ligne publique, il faudra confirmer ce point juridique ou passer à de vraies photos de vos campagnes.</p>
-  
-</div></section>
-
-<div class="bar"><div class="in" role="group" aria-label="Réglages du studio">
-  <div class="seg" id="sT"><button data-v="a" aria-pressed="true">A Showroom</button><button data-v="b" aria-pressed="false">B Carrousel couleur</button><button data-v="c" aria-pressed="false">C Monochrome</button></div>
-  <div class="seg" id="sM"><button data-v="light" aria-pressed="true">Clair</button><button data-v="dark" aria-pressed="false">Sombre</button></div>
-  <div class="seg" id="sO"><button data-v="ess" aria-pressed="false">Essentiel</button><button data-v="imm" aria-pressed="true">Immersif</button></div>
-</div></div>
-
-<div id="studio" data-t="a" data-m="light" data-mo="imm">
-  <div class="pin"><div class="stick"><div class="hbox" id="heroMain">
-    <div class="hero hero-a only-a">
-      <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
-      <div class="a-photo"></div>
-      <div class="a-top"><h4>Votre marque.<br>Partout où la Belgique roule.</h4><div class="row"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div></div>
-      <div class="a-panel">
-        <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
-        <div class="a-word" aria-hidden="true">BXL</div>
-        <div class="cw nb l" aria-hidden="true"><img src="assets/car_ev6.webp" alt=""></div>
-        <div class="cw main"><div class="sh"></div><img src="assets/car_white.webp" alt="Golf blanche sans logo"><img class="on wrapimg" src="assets/car_blue.webp" alt="" aria-hidden="true"><div class="sq"></div></div>
-        <div class="cw nb r" aria-hidden="true"><img src="assets/car_r5.webp" alt=""></div>
-        <div class="a-info"><b>Vos zones, votre durée, vos voitures.</b><div class="row"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div></div>
-      </div>
+  <section class="story tall" id="storyD"><div class="sticky"><h2 class="step" id="stepD">Une voiture ordinaire.</h2><span class="counter" id="ctD">1 / 4</span>
+    <div class="stack">
+      <div class="st on"><x-car c="golf"></x-car></div>
+      <div class="st"><x-car c="golf" a="mayo"></x-car></div>
+      <div class="st"><div class="gridcars" id="manyD"></div></div>
+      <div class="st"><div class="report"><x-car c="golf" a="mayo"></x-car><ul><li>Zones couvertes, à l'échelle de la zone</li><li>Kilomètres validés par voiture</li><li>Photos de preuve avant, pendant, après</li><li>Méthode de mesure en cours de validation</li></ul></div></div>
     </div>
-    <div class="hero hero-b only-b">
-      <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
-      <p class="b-cap" style="margin:0">Exemples de campagnes · Démonstration</p>
-      <div class="b-words" aria-hidden="true"><span>Bruxelles</span><span>Liège</span><span>Namur</span><span>Anvers</span></div>
-      <div class="b-track">
-        <div class="cw"><div><div class="sh"></div><img src="assets/car_blue.webp" alt="Golf bleue et rose"></div></div>
-        <div class="cw"><div><div class="sh"></div><img src="assets/car_r5.webp" alt="Renault 5 jaune et noire"></div></div>
-        <div class="cw"><div><div class="sh"></div><img src="assets/car_ev6.webp" alt="Kia EV6 verte et blanche"></div></div>
-        <div class="cw"><div><div class="sh"></div><img src="assets/car_red.webp" alt="Golf rouge et blanche"></div></div>
-      </div>
-      <div class="b-tl"><button data-go="0" aria-label="Bruxelles" aria-current="true"></button><button data-go="1" aria-label="Liège"></button><button data-go="2" aria-label="Namur"></button><button data-go="3" aria-label="Anvers"></button></div>
-      <div class="b-cta"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div>
-    </div>
-    <div class="hero hero-c only-c">
-      <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
-      <div class="c-word" aria-hidden="true">PARTOUT</div>
-      <div class="cw main"><div class="sh"></div><img src="assets/car_white.webp" alt="Golf blanche sans logo"><img class="on" src="assets/car_pink.webp" alt="" aria-hidden="true"><div class="sq"></div></div>
-      <div class="c-stats"><div><b>3 formats</b><span>de covering</span></div><div><b>3 à 6 mois</b><span>de campagne</span></div><div><b>FR NL EN</b><span>en Belgique</span></div><div class="row"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div></div>
-    </div>
-  </div></div></div>
-
-  <div class="sw"><div class="sec">
-    <p class="eyebrow">Simulation · Modèle réel, logos retirés, image de démonstration</p>
-    <h3>Pose le covering</h3>
-    <div class="demo">
-      <div class="stage"><div class="cw" id="demoCw" style="--p:.7"><img src="assets/car_white.webp" alt="Golf blanche sans logo"><img class="on wrapimg" src="assets/car_blue.webp" alt="" aria-hidden="true"></div></div>
-      <label class="eyebrow" for="wrapR">Surface couverte, schéma indicatif</label>
-      <input type="range" id="wrapR" min="0" max="100" value="70">
-      <div class="fmts" id="fmts"><button data-w="28" aria-pressed="false">Classique</button><button data-w="70" aria-pressed="true">Medium</button><button data-w="100" aria-pressed="false">Complet</button></div>
-    </div>
-  </div></div>
-
-  <div class="sw"><div class="sec">
-    <p class="eyebrow">Page annonceur · Exemple</p>
-    <div class="ann">
-      <div class="txt"><h3>Un média qui passe chez vos clients</h3><p>Choisissez vos zones, votre durée et le nombre de voitures. Nous sélectionnons les conducteurs, posons le covering et le retirons en fin de campagne.</p><a class="pill" href="#studio">Demander mon estimation</a><p style="color:var(--soft);font-size:14px">Vos coordonnées d'abord, l'estimation indicative ensuite. Aucun paiement en ligne.</p></div>
-      <img class="only-a" src="assets/street.webp" alt="Golf couverte de bleu et de rose à Bruxelles, image de démonstration">
-      <img class="only-b" src="assets/top.webp" alt="Golf rose vue du dessus sur fond bleu, image de démonstration" style="object-position:center 30%">
-      <img class="only-c" src="assets/pan.webp" alt="Golf rose en mouvement, image de démonstration">
-    </div>
-  </div></div>
-
-  <div class="sw"><div class="sec">
-    <p class="eyebrow">Back-office · Même famille, plus calme</p>
-    <div class="dash">
-      <aside><b>PROJECT_BRAND</b><span class="on">Accueil</span><span>Prospection</span><span>Conducteurs</span><span>Véhicules</span><span>Campagnes</span><span>Studio</span><span>Pose / dépose</span><span>Devis</span><span>Finance</span></aside>
-      <main>
-        <div class="hd"><b>Bonjour</b><span class="demoT">DONNÉES DE DÉMONSTRATION</span></div>
-        <div class="kpis"><div><b>6</b><span>Demandes de devis</span></div><div><b>14</b><span>Conducteurs en attente</span></div><div><b>2</b><span>Brouillons à relire</span></div><div><b>3</b><span>Tâches du jour</span></div></div>
-        <div class="rows">
-          <div><span>Annonceur démo A</span><span style="color:var(--soft)">Brouillon sourcé, à copier</span><span class="chip">Prêt pour envoi manuel</span></div>
-          <div><span>Flotte démo B</span><span style="color:var(--soft)">Relance à prévoir mardi</span><span class="chip m">Contacté à la main</span></div>
-          <div><span>Agence démo C</span><span style="color:var(--soft)">Contact à vérifier</span><span class="chip">Partiellement vérifié</span></div>
-        </div>
-      </main>
-    </div>
-  </div></div>
-
-  <div class="sw" id="drv"><div class="sec">
-    <p class="eyebrow">Mobile · Site et espace conducteur</p>
-    <div class="drv">
-      <div class="phone hp deskphone"><div class="scr" id="phoneHero"></div></div>
-      <div class="phone" style="--p:1;animation:none"><div class="scr"><div class="app">
-        <span class="st0">En attente</span>
-        <p style="font-size:14px;color:var(--soft)">Dossier bien reçu. Nous vous écrirons quand une campagne correspond à votre zone.</p>
-        <div class="box"><b>Dossier complété à 60 %</b><div class="bar2"><i></i></div></div>
-        <ul><li>Profil et zone</li><li>Véhicule</li><li>Photos du véhicule, à ajouter</li><li>Charte, à signer</li></ul>
-        <p style="font-size:13px;color:var(--soft)">L'inscription ne garantit ni campagne ni rémunération.</p>
-      </div></div></div>
-      <div class="txt"><h3>Votre voiture roule déjà.</h3><p>Le parcours conducteur reste discret sur le site, mais il fonctionne : une vraie inscription, puis un statut clair.</p><a class="pill" href="#studio">M'inscrire</a></div>
-    </div>
-  </div></div>
-
-  <div class="sw"><div class="sec">
-    <p class="eyebrow">Fiche du territoire</p>
-    <div class="spec">
-      <div>
-        <h3 class="only-a" style="font-size:44px">A Showroom</h3><h3 class="only-b" style="font-size:44px">B Carrousel couleur</h3><h3 class="only-c" style="font-size:44px">C Monochrome</h3>
-        <p class="only-a">Un vrai site automobile premium. Grande photo de terrain, puis un panneau monte : le mot géant passe derrière la voiture et le covering se pose. La plus crédible face à un grand compte.</p>
-        <p class="only-b">Chaque campagne est une voiture et une couleur de fond. Le mot de la ville glisse à une autre vitesse que la voiture, et les voisines dépassent sur les côtés. La couleur devient le produit.</p>
-        <p class="only-c">Une seule couleur, très forte, sur fond noir. Un mot immense en dégradé et une voiture énorme. La plus spectaculaire et la plus mémorable.</p>
-        <p class="only-a" style="color:var(--soft)">Vient des références 1, 2, 6 et 8.</p><p class="only-b" style="color:var(--soft)">Vient des références 5, 3 et de l'exemple vinyle.</p><p class="only-c" style="color:var(--soft)">Vient des références 10, 7, 9 et 11.</p>
-      </div>
-      <div>
-        <p class="eyebrow">Palette clair, puis sombre</p>
-        <div class="sws only-a"><i style="background:#FFFFFF"></i><i style="background:#0B0C10"></i><i style="background:#1226FF"></i><i style="background:#FF3EA5"></i></div>
-        <div class="sws only-a"><i style="background:#0B0C10"></i><i style="background:#F5F6F8"></i><i style="background:#8C97FF"></i><i style="background:#FF3EA5"></i></div>
-        <div class="sws only-b"><i style="background:#C8A97E"></i><i style="background:#8E8BA8"></i><i style="background:#9DB89F"></i><i style="background:#1E6F6A"></i></div>
-        <div class="sws only-b"><i style="background:#3A2F20"></i><i style="background:#2B2A33"></i><i style="background:#2C352D"></i><i style="background:#0D2F2D"></i></div>
-        <div class="sws only-c"><i style="background:#FDEDF5"></i><i style="background:#2B0A1D"></i><i style="background:#D4177F"></i><i style="background:#FF5FB0"></i></div>
-        <div class="sws only-c"><i style="background:#0B0A0D"></i><i style="background:#FFFFFF"></i><i style="background:#FF6DB8"></i><i style="background:#8E1560"></i></div>
-        <p class="only-a" style="color:var(--soft)">Hanken Grotesk, sous licence libre.</p><p class="only-b" style="color:var(--soft)">League Gothic et Hanken Grotesk, sous licence libre.</p><p class="only-c" style="color:var(--soft)">League Gothic et Hanken Grotesk, sous licence libre.</p>
-      </div>
-      
-    </div>
-  </div></div>
+  </div></section>
 </div>
 
-<div hidden><select id="nameSel"><option>-</option></select><button id="copy"></button><p id="ans"></p></div>
+<!-- E -->
+<div class="dir e">
+  <section class="pin tall" id="pinE"><div class="stage convoi" id="passE" style="--p:0">
+    <div class="road"></div>
+    <div class="nav" style="color:#fff"><span class="logo">PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
+    <div class="lane dash" style="top:33cqh"></div><div class="lane dash" style="top:66cqh"></div>
+    <div class="paint" style="top:8.5cqh" aria-hidden="true">Un message</div>
+    <div class="row" id="rowE" aria-hidden="true"></div>
+    <div class="paint" style="top:69cqh" aria-hidden="true">Plusieurs voitures</div>
+    <div class="light" id="lightE" data-s="r" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="signs"><span></span><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
+  </div></section>
+  <section class="map" id="mapE">
+    <svg viewBox="0 0 640 520" role="img" aria-label="Schéma d'une ville avec un trajet de voitures">
+      <g fill="none" stroke="#3A3C40" stroke-width="14" stroke-linecap="round"><path d="M40 90H600M40 260H600M40 430H600M130 30V490M320 30V490M510 30V490"/><path d="M40 470 600 50" stroke-width="10"/></g>
+      <g fill="none" stroke="#FFC400" stroke-width="6" stroke-dasharray="1400" id="routeE" stroke-dashoffset="1400" stroke-linecap="round"><path id="routeP" d="M60 430H320V260H130V90H510V430H600"/></g>
+      <g id="dotsE" fill="#FFC400"></g>
+    </svg>
+    <ol class="mapsteps" id="stepsE">
+      <li class="on">Une voiture<span>Elle roule déjà, sans détour.</span></li>
+      <li>Un support<span>Covering posé par nos équipes.</span></li>
+      <li>Un réseau<span>Plusieurs voitures, une même zone.</span></li>
+      <li>Une campagne suivie<span>Zones, kilomètres et photos de preuve.</span></li>
+    </ol>
+  </section>
+</div>
+
+<!-- F -->
+<div class="dir f">
+  <section class="pin tall" id="pinF"><div class="stage" id="passF" style="--p:0;--pw:0">
+    <div class="scene"></div>
+    <div class="nav" style="color:#fff"><span class="logo">PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="cta" style="background:#FFE600;color:#0B0B0B" href="#atelier">Concevoir ma campagne</a></div>
+    <div class="frame" id="frameF"><div class="left">Parti en campagne. Retour dans 4 mois.</div><div class="poster">ce panneau ne bouge pas.</div></div>
+    <div class="bigw">nous, si.</div>
+    <div class="car golf scene-car" id="carF"><div class="shade"></div><div class="base"></div><div class="skin"><div class="art" style="background:#FFE600;color:#0B0B0B;font:800 9.6cqw/1 var(--br);letter-spacing:-.05em;container-type:normal">nous, si.</div></div><div class="wh a"></div><div class="wh b"></div></div>
+  </div></section>
+  <section class="posters" aria-label="De la voiture à la campagne">
+    <article class="pst"><small>1</small><h3>une voiture.</h3><x-car c="golf"></x-car></article>
+    <article class="pst"><small>2</small><h3>une affiche.</h3><x-car c="golf" a="nous"></x-car></article>
+    <article class="pst"><small>3</small><h3>un réseau.</h3><div class="gridcars" id="manyF"></div></article>
+    <article class="pst"><small>4</small><h3>une campagne suivie.</h3><small>Zones, kilomètres validés, photos de preuve.</small></article>
+  </section>
+  <section class="seen" style="padding-block:clamp(40px,6vw,80px)"><h2>vous l'avez vue trois fois ce matin.</h2><div class="three"><x-car c="golf" a="nous"></x-car><x-car c="golf" a="nous"></x-car><x-car c="golf" a="nous"></x-car></div></section>
+</div>
+
+<!-- Commun -->
+<section class="sec atelier" id="atelier">
+  <h2>Tapez votre marque.</h2>
+  <div class="ain">
+    <div class="car golf" id="liveCar"><div class="shade"></div><div class="base"></div><div class="skin fit" id="liveSkin"><div class="art" id="liveArt"><span id="liveTxt"></span></div></div><div class="wh a"></div><div class="wh b"></div></div>
+    <div class="controls">
+      <label for="brand">Le nom de votre marque</label>
+      <input id="brand" maxlength="14" value="Votre marque" autocomplete="off">
+      <label>Format</label>
+      <div class="chips" id="fmt"><button data-f="c" aria-pressed="false">Classique</button><button data-f="m" aria-pressed="false">Medium</button><button data-f="x" aria-pressed="true">Complet</button></div>
+      <label>Couleur</label>
+      <div class="dots" id="col"><button data-c="#FFE600,#0B0B0B" style="background:#FFE600" aria-label="Jaune"></button><button data-c="#1226FF,#FFFFFF" style="background:#1226FF" aria-label="Bleu"></button><button data-c="#FF3B00,#0B0B0B" style="background:#FF3B00" aria-label="Orange"></button><button data-c="#FF2D8A,#0B0B0B" style="background:#FF2D8A" aria-label="Rose"></button><button data-c="#0B0B0B,#FFFFFF" style="background:#0B0B0B" aria-label="Noir"></button></div>
+      <a class="cta" href="#atelier" style="justify-self:start">Recevoir mon estimation</a>
+      <p class="dtag">Classique : portières. Medium : portières, avant et rétros. Complet : toute la carrosserie. Jamais sur les vitres.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="camps">
+  <h2>Quatre campagnes qui n'existent pas.</h2>
+  <div class="gal">
+    <figure class="tile" style="--tb:#FFD500;--tc:#0a0a0a"><span class="ghost">Sauce</span><x-car c="golf" a="mayo"></x-car><figcaption><span>Marque fictive</span><span>Complet</span></figcaption></figure>
+    <figure class="tile" style="--tb:#111;--tc:#F5EFE3"><span class="ghost">Lundi</span><x-car c="r5" a="courage"></x-car><figcaption><span>Marque fictive</span><span>Complet</span></figcaption></figure>
+    <figure class="tile" style="--tb:#E8341C;--tc:#fff"><span class="ghost">Four</span><x-car c="r5" a="chaud"></x-car><figcaption><span>Marque fictive</span><span>Complet</span></figcaption></figure>
+    <figure class="tile" style="--tb:#DDE3FF;--tc:#1226FF"><span class="ghost">Réseau</span><x-car c="golf" a="zero" z="c"></x-car><figcaption><span>Marque fictive</span><span>Classique, portières</span></figcaption></figure>
+  </div>
+</section>
+
+<section class="sec" id="drv">
+  <div class="drv">
+    <div class="phone"><div class="scr"><div class="ph1"><div class="w">Votre</div><div class="w w2">voiture</div><x-car c="golf" a="brand"></x-car><div class="foot"><span style="font-size:14px">Elle roule déjà.</span><a class="cta" href="#drv">M'inscrire</a></div></div></div></div>
+    <div class="phone"><div class="scr"><div class="app"><span class="big">En attente</span><p style="font-size:14px;color:var(--soft)">Dossier bien reçu. Nous vous écrirons si une campagne correspond à votre zone.</p><div class="box"><b>Dossier complété à 60 %</b><div class="meter"><i></i></div></div><ul><li>Profil et zone</li><li>Véhicule</li><li>Photos, à ajouter</li><li>Charte, à signer</li></ul><p style="font-size:13px;color:var(--soft)">L'inscription ne garantit ni campagne ni rémunération.</p></div></div></div>
+    <div class="txt"><h2>Votre voiture roule déjà.</h2><p>Un parcours discret sur le site, mais bien réel : inscription, puis statut clair.</p></div>
+  </div>
+  <div class="dash">
+    <aside><span class="logo">PROJECT_BRAND</span><span class="on">Accueil</span><span>Prospection</span><span>Conducteurs</span><span>Véhicules</span><span>Campagnes</span><span>Studio</span><span>Pose / dépose</span><span>Devis</span><span>Finance</span></aside>
+    <main><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b style="font-size:20px">Bonjour</b><span class="dtag">Données de démonstration</span></div>
+      <div class="kp"><div><b>6</b><span>Demandes de devis</span></div><div><b>14</b><span>Conducteurs en attente</span></div><div><b>2</b><span>Brouillons à relire</span></div><div><b>3</b><span>Tâches du jour</span></div></div>
+      <div><div class="rw"><span>Annonceur démo A</span><span style="color:var(--soft)">Brouillon sourcé, à copier</span><span class="tg">Envoi manuel</span></div><div class="rw"><span>Flotte démo B</span><span style="color:var(--soft)">Relance mardi</span><span class="tg">Contacté</span></div><div class="rw"><span>Agence démo C</span><span style="color:var(--soft)">Contact à vérifier</span><span class="tg">Partiel</span></div></div>
+    </main>
+  </div>
+</section>
+
+<section class="fiche" id="fiche">
+  <div class="fgrid">
+    <div>
+      <div class="only-d"><h2>D. Le Passage</h2><p>Idée : la voiture est une fenêtre sur la campagne. Le message reste à sa place dans la ville, et il prend vie quand la voiture le traverse.</p></div>
+      <div class="only-e"><h2>E. Le Convoi</h2><p>Idée : un message se lit à plusieurs. Chaque voiture porte une lettre et le réseau écrit le mot. On vend le réseau, pas la voiture.</p></div>
+      <div class="only-f"><h2>F. La Contre-Affiche</h2><p>Idée : le site est lui-même une campagne. L'affiche quitte le mur, se pose sur la voiture et part chez vos clients.</p></div>
+      <h3>Logo provisoire, nom non vérifié</h3>
+      <div class="lg"><span class="lg-d only-d">allez.</span><span class="lg-e only-e"><i>c</i><i>o</i><i>r</i><i>t</i><i>è</i><i>g</i><i>e</i></span><span class="lg-f only-f">flanko</span></div>
+      <p class="only-d note" style="margin-top:8px">Une bande de couleur traverse le mot, comme la voiture traverse la page.</p><p class="only-e note" style="margin-top:8px">Chaque lettre devient un toit de voiture vu du dessus.</p><p class="only-f note" style="margin-top:8px">Le coin coupé rappelle un vinyle qu'on décolle.</p>
+      <h3>Palette, clair puis sombre</h3>
+      <div class="pal only-d"><i style="background:#FAFAF7"></i><i style="background:#0A0A0A"></i><i style="background:#FF3B00"></i><i style="background:#1226FF"></i><i style="background:#FF2D8A"></i></div>
+      <div class="pal only-e"><i style="background:#E4E4E0"></i><i style="background:#17181A"></i><i style="background:#FFC400"></i><i style="background:#0B4EA2"></i><i style="background:#FFFFFF"></i></div>
+      <div class="pal only-f"><i style="background:#FFE600"></i><i style="background:#0B0B0B"></i><i style="background:#FF3B00"></i><i style="background:#1226FF"></i><i style="background:#FFFFFF"></i></div>
+      <h3>Hiérarchie typographique</h3>
+      <div class="ty only-d"><span style="font:400 60px/1 var(--lg)">LEAGUE GOTHIC, MONUMENT</span><span style="font:500 13px var(--mono)">DM Mono, légendes de terrain</span><span>Hanken Grotesk, texte courant</span></div>
+      <div class="ty only-e"><span style="font:800 54px/1 var(--bc)">BARLOW CONDENSED, ROUTE</span><span style="font:500 13px var(--mono)">DM Mono, données</span><span>Hanken Grotesk, texte courant</span></div>
+      <div class="ty only-f"><span style="font:800 46px/1 var(--br);letter-spacing:-.05em">bricolage, le slogan</span><span style="font:500 13px var(--mono)">DM Mono, petites lignes</span><span>Hanken Grotesk, texte courant</span></div>
+      <h3>Animation à regarder</h3>
+      <p class="only-d">Scrolle le héros : le mot reste fixe et s'imprime sur la voiture en mouvement, les roues tournent, puis la couleur envahit l'écran.</p>
+      <p class="only-e">Le convoi arrive, s'arrête au feu rouge et épelle le mot. Tape une marque dans l'atelier : le convoi l'épelle à son tour.</p>
+      <p class="only-f">L'affiche descend du panneau sur la voiture, le mur reste vide, et la voiture repart avec la campagne.</p>
+      <h3>Force et risque</h3>
+      <p class="only-d"><b>Force :</b> très reconnaissable, compris en une seconde. <b>Risque :</b> dépend beaucoup de la qualité du scroll.</p>
+      <p class="only-e"><b>Force :</b> la plus originale, elle vend le réseau. <b>Risque :</b> moins immédiate, la vue du dessus montre moins le flanc.</p>
+      <p class="only-f"><b>Force :</b> un vrai ton d'agence, avec de l'humour. <b>Risque :</b> un ton frontal à doser face aux régies d'affichage.</p>
+    </div>
+    <div class="phoneV"><iframe id="mob" title="Version mobile de la direction" loading="lazy"></iframe></div>
+  </div>
+  <div class="choice">
+    <h2 style="margin:0">Ce que tu gardes</h2>
+    <div class="cc" id="cc"></div>
+    <button id="copy">Copier ma réponse</button>
+    <p id="ans"></p>
+    <p class="note">Images créées par IA pour la démonstration. Modèles réels sans logo, aucun lien avec les constructeurs. Campagnes et marques fictives.</p>
+  </div>
+</section>
+
+<div class="bar" role="group" aria-label="Comparer">
+  <div id="bD"><button data-v="d">D Le Passage</button><button data-v="e">E Le Convoi</button><button data-v="f">F Contre-Affiche</button></div>
+  <div id="bM"><button data-v="light">Clair</button><button data-v="dark">Sombre</button></div>
+  <div id="bO"><button data-v="ess">Essentiel</button><button data-v="imm">Immersif</button></div>
+</div>
+
 <script>
 (function(){
-  var s=document.getElementById('studio'),root=document,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var st={t:'a',m:'light',o:reduce?'ess':'imm'},names={a:'A Showroom',b:'B Carrousel couleur',c:'C Monochrome'},labM={light:'clair',dark:'sombre'},labO={ess:'essentiel',imm:'immersif'};
-  try{var sv=JSON.parse(localStorage.getItem('gate1')||'null');if(sv){st.t=sv.t||st.t;st.m=sv.m||st.m;if(!reduce)st.o=sv.o||st.o}}catch(e){}
-  function press(id,v){document.querySelectorAll('#'+id+' button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false')})}
-  function apply(){
-    s.dataset.t=st.t;s.dataset.m=st.m;s.dataset.mo=st.o;press('sT',st.t);press('sM',st.m);press('sO',st.o);
-    document.getElementById('ans').textContent='Ma réponse : '+names[st.t]+', '+labM[st.m]+', '+labO[st.o]+', nom : '+document.getElementById('nameSel').value+'.';
-    try{localStorage.setItem('gate1',JSON.stringify(st))}catch(e){}
-    scroll();
-  }
-  function bind(id,k){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(b){st[k]=b.dataset.v;apply()}})}
-  bind('sT','t');bind('sM','m');bind('sO','o');
-  var pin=document.querySelector('.pin'),tones=['#C8A97E','#8E8BA8','#9DB89F','#1E6F6A'];
-  function go(h,i){h.style.setProperty('--i',i);h.style.setProperty('--sl',tones[i]);h.dataset.i=i;h.querySelectorAll('.b-tl button').forEach(function(b,n){b.setAttribute('aria-current',n===i?'true':'false')})}
-  var mainB=document.querySelector('#heroMain .hero-b');
-  function scroll(){
-    if(st.o==='ess'){s.style.setProperty('--p','1');return}
-    var r=pin.getBoundingClientRect(),h=r.height-innerHeight,p=Math.max(0,Math.min(1,(46-r.top)/h));
-    s.style.setProperty('--p',p.toFixed(3));
-    go(mainB,Math.min(3,Math.floor(p*4)));
-  }
-  addEventListener('scroll',function(){requestAnimationFrame(scroll)},{passive:true});addEventListener('resize',scroll);
-  var ph=document.getElementById('heroMain').cloneNode(true);ph.removeAttribute('id');document.getElementById('phoneHero').appendChild(ph);
-  var phB=ph.querySelector('.hero-b');
-  document.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)go(b.closest('.hero-b'),+b.dataset.go)});
-  if(!reduce)setInterval(function(){go(phB,((+phB.dataset.i||0)+1)%4);if(st.o==='ess')go(mainB,((+mainB.dataset.i||0)+1)%4)},3600);
-  var r=document.getElementById('wrapR'),cw=document.getElementById('demoCw'),f=document.getElementById('fmts');
-  function setW(v){cw.style.setProperty('--p',(v/100).toFixed(2));f.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.w==v?'true':'false')})}
-  r.addEventListener('input',function(){setW(r.value)});
-  f.addEventListener('click',function(e){var b=e.target.closest('button');if(b){r.value=b.dataset.w;setW(b.dataset.w)}});
-  document.getElementById('nameSel').addEventListener('change',apply);
-  document.getElementById('copy').addEventListener('click',function(){var a=document.getElementById('ans'),t=a.textContent,c=this;navigator.clipboard.writeText(t).then(function(){c.textContent='Copié'},function(){var g=document.createRange();g.selectNodeContents(a);var x=getSelection();x.removeAllRanges();x.addRange(g);c.textContent='Sélectionné, copie manuelle'})});
-  apply();
+var q=new URLSearchParams(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,B=document.body;
+var S={d:q.get('d')||'d',m:q.get('m')||'light',o:rm?'ess':(q.get('o')||'imm')};
+if(q.get('embed'))B.classList.add('embed');
+var mob=matchMedia('(max-width:760px)');
+var ART={
+ mayo:'<div class="art" style="background:#FFD500;color:#0a0a0a;font:400 25cqw/1 var(--lg);letter-spacing:.02em">MAYO</div>',
+ courage:'<div class="art" style="background:#141414;color:#F5EFE3;font:400 24cqw/1 var(--lg)">COURAGE.</div>',
+ chaud:'<div class="art" style="background:#fff;color:#E8341C;font:800 21cqw/1 var(--br);letter-spacing:-.06em">chaud.</div>',
+ zero:'<div class="art" style="background:repeating-linear-gradient(115deg,#1226FF 0 6cqw,#fff 6cqw 12cqw)"><span style="background:#fff;color:#1226FF;font:800 9cqw/1 var(--br);padding:1.6cqw 2.6cqw;letter-spacing:-.05em">4 barres.</span></div>',
+ nous:'<div class="art" style="background:#FFE600;color:#0B0B0B;font:800 15cqw/1 var(--br);letter-spacing:-.05em">nous, si.</div>',
+ brand:'<div class="art" style="background:var(--acc);color:var(--onacc);font:400 26cqw/1 var(--lg)">ROULE</div>'
+};
+function carHTML(c,a,z){return '<div class="car '+c+'"><div class="shade"></div><div class="base"></div>'+(a?'<div class="skin fit"'+(z?' style="clip-path:polygon(31.4% 34%,81.6% 28%,73% 68%,70% 76%,68% 79%,31.6% 80%,30.7% 56%)"':'')+'>'+ART[a]+'</div>':'')+'</div>'}
+document.querySelectorAll('x-car').forEach(function(x){var t=document.createElement('div');t.innerHTML=carHTML(x.getAttribute('c'),x.getAttribute('a'),x.getAttribute('z'));x.replaceWith(t.firstChild)});
+['manyD','manyF'].forEach(function(id){var n=id==='manyD'?15:9,h='',l=['mayo','mayo','mayo'];for(var i=0;i<n;i++)h+=carHTML('golf',id==='manyD'?'mayo':'nous');document.getElementById(id).innerHTML=h});
+
+// mots D, découpés autrement sur téléphone
+function wordsD(){document.querySelectorAll('.pass .wordset').forEach(function(w){var s=w.querySelectorAll('span');var t=mob.matches?['Votre','marque','passe','ici.']:['Votre marque','passe ici.','',''];s.forEach(function(e,i){e.textContent=t[i]})})}
+
+// convoi E
+var row=document.getElementById('rowE'),word='MARQUE',cars=[];
+function placeF(){var f=document.getElementById('frameF');if(mob.matches){f.style.cssText='';return}var st=document.getElementById('passF'),W=st.clientWidth,H=st.clientHeight,k=Math.max(W/1344,H/752),ox=(W-1344*k)/2,oy=H-752*k;f.style.left=ox+.26*1344*k+'px';f.style.top=oy+.056*752*k+'px';f.style.width=.477*1344*k+'px';f.style.height=.526*752*k+'px'}
+function buildE(w){word=(w||'MARQUE').replace(/\s+/g,'').toUpperCase().slice(0,8)||'MARQUE';row.innerHTML='';cars=[];var cols=['#FFC400','#FFC400','#fff','#FFC400','#FFC400','#fff','#FFC400','#FFC400'];
+ for(var i=0;i<word.length;i++){var d=document.createElement('div');d.className='tcar';d.innerHTML='<i><span class="skin" style="--t:'+cols[i]+'"></span><b>'+word[i]+'</b></i>';row.appendChild(d);cars.push(d)}layoutE()}
+function layoutE(){var st=document.getElementById('passE'),W=st.clientWidth,H=st.clientHeight,m=mob.matches,n=cars.length;
+ if(m){var cw=W*.28;cars.forEach(function(c,i){c.style.width=cw*2.014+'px';c.dataset.m=1;c.style.setProperty('--W',cw+'px')})}
+ else{var w=Math.min((W*.92)/n,H*.42*2.014,W*.17),gap=(W*.92-w*n)/Math.max(n-1,1);gap=Math.min(gap,w*.08);cars.forEach(function(c,i){c.style.width=w+'px';c.style.setProperty('--W',w*.4965+'px');c.dataset.x=W*.04+i*(w+gap);c.style.top=H*.5-w/2.014/2+'px';c.style.left=0})}}
+
+// pilotage au scroll
+function prog(el){var r=el.getBoundingClientRect(),h=r.height-innerHeight;return h<=0?1:Math.max(0,Math.min(1,-r.top/h))}
+var artD=document.getElementById('artD'),carD=document.getElementById('carD'),pD=document.getElementById('passD');
+var last=-1;
+function frame(){
+ var imm=S.o==='imm';
+ if(S.d==='d'){
+  var p=imm?prog(document.getElementById('pinD')):.66,W=pD.clientWidth,H=pD.clientHeight,cw=carD.offsetWidth,top=carD.offsetTop;
+  var t=Math.min(1,p/.62),e=1-Math.pow(1-t,2),x=W*1.02-(W*1.02+cw*.0-((W-cw)/2))*e;
+  pD.style.setProperty('--p',p);carD.style.transform='translate3d('+x+'px,0,0)';artD.style.transform='translate3d('+(-x)+'px,'+(-top)+'px,0)';
+  var rot=(x/(cw*.0084*3.14))*-1;carD.querySelectorAll('.wh').forEach(function(w){w.style.transform='rotate('+(-rot*.4)+'deg)'});
+  var s=document.getElementById('storyD');if(s){var sp=imm?prog(s):0,i=Math.min(3,Math.floor(sp*4));if(i!==last){last=i;s.querySelectorAll('.st').forEach(function(e,n){e.classList.toggle('on',n===i)});document.getElementById('stepD').textContent=['Une voiture ordinaire.','Un support publicitaire.','Un réseau.','Une campagne suivie.'][i];document.getElementById('ctD').textContent=(i+1)+' / 4'}}
+ }
+ if(S.d==='e'){
+  var p2=imm?prog(document.getElementById('pinE')):.6,st=document.getElementById('passE'),W2=st.clientWidth,H2=st.clientHeight,n=cars.length;
+  document.getElementById('lightE').dataset.s=p2>.8?'g':'r';
+  cars.forEach(function(c,i){
+   if(mob.matches){var cw=W2*.28,rowi=Math.floor(i/2),col=i%2,gy=H2*.17+rowi*(cw*2.014+10),gx=W2*.5+(col?8:-8-cw),a=Math.min(1,p2/.6),dy=(1-a)*(H2*1.4+i*60)-(p2>.8?(p2-.8)*5*H2*1.5:0);c.style.left=gx-(cw*2.014-cw)/2+'px';c.style.top=gy+(cw*2.014-cw)/2+'px';c.style.transform='translate3d(0,'+dy+'px,0) rotate(90deg)'}
+   else{var base=+c.dataset.x,a2=Math.min(1,p2/.6),e2=1-Math.pow(1-a2,2.2),off=(1-e2)*(W2+(i+1)*W2*.12),out=p2>.8?-(p2-.8)*5*W2*1.2:0;c.style.transform='translate3d('+(base+off+out)+'px,0,0)'}
+  });
+ }
+ if(S.d==='f'){
+  var p3=imm?prog(document.getElementById('pinF')):.62,f=document.getElementById('passF'),carF=document.getElementById('carF');
+  var pw=Math.max(0,Math.min(1,(p3-.12)/.42)),go=Math.max(0,(p3-.68)/.32);
+  f.style.setProperty('--p',p3);f.style.setProperty('--pw',pw);
+  carF.style.transform='translate3d('+(-go*go*f.clientWidth*1.3)+'px,0,0)';
+  carF.querySelectorAll('.wh').forEach(function(w){w.style.transform='rotate('+(-go*go*900)+'deg)'});
+ }
+ var mp=document.getElementById('mapE');
+ if(S.d==='e'&&mp){var r=mp.getBoundingClientRect(),v=imm?Math.max(0,Math.min(1,(innerHeight*.8-r.top)/(r.height+innerHeight*.2))):1;var rt=document.getElementById('routeE');rt.setAttribute('stroke-dashoffset',1400*(1-v));var li=Math.min(3,Math.floor(v*4));document.querySelectorAll('#stepsE li').forEach(function(l,i){l.classList.toggle('on',i===li)})}
+}
+var tick=false;addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;frame()})}},{passive:true});
+addEventListener('resize',function(){layoutE();placeF();frame()});
+mob.addEventListener('change',function(){wordsD();layoutE();placeF();frame()});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-camp]');if(b)pD.style.setProperty('--camp',b.dataset.camp)});
+
+// atelier en direct
+var inp=document.getElementById('brand'),txt=document.getElementById('liveTxt'),art=document.getElementById('liveArt'),skin=document.getElementById('liveSkin'),col=['#FFE600','#0B0B0B'];
+var PD='81.6% 28%,73% 68%,70% 76%,68% 79%';var CL={c:'polygon(31.4% 34%,'+PD+',31.6% 80%,30.7% 56%,31.4% 34%,31.4% 34%,31.4% 34%,31.4% 34%)',m:'polygon(0 27%,29% 27%,34% 25%,41% 25%,41% 34%,'+PD+',31.6% 82%,31.6% 100%,0 100%,0 27%)',x:'polygon(0 0,100% 0,100% 0,100% 0,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,0 100%)'};var F='x';
+function live(){var v=inp.value.trim()||'Votre marque';txt.textContent=B.dataset.d==='f'?v.toLowerCase():v.toUpperCase();var fam=getComputedStyle(B).getPropertyValue('--d1');var size=Math.min(36,150/Math.max(v.length,3))*(F==='c'?.52:1);art.style.cssText=(F==='c'?'padding:9cqw 19cqw 0 31cqw;':'')+'background:'+col[0]+';color:'+col[1]+';font:'+(B.dataset.d==='d'?400:800)+' '+size+'cqw/1 '+fam+';letter-spacing:'+(B.dataset.d==='f'?'-.05em':'0');}
+inp.addEventListener('input',function(){live();if(B.dataset.d==='e'){buildE(inp.value);frame()}});
+document.getElementById('fmt').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;F=b.dataset.f;skin.style.clipPath=CL[F];live();this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)})});
+document.getElementById('col').addEventListener('click',function(e){var b=e.target.closest('button');if(b){col=b.dataset.c.split(',');live()}});
+
+// fiche et réponse
+var EL={'D Le Passage':['Mot fixe imprimé sur la voiture','Couleur qui envahit l\'écran','Histoire en 4 temps','Typo League Gothic'],'E Le Convoi':['Vue du dessus','Lettres sur les toits','Boutons panneaux routiers','Carte de la ville'],'F Contre-Affiche':['Affiche qui quitte le panneau','Ton de slogan','Mur de 4 affiches','Trois voitures identiques'],'Commun':['Atelier « tapez votre marque »','Galerie de campagnes fictives','Section conducteur mobile']};
+var cc=document.getElementById('cc');Object.keys(EL).forEach(function(k){EL[k].forEach(function(t){var l=document.createElement('label');l.innerHTML='<input type="checkbox"> <span>'+k+' : '+t+'</span>';cc.appendChild(l)})});
+function ans(){var sel=[].map.call(cc.querySelectorAll('input:checked'),function(i){return i.nextElementSibling.textContent});document.getElementById('ans').textContent='Je préfère '+({d:'D',e:'E',f:'F'})[S.d]+', '+(S.m==='dark'?'sombre':'clair')+', '+(S.o==='imm'?'immersif':'essentiel')+'. Je garde : '+(sel.join(' ; ')||'à préciser')+'.'}
+cc.addEventListener('change',ans);
+document.getElementById('copy').addEventListener('click',function(){var a=document.getElementById('ans'),c=this;navigator.clipboard.writeText(a.textContent).then(function(){c.textContent='Copié'},function(){c.textContent='Sélectionne le texte'})});
+
+function press(id,v){document.querySelectorAll('#'+id+' button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v)})}
+function apply(){B.dataset.d=S.d;B.dataset.m=S.m;B.dataset.o=S.o;press('bD',S.d);press('bM',S.m);press('bO',S.o);last=-1;
+ wordsD();layoutE();placeF();live();ans();
+ if(!q.get('embed')){var m=document.getElementById('mob'),u='?d='+S.d+'&m='+S.m+'&o='+S.o+'&embed=1';if(m.dataset.u!==u){m.dataset.u=u;m.src=u}}
+ frame()}
+function bind(id,k){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(b){var was=S[k];S[k]=b.dataset.v;if(k==='d'&&was!==S[k])scrollTo(0,0);apply()}})}
+bind('bD','d');bind('bM','m');bind('bO','o');
+buildE('MARQUE');apply();
+if(document.fonts)document.fonts.ready.then(function(){layoutE();frame()});
 })();
 </script>
-</body></html>
+</body>
+</html>
