@@ -148,7 +148,7 @@ small{font-size:14px;font-weight:600;color:inherit;opacity:.75}
 .tap{display:none}.mo .tap{display:block;position:absolute;z-index:5;left:50%;bottom:13%;width:46px;height:46px;margin-left:-23px;border-radius:50%;background:rgba(255,255,255,.5);opacity:0}
 .ax .ph{max-height:none}
 .mo .ax .stg{height:100svh;padding:74px var(--g) 20px}
-.mo .ax .ph{height:100%;width:auto;min-height:0;aspect-ratio:9/18.6}
+.mo .ax .ph{height:min(100%,44vw + 300px);width:auto;min-height:0;aspect-ratio:9/18.6;justify-self:center;align-self:center}
 
 .wrapc{min-height:100svh;display:grid;align-items:center;padding:80px var(--g) 30px}
 .cta{padding:clamp(44px,9vh,84px) 24px;border-radius:24px;background:var(--sig);color:var(--sigt);text-align:center;transform-origin:center}
