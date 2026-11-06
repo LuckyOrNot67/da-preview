@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>roam · Premium V1</title>
+<meta name="description" content="Agence de communication créative spécialisée dans la publicité sur véhicules. Nous créons vos campagnes, posons le covering et les diffusons dans vos zones.">
+<script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('still')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px}
+html.still{scroll-behavior:auto}
+body{margin:0;overflow-x:clip;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ol,ul,figure,fieldset{margin:0;padding:0;border:0}ol,ul{list-style:none}
+a{color:inherit}img,video,canvas{display:block;max-width:100%}
+img{height:auto}
+button,input,select,textarea{font:inherit;color:inherit}
+button{appearance:none;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2.5px solid currentColor;outline-offset:3px}
+.menu{display:none}
+.sheet{position:fixed;z-index:79;inset:0;display:none;flex-direction:column;justify-content:center;gap:8px;padding:80px var(--g) 30px}
+.sheet.on{display:flex}
+.sheet .sm{margin-top:18px;font-size:16px!important;font-weight:500!important;letter-spacing:0!important}
+.fcar{position:relative;aspect-ratio:1800/616}
+.fcar img{position:absolute;inset:0;width:100%;height:100%}
+.fcar .fi{opacity:0;transition:opacity .35s ease}
+.fcar .fi.on{opacity:1}
+.incl{display:flex;flex-wrap:wrap;gap:6px 18px}
+.incl li{display:flex;align-items:center;gap:7px;opacity:.55;transition:opacity .25s}
+.incl li:before{content:"";flex:none;width:10px;height:10px;border-radius:50%;border:1.5px solid currentColor;transition:background .25s}
+.incl li.on{opacity:1}
+.incl li.on:before{background:var(--acc,currentColor);border-color:var(--acc,currentColor)}
+canvas{width:100%;height:auto;aspect-ratio:256/210}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chips span{display:flex;align-items:center;min-height:40px;padding:0 14px;transition:background .2s,color .2s,border-color .2s}
+.chips input:focus-visible+span{outline:2.5px solid currentColor;outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 20px}
+.legend li{display:flex;align-items:center;gap:8px}
+.legend li:before{content:"";width:11px;height:11px;border-radius:50%;flex:none}
+.opt{margin-top:16px}
+.opt legend{padding:0;margin-bottom:7px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:block;margin-bottom:6px}
+form .w{grid-column:1/-1}
+form input,form select,form textarea{display:block;width:100%;min-height:48px;padding:12px;border-radius:0;font-size:16px}
+.err{display:block;min-height:0;font-size:14px;margin-top:4px}
+.send{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.send p{font-size:15px}
+footer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:18px 50px;padding:26px var(--g) 30px;font-size:14px}
+footer summary{cursor:pointer;font-weight:600}
+footer details p{margin-top:6px}
+.fine{max-width:70ch}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.still .rv{opacity:1;transform:none;transition:none}
+.still *{animation:none!important;transition:none!important}
+@media (max-width:980px){.navl{display:none!important}.menu{display:inline-flex;align-items:center}}
+@media (max-width:640px){form{grid-template-columns:1fr}footer{grid-template-columns:1fr}}
+
+:root{--ci:#D6EA12;--ink:#0B0C06;--g:clamp(16px,2.2vw,32px);--f:"Archivo",system-ui,sans-serif;--acc:#0B0C06}
+body{background:var(--ci);color:var(--ink);font:500 17px/1.4 var(--f)}
+.h{font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:-.055em;line-height:.98}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:999px;background:var(--ink);color:var(--ci);font-weight:600;font-size:16px;text-decoration:none}
+.btn.i{background:var(--ci);color:var(--ink)}
+.logo{font:900 30px/1 var(--f);font-variation-settings:"wdth" 125;letter-spacing:-.06em;text-decoration:none}
+.bar{position:absolute;z-index:5;left:var(--g);right:var(--g);top:clamp(14px,2vw,26px);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.navl{display:flex;gap:clamp(14px,2vw,28px);font-weight:600;font-size:15px}
+.navl a{text-decoration:none}.navl a:hover{text-decoration:underline;text-underline-offset:4px}
+.menu{min-height:46px;padding:0 18px;border-radius:999px;background:var(--ink);color:var(--ci);font-weight:600;font-size:15px}
+.sheet{background:var(--ci)}
+.sheet a{font-size:clamp(30px,9vw,54px);font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:-.05em;text-decoration:none}
+
+/* héros : la composition de Premium V1 */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 100%}
+.ph.m{display:none}
+.hero h1{position:absolute;z-index:2;left:var(--g);top:20svh;white-space:nowrap;font-size:min(6.1vw,14svh)}
+.hero h1 span{display:block}
+.dot{display:inline-block;width:.2em;height:.2em;margin-left:.04em;border-radius:50%;background:currentColor;animation:roll 1.5s cubic-bezier(.16,.84,.3,1) .35s both}
+@keyframes roll{from{transform:translateX(var(--from,70vw))}to{transform:none}}
+.lede{position:absolute;z-index:2;left:var(--g);top:calc(20svh + min(6.1vw,14svh)*2.1);width:min(36vw,520px);font-size:clamp(17px,1.35vw,20px);line-height:1.35}
+.lede .btn{margin-top:18px}
+.four{position:absolute;z-index:2;left:var(--g);bottom:clamp(18px,3vh,32px);width:min(46vw,640px);display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:12px;padding-top:12px;border-top:1.5px solid var(--ink);font-weight:600;font-size:clamp(14px,1.15vw,17px)}
+
+/* concept : noir, une phrase, un détail */
+.con{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);background:var(--ink);color:var(--ci)}
+.con .tx{padding:clamp(80px,14vh,150px) var(--g);align-self:center}
+.con h2{font-size:min(5.6vw,12svh)}
+.con p{margin-top:20px;max-width:46ch;color:#EEF2C8;font-size:clamp(18px,1.4vw,21px);line-height:1.35}
+.con img{width:100%;height:100%;object-fit:cover;min-height:70svh}
+.pts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:clamp(30px,6vh,56px)}
+.pts b{display:block;font-weight:700;font-size:16px;line-height:1.2}
+.pts span{display:block;margin-top:3px;font-size:15px;line-height:1.3;font-weight:400;color:#EEF2C8}
+
+/* expertise : une liste, rien d'autre */
+.exp{padding:clamp(80px,14vh,150px) var(--g)}
+.exp .h{font-size:min(5.6vw,12svh)}
+.rows{margin-top:clamp(30px,6vh,56px);border-top:1.5px solid var(--ink)}
+.rows li{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:12px 32px;align-items:baseline;padding:clamp(16px,2.8vh,26px) 0;border-bottom:1.5px solid var(--ink)}
+.rows b{font-weight:800;font-variation-settings:"wdth" 112;letter-spacing:-.04em;font-size:clamp(25px,3vw,50px);line-height:1.05}
+.rows span{font-size:clamp(17px,1.3vw,19px);line-height:1.35}
+
+/* formats */
+.fmt{padding:clamp(80px,14vh,140px) var(--g);background:var(--ink);color:var(--ci);--acc:#D6EA12}
+.fmt .h{font-size:min(5.6vw,12svh)}
+.fmt>p{margin-top:12px;max-width:46ch;color:#EEF2C8}
+.tabs{display:flex;gap:clamp(18px,3vw,44px);margin-top:26px}
+.tabs button{padding:6px 0 8px;font-weight:700;font-size:clamp(18px,1.7vw,24px);opacity:.6;border-bottom:3px solid transparent;transition:opacity .2s,border-color .2s}
+.tabs button[aria-selected=true]{opacity:1;border-color:var(--ci)}
+.fmt .fcar{width:min(100%,120svh);margin:26px auto 0}
+.fd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 30px;align-items:end;margin-top:22px}
+.fd h3{font-weight:700;font-size:clamp(20px,1.7vw,25px)}
+.incl{margin-top:8px;font-size:15px}
+.note{font-size:14px;line-height:1.4;color:#EEF2C8;font-weight:400;margin-top:10px;max-width:60ch}
+
+/* zones */
+.zon{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);padding:clamp(80px,14vh,140px) var(--g);align-items:center}
+.zon .h{font-size:min(5.6vw,12svh)}
+.zon .in{margin-top:12px;max-width:44ch}
+.opt legend{font-size:14px;font-weight:600}
+.chips span{border-bottom:2px solid rgba(11,12,6,.3);padding:0 2px;margin-right:8px;font-weight:600;font-size:16px}
+.chips input:checked+span{border-color:var(--ink);box-shadow:inset 0 -6px 0 -4px var(--ink)}
+.chips span{opacity:.68}.chips input:checked+span{opacity:1}
+.legend{margin-top:10px;font-size:14px}
+.legend .a:before{border:1.5px solid var(--ink)}.legend .b:before{background:var(--ink)}.legend .c:before{border:1.5px dashed var(--ink)}
+.sum{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1.5px solid var(--ink)}
+.sum p{max-width:46ch;font-weight:600}
+.zon .note{color:var(--ink)}
+
+/* créations */
+.cre{padding:clamp(80px,14vh,140px) var(--g);background:var(--ink);color:var(--ci)}
+.cre header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.cre .h{font-size:min(5.6vw,12svh)}
+.cre header p{max-width:44ch;color:#EEF2C8}
+.pj{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:12px;margin-top:clamp(28px,5vh,46px)}
+.pj figure{overflow:hidden}
+.pj .a{grid-row:1/3}
+.pj .a img{width:100%;height:100%;object-fit:cover}
+.pj .b img{width:100%;aspect-ratio:1/.8;object-fit:cover}
+.pi{display:flex;justify-content:space-between;gap:16px;margin-top:10px}
+.pi b{font-weight:700}.pi span{font-size:14px;color:#EEF2C8;font-weight:400}
+
+/* parcours */
+.flo{padding:clamp(80px,14vh,140px) var(--g)}
+.flo .h{font-size:min(5.6vw,12svh)}
+.six{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,5vw,80px);margin-top:clamp(30px,6vh,56px);counter-reset:s}
+.six li{display:grid;grid-template-columns:44px 1fr;padding:14px 0 18px;border-top:1.5px solid var(--ink);counter-increment:s}
+.six li:before{content:counter(s);font-weight:800;font-size:20px}
+.six b{display:block;font-weight:800;font-size:clamp(19px,1.6vw,23px);line-height:1.2}
+.six span{display:block;grid-column:2;margin-top:3px;font-size:16px;line-height:1.35;font-weight:400}
+
+/* devis */
+.ask{padding:clamp(80px,14vh,140px) var(--g);background:var(--ink);color:var(--ci);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px)}
+.ask h2{font-size:min(4.8vw,11svh)}
+.ask .sd p{margin-top:14px;max-width:40ch;color:#EEF2C8}
+.ask .sd .sm{font-size:14px;font-weight:400}
+form label{font-size:14px;font-weight:600}
+form input,form select,form textarea{background:transparent;border:0;border-bottom:2px solid var(--ci);color:var(--ci);padding:10px 0}
+form select option{color:var(--ink)}
+form input:focus,form select:focus,form textarea:focus{outline:0;box-shadow:0 2px 0 0 var(--ci)}
+footer{background:var(--ink);color:#EEF2C8;border-top:1px solid #33350F;font-weight:400}
+
+@media (max-aspect-ratio:1/1){
+  .ph.w{display:none}
+  .ph.m{display:block;height:auto;top:auto;bottom:0}
+  .logo{font-size:27px}
+  .hero{min-height:640px}
+  .hero h1{top:80px;font-size:11.8vw}
+  .dot{--from:62vw}
+  .lede{top:calc(80px + 11.8vw*2.05);left:var(--g);right:var(--g);width:auto;font-size:18px}
+  .lede .btn{width:100%;min-height:54px;margin-top:14px}
+  .four{display:none}
+  .con{display:block}
+  .con img{height:auto;min-height:0;aspect-ratio:1/1;object-position:50% 30%}
+  .con h2,.exp .h,.fmt .h,.zon .h,.cre .h,.flo .h{font-size:9.6vw}
+  .ask h2{font-size:11vw}
+  .pts{grid-template-columns:1fr}
+  .rows li{grid-template-columns:1fr}
+  .fd{grid-template-columns:1fr}
+  .zon{display:block}.zon .mp{margin-top:26px}
+  .pj{grid-template-columns:1fr 1fr}
+  .pj .a{grid-row:auto;grid-column:1/3}
+  .pj .a img{aspect-ratio:4/3;height:auto}
+  .six{grid-template-columns:1fr}
+  .ask{display:block}.ask form{margin-top:26px}
+  .tabs{justify-content:space-between}
+}
+</style>
+</head>
+<body>
+
+<main id="top">
+<section class="hero" aria-label="Présentation">
+  <img class="ph w" loading="lazy" src="../shared/img/v1_hero.webp" alt="Berline habillée de citron mat dans un studio de la même couleur" width="2800" height="1568">
+  <img class="ph m" loading="lazy" src="../shared/img/v1_hero_m.webp" alt="Berline habillée de citron mat, vue de l'arrière" width="1200" height="2142">
+  <header class="bar"><a class="logo" href="#top" aria-label="roam, nom provisoire">roam.</a><nav class="navl" aria-label="Navigation"><a href="#concept">Concept</a><a href="#expertise">Expertise</a><a href="#formats">Formats</a><a href="#zones">Zones</a><a href="#parcours">Comment ça marche</a></nav><a class="btn navl" href="#devis" style="min-height:46px;padding:0 20px;font-size:15px">Demander un devis</a><button class="menu" data-menu aria-expanded="false" aria-controls="sheet">Menu</button></header>
+  <h1 class="h"><span>Votre marque,</span><span>en circulation<i class="dot" aria-hidden="true"></i></span></h1>
+  <div class="lede"><p>Agence de communication créative spécialisée dans la publicité sur véhicules. Nous créons vos campagnes, posons le covering et les diffusons dans vos zones.</p><a class="btn" href="#devis">Demander un devis</a></div>
+  <ul class="four" aria-label="Nos métiers"><li>Création</li><li>Covering</li><li>Diffusion</li><li>Suivi</li></ul>
+</section>
+<div class="sheet" data-sheet id="sheet"><a href="#concept">Concept</a><a href="#expertise">Expertise</a><a href="#formats">Formats</a><a href="#zones">Zones</a><a href="#parcours">Comment ça marche</a><a href="#devis">Demander un devis</a><a class="sm" href="#conducteur">Devenir conducteur</a></div>
+<section class="con" id="concept" aria-labelledby="c-t"><div class="tx"><h2 class="h rv" id="c-t">Votre publicité ne reste plus sur place.</h2><p class="rv">Une affiche attend qu'on passe devant elle. Nous transformons des véhicules du quotidien en supports publicitaires mobiles : votre message se déplace dans les zones que vous avez choisies.</p><div class="pts rv"><div><b>Un véhicule du quotidien</b><span>Il roule déjà, tous les jours.</span></div><div><b>Une création sur mesure</b><span>Dessinée pour sa carrosserie.</span></div><div><b>Une campagne qui circule</b><span>Dans les zones que vous choisissez.</span></div></div></div><img loading="lazy" decoding="async" src="../shared/img/v1_detail.webp" alt="Détail d'une portière habillée de citron mat" width="896" height="1120"></section>
+<section class="exp" id="expertise" aria-labelledby="e-t"><h2 class="h rv" id="e-t">Notre expertise.</h2><ol class="rows"><li class="rv"><b>Conception graphique</b><span>Direction artistique et concept de campagne, pensés pour un support en mouvement.</span></li><li class="rv"><b>Création et adaptation</b><span>Nous créons vos visuels ou adaptons les vôtres aux surfaces de chaque véhicule.</span></li><li class="rv"><b>Covering et pose</b><span>Préparation, impression et pose du film par nos équipes, hors vitres.</span></li><li class="rv"><b>Diffusion sur véhicules</b><span>Votre campagne circule sur un réseau de véhicules, dans les zones définies.</span></li><li class="rv"><b>Suivi des campagnes</b><span>Kilomètres éligibles, zones couvertes et données disponibles, réunis dans vos rapports.</span></li></ol></section>
+<section class="fmt" id="formats" data-formats aria-labelledby="ft-h"><h2 class="h" id="ft-h">Trois formats, une même voiture.</h2><p>Choisissez la surface qui porte votre message. La création s'adapte à chaque format.</p><div class="tabs" role="tablist" aria-label="Format de covering"><button role="tab" id="ft0" aria-selected="false" aria-controls="fpanel" tabindex=-1>Classique</button><button role="tab" id="ft1" aria-selected="true" aria-controls="fpanel">Medium</button><button role="tab" id="ft2" aria-selected="false" aria-controls="fpanel" tabindex=-1>Complet</button></div><div id="fpanel" role="tabpanel" aria-labelledby="ft1" tabindex="0"><div class="fcar"><img srcset="../shared/img/car_base_m.webp 900w,../shared/img/car_base.webp 1800w" sizes="(max-width:800px) 100vw,70vw" src="../shared/img/car_base.webp" alt="" aria-hidden="true" width="1800" height="616" decoding="async"><img class="fi" data-fi srcset="../shared/img/v1_classique_m.webp 900w,../shared/img/v1_classique.webp 1800w" sizes="(max-width:800px) 100vw,70vw" src="../shared/img/v1_classique.webp" alt="Format Classique : le message sur les deux portières." width="1800" height="616" decoding="async"><img class="fi" data-fi srcset="../shared/img/v1_medium_m.webp 900w,../shared/img/v1_medium.webp 1800w" sizes="(max-width:800px) 100vw,70vw" src="../shared/img/v1_medium.webp" alt="Format Medium : les portières, l'avant et les rétroviseurs." width="1800" height="616" decoding="async"><img class="fi" data-fi srcset="../shared/img/v1_complet_m.webp 900w,../shared/img/v1_complet.webp 1800w" sizes="(max-width:800px) 100vw,70vw" src="../shared/img/v1_complet.webp" alt="Format Complet : toute la carrosserie, hors vitres." width="1800" height="616" decoding="async"></div><div class="fd"><div><h3 data-fdesc data-d0="Le message sur les deux portières." data-d1="Les portières, l'avant et les rétroviseurs." data-d2="Toute la carrosserie, hors vitres."></h3><ul class="incl"><li data-z="012">Portières</li><li data-z="12">Avant</li><li data-z="12">Rétroviseurs</li><li data-z="2">Arrière</li><li data-z="2">Toit</li></ul><p class="note">Formats provisoires. Surfaces à valider techniquement. Tarifs établis sur devis.</p></div><a class="btn i" href="#devis">Demander un devis</a></div></div></section>
+<section class="zon" id="zones" data-zones data-dot="rgba(11,12,6,.2)" data-on="#0B0C06" data-pill="#0B0C06" data-pilltx="#D6EA12" data-mark="#0B0C06" data-halo="#D6EA12" data-font="Archivo,sans-serif" aria-labelledby="zt"><div><h2 class="h" id="zt">Votre campagne, vos zones.</h2><p class="in">Vous choisissez où votre message circule, avec combien de véhicules et pendant combien de temps. Composez une simulation.</p><fieldset class="opt"><legend>Villes</legend><div class="chips" id="z-cities"></div></fieldset><fieldset class="opt"><legend>Zone ciblée</legend><div class="chips" id="z-scope"></div></fieldset><fieldset class="opt"><legend>Véhicules</legend><div class="chips" id="z-cars"></div></fieldset><fieldset class="opt"><legend>Durée de diffusion</legend><div class="chips" id="z-dur"></div></fieldset><fieldset class="opt"><legend>Format de covering</legend><div class="chips" id="z-fmt"></div></fieldset></div><div class="mp"><canvas role="img" aria-label="Carte de Belgique : simulation des zones choisies autour des villes sélectionnées"></canvas><ul class="legend"><li class="a">Ville proposée</li><li class="b">Votre sélection, en simulation</li><li class="c">Zone disponible : confirmée au devis</li></ul><div class="sum"><p data-zsum aria-live="polite"></p><a class="btn" data-zuse href="#devis">Imaginer cette campagne</a></div><p class="note">Simulation sans données de diffusion. Les villes sont des exemples : aucune n'est présentée comme couverte aujourd'hui. Les zones disponibles dépendent du réseau et sont confirmées dans le devis.</p></div></section>
+<section class="cre" id="creations" aria-labelledby="ct"><header><h2 class="h" id="ct">Nos créations.</h2><p>Deux démonstrations, de la création à plat au véhicule habillé. Concepts graphiques fictifs, sans marque ni client.</p></header><div class="pj rv"><figure class="a"><img loading="lazy" decoding="async" src="../shared/img/crea1.webp" alt="SUV compact en parking béton, habillé d'arcs crème, noirs et vermillon" width="2000" height="1120"></figure><figure class="b"><img loading="lazy" decoding="async" src="../shared/img/p1_proof.webp" alt="Épreuve imprimée du projet Arcs" width="1000" height="1244"></figure><figure class="b"><img loading="lazy" decoding="async" src="../shared/img/p1_detail.webp" alt="Détail du film, projet Arcs" width="1000" height="1244"></figure></div><div class="pi"><b>Arcs</b><span>Démonstration · SUV compact · format Complet</span></div><div class="pj rv"><figure class="a"><img loading="lazy" decoding="async" src="../shared/img/crea3.webp" alt="Petite citadine magenta habillée d'une vague crème" width="2000" height="1120"></figure><figure class="b"><img loading="lazy" decoding="async" src="../shared/img/p2_proof.webp" alt="Épreuve imprimée du projet Vague" width="1000" height="1244"></figure><figure class="b"><img loading="lazy" decoding="async" src="../shared/img/p2_detail.webp" alt="Détail du film, projet Vague" width="1000" height="1244"></figure></div><div class="pi"><b>Vague</b><span>Démonstration · Citadine · format Complet</span></div></section>
+<section class="flo" id="parcours" aria-labelledby="pt"><h2 class="h rv" id="pt">Comment ça fonctionne.</h2><ol class="six"><li><b>Demande de devis</b><span>Vous nous expliquez vos besoins et vos objectifs.</span></li><li><b>Proposition créative</b><span>Nous préparons une proposition et un devis.</span></li><li><b>Création et validation</b><span>Notre équipe crée ou adapte les visuels, puis vous les validez.</span></li><li><b>Pose du covering</b><span>Nous organisons la pose sur les véhicules.</span></li><li><b>Diffusion</b><span>Les véhicules circulent selon les conditions de la campagne.</span></li><li><b>Suivi et bilan</b><span>Vous recevez les données et rapports disponibles.</span></li></ol></section>
+<section class="ask" id="devis" aria-labelledby="at"><div class="sd"><h2 class="h" id="at">Votre prochaine campagne prend la route&nbsp;?</h2><p>Dites-nous ce que vous voulez faire connaître et où. Nous revenons vers vous avec une proposition et un devis.</p><p class="sm">Pas de paiement en ligne : chaque campagne est préparée sur devis.</p></div><form data-quote novalidate>
+<div><label for="q-nom">Nom *</label><input id="q-nom" name="nom" type="text" required autocomplete=name aria-describedby="nom-err"><span class="err" id="nom-err"></span></div>
+<div><label for="q-societe">Société *</label><input id="q-societe" name="societe" type="text" required autocomplete=organization aria-describedby="societe-err"><span class="err" id="societe-err"></span></div>
+<div><label for="q-email">E-mail *</label><input id="q-email" name="email" type="email" required autocomplete=email aria-describedby="email-err"><span class="err" id="email-err"></span></div>
+<div><label for="q-tel">Téléphone</label><input id="q-tel" name="tel" type="tel" autocomplete=tel aria-describedby="tel-err"><span class="err" id="tel-err"></span></div>
+<div><label for="q-zones">Villes ou zones</label><input id="q-zones" name="zones"></div>
+<div><label for="q-format">Format envisagé</label><select id="q-format" name="format"><option value="">Je ne sais pas encore</option><option>Classique</option><option>Medium</option><option>Complet</option></select></div>
+<div class="w"><label for="q-besoin">Votre besoin</label><textarea id="q-besoin" name="besoin" rows="3"></textarea></div>
+<div class="w send"><button class="btn i" type="submit">Demander un devis</button><p data-sent role="status"></p></div>
+</form></section>
+</main>
+<footer id="conducteur"><details><summary>Devenir conducteur</summary><p>Vous roulez beaucoup et votre voiture est en bon état ? Le parcours de candidature arrive bientôt.</p></details><p class="fine">Aperçu de travail. Le nom roam est provisoire. Images et vidéos créées par IA, modèles sans logo et sans lien avec les constructeurs. Les créations sont des démonstrations, sans client réel.</p></footer>
+<script src="../shared/be.js"></script><script src="../shared/site.js"></script>
+</body></html>
