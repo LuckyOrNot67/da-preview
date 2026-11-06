@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-c="blanc">
+<html lang="fr" data-c="bleu" data-m="jour">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -10,17 +10,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap">
-<script>(()=>{let c=new URLSearchParams(location.search).get('c');try{c=c||localStorage.getItem('roam-c')}catch(e){}if(['blanc','sable','ardoise','nuit'].includes(c))document.documentElement.dataset.c=c})()</script>
+<script>(()=>{const u=new URLSearchParams(location.search),R=document.documentElement;let c=u.get('c'),m=u.get('m');try{c=c||localStorage.getItem('roam-c');m=m||localStorage.getItem('roam-m')}catch(e){}if(['bleu','brique','framboise'].includes(c))R.dataset.c=c;R.dataset.m=['jour','nuit'].includes(m)?m:matchMedia('(prefers-color-scheme: dark)').matches?'nuit':'jour'})()</script>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skip" href="#top">Aller au contenu</a>
 <header class="bar">
   <a class="logo" href="#top" aria-label="roam, nom provisoire"><i></i>roam</a>
-  <nav class="links" aria-label="Navigation principale"><a href="#campagnes">Campagnes</a><a href="#expertise">Expertise</a><a href="#formats">Formats</a><a href="#zones">Zones</a></nav>
+  <nav class="links" aria-label="Navigation principale"><a href="#concept">Concept</a><a href="#formats">Formats</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a></nav>
   <div class="acts"><a class="btn sm" href="#contact">Créer ma campagne</a><button class="menu" data-menu aria-expanded="false" aria-controls="sheet">Menu</button></div>
 </header>
-<div class="sheet" data-sheet id="sheet"><a href="#campagnes">Campagnes</a><a href="#expertise">Expertise</a><a href="#formats">Formats</a><a href="#zones">Zones</a><a href="#contact">Créer ma campagne</a></div>
+<div class="sheet" data-sheet id="sheet"><a href="#concept">Concept</a><a href="#formats">Formats</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a><a href="#contact">Créer ma campagne</a></div>
 
 <main id="top">
 <section class="hero" aria-label="Présentation">
@@ -36,17 +36,38 @@
     <li><svg viewBox="0 0 24 24"><path d="M3 15l2-6h14l2 6v3H3zM7 18v2M17 18v2M6 15h3M15 15h3"/></svg>Diffusion</li>
     <li><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>Zones</li>
     <li><svg viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-5M13 16V8M18 16v-3"/></svg>Suivi</li>
-    <li class="go"><a href="#expertise" aria-label="Voir notre expertise">→</a></li>
+    <li class="go"><a href="#concept" aria-label="Découvrir le concept">→</a></li>
   </ul>
 </section>
 
-<section class="cam" id="campagnes" aria-labelledby="c-t">
-  <p class="eye">Des campagnes qui roulent</p>
-  <h2 id="c-t">Nos styles de campagne</h2>
-  <p class="lead">Choisissez un style pour voir comment la campagne vit sur le véhicule.</p>
-  <div class="pills" role="group" aria-label="Filtrer par véhicule" id="pills"></div>
-  <div class="grid" id="grid">{{TILES}}</div>
-  <p class="fine">Démonstrations : concepts graphiques fictifs, sans marque ni client.</p>
+<section class="con" id="concept" aria-labelledby="k0">
+  <p class="eye">Notre concept</p>
+  <h2 id="k0">Chaque trajet devient une prise de parole.</h2>
+  <div class="cgrid">
+    <p class="big">Des véhicules roulent déjà, chaque jour, là où vivent et passent vos clients. Nous les transformons en supports de communication.</p>
+    <ol class="trio">
+      <li><b>Votre message</b><span>Nous imaginons une campagne pensée pour la route.</span></li>
+      <li><b>Nos véhicules</b><span>Nous l'installons sur des véhicules de conducteurs sous contrat avec nous.</span></li>
+      <li><b>Vos zones</b><span>Votre marque circule dans les villes que vous visez.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="show" id="formats" aria-labelledby="f-t">
+  <div class="shead">
+    <p class="eye">Nos styles de campagne</p>
+    <h2 id="f-t">Trois façons d'habiller un véhicule</h2>
+    <p class="lead">Du message discret sur les portières à la carrosserie entière.</p>
+  </div>
+  <div class="track" id="track">
+    <div class="stage">
+      <nav class="snav" aria-label="Styles de campagne">{{SNAV}}</nav>
+      <div class="stx">{{STX}}</div>
+      <div class="scar">{{SCAR}}</div>
+      <div class="sarrows"><button id="sprev" aria-label="Style précédent">←</button><button id="snext" aria-label="Style suivant">→</button></div>
+    </div>
+  </div>
+  <p class="fine sfine">Démonstrations : concepts graphiques fictifs, sans marque ni client. Surfaces à valider techniquement.</p>
 </section>
 
 <section class="exp" id="expertise" aria-labelledby="e-t">
@@ -61,77 +82,40 @@
   </ul>
 </section>
 
-<section class="fmt" id="formats" data-formats aria-labelledby="f-t">
-  <p class="eye">Trois surfaces</p>
-  <h2 id="f-t">Choisissez votre format</h2>
-  <div class="tabs" role="tablist" aria-label="Format de covering">
-    <button role="tab" id="ft0" aria-selected="false" aria-controls="fp" tabindex="-1">Classique</button>
-    <button role="tab" id="ft1" aria-selected="true" aria-controls="fp">Medium</button>
-    <button role="tab" id="ft2" aria-selected="false" aria-controls="fp" tabindex="-1">Complet</button>
-  </div>
-  <div id="fp" role="tabpanel" aria-labelledby="ft1" tabindex="0">
-    <div class="fcar">
-      <img src="img/car_base.webp" alt="" aria-hidden="true" width="1800" height="683" loading="lazy">
-      <img class="fi" data-fi src="img/f_classique.webp" alt="Format Classique : les deux portières" width="1800" height="683" loading="lazy">
-      <img class="fi on" data-fi src="img/f_medium.webp" alt="Format Medium : portières, avant et rétroviseurs" width="1800" height="683" loading="lazy">
-      <img class="fi" data-fi src="img/f_complet.webp" alt="Format Complet : toute la carrosserie, hors vitres" width="1800" height="683" loading="lazy">
-    </div>
-    <h3 data-fdesc data-d0="Le message sur les deux portières." data-d1="Les portières, l'avant et les rétroviseurs." data-d2="Toute la carrosserie, hors vitres.">Les portières, l'avant et les rétroviseurs.</h3>
-    <ul class="incl"><li data-z="012" class="on">Portières</li><li data-z="12" class="on">Avant</li><li data-z="12" class="on">Rétroviseurs</li><li data-z="2">Arrière</li><li data-z="2">Toit</li></ul>
-    <p class="fine">Formats provisoires. Surfaces à valider techniquement. Tarifs établis sur devis.</p>
-  </div>
-</section>
-
-<section class="zon" id="zones" aria-labelledby="z-t">
-  <div class="zt">
-    <p class="eye">Ciblage</p>
-    <h2 id="z-t">Votre campagne, vos zones</h2>
-    <p class="lead">Composez une simulation : les villes, la zone, le nombre de véhicules et la durée.</p>
-    <fieldset><legend>Villes</legend><div class="chips" id="z-cities"></div></fieldset>
-    <fieldset><legend>Zone ciblée</legend><div class="chips" id="z-scope"></div></fieldset>
-    <fieldset><legend>Véhicules</legend><div class="chips" id="z-cars"></div></fieldset>
-    <fieldset><legend>Durée</legend><div class="chips" id="z-dur"></div></fieldset>
-  </div>
-  <div class="zm">
-    <svg id="zmap" viewBox="0 0 256 210" role="img" aria-label="Carte de Belgique : simulation des zones choisies"><path id="bepath" class="be" d="M113.9 16.4L118.9 18.8L123.2 19.4L125.3 18.3L123.9 12.2L127.6 9.1L131.4 7.6L133.3 10.2L136.9 12.8L139.9 12.9L147.7 6.0L149.3 7.4L151.1 9.8L151.3 11.7L151.8 13.8L153.4 14.7L159.6 14.3L162.5 10.5L165.0 8.1L166.9 9.8L167.8 14.3L169.4 20.4L176.7 27.2L182.9 29.1L190.4 27.7L193.4 26.5L195.4 27.5L197.3 31.2L201.6 35.2L210.7 38.1L213.7 39.7L215.5 42.5L215.1 46.4L210.7 56.2L210.1 59.1L210.7 60.0L209.8 61.9L204.1 68.3L203.7 70.8L205.5 74.4L207.1 77.5L210.5 79.1L213.7 79.6L219.7 79.8L226.1 80.0L226.1 80.0L227.0 81.9L234.0 87.1L236.3 91.2L241.6 95.4L237.2 100.4L237.9 102.9L239.5 105.1L245.2 106.5L248.2 109.8L248.4 115.0L249.6 123.4L237.7 131.9L234.3 141.1L234.0 143.0L234.0 143.0L233.6 142.6L232.2 139.7L229.9 139.7L225.1 138.3L218.1 146.8L214.9 153.7L213.0 158.9L210.3 163.1L209.8 167.4L210.1 169.4L209.1 171.8L209.1 174.2L213.0 179.1L214.2 181.9L219.0 190.5L217.4 193.8L216.2 197.1L214.9 199.7L213.3 201.3L213.3 201.3L208.2 201.1L201.8 202.2L197.5 203.9L195.2 203.9L190.6 199.6L185.6 193.1L182.2 190.0L180.8 187.2L176.7 186.2L171.0 182.9L166.9 179.4L163.4 177.2L158.6 176.1L154.8 176.3L153.4 170.4L152.9 163.6L149.7 159.1L154.3 141.4L151.6 139.7L148.6 141.1L144.5 145.4L142.4 150.4L141.3 154.8L134.2 158.9L123.0 160.5L110.9 158.9L109.1 157.9L108.4 156.7L108.4 155.1L109.1 152.7L111.3 149.7L111.8 145.6L109.5 142.1L108.1 140.7L108.8 137.2L110.4 132.9L110.7 130.5L102.4 122.8L96.5 121.4L90.5 121.3L86.2 120.4L83.7 120.7L81.9 122.8L79.8 124.4L78.4 122.5L75.9 109.3L73.9 107.4L66.3 105.1L56.3 104.3L53.5 101.8L51.9 95.9L51.0 88.8L47.6 81.9L46.0 80.1L43.0 77.2L37.5 78.4L31.1 82.4L27.5 83.4L25.9 83.9L20.9 80.0L15.1 73.9L10.6 67.5L9.4 63.8L10.8 59.5L9.2 56.2L6.7 50.1L6.0 45.4L6.0 45.4L33.6 28.6L50.3 19.9L58.3 17.3L58.3 17.3L60.2 26.0L61.8 28.7L63.6 30.5L66.1 30.8L68.8 28.7L73.0 26.5L79.4 27.5L84.1 29.6L85.7 31.7L88.9 33.8L93.3 34.3L102.2 30.3L110.7 24.4L112.9 20.2L113.9 16.4Z"/><g id="zzones"></g><g id="zcities"></g></svg>
-    <p class="sum" id="zsum" aria-live="polite"></p>
-    <p class="fine">Simulation sans données de diffusion. Aucune ville n'est présentée comme couverte aujourd'hui : les zones disponibles sont confirmées dans le devis.</p>
-  </div>
-</section>
-
 <section class="app" id="suivi" aria-labelledby="a-t">
-  <div class="phones" aria-hidden="true">
-    <div class="ph p1"><div class="sc">
-      <div class="mapui"><svg viewBox="0 0 256 210"><use href="#bepath"/></svg><i></i><b>Bruxelles</b></div>
-      <div class="card dark"><span>Campagne</span><strong>Démonstration</strong><div class="r"><em>— km</em><em>— jours</em></div></div>
+  <div class="ahead">
+    <p class="eye">Application mobile</p>
+    <h2 id="a-t">Votre campagne, vos zones, dans votre poche</h2>
+  </div>
+  <div class="arow">
+    <div class="ph" aria-hidden="true"><div class="sc">
+      <div class="top"><span>Ma campagne</span><span class="live">Active</span></div>
+      <div class="mapui"><svg viewBox="0 0 256 210"><path id="bepath" d="M113.9 16.4L118.9 18.8L123.2 19.4L125.3 18.3L123.9 12.2L127.6 9.1L131.4 7.6L133.3 10.2L136.9 12.8L139.9 12.9L147.7 6.0L149.3 7.4L151.1 9.8L151.3 11.7L151.8 13.8L153.4 14.7L159.6 14.3L162.5 10.5L165.0 8.1L166.9 9.8L167.8 14.3L169.4 20.4L176.7 27.2L182.9 29.1L190.4 27.7L193.4 26.5L195.4 27.5L197.3 31.2L201.6 35.2L210.7 38.1L213.7 39.7L215.5 42.5L215.1 46.4L210.7 56.2L210.1 59.1L210.7 60.0L209.8 61.9L204.1 68.3L203.7 70.8L205.5 74.4L207.1 77.5L210.5 79.1L213.7 79.6L219.7 79.8L226.1 80.0L226.1 80.0L227.0 81.9L234.0 87.1L236.3 91.2L241.6 95.4L237.2 100.4L237.9 102.9L239.5 105.1L245.2 106.5L248.2 109.8L248.4 115.0L249.6 123.4L237.7 131.9L234.3 141.1L234.0 143.0L234.0 143.0L233.6 142.6L232.2 139.7L229.9 139.7L225.1 138.3L218.1 146.8L214.9 153.7L213.0 158.9L210.3 163.1L209.8 167.4L210.1 169.4L209.1 171.8L209.1 174.2L213.0 179.1L214.2 181.9L219.0 190.5L217.4 193.8L216.2 197.1L214.9 199.7L213.3 201.3L213.3 201.3L208.2 201.1L201.8 202.2L197.5 203.9L195.2 203.9L190.6 199.6L185.6 193.1L182.2 190.0L180.8 187.2L176.7 186.2L171.0 182.9L166.9 179.4L163.4 177.2L158.6 176.1L154.8 176.3L153.4 170.4L152.9 163.6L149.7 159.1L154.3 141.4L151.6 139.7L148.6 141.1L144.5 145.4L142.4 150.4L141.3 154.8L134.2 158.9L123.0 160.5L110.9 158.9L109.1 157.9L108.4 156.7L108.4 155.1L109.1 152.7L111.3 149.7L111.8 145.6L109.5 142.1L108.1 140.7L108.8 137.2L110.4 132.9L110.7 130.5L102.4 122.8L96.5 121.4L90.5 121.3L86.2 120.4L83.7 120.7L81.9 122.8L79.8 124.4L78.4 122.5L75.9 109.3L73.9 107.4L66.3 105.1L56.3 104.3L53.5 101.8L51.9 95.9L51.0 88.8L47.6 81.9L46.0 80.1L43.0 77.2L37.5 78.4L31.1 82.4L27.5 83.4L25.9 83.9L20.9 80.0L15.1 73.9L10.6 67.5L9.4 63.8L10.8 59.5L9.2 56.2L6.7 50.1L6.0 45.4L6.0 45.4L33.6 28.6L50.3 19.9L58.3 17.3L58.3 17.3L60.2 26.0L61.8 28.7L63.6 30.5L66.1 30.8L68.8 28.7L73.0 26.5L79.4 27.5L84.1 29.6L85.7 31.7L88.9 33.8L93.3 34.3L102.2 30.3L110.7 24.4L112.9 20.2L113.9 16.4Z"/><circle cx="121.8" cy="70" r="24"/><circle cx="81.8" cy="50" r="19"/><circle cx="125" cy="33" r="15"/><circle class="d" cx="121.8" cy="70" r="3"/><circle class="d" cx="81.8" cy="50" r="3"/><circle class="d" cx="125" cy="33" r="3"/></svg><div class="tags"><b>Bruxelles</b><b>Gand</b><b>Anvers</b></div></div>
+      <div class="card"><span>Kilomètres parcourus</span><i class="meter"><u style="width:62%"></u></i></div>
+      <div class="card"><span>Public touché, estimation</span><i class="meter"><u style="width:44%"></u></i></div>
       <div class="pbtn">Voir le rapport</div>
     </div></div>
-    <div class="ph p2"><div class="sc">
-      <div class="top"><span>Suivi</span><span>Modèle</span></div>
-      <div class="card img"><img src="img/c1.webp" alt=""></div>
-      <div class="two"><div class="card"><span>Kilomètres</span><strong>— km</strong></div><div class="card"><span>Zones</span><strong>—</strong></div></div>
-      <div class="card dark"><span>Photos de preuve</span><strong>—</strong></div>
+    <div class="atx">
+      <h3>Pour les annonceurs</h3>
+      <p>Vous choisissez vos zones avec nous, puis vous les retrouvez dans l'application : où circule votre campagne active, le chemin parcouru et le public qu'elle touche.</p>
+      <ul class="ticks"><li>Vos zones sur la carte</li><li>Vos kilomètres parcourus</li><li>Votre public estimé</li></ul>
+    </div>
+  </div>
+  <div class="arow rev">
+    <div class="ph" aria-hidden="true"><div class="sc">
+      <div class="top"><span>Mon mois</span><span>Conducteur</span></div>
+      <div class="card tall"><span>Objectif du mois</span><i class="meter"><u style="width:78%"></u></i><span>Kilomètres à valider</span></div>
+      <div class="card"><span>Mes grandes zones</span><div class="zt"><b>Bruxelles</b><b>Gand</b></div></div>
+      <div class="card"><span>Kilomètres en plus</span><i class="meter"><u style="width:22%"></u></i></div>
+      <div class="pbtn">Valider mon mois</div>
     </div></div>
+    <div class="atx">
+      <h3>Pour les conducteurs</h3>
+      <p>Une application pour valider vos kilomètres du mois et indiquer les grandes zones parcourues. Vous roulez comme d'habitude, et chaque kilomètre en plus compte.</p>
+      <ul class="ticks"><li>Vos kilomètres à valider</li><li>Vos grandes zones, sans trajet détaillé</li><li>Votre contrat et votre suivi</li></ul>
+    </div>
   </div>
-  <div class="atx">
-    <p class="eye">Suivi de campagne</p>
-    <h2 id="a-t">Vos données, au même endroit</h2>
-    <p>Kilomètres validés, zones agrégées et photos de preuve : vous suivez ce qui est réellement mesuré. L'audience n'est pas affichée tant qu'aucune méthode n'est validée.</p>
-    <p class="fine">Écrans de démonstration. L'espace annonceur n'est pas encore développé.</p>
-  </div>
-</section>
-
-<section class="flow" id="parcours" aria-labelledby="p-t">
-  <p class="eye">Simple</p>
-  <h2 id="p-t">Comment ça marche</h2>
-  <ol class="steps">
-    <li><b>Votre demande</b><span>Vous nous expliquez vos besoins.</span></li>
-    <li><b>La proposition</b><span>Nous préparons un devis.</span></li>
-    <li><b>La création</b><span>Vous validez les visuels.</span></li>
-    <li><b>La pose</b><span>Nous habillons les véhicules.</span></li>
-    <li><b>La diffusion</b><span>Les véhicules circulent.</span></li>
-    <li><b>Le suivi</b><span>Vous recevez les rapports.</span></li>
-  </ol>
+  <p class="fine afine">Écrans de démonstration, sans données réelles. L'application n'est pas encore développée : les méthodes de mesure et la validation des trajets restent à définir.</p>
 </section>
 
 <section class="wrapc" id="contact" aria-labelledby="k-t">
@@ -144,14 +128,13 @@
 </main>
 
 <footer id="conducteur">
-  <div class="fl"><a href="#campagnes">Campagnes</a><a href="#expertise">Expertise</a><a href="#formats">Formats</a><a href="#zones">Zones</a></div>
+  <div class="fl"><a href="#concept">Concept</a><a href="#formats">Formats</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a></div>
   <div class="fl"><a href="#conducteur">Devenir conducteur</a><a href="../premium-v2/confidentialite/">Données personnelles</a></div>
   <div><a class="logo" href="#top" aria-label="roam, nom provisoire, retour en haut"><i></i>roam</a><p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p></div>
 </footer>
 
-<div class="pal" role="group" aria-label="Couleurs du site" id="pal"><span>Couleurs</span><button data-v="blanc">Blanc</button><button data-v="sable">Sable</button><button data-v="ardoise">Ardoise</button><button data-v="nuit">Nuit</button></div>
+<div class="pal" role="group" aria-label="Couleurs du site" id="pal"><button class="sw" data-c="bleu" aria-label="Bleu" title="Bleu"></button><button class="sw" data-c="brique" aria-label="Brique" title="Brique"></button><button class="sw" data-c="framboise" aria-label="Framboise" title="Framboise"></button><b></b><button data-m="jour">Jour</button><button data-m="nuit">Nuit</button></div>
 
-<script>window.SITE_T={lang:'fr',m:{sim:'Simulation : {cars} véhicules, {dur}, {cities} ({scope}).',none:'Choisissez au moins une ville.'}}</script>
 <script src="../shared/site.js"></script><script src="app.js"></script>
 </body>
 </html>
