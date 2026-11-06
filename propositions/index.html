@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Comparer A et B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Mono&family=Hanken+Grotesk:wght@400;600&display=swap">
+<style>
+:root{--ink:#121214;--soft:#62646B;--rule:#DEDFE3;--wall:#F3F3F1;--d:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;--b:"Hanken Grotesk",system-ui,sans-serif;--m:"DM Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:400 17px/1.5 var(--b);padding:clamp(24px,5vw,64px) max(16px,4vw) 70px}
+.w{max-width:1320px;margin:0 auto;display:grid;gap:clamp(30px,5vw,60px)}
+h1,h2{margin:0;font:800 clamp(44px,7vw,92px)/.92 var(--d);letter-spacing:-.05em}
+h2{font-size:clamp(34px,4vw,54px)}
+p{margin:0}
+header{display:grid;gap:14px}
+header p{max-width:56ch;font-size:19px}
+.lab{font:400 12px/1.4 var(--m);color:var(--soft)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+article{display:grid;gap:14px;align-content:start;min-width:0}
+figure{margin:0;background:var(--wall);min-width:0}
+figure img{display:block;width:100%;height:auto}
+figcaption{padding:6px 9px;font:400 12px/1.3 var(--m);color:var(--soft)}
+.row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:12px;align-items:start}
+.go{display:inline-flex;justify-self:start;padding:13px 22px;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;text-decoration:none}
+.go:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+ul{margin:0;padding-left:18px;display:grid;gap:5px}
+.old{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:center;border-top:1px solid var(--rule);padding-top:clamp(24px,4vw,44px)}
+.old div{display:grid;gap:12px}
+@media (max-width:820px){.two,.old{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="w">
+<header>
+  <p class="lab">PROJECT_BRAND · aperçus à comparer · nom, marques et images provisoires</p>
+  <h1>Deux façons de faire rouler une marque.</h1>
+  <p>Chaque proposition montre un hero, sa version mobile et une campagne. Ouvre-les en plein écran : le mouvement fait partie du choix.</p>
+</header>
+<div class="two">
+  <article>
+    <h2>A · Unique × Flanko</h2>
+    <p>Clair, aéré, précis. La couleur vient des campagnes : elle change toute l'ambiance quand on choisit une marque.</p>
+    <figure><img src="assets/c_a1.webp" alt="Hero desktop de la proposition A"><figcaption>Hero desktop</figcaption></figure>
+    <div class="row">
+      <figure><img src="assets/c_a2.webp" alt="Campagne fictive mayo, proposition A"><figcaption>Campagne</figcaption></figure>
+      <figure><img src="assets/c_a4.webp" alt="Hero mobile de la proposition A"><figcaption>Mobile</figcaption></figure>
+    </div>
+    <ul>
+      <li>Réf. 6 : carte blanche, plan de ville, voiture coupée au bord</li>
+      <li>Réf. 5 et vinyle : une couleur par campagne</li>
+      <li>Réf. 11 : la bande sort de la voiture et traverse la page</li>
+      <li>Flanko : typographie, coin coupé, composition mobile</li>
+    </ul>
+    <a class="go" href="a/">Ouvrir A</a>
+  </article>
+  <article>
+    <h2>B · Flanko × Noomo</h2>
+    <p>Plein écran, couleurs assumées. On traverse le disque de la voiture, puis chaque campagne se décolle comme un vinyle.</p>
+    <figure><img src="assets/c_b1.webp" alt="Hero desktop de la proposition B"><figcaption>Hero desktop</figcaption></figure>
+    <div class="row">
+      <figure><img src="assets/c_b3.webp" alt="Transition en vinyle décollé, proposition B"><figcaption>Campagne, vinyle décollé</figcaption></figure>
+      <figure><img src="assets/c_b4.webp" alt="Hero mobile de la proposition B"><figcaption>Mobile</figcaption></figure>
+    </div>
+    <ul>
+      <li>Noomo : un monde continu, texte fin et mots gras, étiquette au curseur</li>
+      <li>Flanko : le ton, et le coin coupé qui devient la transition</li>
+      <li>Réf. 5 et 10 : un écran, une couleur, des mots immenses</li>
+      <li>Réf. 7 : le mot passe derrière la voiture</li>
+    </ul>
+    <a class="go" href="b/">Ouvrir B</a>
+  </article>
+</div>
+<section class="old" aria-label="Ancienne Flanko">
+  <figure><img src="assets/c_f.webp" alt="Ancienne direction Flanko"><figcaption>Ancienne Flanko, conservée telle quelle</figcaption></figure>
+  <div><h2>L'ancienne Flanko</h2><p>Gardée à son adresse pour comparer.</p><a class="go" href="../archive/directions-def/?d=f">Ouvrir Flanko</a></div>
+</section>
+<p class="lab">Campagnes et marques fictives. Visuels créés par IA pour la démonstration, à remplacer par de vraies photos avant lancement.</p>
+</div>
+</body>
+</html>
