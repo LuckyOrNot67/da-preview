@@ -4,515 +4,359 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Trois idées de marque</title>
+<title>DA rose 2.0</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;700&family=League+Gothic&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;700;800&family=League+Gothic&display=swap">
 <style>
-/* Trois concepts sur un même moteur de covering : image blanche + masque carrosserie + visuel multiplié. */
-@property --p{syntax:'<number>';inherits:true;initial-value:0}
-:root{--body:"Hanken Grotesk",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;--lg:"League Gothic",Impact,sans-serif;--br:"Bricolage Grotesque","Arial Black",sans-serif;--bc:"Barlow Condensed","Arial Narrow",sans-serif}
+/* DA rose 2.0 : la composition de la section mobile, poussée en échelle, en profondeur et en transitions. */
+:root{--lg:"League Gothic",Impact,"Arial Narrow",sans-serif;--body:"Hanken Grotesk",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+ --bg:#0B0A0D;--ink:#FFFFFF;--pink:#FF6DB8;--mag:#D4177F;--deep:#8E1560;--soft:#B59DAC;--rule:#2B2230;--onpink:#0B0A0D;--paint:#FF6DB8;color-scheme:dark}
+body[data-m="light"]{--bg:#FDEDF5;--ink:#2B0A1D;--pink:#D4177F;--mag:#FF5FB0;--deep:#7C0A4B;--soft:#8A4A6C;--rule:#F2C9DF;--onpink:#FFFFFF;--paint:#FF6DB8;color-scheme:light}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
-img{max-width:100%;display:block}
-button,input{font:inherit;color:inherit}
-a{color:inherit}
-h1,h2,h3,p{margin:0}
+h1,h2,h3,p{margin:0}a{color:inherit}button,input{font:inherit;color:inherit}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.mono{background:linear-gradient(180deg,var(--pink) 8%,var(--deep) 96%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.m{font-family:var(--lg);font-weight:400;text-transform:uppercase;line-height:.9}
+.btn{display:inline-block;background:var(--pink);color:var(--onpink);font:800 15px/1.1 var(--body);padding:15px 22px;border-radius:999px;border:1.5px solid var(--pink);text-decoration:none;white-space:nowrap;cursor:pointer}
+.btn.o{background:transparent;color:var(--ink);border-color:currentColor}
 
-/* Jetons */
-body[data-d="d"]{--bg:#FAFAF7;--ink:#0A0A0A;--soft:#5E5E58;--rule:#DEDDD6;--acc:#FF3B00;--onacc:#0A0A0A;--d1:var(--lg);--cta:0px}
-body[data-d="d"][data-m="dark"]{--bg:#0A0A0A;--ink:#FAFAF7;--soft:#A9A8A0;--rule:#2B2B28;--acc:#FF3B00;--onacc:#0A0A0A}
-body[data-d="e"]{--bg:#E4E4E0;--ink:#101113;--soft:#55565A;--rule:#C4C4BF;--acc:#FFC400;--onacc:#101113;--sign:#0B4EA2;--d1:var(--bc);--cta:4px}
-body[data-d="e"][data-m="dark"]{--bg:#17181A;--ink:#F2F2EE;--soft:#A2A3A6;--rule:#333438;--acc:#FFC400;--onacc:#101113;--sign:#0B4EA2}
-body[data-d="f"]{--bg:#FFE600;--ink:#0B0B0B;--soft:#3E3A00;--rule:#0B0B0B;--acc:#0B0B0B;--onacc:#FFE600;--d1:var(--br);--cta:999px}
-body[data-d="f"][data-m="dark"]{--bg:#0B0B0B;--ink:#FFE600;--soft:#B8AE2E;--rule:#3A3700;--acc:#FFE600;--onacc:#0B0B0B}
-
-/* Barre de comparaison */
-.bar{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;display:flex;gap:6px;padding:5px;background:#0A0A0Af2;border:1px solid #333;border-radius:14px;max-width:calc(100vw - 16px);overflow-x:auto;scrollbar-width:none;font:500 13px var(--body)}
-.bar div{display:flex;gap:2px}
-.bar div+div{border-left:1px solid #333;padding-left:6px}
-.bar button{background:none;border:0;color:#F2F2EE;padding:8px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}
-.bar button[aria-pressed="true"]{background:#F2F2EE;color:#0A0A0A}
-body.embed .bar,body.embed .fiche,body.embed .choice{display:none}
-
-.dir{display:none}
-body[data-d="d"] .dir.d,body[data-d="e"] .dir.e,body[data-d="f"] .dir.f{display:block}
-body[data-d="d"] .only-e,body[data-d="d"] .only-f,body[data-d="e"] .only-d,body[data-d="e"] .only-f,body[data-d="f"] .only-d,body[data-d="f"] .only-e{display:none!important}
-
-/* Navigation */
-.nav{position:absolute;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,2.6vw,36px);font:500 14px var(--body)}
-.nav nav{display:flex;gap:24px}
-.logo{font:800 22px/1 var(--br);letter-spacing:-.05em}
-.cta{display:inline-block;background:var(--acc);color:var(--onacc);font:700 15px/1.1 var(--body);padding:12px 18px;text-decoration:none;border-radius:var(--cta);white-space:nowrap;border:0;cursor:pointer}
-body[data-d="e"] .cta{background:var(--sign);color:#fff;box-shadow:inset 0 0 0 2px #fff,0 0 0 2px var(--sign);font:700 18px/1 var(--bc);letter-spacing:.02em;text-transform:uppercase}
-.tlink{font:500 14px var(--body);text-underline-offset:.25em}
-
-/* Moteur de covering */
-.car{position:relative;aspect-ratio:var(--ar,2.7416);isolation:isolate;--w:100%}
-.car.golf{--ar:2.7416;--img:url(assets/golf_white.webp);--mask:url(assets/golf_mask.webp)}
-.car.r5{--ar:2.3662;--img:url(assets/r5_white.webp);--mask:url(assets/r5_mask.webp)}
+/* Voiture : image blanche + masque carrosserie, jamais sur les vitres */
+.car{position:relative;aspect-ratio:2.7416;isolation:isolate;--img:url(assets/golf_white_m.webp);--mask:url(assets/golf_mask_m.webp);--c:1}
+.car.r5{aspect-ratio:2.3662;--img:url(assets/r5_white.webp);--mask:url(assets/r5_mask.webp)}
 .car .base{position:absolute;inset:0;background:var(--img) center/100% 100% no-repeat}
-.car .skin{position:absolute;inset:0;-webkit-mask:var(--mask) center/100% 100% no-repeat;mask:var(--mask) center/100% 100% no-repeat;mix-blend-mode:multiply;overflow:hidden}
-.car .shade{position:absolute;left:2%;right:2%;bottom:-3%;height:9%;background:radial-gradient(closest-side,rgba(0,0,0,.5),transparent);filter:blur(5px);z-index:-1}
+.car .skin{position:absolute;inset:0;-webkit-mask:var(--mask) center/100% 100% no-repeat;mask:var(--mask) center/100% 100% no-repeat;mix-blend-mode:multiply;overflow:hidden;container-type:inline-size;clip-path:inset(0 calc((1 - var(--c))*100%) 0 0)}
+.car .art{position:absolute;inset:0;background:var(--s,#FF6DB8);color:var(--t,#0B0A0D);display:grid;place-items:center;padding:8cqw 19cqw 0 31cqw;font:400 var(--fs,9.6cqw)/1 var(--lg);text-transform:uppercase;white-space:nowrap}
+.car .sh{position:absolute;left:2%;right:2%;bottom:-3.5%;height:10%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(6px);z-index:-1}
+.car.hd{--img:url(assets/golf_white.webp);--mask:url(assets/golf_mask.webp)}
 .car .wh{position:absolute;width:13.09%;aspect-ratio:1;top:59.1%;border-radius:50%;background:var(--img) no-repeat;background-size:764% auto;z-index:2}
 .car .wh.a{left:13.7%;background-position:15.76% 92.2%}
 .car .wh.b{left:75.9%;background-position:87.35% 92.2%}
-.fit{container-type:inline-size}
-.fit>.art{padding-top:9cqw}
-.art{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;white-space:nowrap;line-height:1}
 
-/* D · Le Passage */
+/* Héros */
 .pin{position:relative}
-body[data-o="imm"] .pin.tall{height:380vh}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;container-type:size}
+body[data-o="imm"] .pin{height:420vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;container-type:size;background:radial-gradient(70% 62% at 50% 74%,color-mix(in srgb,var(--deep) 70%,transparent),transparent 76%),var(--bg)}
 body[data-o="ess"] .stage{position:relative}
-.wordset{position:absolute;inset:0;font-family:var(--lg);text-transform:uppercase}
-.wordset span{position:absolute;left:2.2cqw;white-space:nowrap;line-height:.84}
-.wordset .l1{top:8.5cqh;font-size:min(23.2cqw,44cqh)}
-.wordset .l2{top:calc(8.5cqh + min(20cqw,38cqh));font-size:min(23.2cqw,44cqh)}
-.pass .car{position:absolute;width:min(76cqw,134cqh);left:0;top:calc(100cqh - min(33.5cqw,59cqh));z-index:6;will-change:transform}
-.pass .skin .wordset{background:var(--camp,var(--acc));color:#FAFAF7;width:100cqw;height:100cqh;inset:auto;left:0;top:0;will-change:transform}
-.pass .flood{position:absolute;inset:0;background:var(--camp,var(--acc));clip-path:circle(calc(max(0,(var(--p) - .68)*3.2)*150%) at 50% 72%);z-index:5;color:#FAFAF7}
-.pass .flood .wordset{position:absolute}
-.pass .meta{position:absolute;left:2.4cqw;right:2.4cqw;bottom:2.6cqh;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;z-index:8;font:500 12px/1.4 var(--mono)}
-.pass .meta p{max-width:30ch}
-.pass .swatch{position:absolute;left:50%;transform:translateX(-50%);top:19px;z-index:9;display:flex;gap:6px}
-.pass .swatch button{width:22px;height:22px;border:2px solid var(--ink);padding:0;cursor:pointer}
+.hero{position:absolute;inset:0;display:none}
+body[data-h="1"] .h1,body[data-h="2"] .h2{display:block}
+.nav{position:absolute;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,2.6vw,36px);font:500 14px var(--body)}
+.nav b{font:800 17px/1 var(--body);letter-spacing:-.02em}
+.nav nav{display:flex;gap:24px}
+.nav .btn{padding:11px 18px;font-size:14px}
+.w{position:absolute;left:0;right:0;text-align:center;white-space:nowrap;font-size:min(38.4cqw,74cqh);transform-origin:50% 0;line-height:.9}
+.h1 .w{top:7cqh;transform:scale(calc(1 + var(--z)*.5),calc(1.26 + var(--z)*.6));opacity:calc(1 - var(--z)*1.4)}
+.h1 .front{z-index:6;clip-path:inset(0 0 0 83.5%)}
+.h1 .car{position:absolute;z-index:4;width:min(100cqw,178cqh);left:50%;bottom:7cqh;margin-left:calc(min(100cqw,178cqh)/-2);transform:translate3d(0,calc(var(--z)*-12cqh),0) scale(calc(1 + var(--z)*var(--z)*2.8));transform-origin:58% 62%;}
+.tape{position:absolute;left:-3cqw;right:-3cqw;bottom:7.5cqh;z-index:8;background:var(--paint);color:#0B0A0D;font:400 min(3.9cqw,7cqh)/1.18 var(--lg);text-transform:uppercase;transform:rotate(-1.6deg) translateY(calc(var(--z)*30cqh));overflow:hidden;white-space:nowrap}
+.tape span{display:inline-block;padding-right:3cqw;animation:tape 26s linear infinite}
+@keyframes tape{to{transform:translateX(-100%)}}
+body[data-o="ess"] .tape span{animation-play-state:paused}
+.fill{position:absolute;inset:0;background:var(--paint);z-index:12;opacity:clamp(0,calc((var(--p) - .78)*7),1);pointer-events:none}
+.foot{position:absolute;left:clamp(16px,2.6vw,36px);right:clamp(16px,2.6vw,36px);bottom:12px;z-index:9;display:flex;justify-content:space-between;align-items:center;font:500 12px var(--mono);color:var(--soft);opacity:calc(1 - var(--z)*3)}
 
-/* Histoire D */
-.story{position:relative}
-body[data-o="imm"] .story.tall{height:420vh}
-.story .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr;padding:clamp(18px,3vw,40px)}
-body[data-o="ess"] .story .sticky{position:relative;height:auto}
-.step{font:400 clamp(58px,12.5vw,190px)/.86 var(--lg);text-transform:uppercase;max-width:14ch}
-.stack{position:relative;min-height:0}
-.st{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .35s}
-.st.on{opacity:1}
-.st .car{width:min(70vw,120vh)}
-.gridcars{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4vw 1.2vw;width:min(92vw,150vh)}
-.gridcars .car{width:auto}
-.report{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;width:min(92vw,1100px);align-items:center}
-.seen .car .skin{}
-.report ul{list-style:none;margin:0;padding:0;font:500 clamp(14px,1.3vw,17px)/1.4 var(--mono)}
-.report li{padding:10px 0;border-top:1px solid var(--rule)}
-.counter{font:500 12px var(--mono);color:var(--soft);position:absolute;right:clamp(18px,3vw,40px);top:clamp(18px,3vw,40px)}
-body[data-o="ess"] .stack{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:20px}
-body[data-o="ess"] .st{position:relative;opacity:1}
-body[data-o="ess"] .st .car,body[data-o="ess"] .gridcars,body[data-o="ess"] .report{width:100%}
+/* Héros 2 : plusieurs plans */
+.h2 .w{top:7cqh;transform:scaleY(1.2) translate3d(calc(var(--mx)*-8px),0,0)}
+.h2 .ghost{z-index:5;top:7cqh;color:transparent;-webkit-text-stroke:2px var(--pink);background:none;opacity:.9;clip-path:inset(38% 0 0 0);transform:scaleY(1.2) translate3d(calc(var(--mx)*-14px),0,0)}
+.h2 .far,.h2 .mid,.h2 .near{position:absolute}
+.h2 .far{z-index:1;width:min(34cqw,60cqh);right:4cqw;top:42cqh;filter:blur(.6px);transform:translate3d(calc(var(--mx)*6px - var(--z)*30cqw),0,0)}
+.h2 .mid{z-index:4;width:min(66cqw,118cqh);left:21cqw;bottom:16cqh;transform:translate3d(calc(var(--mx)*-12px),0,0) scale(calc(1 - var(--z)*.2))}
+.h2 .near{z-index:7;width:min(170cqw,300cqh);left:-118cqw;bottom:-22cqh;transform:translate3d(calc(var(--mx)*-34px + var(--z)*var(--z)*60cqw),calc(var(--z)*-4cqh),0) scale(calc(1 + var(--z)*var(--z)*1.5));transform-origin:64% 62%}
 
-/* E · Le Convoi */
-.road{position:absolute;inset:0;background:#26282B url(assets/asphalt.webp) center/700px}
-body[data-m="light"] .road{background-blend-mode:screen;background-color:#9A9A95}
-body[data-d="e"][data-m="light"] .convoi{color:#fff}
-.lane{position:absolute;left:0;right:0;height:0;border-top:.5cqh dashed #ffffffd9;background:none}
-.lane.dash{border-top:0;height:.7cqh;background:repeating-linear-gradient(90deg,#fff 0 4cqw,transparent 4cqw 8cqw);opacity:.85}
-.lane.solid{height:.7cqh;background:#FFC400;border:0}
-.paint{position:absolute;left:3cqw;right:3cqw;font:800 min(9.4cqw,21cqh)/.82 var(--bc);text-transform:uppercase;color:#fff;opacity:.92;letter-spacing:-.005em;transform:scaleY(1.9);transform-origin:top left;mix-blend-mode:overlay;white-space:nowrap}
-.tcar{position:absolute;aspect-ratio:2.014;z-index:6}
-.tcar>i{position:absolute;left:50%;top:50%;width:49.65%;aspect-ratio:1/2.014;transform:translate(-50%,-50%) rotate(-90deg);background:url(assets/top_white.webp) center/100% 100%;isolation:isolate;display:block}
-.tcar>i::before{content:"";position:absolute;inset:-4%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);z-index:-1;filter:blur(6px)}
-.tcar .skin{position:absolute;inset:0;-webkit-mask:url(assets/top_mask.webp) center/100% 100%;mask:url(assets/top_mask.webp) center/100% 100%;mix-blend-mode:multiply;background:var(--t,#FFC400)}
-.tcar b{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%) rotate(90deg);font:800 1px/1 var(--bc);font-size:calc(var(--W)*.62);color:#101113;z-index:3}
-.convoi .row{position:absolute;inset:0}
-.convoi .signs{position:absolute;left:3cqw;right:3cqw;bottom:9cqh;display:flex;justify-content:space-between;align-items:flex-end;z-index:9;gap:20px;color:#fff}
-.convoi .signs p{font:700 clamp(19px,1.9cqw,30px)/1.05 var(--bc);text-transform:uppercase;max-width:24ch}
-.light{position:absolute;right:3cqw;top:12cqh;width:38px;padding:6px;background:#0a0a0a;border-radius:8px;display:grid;gap:5px;z-index:9}
-.light i{aspect-ratio:1;border-radius:50%;background:#333}
-.light[data-s="r"] i:nth-child(1){background:#FF3B30;box-shadow:0 0 16px #FF3B30}
-.light[data-s="g"] i:nth-child(3){background:#2DE073;box-shadow:0 0 16px #2DE073}
+/* Manifeste rose */
+.mani{background:var(--paint);color:#0B0A0D;position:relative;overflow:hidden;padding:clamp(40px,7vw,90px) clamp(16px,2.6vw,36px) 0}
+.mani .s{font-size:clamp(46px,9vw,140px);line-height:.92}
+.mani .b{font-size:clamp(110px,31.5vw,520px);line-height:.84;margin-left:-.02em}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;border-top:2px solid #0B0A0D;padding-block:14px 26px;margin-top:16px;font:700 clamp(16px,1.6vw,21px)/1.25 var(--body)}
+.runner{position:relative;height:clamp(150px,27vw,420px)}
+.runner .car{position:absolute;width:min(74vw,1100px);bottom:0;left:0;--s:#0B0A0D;--t:#FF6DB8;will-change:transform}
+.runner .road{position:absolute;left:-40px;right:-40px;bottom:0;height:3px;background:#0B0A0D}
 
-/* Histoire E */
-.map{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,4vw,60px);padding:clamp(24px,5vw,70px) clamp(16px,3vw,40px);align-items:center;background:#101113;color:#fff}
-.map svg{width:100%;height:auto;display:block}
-.map .pt{transition:r .3s}
-.mapsteps{display:grid;gap:14px;list-style:none;margin:0;padding:0}
-.mapsteps li{background:var(--sign);color:#fff;box-shadow:inset 0 0 0 3px #fff;padding:14px 18px;font:700 clamp(24px,3vw,44px)/1 var(--bc);text-transform:uppercase;border-radius:8px;opacity:.38;transition:opacity .3s}
-.mapsteps li.on{opacity:1}
-.mapsteps span{display:block;font:500 13px/1.3 var(--body);text-transform:none;margin-top:6px}
-body[data-o="ess"] .mapsteps li{opacity:1}
+/* Histoire horizontale */
+.hs{position:relative}
+body[data-o="imm"] .hs{height:440vh}
+.hst{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.track{display:flex;width:400vw;height:100%;will-change:transform}
+.pn{flex:none;width:100vw;height:100%;position:relative;overflow:hidden;container-type:size}
+.pn .w{top:8cqh;font-size:min(30cqw,66cqh)}
+.pn .car{position:absolute;width:min(78cqw,136cqh);left:50%;margin-left:calc(min(78cqw,136cqh)/-2);bottom:13cqh;z-index:3}
+.pn .lab{position:absolute;left:clamp(16px,2.6vw,36px);bottom:26px;z-index:5;display:flex;gap:14px;align-items:baseline}
+.pn .lab b{font:500 13px var(--mono);color:var(--pink)}
+.pn .lab span{font:700 clamp(17px,1.7vw,24px)/1.2 var(--body)}
+.fleet{position:absolute;inset:auto 0 9cqh;display:grid;gap:1.6cqh;z-index:3}
+.lane{display:flex;gap:2cqw;justify-content:center;white-space:nowrap}
+.proof{position:absolute;right:clamp(16px,2.6vw,36px);top:50%;transform:translateY(-50%);z-index:5;list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.proof li{background:var(--bg);border:1.5px solid var(--pink);padding:10px 14px;font:500 13px var(--mono);border-radius:999px}
 
-/* F · La Contre-Affiche */
-.scene{position:absolute;inset:0;background:url(assets/bill_day.webp) center bottom/cover}
-body[data-m="dark"] .scene{background-image:url(assets/bill_night.webp)}
-.frame{position:absolute}
-.dir.f .nav nav{display:none}
-.dir.f .nav .logo{background:#FFE600;color:#0B0B0B;padding:8px 10px}
-.poster{position:absolute;inset:0;background:#FFE600;color:#0B0B0B;display:flex;align-items:center;padding:3cqw;font:800 min(7.2cqw,14cqh)/.9 var(--br);letter-spacing:-.05em;clip-path:inset(calc(var(--pw)*100%) 0 0 0)}
-.left{position:absolute;inset:0;display:grid;place-items:center;color:#222;font:500 clamp(11px,1cqw,14px) var(--mono);text-align:center;background:#fff}
-.bigw{position:absolute;left:2cqw;bottom:9cqh;z-index:4;font:800 min(15cqw,28cqh)/.82 var(--br);letter-spacing:-.06em;color:#FFE600;text-shadow:0 2px 30px rgba(0,0,0,.35);opacity:calc(min(1,var(--p)*2.6));transform:translateY(calc((1 - min(1,var(--p)*2.6))*5cqh))}
-.scene-car{position:absolute;width:min(62cqw,112cqh);bottom:3cqh;right:4cqw;z-index:5;will-change:transform}
-.scene-car .skin{clip-path:inset(0 0 calc((1 - var(--pw))*100%) 0)}
-.fyel{position:absolute;inset:0;background:#FFE600;display:grid;place-items:center;color:#0B0B0B;font:800 34cqw/.8 var(--br);letter-spacing:-.06em}
-
-.posters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));min-height:90vh}
-.pst{padding:clamp(14px,1.8vw,26px);display:flex;flex-direction:column;justify-content:space-between;gap:16px;position:relative;overflow:hidden;min-height:440px}
-.pst h3{font:800 clamp(38px,5vw,84px)/.86 var(--br);letter-spacing:-.055em}
-.pst small{font:500 12px var(--mono)}
-.pst .car{width:150%;margin-left:-14%}
-.pst .gridcars{grid-template-columns:repeat(3,1fr);width:100%}
-.pst:nth-child(1){background:#fff;color:#0B0B0B}.pst:nth-child(2){background:#0B0B0B;color:#FFE600}.pst:nth-child(3){background:#FF3B00;color:#0B0B0B}.pst:nth-child(4){background:#1226FF;color:#fff}
-.seen{position:relative;overflow:hidden;background:#0B0B0B;padding:clamp(14px,2.4vw,36px);display:grid;align-content:space-between;gap:30px}
-.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5vw}
-.seen h2{font:800 clamp(52px,10.5vw,170px)/.84 var(--br);letter-spacing:-.06em;color:#FFE600;max-width:13ch}
-
-/* Atelier partagé */
-.sec{padding:clamp(44px,7vw,100px) clamp(16px,3vw,40px)}
-.sec h2{font-family:var(--d1);font-weight:400;font-size:clamp(50px,10vw,150px);line-height:.88;text-transform:uppercase;letter-spacing:0}
-body[data-d="e"] .sec h2{font-weight:800}
-body[data-d="f"] .sec h2{font-weight:800;text-transform:none;letter-spacing:-.055em;font-size:clamp(44px,8.6vw,130px)}
-.atelier{display:grid;gap:clamp(18px,3vw,30px)}
-.ain{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);gap:clamp(20px,4vw,50px);align-items:end}
-.ain .car{width:100%}
-.controls{display:grid;gap:14px}
-.controls label{font:500 12px var(--mono);color:var(--soft)}
-#brand{width:100%;border:0;border-bottom:3px solid var(--ink);background:none;font:400 clamp(38px,5vw,64px)/1.1 var(--d1);padding:4px 0;text-transform:uppercase;border-radius:0}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips button{border:2px solid var(--ink);background:none;padding:9px 13px;font-weight:700;cursor:pointer;border-radius:var(--cta)}
-.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.dots{display:flex;gap:7px}
-.dots button{width:32px;height:32px;border:2px solid var(--ink);padding:0;cursor:pointer;border-radius:var(--cta)}
+/* Atelier */
+.lab2{position:relative;overflow:hidden;min-height:100svh;container-type:inline-size;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(70px,8vw,100px) clamp(16px,2.6vw,36px) 96px}
+.typed{position:absolute;left:0;right:0;top:9%;text-align:center;white-space:nowrap;line-height:1;transform:scaleY(1.2);transform-origin:50% 0;background:linear-gradient(180deg,var(--cA,#FF6DB8) 8%,var(--cB,#8E1560) 96%);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:30cqw}
+.lab2 .car{position:relative;z-index:3;width:min(92cqw,1500px);margin:18vh auto 0}
+.lab2 .art{transition:none}
 #liveSkin{transition:clip-path .55s cubic-bezier(.7,0,.2,1)}
+.tool{position:relative;z-index:5;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:18px 34px;align-items:end}
+.tool label{display:grid;gap:4px;font:500 12px var(--mono);color:var(--soft)}
+#brand{width:100%;max-width:480px;background:transparent;border:0;border-bottom:3px solid var(--pink);font:400 clamp(34px,4vw,54px)/1.1 var(--lg);text-transform:uppercase;padding:2px 0;border-radius:0}
+.tabs{display:flex;gap:20px}
+.tabs button{background:none;border:0;padding:0;font:400 clamp(30px,3.6vw,54px)/1 var(--lg);text-transform:uppercase;color:var(--soft);cursor:pointer}
+.tabs button[aria-pressed="true"]{color:var(--pink)}
+.cols{display:flex;gap:7px}
+.cols button{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);padding:0;cursor:pointer}
+.zones{position:relative;z-index:5;font:500 12px var(--mono);color:var(--soft);margin-top:10px}
 
-/* Campagnes */
-.gal{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(8px,1vw,14px);margin-top:26px}
-.tile{position:relative;padding:18px 14px 44px;display:flex;align-items:flex-end;min-height:260px;overflow:hidden;background:var(--tb)}
-.tile:nth-child(1){grid-column:span 7}.tile:nth-child(2){grid-column:span 5}.tile:nth-child(3){grid-column:span 5}.tile:nth-child(4){grid-column:span 7}
-.tile .car{width:100%;max-width:760px;margin:auto}
-.tile figcaption{position:absolute;left:14px;bottom:12px;right:14px;display:flex;justify-content:space-between;font:500 12px var(--mono);color:var(--tc,#0a0a0a)}
-.tile figure,figure.tile{margin:0}
-.tile .ghost{position:absolute;left:10px;top:6px;font:400 clamp(60px,10vw,150px)/.9 var(--lg);text-transform:uppercase;color:var(--tc,#0a0a0a);opacity:.95}
+/* Campagnes empilées */
+.cmp{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;container-type:size;background:radial-gradient(70% 60% at 50% 72%,var(--a),transparent 76%),var(--b)}
+body[data-o="ess"] .cmp{position:relative}
+.cmp .w{top:6cqh;font-size:var(--wf,min(36cqw,70cqh));transform:scaleY(1.18);background:linear-gradient(180deg,var(--c1) 8%,var(--c2) 96%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cmp .car{position:absolute;z-index:3;width:min(82cqw,146cqh);left:50%;margin-left:calc(min(82cqw,146cqh)/-2);bottom:10cqh}
+.cmp .cap{position:absolute;left:clamp(16px,2.6vw,36px);right:clamp(16px,2.6vw,36px);bottom:22px;z-index:4;display:flex;justify-content:space-between;font:500 12px var(--mono);color:var(--c1)}
 
-/* Conducteur : la référence de qualité */
-.drv{display:flex;gap:clamp(18px,4vw,52px);align-items:center;flex-wrap:wrap;justify-content:center}
-.phone{width:286px;flex:none;background:#0A0B10;border-radius:40px;padding:9px;box-shadow:0 26px 60px -30px rgba(0,0,0,.6)}
-.scr{height:584px;border-radius:32px;overflow:hidden;position:relative;background:var(--bg);color:var(--ink);container-type:size}
-.ph1{position:absolute;inset:0}
-.ph1 .w{position:absolute;left:0;right:0;top:9cqh;text-align:center;font:400 53cqw/.8 var(--lg);text-transform:uppercase}
-.ph1 .w2{top:calc(9cqh + 44cqw)}
-.ph1 .car{position:absolute;width:128cqw;left:-14cqw;top:calc(9cqh + 74cqw)}
-.ph1 .foot{position:absolute;left:18px;right:18px;bottom:20px;display:grid;gap:8px}
-.ph1 .cta{text-align:center;font-size:15px}
+#camps,.drv,.ops{content-visibility:auto;contain-intrinsic-size:auto 900px}
+/* Conducteur : la section de référence */
+.drv{position:relative;overflow:hidden;padding:clamp(50px,7vw,100px) clamp(16px,2.6vw,36px)}
+.drv .bg{position:absolute;left:0;right:0;top:3%;text-align:center;font-size:27vw;white-space:nowrap;opacity:.95;transform:scaleY(1.5);transform-origin:50% 0}
+.drvin{position:relative;z-index:2;max-width:1280px;margin:auto;display:flex;gap:clamp(20px,4vw,56px);flex-wrap:wrap;justify-content:center;align-items:center}
+.phone{width:290px;flex:none;background:#050506;border-radius:42px;padding:9px;box-shadow:0 0 0 1px #3a3340,0 30px 70px -30px #000}
+.phone:nth-child(1){transform:rotate(-3deg)}.phone:nth-child(2){transform:rotate(2deg) translateY(26px);margin-left:-34px}
+.scr{height:600px;border-radius:33px;overflow:hidden;position:relative;background:var(--bg);container-type:size}
+.scr .nv{position:absolute;left:16px;top:18px;font:800 12px var(--body);z-index:3}
+.scr .w{top:9cqh;font-size:38.4cqw;transform:scaleY(2)}
+.scr .car{position:absolute;width:128cqw;left:-14cqw;top:32cqh;z-index:3}
+.scr .f{position:absolute;left:14px;right:14px;bottom:16px;display:grid;gap:8px;text-align:center;z-index:4}
+.scr .f .btn{font-size:14px;padding:13px}
 .app{position:absolute;inset:0;padding:48px 18px 18px;display:grid;gap:14px;align-content:start}
-.app .big{font:400 66px/.86 var(--lg);text-transform:uppercase}
-.app .box{border:2px solid var(--ink);padding:12px;font-size:14px;display:grid;gap:6px}
-.meter{height:8px;background:var(--rule)}.meter i{display:block;width:60%;height:100%;background:var(--acc)}
+.app .big{font:400 72px/.86 var(--lg);text-transform:uppercase}
+.box{border:1.5px solid var(--ink);padding:12px;border-radius:14px;display:grid;gap:7px;font-size:14px}
+.bar2{height:7px;background:var(--rule);border-radius:9px;overflow:hidden}.bar2 i{display:block;width:60%;height:100%;background:var(--pink)}
 .app ul{margin:0;padding-left:18px;font-size:14px}
-.drv .txt{flex:1 1 300px;min-width:0;display:grid;gap:14px;justify-items:start}
-.drv h2{font-size:clamp(58px,10vw,150px)}
+.drv .tx{flex:1 1 300px;min-width:0;display:grid;gap:14px;justify-items:start}
+.drv h2{font-size:clamp(64px,10.5vw,170px)}
 
 /* Back-office */
-.dash{display:grid;grid-template-columns:190px minmax(0,1fr);border:1px solid var(--rule);font-size:14px;background:var(--bg);color:var(--ink);margin-top:22px}
+.ops{padding:0 clamp(16px,2.6vw,36px) clamp(50px,6vw,80px)}
+.dash{display:grid;grid-template-columns:190px minmax(0,1fr);border:1px solid var(--rule);border-radius:14px;overflow:hidden;font-size:14px;max-width:1280px;margin:auto}
 .dash aside{border-right:1px solid var(--rule);padding:14px 10px;display:grid;gap:2px;align-content:start}
-.dash aside .logo{padding:6px 8px 14px;font-size:18px}
-.dash aside span{padding:6px 8px;color:var(--soft)}
-.dash aside span.on{background:var(--ink);color:var(--bg)}
+.dash aside b{padding:6px 8px 12px}.dash aside span{padding:6px 8px;border-radius:7px;color:var(--soft)}
+.dash aside .on{background:var(--pink);color:var(--onpink)}
 .dash main{padding:18px;display:grid;gap:14px;min-width:0}
 .kp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--rule)}
 .kp div{padding:10px 8px 10px 0}.kp b{display:block;font:700 28px/1.1 var(--body);font-variant-numeric:tabular-nums}.kp span{color:var(--soft);font-size:13px}
 .rw{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);align-items:center}
-.tg{font:500 11px var(--mono);padding:3px 8px;border:1px solid var(--ink);white-space:nowrap}
-.dtag{font:500 11px var(--mono);color:var(--soft)}
+.tg{font:500 11px var(--mono);padding:3px 8px;border-radius:99px;background:color-mix(in srgb,var(--pink) 22%,transparent);white-space:nowrap}
+.dmo{font:500 11px var(--mono);color:var(--soft)}
 
-/* Fiche */
-.fiche{background:#F2F2EE;color:#101113;font:400 16px/1.5 var(--body);padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px) 110px}
-.fiche h2{font:800 clamp(34px,5vw,64px)/1 var(--br);letter-spacing:-.04em;margin-bottom:12px}
-.fgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);max-width:1280px;margin:auto}
-.fgrid h3{font:500 12px var(--mono);color:#5e5e58;margin:22px 0 8px}
-.lg{display:flex;flex-wrap:wrap;gap:20px 34px;align-items:center}
-.lg-d{font:800 clamp(52px,7vw,92px)/1 var(--br);letter-spacing:-.055em;position:relative;display:inline-block;background:linear-gradient(90deg,#0a0a0a 0 34%,#FF3B00 34% 72%,#0a0a0a 72%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lg-e{display:inline-flex;gap:5px}
-.lg-e i{font:800 clamp(30px,4vw,48px)/1 var(--bc);font-style:normal;width:1.3em;height:1.9em;display:grid;place-items:center;background:#FFC400;border-radius:.42em .42em .28em .28em;text-transform:uppercase}
-.lg-f{font:800 clamp(52px,7vw,92px)/1 var(--br);letter-spacing:-.055em;background:#FFE600;padding:.08em .26em .14em;clip-path:polygon(0 0,100% 0,100% 62%,84% 100%,0 100%);display:inline-block}
-.pal{display:flex}.pal i{flex:1;height:56px}
-.ty{display:grid;gap:4px}
-.phoneV{width:320px;max-width:100%;background:#0A0B10;border-radius:42px;padding:10px;justify-self:center;align-self:start}
-.phoneV iframe{width:100%;height:640px;border:0;border-radius:33px;background:#fff;display:block}
-.choice{max-width:1280px;margin:46px auto 0;display:grid;gap:12px}
-.cc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 22px}
-.cc label{display:flex;gap:8px;align-items:flex-start;font-size:15px}
-.choice button{justify-self:start;background:#101113;color:#fff;border:0;padding:12px 16px;font-weight:700;cursor:pointer}
-#ans{font:500 13px var(--mono);user-select:all}
-.note{font-size:13px;color:#5e5e58;max-width:78ch}
+/* Fin */
+.end{background:var(--paint);color:#0B0A0D;padding:clamp(40px,6vw,70px) clamp(16px,2.6vw,36px) 26px;overflow:hidden}
+.end .b{font-size:clamp(110px,27vw,460px);line-height:.84}
+.end .r{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}
+.end .btn{background:#0B0A0D;color:#FF6DB8;border-color:#0B0A0D;font-size:18px;padding:18px 28px}
+.end nav{display:flex;gap:18px;font:500 14px var(--body)}
 
+/* Note de travail */
+.note{background:#F4F1F3;color:#1a1016;padding:clamp(36px,5vw,64px) clamp(16px,2.6vw,36px) 100px;font-size:16px}
+.ngrid{max-width:1280px;margin:auto;display:grid;grid-template-columns:minmax(0,1.5fr) 300px;gap:clamp(24px,4vw,56px)}
+.note h2{font:800 clamp(28px,3.4vw,42px)/1.08 var(--body);letter-spacing:-.03em;margin-bottom:14px}
+.note h3{font:500 12px var(--mono);color:#6b5c64;margin:20px 0 6px}
+.note ul{margin:0;padding-left:18px}.note li{margin-bottom:5px}
+.pv{background:#050506;border-radius:40px;padding:9px;align-self:start}
+.pv iframe{width:100%;height:600px;border:0;border-radius:32px;display:block;background:#0B0A0D}
+.small{font-size:13px;color:#6b5c64;margin-top:14px}
+
+/* Barre de comparaison */
+.bar{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;display:flex;gap:6px;padding:5px;background:#0A0A0Cf2;border:1px solid #3a3340;border-radius:14px;max-width:calc(100vw - 14px);overflow-x:auto;scrollbar-width:none;font:500 13px var(--body)}
+.bar div{display:flex;gap:2px}.bar div+div{border-left:1px solid #3a3340;padding-left:6px}
+.bar button{background:none;border:0;color:#F2EEF0;padding:8px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.bar button[aria-pressed="true"]{background:#FF6DB8;color:#0B0A0D}
+body.embed .bar,body.embed .note{display:none}
+
+/* Téléphone : compositions verticales propres */
 @media (max-width:760px){
-  .nav nav,.nav .cta{display:none}
-  .wordset .l1,.wordset .l2{left:3cqw}
-  .wordset .m{display:block}
-  .wordset .l1{top:9cqh;font-size:39cqw}.wordset .l2{top:calc(9cqh + 33cqw);font-size:39cqw}
-  .wordset .l3{top:calc(9cqh + 66cqw);font-size:39cqw}.wordset .l4{top:calc(9cqh + 99cqw);font-size:39cqw}
-  .pass .car{width:128cqw;top:calc(9cqh + 82cqw)}
-  .pass .meta{flex-direction:column;align-items:stretch;bottom:74px}
-  .pass .meta .cta{text-align:center}
-  .pass .swatch{display:none}
-  .gridcars{grid-template-columns:repeat(3,1fr)}
-  .report,.map,.ain{grid-template-columns:minmax(0,1fr)}
-  .step{font-size:21vw}
-  .st .car{width:112vw}
-  .frame{width:88cqw;height:38cqh;top:11cqh;left:6cqw}
-  .scene{background-position:50% bottom}
-  .poster{font-size:13cqw;padding:5cqw}
-  .bigw{font-size:30cqw;bottom:96px;left:4cqw}
-  .scene-car{width:124cqw;right:-16cqw;bottom:calc(96px + 22cqw)}
-  .posters{grid-template-columns:minmax(0,1fr)}
-  .tile:nth-child(n){grid-column:span 12}
-  .dash{grid-template-columns:minmax(0,1fr)}.dash aside{display:none}
-  .kp{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .fgrid{grid-template-columns:minmax(0,1fr)}
-  .rw{grid-template-columns:minmax(0,1fr) auto}.rw span:nth-child(2){display:none}
-  .sec{padding-bottom:64px}
-  .paint{font-size:16cqw;left:3cqw}
+ .nav nav,.nav .btn{display:none}
+ .w{font-size:38.4cqw}
+ .h1 .w{top:11cqh;transform:scale(1,calc(2.05 + var(--z)*.5))}
+ .h1 .front{clip-path:inset(0 0 0 83.5%)}
+ .h1 .car{width:132cqw;left:-16cqw;margin-left:0;bottom:auto;top:32cqh;transform-origin:58% 66%}
+ .tape{bottom:29cqh;font-size:7.4cqw}
+ .foot{display:none}
+ .mob{display:flex!important}
+ .h2 .w,.h2 .ghost{top:11cqh;transform:scaleY(1.7)}
+ .h2 .far{width:60cqw;right:-12cqw;top:28cqh}
+ .h2 .mid{width:112cqw;left:-6cqw;bottom:auto;top:33cqh}
+ .h2 .near{width:250cqw;left:-170cqw;bottom:22cqh}
+ .facts{grid-template-columns:minmax(0,1fr);gap:8px}
+ .mani .b{font-size:33.5vw}
+ .runner{height:44vw}.runner .car{width:112vw}
+ body[data-o="imm"] .hs{height:auto}.hst{position:relative;height:auto}.track{display:block;width:100%;transform:none!important}
+ .pn{width:100%;height:92svh}
+ .pn .w{font-size:30cqw;transform:scaleY(1.9);transform-origin:50% 0}
+ .pn .car{width:128cqw;margin-left:0;left:-14cqw;bottom:auto;top:32cqh}
+ .proof{top:auto;bottom:62px;right:auto;left:16px;transform:none}
+ .lab2{min-height:0;padding-bottom:84px}
+ .lab2 .car{width:124cqw;margin:32cqw 0 0 -12cqw}
+ .typed{top:88px}
+ .tool{grid-template-columns:minmax(0,1fr)}
+ .tabs{gap:14px}
+ .cmp .w{--wf:36cqw;top:13cqh;transform:scaleY(2)}
+ .cmp .car{width:128cqw;margin-left:0;left:-14cqw;top:36cqh;bottom:auto}
+ .cmp .cap{bottom:76px}
+ .drv .bg{display:none}
+ .phone:nth-child(1),.phone:nth-child(2){transform:none;margin-left:0}
+ .dash{grid-template-columns:minmax(0,1fr)}.dash aside{display:none}
+ .kp{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .rw{grid-template-columns:minmax(0,1fr) auto}.rw span:nth-child(2){display:none}
+ .ngrid{grid-template-columns:minmax(0,1fr)}.pv{display:none}
+ .end{padding-bottom:84px}
 }
-@media (min-width:761px){.wordset .l3,.wordset .l4{display:none}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.mob{display:none;position:absolute;left:16px;right:16px;bottom:74px;z-index:9;gap:8px;flex-direction:column;text-align:center;opacity:calc(1 - var(--z)*3)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
-<body data-d="d" data-m="light" data-o="imm">
-<h1 class="sr">Régie publicitaire sur voitures en Belgique, maquette de travail</h1>
+<body data-h="1" data-m="dark" data-o="imm">
+<h1 class="sr">Publicité sur voitures en Belgique : votre marque sur des voitures qui roulent déjà.</h1>
 
-<!-- D -->
-<div class="dir d">
-  <section class="pin tall" id="pinD"><div class="stage pass" id="passD" style="--p:0">
-    <div class="nav"><span class="logo">PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
-    <div class="wordset" aria-hidden="true"><span class="l1 mq">Votre marque</span><span class="l2 mq">passe ici.</span><span class="l3"></span><span class="l4"></span></div>
-    <div class="swatch" role="group" aria-label="Changer de campagne"><button data-camp="#FF3B00" style="background:#FF3B00" aria-label="Orange signal"></button><button data-camp="#1226FF" style="background:#1226FF" aria-label="Bleu"></button><button data-camp="#FF2D8A" style="background:#FF2D8A" aria-label="Rose"></button><button data-camp="#0A8F5B" style="background:#0A8F5B" aria-label="Vert"></button></div>
-    <div class="flood" aria-hidden="true"><div class="wordset"><span class="l1 mq">Votre marque</span><span class="l2 mq">passe ici.</span><span class="l3"></span><span class="l4"></span></div></div>
-    <div class="car golf" id="carD"><div class="shade"></div><div class="base"></div><div class="skin"><div class="wordset" id="artD" aria-hidden="true"><span class="l1 mq">Votre marque</span><span class="l2 mq">passe ici.</span><span class="l3"></span><span class="l4"></span></div></div><div class="wh a"></div><div class="wh b"></div></div>
-    <div class="meta"><p>Publicité sur voitures, en Belgique. Vous choisissez les zones et la durée, nous gérons tout le reste.</p><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
-  </div></section>
+<section class="pin" id="pin"><div class="stage" id="stage" style="--p:0;--z:0;--mx:0">
+  <div class="nav"><b>PROJECT_BRAND</b><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="btn" href="#lab">Concevoir ma campagne</a></div>
 
-  <section class="story tall" id="storyD"><div class="sticky"><h2 class="step" id="stepD">Une voiture ordinaire.</h2><span class="counter" id="ctD">1 / 4</span>
-    <div class="stack">
-      <div class="st on"><x-car c="golf"></x-car></div>
-      <div class="st"><x-car c="golf" a="mayo"></x-car></div>
-      <div class="st"><div class="gridcars" id="manyD"></div></div>
-      <div class="st"><div class="report"><x-car c="golf" a="mayo"></x-car><ul><li>Zones couvertes, à l'échelle de la zone</li><li>Kilomètres validés par voiture</li><li>Photos de preuve avant, pendant, après</li><li>Méthode de mesure en cours de validation</li></ul></div></div>
+  <div class="hero h1">
+    <div class="w m mono" aria-hidden="true">Partout</div>
+    <x-car id="carH" class="hd" text="Votre marque" wheels="0"></x-car>
+    <div class="w m mono front" aria-hidden="true">Partout</div>
+  </div>
+
+  <div class="hero h2">
+    <x-car class="far" r5="1" text="Votre marque"></x-car>
+    <div class="w m mono" aria-hidden="true">Partout</div>
+    <x-car class="mid" id="carM" text="Votre marque"></x-car>
+    <div class="w m ghost" aria-hidden="true">Partout</div>
+    <x-car class="near hd" text=""></x-car>
+  </div>
+
+  <div class="tape" aria-hidden="true"><span>Publicité sur voitures en Belgique · Votre marque sur des voitures qui roulent déjà · Publicité sur voitures en Belgique · Votre marque sur des voitures qui roulent déjà ·</span><span>Publicité sur voitures en Belgique · Votre marque sur des voitures qui roulent déjà · Publicité sur voitures en Belgique · Votre marque sur des voitures qui roulent déjà ·</span></div>
+  <div class="foot"><span>Maquette · Modèle réel, logo retiré</span><span>Scrolle</span></div>
+  <div class="mob"><a class="btn" href="#lab">Concevoir ma campagne</a></div>
+  <div class="fill"></div>
+</div></section>
+
+<section class="mani">
+  <p class="m s">Un panneau attend qu'on passe.</p>
+  <p class="m b">Nous, on passe.</p>
+  <div class="facts"><span>Vous choisissez les zones et la durée.</span><span>Nous posons le covering et sélectionnons les conducteurs.</span><span>Votre marque roule dans la ville.</span></div>
+  <div class="runner" id="runner"><div class="road"></div><x-car id="carR" text="Votre marque" s="#0B0A0D" t="#FF6DB8" wheels="1"></x-car></div>
+</section>
+
+<section class="hs" id="hs"><div class="hst"><div class="track" id="track">
+  <article class="pn"><div class="w m mono" aria-hidden="true">Une voiture</div><x-car bare="1"></x-car><p class="lab"><b>1</b><span>Elle roule déjà, tous les jours.</span></p></article>
+  <article class="pn"><div class="w m mono" aria-hidden="true">Un covering</div><x-car id="carS" text="Votre marque"></x-car><p class="lab"><b>2</b><span>Portières, avant, ou toute la carrosserie.</span></p></article>
+  <article class="pn"><div class="w m mono" aria-hidden="true">Un réseau</div><div class="fleet" id="fleet"></div><p class="lab"><b>3</b><span>Plusieurs voitures, une même zone.</span></p></article>
+  <article class="pn"><div class="w m mono" aria-hidden="true">Un suivi</div><x-car text="Votre marque"></x-car><ul class="proof"><li>Zones couvertes</li><li>Kilomètres validés</li><li>Photos de preuve</li></ul><p class="lab"><b>4</b><span>Vous voyez où votre campagne a roulé.</span></p></article>
+</div></div></section>
+
+<section class="lab2" id="lab">
+  <div class="typed m" id="typed" aria-hidden="true">Votre marque</div>
+  <div class="car hd" id="live"><div class="sh"></div><div class="base"></div><div class="skin" id="liveSkin"><div class="art" id="liveArt"><span id="liveTxt"></span></div></div></div>
+  <div>
+    <div class="tool">
+      <label>Tapez votre marque<input id="brand" maxlength="14" value="Votre marque" autocomplete="off"></label>
+      <div class="tabs" id="fmt"><button data-f="c" aria-pressed="false">Classique</button><button data-f="m" aria-pressed="false">Medium</button><button data-f="x" aria-pressed="true">Complet</button></div>
+      <div class="cols" id="cols"><button data-c="#FF6DB8,#0B0A0D,#FF6DB8,#8E1560" style="background:#FF6DB8" aria-label="Rose"></button><button data-c="#FFD500,#0B0A0D,#FFD500,#7A6400" style="background:#FFD500" aria-label="Jaune"></button><button data-c="#2438FF,#FFFFFF,#6E7CFF,#16208F" style="background:#2438FF" aria-label="Bleu"></button><button data-c="#111014,#FFFFFF,#FFFFFF,#5A5560" style="background:#111014" aria-label="Noir"></button></div>
     </div>
-  </div></section>
-</div>
-
-<!-- E -->
-<div class="dir e">
-  <section class="pin tall" id="pinE"><div class="stage convoi" id="passE" style="--p:0">
-    <div class="road"></div>
-    <div class="nav" style="color:#fff"><span class="logo">PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
-    <div class="lane dash" style="top:33cqh"></div><div class="lane dash" style="top:66cqh"></div>
-    <div class="paint" style="top:8.5cqh" aria-hidden="true">Un message</div>
-    <div class="row" id="rowE" aria-hidden="true"></div>
-    <div class="paint" style="top:69cqh" aria-hidden="true">Plusieurs voitures</div>
-    <div class="light" id="lightE" data-s="r" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="signs"><span></span><a class="cta" href="#atelier">Concevoir ma campagne</a></div>
-  </div></section>
-  <section class="map" id="mapE">
-    <svg viewBox="0 0 640 520" role="img" aria-label="Schéma d'une ville avec un trajet de voitures">
-      <g fill="none" stroke="#3A3C40" stroke-width="14" stroke-linecap="round"><path d="M40 90H600M40 260H600M40 430H600M130 30V490M320 30V490M510 30V490"/><path d="M40 470 600 50" stroke-width="10"/></g>
-      <g fill="none" stroke="#FFC400" stroke-width="6" stroke-dasharray="1400" id="routeE" stroke-dashoffset="1400" stroke-linecap="round"><path id="routeP" d="M60 430H320V260H130V90H510V430H600"/></g>
-      <g id="dotsE" fill="#FFC400"></g>
-    </svg>
-    <ol class="mapsteps" id="stepsE">
-      <li class="on">Une voiture<span>Elle roule déjà, sans détour.</span></li>
-      <li>Un support<span>Covering posé par nos équipes.</span></li>
-      <li>Un réseau<span>Plusieurs voitures, une même zone.</span></li>
-      <li>Une campagne suivie<span>Zones, kilomètres et photos de preuve.</span></li>
-    </ol>
-  </section>
-</div>
-
-<!-- F -->
-<div class="dir f">
-  <section class="pin tall" id="pinF"><div class="stage" id="passF" style="--p:0;--pw:0">
-    <div class="scene"></div>
-    <div class="nav" style="color:#fff"><span class="logo">PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Campagnes</span><span>Flottes</span><span>FR NL EN</span></nav><a class="cta" style="background:#FFE600;color:#0B0B0B" href="#atelier">Concevoir ma campagne</a></div>
-    <div class="frame" id="frameF"><div class="left">Parti en campagne. Retour dans 4 mois.</div><div class="poster">ce panneau ne bouge pas.</div></div>
-    <div class="bigw">nous, si.</div>
-    <div class="car golf scene-car" id="carF"><div class="shade"></div><div class="base"></div><div class="skin"><div class="art" style="background:#FFE600;color:#0B0B0B;font:800 9.6cqw/1 var(--br);letter-spacing:-.05em;container-type:normal">nous, si.</div></div><div class="wh a"></div><div class="wh b"></div></div>
-  </div></section>
-  <section class="posters" aria-label="De la voiture à la campagne">
-    <article class="pst"><small>1</small><h3>une voiture.</h3><x-car c="golf"></x-car></article>
-    <article class="pst"><small>2</small><h3>une affiche.</h3><x-car c="golf" a="nous"></x-car></article>
-    <article class="pst"><small>3</small><h3>un réseau.</h3><div class="gridcars" id="manyF"></div></article>
-    <article class="pst"><small>4</small><h3>une campagne suivie.</h3><small>Zones, kilomètres validés, photos de preuve.</small></article>
-  </section>
-  <section class="seen" style="padding-block:clamp(40px,6vw,80px)"><h2>vous l'avez vue trois fois ce matin.</h2><div class="three"><x-car c="golf" a="nous"></x-car><x-car c="golf" a="nous"></x-car><x-car c="golf" a="nous"></x-car></div></section>
-</div>
-
-<!-- Commun -->
-<section class="sec atelier" id="atelier">
-  <h2>Tapez votre marque.</h2>
-  <div class="ain">
-    <div class="car golf" id="liveCar"><div class="shade"></div><div class="base"></div><div class="skin fit" id="liveSkin"><div class="art" id="liveArt"><span id="liveTxt"></span></div></div><div class="wh a"></div><div class="wh b"></div></div>
-    <div class="controls">
-      <label for="brand">Le nom de votre marque</label>
-      <input id="brand" maxlength="14" value="Votre marque" autocomplete="off">
-      <label>Format</label>
-      <div class="chips" id="fmt"><button data-f="c" aria-pressed="false">Classique</button><button data-f="m" aria-pressed="false">Medium</button><button data-f="x" aria-pressed="true">Complet</button></div>
-      <label>Couleur</label>
-      <div class="dots" id="col"><button data-c="#FFE600,#0B0B0B" style="background:#FFE600" aria-label="Jaune"></button><button data-c="#1226FF,#FFFFFF" style="background:#1226FF" aria-label="Bleu"></button><button data-c="#FF3B00,#0B0B0B" style="background:#FF3B00" aria-label="Orange"></button><button data-c="#FF2D8A,#0B0B0B" style="background:#FF2D8A" aria-label="Rose"></button><button data-c="#0B0B0B,#FFFFFF" style="background:#0B0B0B" aria-label="Noir"></button></div>
-      <a class="cta" href="#atelier" style="justify-self:start">Recevoir mon estimation</a>
-      <p class="dtag">Classique : portières. Medium : portières, avant et rétros. Complet : toute la carrosserie. Jamais sur les vitres.</p>
-    </div>
+    <p class="zones" id="zones">Complet : toute la carrosserie, jamais les vitres.</p>
   </div>
 </section>
 
-<section class="sec" id="camps">
-  <h2>Quatre campagnes qui n'existent pas.</h2>
-  <div class="gal">
-    <figure class="tile" style="--tb:#FFD500;--tc:#0a0a0a"><span class="ghost">Sauce</span><x-car c="golf" a="mayo"></x-car><figcaption><span>Marque fictive</span><span>Complet</span></figcaption></figure>
-    <figure class="tile" style="--tb:#111;--tc:#F5EFE3"><span class="ghost">Lundi</span><x-car c="r5" a="courage"></x-car><figcaption><span>Marque fictive</span><span>Complet</span></figcaption></figure>
-    <figure class="tile" style="--tb:#E8341C;--tc:#fff"><span class="ghost">Four</span><x-car c="r5" a="chaud"></x-car><figcaption><span>Marque fictive</span><span>Complet</span></figcaption></figure>
-    <figure class="tile" style="--tb:#DDE3FF;--tc:#1226FF"><span class="ghost">Réseau</span><x-car c="golf" a="zero" z="c"></x-car><figcaption><span>Marque fictive</span><span>Classique, portières</span></figcaption></figure>
+<section id="camps">
+  <article class="cmp" style="--a:#3A2F00;--b:#0D0B00;--c1:#FFD500;--c2:#6B5800"><div class="w m" aria-hidden="true">Mayo</div><x-car text="Mayo" s="#FFD500" t="#0B0A0D"></x-car><p class="cap"><span>Campagne fictive, marque fictive</span><span>Complet</span></p></article>
+  <article class="cmp" style="--a:#2B2730;--b:#0B0A0D;--c1:#F5EFE3;--c2:#5F5A55"><div class="w m" aria-hidden="true">Lundi</div><x-car r5="1" text="Courage." s="#141316" t="#F5EFE3"></x-car><p class="cap"><span>Campagne fictive, marque fictive</span><span>Complet</span></p></article>
+  <article class="cmp" style="--a:#14207A;--b:#05071F;--c1:#6E7CFF;--c2:#1A268F"><div class="w m" aria-hidden="true">Réseau</div><x-car text="4 barres." s="#2438FF" t="#FFFFFF" zone="c"></x-car><p class="cap"><span>Campagne fictive, marque fictive</span><span>Classique, portières</span></p></article>
+  <article class="cmp" style="--a:#6A0E3F;--b:#0B0A0D;--c1:#FF6DB8;--c2:#8E1560"><div class="w m" aria-hidden="true">Rose</div><x-car text="Ici." s="#FF6DB8" t="#0B0A0D"></x-car><p class="cap"><span>Votre campagne ici</span><span>Complet</span></p></article>
+</section>
+
+<section class="drv" id="drv">
+  <div class="bg m mono" aria-hidden="true">Conducteurs</div>
+  <div class="drvin">
+    <div class="phone"><div class="scr"><span class="nv">PROJECT_BRAND</span><div class="w m mono" aria-hidden="true">Partout</div><x-car text="Votre marque"></x-car><div class="f"><span style="font-size:14px">Votre voiture roule déjà.</span><a class="btn" href="#drv">M'inscrire</a></div></div></div>
+    <div class="phone"><div class="scr"><div class="app"><span class="big mono">En attente</span><p style="font-size:14px;color:var(--soft)">Dossier bien reçu. Nous vous écrirons si une campagne correspond à votre zone.</p><div class="box"><b>Dossier complété à 60 %</b><div class="bar2"><i></i></div></div><ul><li>Profil et zone</li><li>Véhicule</li><li>Photos, à ajouter</li><li>Charte, à signer</li></ul><p style="font-size:13px;color:var(--soft)">L'inscription ne garantit ni campagne ni rémunération.</p></div></div></div>
+    <div class="tx"><h2 class="m">Votre voiture roule déjà.</h2><p>Une inscription simple, puis un statut clair. Le parcours reste discret sur le site, mais il fonctionne.</p><a class="btn o" href="#drv">Devenir conducteur</a></div>
   </div>
 </section>
 
-<section class="sec" id="drv">
-  <div class="drv">
-    <div class="phone"><div class="scr"><div class="ph1"><div class="w">Votre</div><div class="w w2">voiture</div><x-car c="golf" a="brand"></x-car><div class="foot"><span style="font-size:14px">Elle roule déjà.</span><a class="cta" href="#drv">M'inscrire</a></div></div></div></div>
-    <div class="phone"><div class="scr"><div class="app"><span class="big">En attente</span><p style="font-size:14px;color:var(--soft)">Dossier bien reçu. Nous vous écrirons si une campagne correspond à votre zone.</p><div class="box"><b>Dossier complété à 60 %</b><div class="meter"><i></i></div></div><ul><li>Profil et zone</li><li>Véhicule</li><li>Photos, à ajouter</li><li>Charte, à signer</li></ul><p style="font-size:13px;color:var(--soft)">L'inscription ne garantit ni campagne ni rémunération.</p></div></div></div>
-    <div class="txt"><h2>Votre voiture roule déjà.</h2><p>Un parcours discret sur le site, mais bien réel : inscription, puis statut clair.</p></div>
-  </div>
-  <div class="dash">
-    <aside><span class="logo">PROJECT_BRAND</span><span class="on">Accueil</span><span>Prospection</span><span>Conducteurs</span><span>Véhicules</span><span>Campagnes</span><span>Studio</span><span>Pose / dépose</span><span>Devis</span><span>Finance</span></aside>
-    <main><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b style="font-size:20px">Bonjour</b><span class="dtag">Données de démonstration</span></div>
-      <div class="kp"><div><b>6</b><span>Demandes de devis</span></div><div><b>14</b><span>Conducteurs en attente</span></div><div><b>2</b><span>Brouillons à relire</span></div><div><b>3</b><span>Tâches du jour</span></div></div>
-      <div><div class="rw"><span>Annonceur démo A</span><span style="color:var(--soft)">Brouillon sourcé, à copier</span><span class="tg">Envoi manuel</span></div><div class="rw"><span>Flotte démo B</span><span style="color:var(--soft)">Relance mardi</span><span class="tg">Contacté</span></div><div class="rw"><span>Agence démo C</span><span style="color:var(--soft)">Contact à vérifier</span><span class="tg">Partiel</span></div></div>
-    </main>
-  </div>
-</section>
+<section class="ops"><div class="dash">
+  <aside><b>PROJECT_BRAND</b><span class="on">Accueil</span><span>Prospection</span><span>Conducteurs</span><span>Véhicules</span><span>Campagnes</span><span>Studio</span><span>Pose / dépose</span><span>Devis</span><span>Finance</span></aside>
+  <main><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b style="font-size:20px">Bonjour</b><span class="dmo">Données de démonstration</span></div>
+    <div class="kp"><div><b>6</b><span>Demandes de devis</span></div><div><b>14</b><span>Conducteurs en attente</span></div><div><b>2</b><span>Brouillons à relire</span></div><div><b>3</b><span>Tâches du jour</span></div></div>
+    <div><div class="rw"><span>Annonceur démo A</span><span style="color:var(--soft)">Brouillon sourcé, à copier</span><span class="tg">Envoi manuel</span></div><div class="rw"><span>Flotte démo B</span><span style="color:var(--soft)">Relance mardi</span><span class="tg">Contacté</span></div><div class="rw"><span>Agence démo C</span><span style="color:var(--soft)">Contact à vérifier</span><span class="tg">Partiel</span></div></div>
+  </main>
+</div></section>
 
-<section class="fiche" id="fiche">
-  <div class="fgrid">
-    <div>
-      <div class="only-d"><h2>D. Le Passage</h2><p>Idée : la voiture est une fenêtre sur la campagne. Le message reste à sa place dans la ville, et il prend vie quand la voiture le traverse.</p></div>
-      <div class="only-e"><h2>E. Le Convoi</h2><p>Idée : un message se lit à plusieurs. Chaque voiture porte une lettre et le réseau écrit le mot. On vend le réseau, pas la voiture.</p></div>
-      <div class="only-f"><h2>F. La Contre-Affiche</h2><p>Idée : le site est lui-même une campagne. L'affiche quitte le mur, se pose sur la voiture et part chez vos clients.</p></div>
-      <h3>Logo provisoire, nom non vérifié</h3>
-      <div class="lg"><span class="lg-d only-d">allez.</span><span class="lg-e only-e"><i>c</i><i>o</i><i>r</i><i>t</i><i>è</i><i>g</i><i>e</i></span><span class="lg-f only-f">flanko</span></div>
-      <p class="only-d note" style="margin-top:8px">Une bande de couleur traverse le mot, comme la voiture traverse la page.</p><p class="only-e note" style="margin-top:8px">Chaque lettre devient un toit de voiture vu du dessus.</p><p class="only-f note" style="margin-top:8px">Le coin coupé rappelle un vinyle qu'on décolle.</p>
-      <h3>Palette, clair puis sombre</h3>
-      <div class="pal only-d"><i style="background:#FAFAF7"></i><i style="background:#0A0A0A"></i><i style="background:#FF3B00"></i><i style="background:#1226FF"></i><i style="background:#FF2D8A"></i></div>
-      <div class="pal only-e"><i style="background:#E4E4E0"></i><i style="background:#17181A"></i><i style="background:#FFC400"></i><i style="background:#0B4EA2"></i><i style="background:#FFFFFF"></i></div>
-      <div class="pal only-f"><i style="background:#FFE600"></i><i style="background:#0B0B0B"></i><i style="background:#FF3B00"></i><i style="background:#1226FF"></i><i style="background:#FFFFFF"></i></div>
-      <h3>Hiérarchie typographique</h3>
-      <div class="ty only-d"><span style="font:400 60px/1 var(--lg)">LEAGUE GOTHIC, MONUMENT</span><span style="font:500 13px var(--mono)">DM Mono, légendes de terrain</span><span>Hanken Grotesk, texte courant</span></div>
-      <div class="ty only-e"><span style="font:800 54px/1 var(--bc)">BARLOW CONDENSED, ROUTE</span><span style="font:500 13px var(--mono)">DM Mono, données</span><span>Hanken Grotesk, texte courant</span></div>
-      <div class="ty only-f"><span style="font:800 46px/1 var(--br);letter-spacing:-.05em">bricolage, le slogan</span><span style="font:500 13px var(--mono)">DM Mono, petites lignes</span><span>Hanken Grotesk, texte courant</span></div>
-      <h3>Animation à regarder</h3>
-      <p class="only-d">Scrolle le héros : le mot reste fixe et s'imprime sur la voiture en mouvement, les roues tournent, puis la couleur envahit l'écran.</p>
-      <p class="only-e">Le convoi arrive, s'arrête au feu rouge et épelle le mot. Tape une marque dans l'atelier : le convoi l'épelle à son tour.</p>
-      <p class="only-f">L'affiche descend du panneau sur la voiture, le mur reste vide, et la voiture repart avec la campagne.</p>
-      <h3>Force et risque</h3>
-      <p class="only-d"><b>Force :</b> très reconnaissable, compris en une seconde. <b>Risque :</b> dépend beaucoup de la qualité du scroll.</p>
-      <p class="only-e"><b>Force :</b> la plus originale, elle vend le réseau. <b>Risque :</b> moins immédiate, la vue du dessus montre moins le flanc.</p>
-      <p class="only-f"><b>Force :</b> un vrai ton d'agence, avec de l'humour. <b>Risque :</b> un ton frontal à doser face aux régies d'affichage.</p>
-    </div>
-    <div class="phoneV"><iframe id="mob" title="Version mobile de la direction" loading="lazy"></iframe></div>
-  </div>
-  <div class="choice">
-    <h2 style="margin:0">Ce que tu gardes</h2>
-    <div class="cc" id="cc"></div>
-    <button id="copy">Copier ma réponse</button>
-    <p id="ans"></p>
-    <p class="note">Images créées par IA pour la démonstration. Modèles réels sans logo, aucun lien avec les constructeurs. Campagnes et marques fictives.</p>
-  </div>
-</section>
+<section class="end"><p class="m b">À votre tour.</p><div class="r"><a class="btn" href="#lab">Concevoir ma campagne</a><nav><span>Annonceurs</span><span>Flottes</span><span>Devenir conducteur</span><span>FR NL EN</span></nav></div></section>
+
+<section class="note"><div class="ngrid"><div>
+  <h2>Ce qui change, et pourquoi</h2>
+  <h3>Conservé</h3><ul><li>Le rose sur noir et le dégradé du mot</li><li>Le mot monumental condensé et la voiture devant</li><li>Les deux écrans de la section mobile et leur simplicité</li><li>Le back-office sobre, le statut « En attente »</li><li>Clair et sombre, essentiel et immersif</li></ul>
+  <h3>Amélioré</h3><ul><li><b>Profondeur :</b> la dernière lettre passe devant la voiture, et le héros 2 superpose cinq plans</li><li><b>Échelle :</b> une voiture géante coupée par l'écran, des mots à 30 % de la largeur</li><li><b>Transition :</b> on plonge dans la portière rose, qui devient la page suivante</li><li><b>Ton d'agence :</b> « Un panneau attend qu'on passe. Nous, on passe. »</li><li><b>Clarté :</b> le ruban dit le métier dès la première seconde</li><li><b>Mobile :</b> mêmes compositions, repensées à la verticale</li></ul>
+  <h3>Repris des essais D, E et F</h3><ul><li>Le covering en direct : c'est la preuve du produit, il devient rose et monumental</li><li>Le masque carrosserie : rien sur les vitres, des zones réalistes</li></ul>
+  <h3>Abandonné</h3><ul><li>Les boutons de territoire et les mises en page centrées de concessionnaire</li><li>Les scènes de rue générées, qui faisaient trop IA</li></ul>
+  <p class="small">Comparer : <a href="archive/rose-v1/">ancienne version rose</a> · <a href="archive/directions-def/">directions D, E, F</a>. Images de démonstration créées par IA, modèles réels sans logo, aucun lien avec les constructeurs. Campagnes et marques fictives.</p>
+</div><div class="pv"><iframe id="mob" title="Aperçu mobile" loading="lazy"></iframe></div></div></section>
 
 <div class="bar" role="group" aria-label="Comparer">
-  <div id="bD"><button data-v="d">D Le Passage</button><button data-v="e">E Le Convoi</button><button data-v="f">F Contre-Affiche</button></div>
-  <div id="bM"><button data-v="light">Clair</button><button data-v="dark">Sombre</button></div>
+  <div id="bH"><button data-v="1">Héros 1 Monument</button><button data-v="2">Héros 2 Profondeur</button></div>
+  <div id="bM"><button data-v="dark">Sombre</button><button data-v="light">Clair</button></div>
   <div id="bO"><button data-v="ess">Essentiel</button><button data-v="imm">Immersif</button></div>
 </div>
 
 <script>
 (function(){
-var q=new URLSearchParams(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,B=document.body;
-var S={d:q.get('d')||'d',m:q.get('m')||'light',o:rm?'ess':(q.get('o')||'imm')};
+var q=new URLSearchParams(location.search),B=document.body,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,small=matchMedia('(max-width:760px)');
+var S={h:q.get('h')||'1',m:q.get('m')||'dark',o:rm?'ess':(q.get('o')||'imm')};
 if(q.get('embed'))B.classList.add('embed');
-var mob=matchMedia('(max-width:760px)');
-var ART={
- mayo:'<div class="art" style="background:#FFD500;color:#0a0a0a;font:400 25cqw/1 var(--lg);letter-spacing:.02em">MAYO</div>',
- courage:'<div class="art" style="background:#141414;color:#F5EFE3;font:400 24cqw/1 var(--lg)">COURAGE.</div>',
- chaud:'<div class="art" style="background:#fff;color:#E8341C;font:800 21cqw/1 var(--br);letter-spacing:-.06em">chaud.</div>',
- zero:'<div class="art" style="background:repeating-linear-gradient(115deg,#1226FF 0 6cqw,#fff 6cqw 12cqw)"><span style="background:#fff;color:#1226FF;font:800 9cqw/1 var(--br);padding:1.6cqw 2.6cqw;letter-spacing:-.05em">4 barres.</span></div>',
- nous:'<div class="art" style="background:#FFE600;color:#0B0B0B;font:800 15cqw/1 var(--br);letter-spacing:-.05em">nous, si.</div>',
- brand:'<div class="art" style="background:var(--acc);color:var(--onacc);font:400 26cqw/1 var(--lg)">ROULE</div>'
-};
-function carHTML(c,a,z){return '<div class="car '+c+'"><div class="shade"></div><div class="base"></div>'+(a?'<div class="skin fit"'+(z?' style="clip-path:polygon(31.4% 34%,81.6% 28%,73% 68%,70% 76%,68% 79%,31.6% 80%,30.7% 56%)"':'')+'>'+ART[a]+'</div>':'')+'</div>'}
-document.querySelectorAll('x-car').forEach(function(x){var t=document.createElement('div');t.innerHTML=carHTML(x.getAttribute('c'),x.getAttribute('a'),x.getAttribute('z'));x.replaceWith(t.firstChild)});
-['manyD','manyF'].forEach(function(id){var n=id==='manyD'?15:9,h='',l=['mayo','mayo','mayo'];for(var i=0;i<n;i++)h+=carHTML('golf',id==='manyD'?'mayo':'nous');document.getElementById(id).innerHTML=h});
+var DOOR='polygon(31.4% 34%,81.6% 28%,73% 68%,70% 76%,68% 79%,31.6% 80%,30.7% 56%)';
+function esc(t){return (t||'').replace(/[<>&]/g,'')}
+document.querySelectorAll('x-car').forEach(function(x){
+ var a=function(n){return x.getAttribute(n)},d=document.createElement('div');
+ d.className='car'+(a('r5')?' r5':'')+(a('class')?' '+a('class'):'');if(a('id'))d.id=a('id');
+ var t=a('text'),style=(a('s')?'--s:'+a('s')+';':'')+(a('t')?'--t:'+a('t')+';':'');
+ var skin=a('bare')?'':'<div class="skin"'+(a('zone')?' style="clip-path:'+DOOR+'"':'')+'><div class="art" style="'+style+'"><span>'+esc(t)+'</span></div></div>';
+ d.innerHTML='<div class="sh"></div><div class="base"></div>'+skin+(a('wheels')==='1'?'<div class="wh a"></div><div class="wh b"></div>':'');
+ x.replaceWith(d)
+});
+var fl=document.getElementById('fleet'),h='';[[9,9],[15,7],[25,5]].forEach(function(r){h+='<div class="lane" style="--k:'+r[0]+'">';for(var i=0;i<r[1];i++)h+='<img src="assets/golf_pink_s.webp" alt="" loading="lazy" style="width:calc(var(--k)*1cqw);flex:none;display:block">';h+='</div>'});fl.innerHTML=h;
 
-// mots D, découpés autrement sur téléphone
-function wordsD(){document.querySelectorAll('.pass .wordset').forEach(function(w){var s=w.querySelectorAll('span');var t=mob.matches?['Votre','marque','passe','ici.']:['Votre marque','passe ici.','',''];s.forEach(function(e,i){e.textContent=t[i]})})}
-
-// convoi E
-var row=document.getElementById('rowE'),word='MARQUE',cars=[];
-function placeF(){var f=document.getElementById('frameF');if(mob.matches){f.style.cssText='';return}var st=document.getElementById('passF'),W=st.clientWidth,H=st.clientHeight,k=Math.max(W/1344,H/752),ox=(W-1344*k)/2,oy=H-752*k;f.style.left=ox+.26*1344*k+'px';f.style.top=oy+.056*752*k+'px';f.style.width=.477*1344*k+'px';f.style.height=.526*752*k+'px'}
-function buildE(w){word=(w||'MARQUE').replace(/\s+/g,'').toUpperCase().slice(0,8)||'MARQUE';row.innerHTML='';cars=[];var cols=['#FFC400','#FFC400','#fff','#FFC400','#FFC400','#fff','#FFC400','#FFC400'];
- for(var i=0;i<word.length;i++){var d=document.createElement('div');d.className='tcar';d.innerHTML='<i><span class="skin" style="--t:'+cols[i]+'"></span><b>'+word[i]+'</b></i>';row.appendChild(d);cars.push(d)}layoutE()}
-function layoutE(){var st=document.getElementById('passE'),W=st.clientWidth,H=st.clientHeight,m=mob.matches,n=cars.length;
- if(m){var cw=W*.28;cars.forEach(function(c,i){c.style.width=cw*2.014+'px';c.dataset.m=1;c.style.setProperty('--W',cw+'px')})}
- else{var w=Math.min((W*.92)/n,H*.42*2.014,W*.17),gap=(W*.92-w*n)/Math.max(n-1,1);gap=Math.min(gap,w*.08);cars.forEach(function(c,i){c.style.width=w+'px';c.style.setProperty('--W',w*.4965+'px');c.dataset.x=W*.04+i*(w+gap);c.style.top=H*.5-w/2.014/2+'px';c.style.left=0})}}
-
-// pilotage au scroll
-function prog(el){var r=el.getBoundingClientRect(),h=r.height-innerHeight;return h<=0?1:Math.max(0,Math.min(1,-r.top/h))}
-var artD=document.getElementById('artD'),carD=document.getElementById('carD'),pD=document.getElementById('passD');
-var last=-1;
+var pin=document.getElementById('pin'),st=document.getElementById('stage'),hs=document.getElementById('hs'),tr=document.getElementById('track'),run=document.getElementById('runner'),carR=document.getElementById('carR'),carS=document.getElementById('carS');
+function prog(e){var r=e.getBoundingClientRect(),h=r.height-innerHeight;return h<=0?1:Math.max(0,Math.min(1,-r.top/h))}
 function frame(){
- var imm=S.o==='imm';
- if(S.d==='d'){
-  var p=imm?prog(document.getElementById('pinD')):.66,W=pD.clientWidth,H=pD.clientHeight,cw=carD.offsetWidth,top=carD.offsetTop;
-  var t=Math.min(1,p/.62),e=1-Math.pow(1-t,2),x=W*1.02-(W*1.02+cw*.0-((W-cw)/2))*e;
-  pD.style.setProperty('--p',p);carD.style.transform='translate3d('+x+'px,0,0)';artD.style.transform='translate3d('+(-x)+'px,'+(-top)+'px,0)';
-  var rot=(x/(cw*.0084*3.14))*-1;carD.querySelectorAll('.wh').forEach(function(w){w.style.transform='rotate('+(-rot*.4)+'deg)'});
-  var s=document.getElementById('storyD');if(s){var sp=imm?prog(s):0,i=Math.min(3,Math.floor(sp*4));if(i!==last){last=i;s.querySelectorAll('.st').forEach(function(e,n){e.classList.toggle('on',n===i)});document.getElementById('stepD').textContent=['Une voiture ordinaire.','Un support publicitaire.','Un réseau.','Une campagne suivie.'][i];document.getElementById('ctD').textContent=(i+1)+' / 4'}}
- }
- if(S.d==='e'){
-  var p2=imm?prog(document.getElementById('pinE')):.6,st=document.getElementById('passE'),W2=st.clientWidth,H2=st.clientHeight,n=cars.length;
-  document.getElementById('lightE').dataset.s=p2>.8?'g':'r';
-  cars.forEach(function(c,i){
-   if(mob.matches){var cw=W2*.28,rowi=Math.floor(i/2),col=i%2,gy=H2*.17+rowi*(cw*2.014+10),gx=W2*.5+(col?8:-8-cw),a=Math.min(1,p2/.6),dy=(1-a)*(H2*1.4+i*60)-(p2>.8?(p2-.8)*5*H2*1.5:0);c.style.left=gx-(cw*2.014-cw)/2+'px';c.style.top=gy+(cw*2.014-cw)/2+'px';c.style.transform='translate3d(0,'+dy+'px,0) rotate(90deg)'}
-   else{var base=+c.dataset.x,a2=Math.min(1,p2/.6),e2=1-Math.pow(1-a2,2.2),off=(1-e2)*(W2+(i+1)*W2*.12),out=p2>.8?-(p2-.8)*5*W2*1.2:0;c.style.transform='translate3d('+(base+off+out)+'px,0,0)'}
-  });
- }
- if(S.d==='f'){
-  var p3=imm?prog(document.getElementById('pinF')):.62,f=document.getElementById('passF'),carF=document.getElementById('carF');
-  var pw=Math.max(0,Math.min(1,(p3-.12)/.42)),go=Math.max(0,(p3-.68)/.32);
-  f.style.setProperty('--p',p3);f.style.setProperty('--pw',pw);
-  carF.style.transform='translate3d('+(-go*go*f.clientWidth*1.3)+'px,0,0)';
-  carF.querySelectorAll('.wh').forEach(function(w){w.style.transform='rotate('+(-go*go*900)+'deg)'});
- }
- var mp=document.getElementById('mapE');
- if(S.d==='e'&&mp){var r=mp.getBoundingClientRect(),v=imm?Math.max(0,Math.min(1,(innerHeight*.8-r.top)/(r.height+innerHeight*.2))):1;var rt=document.getElementById('routeE');rt.setAttribute('stroke-dashoffset',1400*(1-v));var li=Math.min(3,Math.floor(v*4));document.querySelectorAll('#stepsE li').forEach(function(l,i){l.classList.toggle('on',i===li)})}
+ var imm=S.o==='imm',p=imm?prog(pin):0,z=Math.max(0,(p-.08)/.72);z=Math.min(1,z);
+ st.style.setProperty('--p',p.toFixed(4));st.style.setProperty('--z',z.toFixed(4));
+ var r=run.getBoundingClientRect(),v=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height*.5))),W=innerWidth,cw=carR.offsetWidth,x=imm?(W-(W+cw*.9)*v):(W-cw)/2;
+ carR.style.transform='translate3d('+x+'px,0,0)';carR.querySelectorAll('.wh').forEach(function(w){w.style.transform='rotate('+(x*.22)+'deg)'});
+ if(imm&&!small.matches){var sp=prog(hs);tr.style.transform='translate3d('+(-sp*3*W)+'px,0,0)';var i=Math.min(1,Math.max(0,(sp-.2)/.13));carS.style.setProperty('--c',i)}else{tr.style.transform='none';carS.style.setProperty('--c',1)}
+ document.querySelectorAll('.pn .w').forEach(function(w,n){if(imm&&!small.matches){var c=prog(hs)*3-n;w.style.transform='translate3d('+(c*18)+'vw,0,0) scaleY(1.2)'}else w.style.transform=''});
 }
-var tick=false;addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;frame()})}},{passive:true});
-addEventListener('resize',function(){layoutE();placeF();frame()});
-mob.addEventListener('change',function(){wordsD();layoutE();placeF();frame()});
-document.addEventListener('click',function(e){var b=e.target.closest('[data-camp]');if(b)pD.style.setProperty('--camp',b.dataset.camp)});
+var tick=false;addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;frame()})}},{passive:true});addEventListener('resize',frame);
+// La voiture blanche se couvre au chargement : la première image raconte le métier.
+var heroCars=[document.getElementById('carH'),document.getElementById('carM')];
+function intro(){if(S.o==='ess'){heroCars.forEach(function(c){c.style.setProperty('--c',1)});return}var t0=performance.now();heroCars.forEach(function(c){c.style.setProperty('--c',0)});(function g(t){var k=Math.max(0,Math.min(1,(t-t0-450)/1300)),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;heroCars.forEach(function(c){c.style.setProperty('--c',e)});if(k<1)requestAnimationFrame(g)})(t0);setTimeout(function(){heroCars.forEach(function(c){c.style.setProperty('--c',1)})},2100)}
+addEventListener('pointermove',function(e){if(S.h==='2'&&!small.matches)st.style.setProperty('--mx',((e.clientX/innerWidth-.5)*2).toFixed(3))},{passive:true});
 
-// atelier en direct
-var inp=document.getElementById('brand'),txt=document.getElementById('liveTxt'),art=document.getElementById('liveArt'),skin=document.getElementById('liveSkin'),col=['#FFE600','#0B0B0B'];
-var PD='81.6% 28%,73% 68%,70% 76%,68% 79%';var CL={c:'polygon(31.4% 34%,'+PD+',31.6% 80%,30.7% 56%,31.4% 34%,31.4% 34%,31.4% 34%,31.4% 34%)',m:'polygon(0 27%,29% 27%,34% 25%,41% 25%,41% 34%,'+PD+',31.6% 82%,31.6% 100%,0 100%,0 27%)',x:'polygon(0 0,100% 0,100% 0,100% 0,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,0 100%)'};var F='x';
-function live(){var v=inp.value.trim()||'Votre marque';txt.textContent=B.dataset.d==='f'?v.toLowerCase():v.toUpperCase();var fam=getComputedStyle(B).getPropertyValue('--d1');var size=Math.min(36,150/Math.max(v.length,3))*(F==='c'?.52:1);art.style.cssText=(F==='c'?'padding:9cqw 19cqw 0 31cqw;':'')+'background:'+col[0]+';color:'+col[1]+';font:'+(B.dataset.d==='d'?400:800)+' '+size+'cqw/1 '+fam+';letter-spacing:'+(B.dataset.d==='f'?'-.05em':'0');}
-inp.addEventListener('input',function(){live();if(B.dataset.d==='e'){buildE(inp.value);frame()}});
-document.getElementById('fmt').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;F=b.dataset.f;skin.style.clipPath=CL[F];live();this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)})});
-document.getElementById('col').addEventListener('click',function(e){var b=e.target.closest('button');if(b){col=b.dataset.c.split(',');live()}});
-
-// fiche et réponse
-var EL={'D Le Passage':['Mot fixe imprimé sur la voiture','Couleur qui envahit l\'écran','Histoire en 4 temps','Typo League Gothic'],'E Le Convoi':['Vue du dessus','Lettres sur les toits','Boutons panneaux routiers','Carte de la ville'],'F Contre-Affiche':['Affiche qui quitte le panneau','Ton de slogan','Mur de 4 affiches','Trois voitures identiques'],'Commun':['Atelier « tapez votre marque »','Galerie de campagnes fictives','Section conducteur mobile']};
-var cc=document.getElementById('cc');Object.keys(EL).forEach(function(k){EL[k].forEach(function(t){var l=document.createElement('label');l.innerHTML='<input type="checkbox"> <span>'+k+' : '+t+'</span>';cc.appendChild(l)})});
-function ans(){var sel=[].map.call(cc.querySelectorAll('input:checked'),function(i){return i.nextElementSibling.textContent});document.getElementById('ans').textContent='Je préfère '+({d:'D',e:'E',f:'F'})[S.d]+', '+(S.m==='dark'?'sombre':'clair')+', '+(S.o==='imm'?'immersif':'essentiel')+'. Je garde : '+(sel.join(' ; ')||'à préciser')+'.'}
-cc.addEventListener('change',ans);
-document.getElementById('copy').addEventListener('click',function(){var a=document.getElementById('ans'),c=this;navigator.clipboard.writeText(a.textContent).then(function(){c.textContent='Copié'},function(){c.textContent='Sélectionne le texte'})});
+// Atelier en direct
+var inp=document.getElementById('brand'),txt=document.getElementById('liveTxt'),art=document.getElementById('liveArt'),skin=document.getElementById('liveSkin'),typed=document.getElementById('typed'),col=['#FF6DB8','#0B0A0D','#FF6DB8','#8E1560'],F='x';
+var CL={c:DOOR,m:'polygon(0 27%,29% 27%,34% 25%,41% 25%,41% 34%,81.6% 28%,73% 68%,70% 76%,68% 79%,31.6% 82%,31.6% 100%,0 100%)',x:'none'};
+var ZN={c:'Classique : les portières.',m:'Medium : les portières, l\'avant et les rétros.',x:'Complet : toute la carrosserie, jamais les vitres.'};
+function live(){var v=(inp.value.trim()||'Votre marque').toUpperCase();txt.textContent=v;typed.textContent=v;var n=Math.max(v.length,4);
+ art.style.setProperty('--s',col[0]);art.style.setProperty('--t',col[1]);art.style.setProperty('--fs',Math.min(F==='c'?13:17,(F==='c'?118:165)/n)+'cqw');
+ art.style.padding=F==='x'?'8cqw 5cqw 0':F==='m'?'8cqw 19cqw 0 8cqw':'8cqw 19cqw 0 31cqw';
+ typed.style.fontSize=Math.min(36,258/n)+'cqw';typed.style.setProperty('--cA',col[2]);typed.style.setProperty('--cB',col[3])}
+inp.addEventListener('input',live);
+document.getElementById('fmt').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;F=b.dataset.f;skin.style.clipPath=CL[F];document.getElementById('zones').textContent=ZN[F];this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});live()});
+document.getElementById('cols').addEventListener('click',function(e){var b=e.target.closest('button');if(b){col=b.dataset.c.split(',');live()}});
 
 function press(id,v){document.querySelectorAll('#'+id+' button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v)})}
-function apply(){B.dataset.d=S.d;B.dataset.m=S.m;B.dataset.o=S.o;press('bD',S.d);press('bM',S.m);press('bO',S.o);last=-1;
- wordsD();layoutE();placeF();live();ans();
- if(!q.get('embed')){var m=document.getElementById('mob'),u='?d='+S.d+'&m='+S.m+'&o='+S.o+'&embed=1';if(m.dataset.u!==u){m.dataset.u=u;m.src=u}}
- frame()}
-function bind(id,k){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(b){var was=S[k];S[k]=b.dataset.v;if(k==='d'&&was!==S[k])scrollTo(0,0);apply()}})}
-bind('bD','d');bind('bM','m');bind('bO','o');
-buildE('MARQUE');apply();
-if(document.fonts)document.fonts.ready.then(function(){layoutE();frame()});
+function apply(){B.dataset.h=S.h;B.dataset.m=S.m;B.dataset.o=S.o;press('bH',S.h);press('bM',S.m);press('bO',S.o);
+ if(!q.get('embed')){var m=document.getElementById('mob'),u='?h='+S.h+'&m='+S.m+'&o='+S.o+'&embed=1';if(m.dataset.u!==u){m.dataset.u=u;m.src=u}}frame()}
+function bind(id,k){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(b){var c=S[k]!==b.dataset.v;S[k]=b.dataset.v;apply();if(c&&k!=='m')intro()}})}
+bind('bH','h');bind('bM','m');bind('bO','o');
+apply();live();intro();
 })();
 </script>
 </body>
