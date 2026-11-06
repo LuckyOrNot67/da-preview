@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Moodboard PROJECT_BRAND</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Mono:wght@400&family=Hanken+Grotesk:wght@400;600&display=swap">
+<style>
+/* Salle d'accrochage : les images d'abord, sur fond neutre, le texte en cartel à côté. */
+:root{
+  --bg:#FFFFFF; --wall:#EEEFF1; --ink:#111214; --soft:#5C6068; --rule:#D9DBDF; --keep:#0B6B4F; --drop:#B3261E; --mark:#FFE9F4;
+  --d:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif; --b:"Hanken Grotesk",system-ui,-apple-system,sans-serif; --m:"DM Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111214;--wall:#1B1C20;--ink:#F3F3F5;--soft:#A4A7AF;--rule:#2F3137;--keep:#5BD1A6;--drop:#FF8A80;--mark:#3A1A2B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111214;--wall:#1B1C20;--ink:#F3F3F5;--soft:#A4A7AF;--rule:#2F3137;--keep:#5BD1A6;--drop:#FF8A80;--mark:#3A1A2B;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--b);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 80px}
+.w{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-family:var(--d);font-weight:800;letter-spacing:-.03em;line-height:1.02;text-wrap:balance;margin:0}
+h1{font-size:clamp(44px,8vw,96px)}
+h2{font-size:clamp(32px,4.6vw,54px)}
+h3{font-size:clamp(22px,2.4vw,28px)}
+p{margin:0}
+.lab{font:400 12px/1.4 var(--m);letter-spacing:.04em;color:var(--soft)}
+header{padding-block:56px 44px;display:grid;gap:18px}
+header p{font-size:clamp(18px,2vw,21px);max-width:62ch}
+section{padding-block:60px;border-top:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr);gap:30px}
+.intro{max-width:66ch;display:grid;gap:12px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;font:400 13px/1.5 var(--m)}
+nav.toc a{color:var(--ink)}
+.fix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
+.fix div{display:grid;gap:6px;min-width:0}
+.fix div:last-child{grid-column:1/-1}
+.fix b{font:800 24px/1.1 var(--d);letter-spacing:-.02em}
+.wallgrid{columns:5 180px;column-gap:10px}
+.wallgrid a{display:block;break-inside:avoid;margin-bottom:10px;background:var(--wall);text-decoration:none;color:var(--ink)}
+.wallgrid img,.wallgrid video{display:block;width:100%;height:auto}
+.wallgrid span{display:block;padding:5px 8px;font:400 11px/1.3 var(--m)}
+.wallgrid .no span{color:var(--drop)}
+.wallgrid .fav span{background:var(--ink);color:var(--bg)}
+.ref{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:34px;align-items:start;padding-block:26px;border-top:1px solid var(--rule)}
+.ref:first-of-type{border-top:0;padding-top:0}
+.ref.tall{grid-template-columns:minmax(0,380px) minmax(0,1fr)}
+.ref figure{margin:0;background:var(--wall);min-width:0}
+.ref img,.ref video{display:block;width:100%;height:auto}
+.zoom{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.zoom img{display:block;width:100%;height:auto}
+.zoom:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.txt{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}
+dl{margin:0;display:grid;gap:10px}
+dt{font:400 12px/1.3 var(--m);color:var(--soft)}
+dd{margin:0}
+.ok dt{color:var(--keep)} .ko dt{color:var(--drop)}
+.six{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:34px;align-items:start}
+.six figure{margin:0}
+.six video{display:block;width:100%;background:var(--wall)}
+.frames{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.frames figure{margin:0;background:var(--wall);min-width:0}
+.frames img{display:block;width:100%}
+.frames figcaption{padding:5px 7px;font:400 11px/1.3 var(--m)}
+.map{width:100%;border-collapse:collapse;font-size:15px}
+.tblw{overflow-x:auto}
+.map th,.map td{padding:10px 14px 10px 0;border-top:1px solid var(--rule);text-align:left;vertical-align:top}
+.map th{font:400 12px/1.3 var(--m);color:var(--soft);border-top:0}
+.logos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 18px}
+.logos figure{margin:0;display:grid;gap:8px;align-content:start;min-width:0}
+.logos .box{aspect-ratio:4/3;background:var(--wall);overflow:hidden}
+.logos .box img{display:block;width:100%;height:100%;object-fit:cover}
+.logos figcaption{font-size:15px}
+.logos b{display:block;font:800 19px/1.2 var(--d)}
+.rule{background:var(--wall);padding:20px 22px;display:grid;gap:6px;max-width:80ch}
+.pair{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pair figure{margin:0;background:var(--wall);min-width:0}
+.pair img{display:block;width:100%;height:auto}
+.pair figcaption{padding:6px 9px;font:400 12px/1.35 var(--m);color:var(--soft)}
+.dec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.dec article{display:grid;gap:5px;padding-block:18px;border-top:1px solid var(--rule);min-width:0}
+.dec h3{font-size:22px;letter-spacing:-.02em}
+.dec .lab{color:var(--soft)}
+.ask{background:var(--mark);padding:24px;display:grid;gap:10px}
+.ask ol{margin:0;padding-left:20px;display:grid;gap:8px}
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:96vh}
+dialog::backdrop{background:rgba(0,0,0,.86)}
+dialog img{display:block;max-width:96vw;max-height:96vh;width:auto;height:auto}
+@media (max-width:820px){
+  .fix,.ref,.ref.tall,.six,.dec{grid-template-columns:minmax(0,1fr)}
+  .txt{position:static}
+  .frames{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .logos,.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
+</head>
+<body>
+<div class="w">
+<header>
+  <p class="lab">PROJECT_BRAND · pour validation · 6 novembre 2026</p>
+  <h1>Tes références, vues pour de vrai.</h1>
+  <p>Les 20 images que tu m'as données et ce qu'on garde de Flanko. Aucune homepage ne sera codée avant ta validation.</p>
+  <nav class="toc" aria-label="Sommaire"><a href="#mur">Le mur</a><a href="#lecture">Ce que j'avais mal lu</a><a href="#r6">Référence 6</a><a href="#refs">Les 10 autres</a><a href="#extra">Vinyle</a><a href="#logos">Logos</a><a href="#non">Contre-exemples</a><a href="#flanko">Flanko</a><a href="#da">Direction proposée</a><a href="#ok">À valider</a></nav>
+</header>
+
+<section id="mur">
+  <div class="intro"><h2>Le mur complet</h2><p>Toutes les références, images originales. Clique sur une image pour lire son analyse.</p></div>
+  <div class="wallgrid">
+    <a class="fav" href="#r6"><video src="assets/da06.mp4" autoplay muted loop playsinline aria-label="Référence 6, vidéo"></video><span>6, ta préférée</span></a>
+    <a href="#r1"><img src="assets/da01.webp" alt="Référence 1"><span>1</span></a>
+    <a href="#r2"><img src="assets/da02.webp" alt="Référence 2"><span>2</span></a>
+    <a href="#r3"><img src="assets/da03.webp" alt="Référence 3"><span>3</span></a>
+    <a href="#r4"><img src="assets/da04.webp" alt="Référence 4"><span>4</span></a>
+    <a href="#r5"><video src="assets/da05.mp4" autoplay muted loop playsinline aria-label="Référence 5, animation"></video><span>5</span></a>
+    <a href="#r7"><img src="assets/da07.webp" alt="Référence 7"><span>7</span></a>
+    <a href="#r8"><img src="assets/da08.webp" alt="Référence 8"><span>8</span></a>
+    <a href="#r9"><img src="assets/da09.webp" alt="Référence 9"><span>9</span></a>
+    <a href="#r10"><img src="assets/da10.webp" alt="Référence 10"><span>10</span></a>
+    <a href="#r11"><img src="assets/da11.webp" alt="Référence 11"><span>11</span></a>
+    <a href="#extra"><img src="assets/extra.webp" alt="Référence positive supplémentaire"><span>Positive en plus</span></a>
+    <a href="#logos"><img src="assets/logo1.webp" alt="Logo nomo"><span>Logo 1</span></a>
+    <a href="#logos"><img src="assets/logo2.webp" alt="Logo willo"><span>Logo 2</span></a>
+    <a href="#logos"><img src="assets/logo3.webp" alt="Logo coconut"><span>Logo 3</span></a>
+    <a href="#logos"><img src="assets/logo4.webp" alt="Logo ilunea"><span>Logo 4</span></a>
+    <a href="#logos"><img src="assets/logo5.webp" alt="Logo Connect"><span>Logo 5</span></a>
+    <a href="#logos"><img src="assets/logo6.webp" alt="Logo STWD"><span>Logo 6</span></a>
+    <a class="no" href="#non"><img src="assets/rej1.webp" alt="Contre-exemple 1"><span>Contre-exemple 1</span></a>
+    <a class="no" href="#non"><img src="assets/rej2.webp" alt="Contre-exemple 2"><span>Contre-exemple 2</span></a>
+    <a href="#flanko"><img src="assets/f_mob.webp" alt="Flanko, version mobile"><span>Flanko, mobile</span></a>
+  </div>
+</section>
+
+<section id="lecture">
+  <div class="intro"><h2>Ce que j'avais mal lu</h2><p>En revoyant les images une par une, je vois pourquoi mes maquettes tournaient en rond.</p></div>
+  <div class="fix">
+    <div><b>J'ai suivi la 10, pas la 6</b><p>Ta préférée est une page blanche, calme, avec un plan de ville et des téléphones. J'ai bâti tout le site sur le noir et rose de la référence 10.</p></div>
+    <div><b>8 fonds clairs sur 11</b><p>Seules les références 9 et 10 sont sur fond noir, et la 5 sur fond coloré. Le tout-noir que j'ai poussé ne vient pas de ton moodboard.</p></div>
+    <div><b>Le gros mot : 5 sur 11</b><p>Voiture et mot géant apparaissent dans les références 1, 5, 7, 10 et 11. Les six autres tiennent par autre chose. J'en avais fait la seule idée.</p></div>
+    <div><b>Plusieurs voitures, plusieurs angles</b><p>Les références 3, 5 et 6 montrent plusieurs modèles, la 10 plusieurs vues de la même voiture. Moi, un seul profil de Golf partout.</p></div>
+    <div><b>Erreurs dans mes notes</b><p>Référence 7 : la voiture passe devant les deux mots, pas entre eux. Référence 11 : l'image est une composition pivotée d'un quart de tour. Logos : « tout en minuscules » était faux, CONNECT est en capitales et STWD est tracé à la main.</p></div>
+  </div>
+</section>
+
+<section id="r6">
+  <div class="intro"><p class="lab">Référence 6 · ta préférée · vidéo de 14 secondes</p><h2>Unique, location de voitures à New York</h2><p>Le pin s'intitule « Car Rental Website Animation ». Son auteur explique que la visite doit donner l'impression de démarrer dès le premier scroll.</p></div>
+  <div class="six">
+    <figure><video src="assets/da06.mp4" controls autoplay muted loop playsinline aria-label="Vidéo de la référence 6"></video></figure>
+    <div class="txt">
+      <button class="zoom" type="button" aria-label="Agrandir l'image de la référence 6"><img src="assets/da06.webp" alt="Accueil du site Unique : titre noir à gauche, cabriolet argent coupé à droite, plan de ville pâle"></button>
+      <dl>
+        <div><dt>Ce que je vois</dt><dd>Une page blanche à bords arrondis sur fond gris. Titre noir, gras, géométrique, sur trois lignes à gauche. Cabriolet argent coupé par le bord droit, avec une ombre noire très dense.</dd></div>
+        <div><dt>Le détail clé</dt><dd>Un plan de ville presque effacé derrière la voiture, cinq points et une flèche de navigation. La voiture existe dans un lieu sans aucune scène de rue.</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="frames">
+    <figure><img src="assets/v1.webp" alt="Accueil"><figcaption>Accueil</figcaption></figure>
+    <figure><img src="assets/v2.webp" alt="Deux téléphones inclinés"><figcaption>Deux téléphones inclinés</figcaption></figure>
+    <figure><img src="assets/v3.webp" alt="Flotte en photos"><figcaption>Flotte : 7 photos</figcaption></figure>
+    <figure><img src="assets/v4.webp" alt="Quatre avantages"><figcaption>4 avantages décalés</figcaption></figure>
+    <figure><img src="assets/v5.webp" alt="Bloc noir de conversion"><figcaption>Bloc noir d'action</figcaption></figure>
+  </div>
+  <div class="tblw"><table class="map">
+    <thead><tr><th>Dans la référence</th><th>Pourquoi ça marche</th><th>Chez nous</th></tr></thead>
+    <tbody>
+      <tr><td>Plan de ville avec points</td><td>Dit « où » en silence</td><td>Nos zones en Belgique, le vrai sujet d'une campagne</td></tr>
+      <tr><td>Rangée de logos, un sélectionné</td><td>Un choix clair dès l'accueil</td><td>Choix du format ou de la ville, jamais de faux clients</td></tr>
+      <tr><td>Deux téléphones superposés</td><td>Le produit devient un objet</td><td>Espace conducteur</td></tr>
+      <tr><td>Flotte en vraies photos</td><td>Variété, matière réelle</td><td>Types de voitures et campagnes, en photos</td></tr>
+      <tr><td>Une seule pilule noire répétée</td><td>Une action toujours identifiable</td><td>« Concevoir ma campagne »</td></tr>
+      <tr><td>Grand bloc noir final</td><td>Le seul contraste fort de la page</td><td>Demande de devis</td></tr>
+      <tr><td>Blocs qui montent au scroll</td><td>Le site avance, comme une voiture</td><td>Même logique, avec notre plan</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Le risque :</b> telle quelle, cette page reste un modèle de location propre, sans personnalité d'agence. Il faut sa structure, plus un vrai moment fort.</p>
+</section>
+
+<section id="refs">
+  <div class="intro"><h2>Les 10 autres, une par une</h2></div>
+
+  <article class="ref tall" id="r1">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 1"><img src="assets/da01.webp" alt="Page Rivian, SUV bleu en photo puis SUV gris devant le mot R1S"></button></figure>
+    <div class="txt"><h3>1. Page Rivian</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Un SUV bleu photographié face à la mer, puis une page blanche où un SUV gris passe devant le mot « R1S ». La voiture suivante dépasse à droite.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>L'enchaînement photo réelle puis objet isolé. La voiture suivante visible, qui invite à continuer.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>L'univers constructeur et la vente de véhicules.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref" id="r2">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 2"><img src="assets/da02.webp" alt="Mini électrique vue du dessus au centre d'un écran gris bleuté"></button></figure>
+    <div class="txt"><h3>2. Mini Electric</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Une Mini vue du dessus, coupée en bas, au centre d'un écran gris bleuté. « MINI » en léger, « ELECTRIC » en gras. Quatre tuiles de chiffres et une vidéo à droite.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>L'angle du dessus, qui change la voiture en forme graphique. Le contraste léger et gras dans un même titre.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Les petites tuiles de chiffres et l'ombre de carte.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref" id="r3">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 3"><img src="assets/da03.webp" alt="Quatre cartes Audi avec un grand arc de couleur derrière chaque voiture"></button></figure>
+    <div class="txt"><h3>3. Cartes Audi</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Quatre cartes verticales. Un grand arc coloré derrière chaque voiture, coupée par le bord de la carte. La couleur de l'arc répond à celle de la voiture. Une barre de lecteur vidéo traîne sur la capture.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>Une couleur par voiture, une voiture différente par carte, le bord qui coupe l'objet.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Les fiches techniques et le panier d'achat.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref" id="r4">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 4"><img src="assets/da04.webp" alt="Deux écrans d'application de vente de chaussures"></button></figure>
+    <div class="txt"><h3>4. Application de boutique</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Pas de voiture : deux écrans de vente de vêtements. Fond très clair, gros boutons ronds, barre de navigation arrondie en bas.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>La simplicité et la taille des boutons pour l'espace conducteur. La barre de total fixée en bas, utile pour un suivi.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>La bannière promo et le personnage détouré.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref" id="r5">
+    <figure><video src="assets/da05.mp4" controls autoplay muted loop playsinline aria-label="Animation de la référence 5"></video></figure>
+    <div class="txt"><h3>5. Classic Microcars, 8,5 secondes</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Un carrousel de petites voitures anciennes. À chaque modèle, le fond change de couleur et le nom condensé défile derrière. Les voisines dépassent sur les côtés. Un volet blanc monte ensuite avec photos et fiche.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>La couleur de fond qui change avec la voiture. C'est notre métier : une campagne, une couleur. Les petites voitures aussi : la citadine a du charme.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Le texte minuscule et le ton musée.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref tall" id="r7">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 7"><img src="assets/da07.webp" alt="Page Breezy : voiture noire vue du dessus sur les mots Luxury et Car Wash"></button></figure>
+    <div class="txt"><h3>7. Breezy, lavage auto</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>« LUXURY » rouge et « CAR WASH » gris, italiques et très serrés. Une voiture noire vue du dessus passe devant les deux, et son ombre tombe sur le gris. Les prix sont sur une ligne juste dessous. Même composition sur téléphone.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>L'ombre portée sur le texte, qui crée une vraie profondeur. L'offre lisible dès l'accueil. Le héros mobile fidèle au desktop.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>La suite de page, banale, et les chiffres de réassurance sans source.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref tall" id="r8">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 8"><img src="assets/da08.webp" alt="Porsche jaune nette à droite, floutée derrière un volet dépoli à gauche"></button></figure>
+    <div class="txt"><h3>8. « There is no substitute. »</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Une Porsche jaune dans un hangar blanc. Un volet dépoli couvre près des trois quarts de l'image et floute la voiture. Le reste est net.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>Le texte sur un calque qui laisse deviner l'image, avec un bord net. Une seule phrase pleine et assumée.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Le bouton bleu brillant et la micro-navigation en bas.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref tall" id="r9">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 9"><img src="assets/da09.webp" alt="Main tenant un téléphone affichant l'arrière d'une voiture sur fond citron"></button></figure>
+    <div class="txt"><h3>9. Téléphone en main</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Une vraie main, un téléphone incliné, un écran citron avec l'arrière d'une voiture grise, un halo sur fond noir. Un seul bouton à glisser.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>La main : elle rend l'interface humaine, parfait pour les conducteurs. Un écran, une seule action.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Le citron sur noir, déjà très vu.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref tall" id="r10">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 10"><img src="assets/da10.webp" alt="Site monochrome rose sur noir avec une Porsche rose et un configurateur"></button></figure>
+    <div class="txt"><h3>10. Porsche rose</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Rose sur noir, mots très condensés en dégradé, voiture devant. Plusieurs vues de la voiture : trois-quarts avant, arrière, trois-quarts arrière. Un configurateur de couleurs et de jantes.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>La monochromie pour un seul écran fort. Les angles variés. Le configurateur, qui devient le nôtre : on choisit sa zone et sa couleur.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Son usage sur tout le site, et le rendu de voiture très retouché.</dd></div>
+    </dl></div>
+  </article>
+
+  <article class="ref tall" id="r11">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence 11"><img src="assets/da11.webp" alt="Composition Porsche blanche pivotée, mot gris géant, bande verte en diagonale"></button></figure>
+    <div class="txt"><h3>11. GT3 RS blanche</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Une composition pivotée d'un quart de tour. Mot gris géant, voiture blanche, bande verte en diagonale. Cette bande reprend le vert de la portière.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>Le lien direct entre le covering et le décor : la bande sort de la portière et continue dans la page. Le texte qu'on fait tourner.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Les feuilles volantes et le flou de sol.</dd></div>
+    </dl></div>
+  </article>
+</section>
+
+<section id="extra">
+  <div class="intro"><h2>La référence positive en plus</h2></div>
+  <article class="ref tall">
+    <figure><button class="zoom" type="button" aria-label="Agrandir la référence vinyle"><img src="assets/extra.webp" alt="Trois bannières de vinyle satin chrome vert, bleu et rouge"></button></figure>
+    <div class="txt"><h3>Bannières vinyle</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Trois bannières de vinyle satin, en vert, bleu et rouge. Trois voitures différentes couvertes, un rouleau de vinyle au bord, le mot de la couleur en fantôme derrière.</dd></div>
+      <div class="ok"><dt>À reprendre</dt><dd>C'est la plus proche de notre métier. Le rouleau de vinyle comme vraie matière de marque. La couleur annoncée comme un produit.</dd></div>
+      <div class="ko"><dt>À laisser</dt><dd>Le « BUY NOW », les détourages approximatifs et le ton e-commerce.</dd></div>
+    </dl></div>
+  </article>
+</section>
+
+<section id="logos">
+  <div class="intro"><h2>Tes 6 logos</h2></div>
+  <div class="logos">
+    <figure><div class="box"><img src="assets/logo1.webp" alt="Logo nomo"></div><figcaption><b>nomo</b>Le N et le M se lient en une même vague. Noir plein sur rose pâle.</figcaption></figure>
+    <figure><div class="box"><img src="assets/logo2.webp" alt="Logo willo"></div><figcaption><b>willo.</b>W incliné et rond, point en demi-cercle posé au sol.</figcaption></figure>
+    <figure><div class="box"><img src="assets/logo3.webp" alt="Logo coconut"></div><figcaption><b>coconut.</b>Lettres qui se touchent, point détaché, petite ligne espacée dessous.</figcaption></figure>
+    <figure><div class="box"><img src="assets/logo4.webp" alt="Logo ilunea"></div><figcaption><b>ilunea.</b>Formes pleines et rondes, gros point, phrase de marque espacée.</figcaption></figure>
+    <figure><div class="box"><img src="assets/logo5.webp" alt="Logo Connect"></div><figcaption><b>CONNECT</b>Capitales. Le double N forme une route qui serpente dans le mot.</figcaption></figure>
+    <figure><div class="box"><img src="assets/logo6.webp" alt="Logo STWD"></div><figcaption><b>STWD.</b>Signature au marqueur, imprimée sur du papier. Le seul logo tracé à la main.</figcaption></figure>
+  </div>
+  <div class="rule"><p class="lab">Ce qu'ils ont en commun</p><p>Un mot seul, très gras, noir ou d'une seule couleur, et une seule idée dessinée. Quatre finissent par un point (2, 3, 4, 6), deux reposent sur une liaison de lettres (1, 5). Pas d'icône à côté du mot. Ces formes rondes parlent la même langue que le titre de la référence 6, bien plus que mes capitales condensées.</p></div>
+</section>
+
+<section id="non">
+  <div class="intro"><h2>Tes 2 contre-exemples</h2><p>Tu ne m'as pas dit pourquoi tu les rejettes. Ceci est ma lecture, à corriger.</p></div>
+  <article class="ref">
+    <figure><button class="zoom" type="button" aria-label="Agrandir le contre-exemple 1"><img src="assets/rej1.webp" alt="Page clicar avec Mercedes rose, motif topographique et QR code"></button></figure>
+    <div class="txt"><h3>clicar</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Un 4×4 Mercedes rose sur fond de motif topographique rose et noir, un QR code rond, un bouton 360°, des logos de marques, une typo technique.</dd></div>
+      <div class="ko"><dt>Ce que j'en retiens</dt><dd>Le rose et le noir ne suffisent pas : cette image les utilise et tu la rejettes. Trop de petits éléments se disputent l'attention, et le motif est pur décor.</dd></div>
+    </dl></div>
+  </article>
+  <article class="ref">
+    <figure><button class="zoom" type="button" aria-label="Agrandir le contre-exemple 2"><img src="assets/rej2.webp" alt="Page de mode Nexora en lilas avec cartes flottantes"></button></figure>
+    <div class="txt"><h3>Nexora</h3><dl>
+      <div><dt>Ce que je vois</dt><dd>Un mannequin passe devant deux mots, sur un grand aplat lilas. Petits avis, cartes, icônes et étoiles flottent partout.</dd></div>
+      <div class="ko"><dt>Ce que j'en retiens</dt><dd>Le sujet devant le mot ne suffit pas non plus : cette image le fait et tu la rejettes. La qualité vient de la retenue, de la vraie matière et d'une image qui ne sent pas le modèle tout prêt.</dd></div>
+    </dl></div>
+  </article>
+</section>
+
+<section id="flanko">
+  <div class="intro"><p class="lab">Ancienne direction F, celle du logo flanko</p><h2>Ce qu'on garde de Flanko</h2><p>Je pars du principe que c'est la version dont tu parles. J'ai ajouté la section mobile rose que tu avais aimée, pour comparer.</p></div>
+  <div class="pair">
+    <figure><button class="zoom" type="button" aria-label="Agrandir Flanko sur mobile"><img src="assets/f_mob.webp" alt="Flanko mobile : aplat jaune, slogan, voiture coupée"></button><figcaption>Composition mobile</figcaption></figure>
+    <figure><button class="zoom" type="button" aria-label="Agrandir la typographie Flanko"><img src="assets/f_logo.webp" alt="Logo flanko et hiérarchie typographique"></button><figcaption>Logo et hiérarchie</figcaption></figure>
+    <figure><button class="zoom" type="button" aria-label="Agrandir la section mobile rose"><img src="assets/c_mobile.webp" alt="Section mobile de la direction rose"></button><figcaption>Section mobile rose</figcaption></figure>
+  </div>
+  <div class="dec">
+    <article><p class="lab">À garder</p><p><b>Typographie :</b> Bricolage Grotesque, très grasse, serrée, en minuscules. Elle rejoint les logos et donne le ton d'agence qui manque à la référence 6.</p></article>
+    <article><p class="lab">À garder</p><p><b>Mobile :</b> un grand aplat de couleur, une phrase courte, puis une voiture coupée par les deux bords. Simple, direct, et lisible en une seconde.</p></article>
+    <article><p class="lab">À garder</p><p>Le coin coupé du logo, qui évoque un vinyle qu'on décolle. Le ton de « ce panneau ne bouge pas. »</p></article>
+    <article><p class="lab">À laisser</p><p>Le mur de briques généré par IA, la Golf blanche et le jaune comme couleur unique.</p></article>
+  </div>
+</section>
+
+<section id="da">
+  <div class="intro"><h2>La direction que je propose</h2><p>Le squelette calme de la référence 6, le ton de Flanko, et un seul grand moment : le plan de ville qu'on traverse. Chaque décision renvoie à tes images.</p></div>
+  <div class="dec">
+    <article><h3>Une base blanche et noire</h3><p>Le clair redevient la norme, avec beaucoup d'air et une seule action noire.</p><p class="lab">Réf. 6, 1, 8, 11</p></article>
+    <article><h3>La couleur appartient aux campagnes</h3><p>Le fond change avec la voiture couverte. Chaque campagne a sa couleur, et le rose garde un écran entier pour lui.</p><p class="lab">Réf. 5, 3, vinyle, 10</p></article>
+    <article><h3>Le plan de ville comme signature</h3><p>Fin et discret à l'accueil, il devient le monde qu'on traverse au scroll, jusqu'à la portière d'une voiture.</p><p class="lab">Réf. 6</p></article>
+    <article><h3>Une flotte variée et réelle</h3><p>Citadine, familiale, utilitaire, petit SUV. Jamais deux fois la même voiture au même angle. Profil, trois-quarts, dessus, arrière, détail de portière.</p><p class="lab">Réf. 3, 5, 6, 10, vinyle</p></article>
+    <article><h3>De vraies photos d'abord</h3><p>Une voiture dans un lieu réel, puis un objet isolé. Le rouleau de vinyle et la main apportent la matière. L'IA ne sert plus qu'aux simulations de covering, signalées comme telles.</p><p class="lab">Réf. 1, 9, vinyle</p></article>
+    <article><h3>Bricolage en voix principale</h3><p>Grasse, minuscule, serrée. La condensée revient une seule fois, pour un mot immense sur l'écran rose.</p><p class="lab">Flanko, logos, réf. 10</p></article>
+    <article><h3>Le mobile a sa propre composition</h3><p>Aplat, phrase, voiture coupée. Pour l'espace conducteur : téléphones inclinés, main, gros boutons, une action par écran.</p><p class="lab">Flanko, réf. 6, 9, 4, 7</p></article>
+    <article><h3>Le covering reste à toucher</h3><p>On choisit une ville, un format, une couleur, et la voiture change. Rien sur les vitres.</p><p class="lab">Réf. 10, 11</p></article>
+    <article><h3>Ce qu'on s'interdit</h3><p>Motifs décoratifs, QR codes, petites cartes flottantes, faux logos clients, chiffres sans source, scènes de rue générées.</p><p class="lab">Contre-exemples, retours précédents</p></article>
+    <article><h3>Logo, après le nom</h3><p>Un mot très gras et rond avec une seule idée : un point, ou une liaison de lettres en forme de route.</p><p class="lab">Logos 1 à 5</p></article>
+  </div>
+</section>
+
+<section id="ok">
+  <div class="ask">
+    <h2>À valider avant toute maquette</h2>
+    <ol>
+      <li>La direction blanche et noire, avec le rose réservé à un écran fort, te convient-elle ?</li>
+      <li>La version Flanko est-elle bien la direction F jaune ?</li>
+      <li>Mes lectures des deux contre-exemples sont-elles justes ?</li>
+    </ol>
+  </div>
+</section>
+</div>
+
+<dialog id="lb"><img id="lbi" alt=""></dialog>
+<script>
+const lb=document.getElementById('lb'),lbi=document.getElementById('lbi');
+document.querySelectorAll('.zoom').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');lbi.src=i.src;lbi.alt=i.alt;lb.showModal()}));
+lb.addEventListener('click',()=>lb.close());
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.pause()});
+</script>
+</body>
+</html>
