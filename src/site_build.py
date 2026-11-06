@@ -10,8 +10,8 @@ C_P=[('Votre message','Nous imaginons une campagne pensée pour la route.','p_ms
 CONCEPT=['<section class="c2s" aria-label="Notre concept">'+f'<article class="pg p0" style="--i:0"><p class="eye">Notre concept</p><h2 class="huge">{C_T}</h2></article>'+''.join(f'<article class="pg p{i+1}" style="--i:{i+1}"><div class="tx"><span class="n">{i+1}/3</span><h3 class="huge">{t}</h3><p>{d}</p></div><figure><img loading="lazy" src="img/{m}.webp" alt="" width="1600" height="900"></figure></article>' for i,(t,d,m) in enumerate(C_P))+'</section>']
 Z=['Arrière','Rétroviseurs','Portes','Capot','Tout le véhicule']
 S=[dict(n='Classique',p='La zone arrière et les rétroviseurs.',k=2,col='var(--bg)',ct='var(--ink)',g=['s_a1','s_a2','d_a2_0','d_a1_0','d_a2_1']),
-   dict(n='Medium',p='Les portes, l\'arrière, les rétroviseurs et le capot.',k=4,col='#F2600C',ct='#140A02',g=['s_b1','s_b2','d_b1_0','d_b2_0','d_b1_1']),
-   dict(n='Complet',p='Toute la voiture, hors vitres.',k=5,col='#1530C8',ct='#fff',g=['s_c1','s_c2','d_c1_0','d_c2_0','d_c1_1'])]
+   dict(n='Medium',p='Les portes, l\'arrière, les rétroviseurs et le capot.',k=4,col='var(--sig)',ct='var(--sigt)',g=['s_b1','s_b2','d_b1_0','d_b2_0','d_b1_1']),
+   dict(n='Complet',p='Toute la voiture, hors vitres.',k=5,col='var(--bg2)',ct='var(--ink)',g=['s_c1','s_c2','d_c1_0','d_c2_0','d_c1_1'])]
 zs=lambda s:'<ul class="zs">'+''.join(f'<li class="{"on" if i<s["k"] else ""}">{z}</li>' for i,z in enumerate(Z))+'</ul>'
 G=lambda s:''.join(f'<figure class="g{i}"><img loading="lazy" src="img/{m}.webp" alt="{s["n"]} : {s["p"]}" width="1600" height="900"></figure>' for i,m in enumerate(s["g"]))
 F2='<section class="f2"><div class="fst">'+''.join(f'''<article class="fy" style="--c:{s["col"]};--ct:{s["ct"]}"><h3 class="mega">{s["n"]}</h3><div class="fb"><div class="inf"><p class="say">{s["p"]}</p>{zs(s)}</div><div class="gal">{G(s)}</div></div></article>''' for s in S)+'</div></section>'
