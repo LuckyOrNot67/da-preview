@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-c="bleu" data-m="jour">
+<html lang="fr" data-c="noir" data-m="nuit" data-f="1" data-hero="1" data-concept="1" data-formats="1" data-expertise="1" data-app="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -9,132 +9,60 @@
 <link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap">
-<script>(()=>{const u=new URLSearchParams(location.search),R=document.documentElement;let c=u.get('c'),m=u.get('m');try{c=c||localStorage.getItem('roam-c');m=m||localStorage.getItem('roam-m')}catch(e){}if(['bleu','brique','framboise'].includes(c))R.dataset.c=c;R.dataset.m=['jour','nuit'].includes(m)?m:matchMedia('(prefers-color-scheme: dark)').matches?'nuit':'jour'})()</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&display=swap">
+<script>(()=>{const R=document.documentElement,u=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.getItem('roam-cfg'))||{}}catch(e){}for(const k of ['c','m','f','hero','concept','formats','expertise','app']){const v=u.get(k)||s[k];if(v)R.dataset[k]=v}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('mo')})()</script>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skip" href="#top">Aller au contenu</a>
 <header class="bar">
-  <a class="logo" href="#top" aria-label="roam, nom provisoire"><i></i>roam</a>
-  <nav class="links" aria-label="Navigation principale"><a href="#concept">Concept</a><a href="#formats">Formats</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a></nav>
-  <div class="acts"><a class="btn sm" href="#contact">Créer ma campagne</a><button class="menu" data-menu aria-expanded="false" aria-controls="sheet">Menu</button></div>
+  <a class="logo" href="#top" aria-label="roam, nom provisoire"><i></i><span>roam</span></a>
+  <nav class="links" aria-label="Navigation principale"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Application">Application</span></a></nav>
+  <div class="acts"><a class="btn sm" href="#contact"><span class="rl" data-t="Créer ma campagne">Créer ma campagne</span></a><button class="menu" data-menu aria-expanded="false" aria-controls="sheet">Menu</button></div>
 </header>
-<div class="sheet" data-sheet id="sheet"><a href="#concept">Concept</a><a href="#formats">Formats</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a><a href="#contact">Créer ma campagne</a></div>
+<div class="sheet" data-sheet id="sheet"><a href="#concept">Concept</a><a href="#formats">Styles</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a><a href="#contact">Créer ma campagne</a></div>
 
 <main id="top">
-<section class="hero" aria-label="Présentation">
-  <div class="htx">
-    <h1>Votre marque,<br>en circulation.</h1>
-    <p>Nous créons vos campagnes, habillons des véhicules et les faisons circuler dans vos zones.</p>
-    <a class="btn" href="#contact">Créer ma campagne</a>
-  </div>
-  <div class="hart"><img src="img/hero.webp" alt="Berline habillée d'une composition noire et blanche" width="2600" height="1188"></div>
-  <ul class="serv" aria-label="Nos métiers">
-    <li><svg viewBox="0 0 24 24"><path d="M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3"/></svg>Création</li>
-    <li><svg viewBox="0 0 24 24"><path d="M4 8h16v9H4zM4 12h16M8 8V5h8v3"/></svg>Covering</li>
-    <li><svg viewBox="0 0 24 24"><path d="M3 15l2-6h14l2 6v3H3zM7 18v2M17 18v2M6 15h3M15 15h3"/></svg>Diffusion</li>
-    <li><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>Zones</li>
-    <li><svg viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-5M13 16V8M18 16v-3"/></svg>Suivi</li>
-    <li class="go"><a href="#concept" aria-label="Découvrir le concept">→</a></li>
-  </ul>
-</section>
-
-<section class="con" id="concept" aria-labelledby="k0">
-  <p class="eye">Notre concept</p>
-  <h2 id="k0">Chaque trajet devient une prise de parole.</h2>
-  <div class="cgrid">
-    <p class="big">Des véhicules roulent déjà, chaque jour, là où vivent et passent vos clients. Nous les transformons en supports de communication.</p>
-    <ol class="trio">
-      <li><b>Votre message</b><span>Nous imaginons une campagne pensée pour la route.</span></li>
-      <li><b>Nos véhicules</b><span>Nous l'installons sur des véhicules de conducteurs sous contrat avec nous.</span></li>
-      <li><b>Vos zones</b><span>Votre marque circule dans les villes que vous visez.</span></li>
-    </ol>
-  </div>
-</section>
-
-<section class="show" id="formats" aria-labelledby="f-t">
-  <div class="shead">
-    <p class="eye">Nos styles de campagne</p>
-    <h2 id="f-t">Trois façons d'habiller un véhicule</h2>
-    <p class="lead">Du message discret sur les portières à la carrosserie entière.</p>
-  </div>
-  <div class="track" id="track">
-    <div class="stage">
-      <nav class="snav" aria-label="Styles de campagne">{{SNAV}}</nav>
-      <div class="stx">{{STX}}</div>
-      <div class="scar">{{SCAR}}</div>
-      <div class="sarrows"><button id="sprev" aria-label="Style précédent">←</button><button id="snext" aria-label="Style suivant">→</button></div>
-    </div>
-  </div>
-  <p class="fine sfine">Démonstrations : concepts graphiques fictifs, sans marque ni client. Surfaces à valider techniquement.</p>
-</section>
-
-<section class="exp" id="expertise" aria-labelledby="e-t">
-  <p class="eye">De l'idée à la route</p>
-  <h2 id="e-t">Notre expertise</h2>
-  <p class="lead">Une seule équipe pour imaginer votre campagne, habiller les véhicules et suivre leur diffusion.</p>
-  <ul class="four">
-    <li><i class="ic"><svg viewBox="0 0 24 24"><path d="M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3"/></svg></i><h3>Conception graphique</h3><p>Nous créons vos visuels ou adaptons les vôtres aux surfaces du véhicule.</p></li>
-    <li><i class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h16v9H4zM4 12h16M8 8V5h8v3"/></svg></i><h3>Covering et pose</h3><p>Nous préparons, imprimons et posons le film. Les vitres restent libres.</p></li>
-    <li><i class="ic"><svg viewBox="0 0 24 24"><path d="M3 15l2-6h14l2 6v3H3zM7 18v2M17 18v2M6 15h3M15 15h3"/></svg></i><h3>Diffusion sur véhicules</h3><p>Votre campagne circule au quotidien dans les zones définies avec vous.</p></li>
-    <li><i class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-5M13 16V8M18 16v-3"/></svg></i><h3>Suivi des campagnes</h3><p>Vous recevez des rapports sur les données réellement disponibles.</p></li>
-  </ul>
-</section>
-
-<section class="app" id="suivi" aria-labelledby="a-t">
-  <div class="ahead">
-    <p class="eye">Application mobile</p>
-    <h2 id="a-t">Votre campagne, vos zones, dans votre poche</h2>
-  </div>
-  <div class="arow">
-    <div class="ph" aria-hidden="true"><div class="sc">
-      <div class="top"><span>Ma campagne</span><span class="live">Active</span></div>
-      <div class="mapui"><svg viewBox="0 0 256 210"><path id="bepath" d="M113.9 16.4L118.9 18.8L123.2 19.4L125.3 18.3L123.9 12.2L127.6 9.1L131.4 7.6L133.3 10.2L136.9 12.8L139.9 12.9L147.7 6.0L149.3 7.4L151.1 9.8L151.3 11.7L151.8 13.8L153.4 14.7L159.6 14.3L162.5 10.5L165.0 8.1L166.9 9.8L167.8 14.3L169.4 20.4L176.7 27.2L182.9 29.1L190.4 27.7L193.4 26.5L195.4 27.5L197.3 31.2L201.6 35.2L210.7 38.1L213.7 39.7L215.5 42.5L215.1 46.4L210.7 56.2L210.1 59.1L210.7 60.0L209.8 61.9L204.1 68.3L203.7 70.8L205.5 74.4L207.1 77.5L210.5 79.1L213.7 79.6L219.7 79.8L226.1 80.0L226.1 80.0L227.0 81.9L234.0 87.1L236.3 91.2L241.6 95.4L237.2 100.4L237.9 102.9L239.5 105.1L245.2 106.5L248.2 109.8L248.4 115.0L249.6 123.4L237.7 131.9L234.3 141.1L234.0 143.0L234.0 143.0L233.6 142.6L232.2 139.7L229.9 139.7L225.1 138.3L218.1 146.8L214.9 153.7L213.0 158.9L210.3 163.1L209.8 167.4L210.1 169.4L209.1 171.8L209.1 174.2L213.0 179.1L214.2 181.9L219.0 190.5L217.4 193.8L216.2 197.1L214.9 199.7L213.3 201.3L213.3 201.3L208.2 201.1L201.8 202.2L197.5 203.9L195.2 203.9L190.6 199.6L185.6 193.1L182.2 190.0L180.8 187.2L176.7 186.2L171.0 182.9L166.9 179.4L163.4 177.2L158.6 176.1L154.8 176.3L153.4 170.4L152.9 163.6L149.7 159.1L154.3 141.4L151.6 139.7L148.6 141.1L144.5 145.4L142.4 150.4L141.3 154.8L134.2 158.9L123.0 160.5L110.9 158.9L109.1 157.9L108.4 156.7L108.4 155.1L109.1 152.7L111.3 149.7L111.8 145.6L109.5 142.1L108.1 140.7L108.8 137.2L110.4 132.9L110.7 130.5L102.4 122.8L96.5 121.4L90.5 121.3L86.2 120.4L83.7 120.7L81.9 122.8L79.8 124.4L78.4 122.5L75.9 109.3L73.9 107.4L66.3 105.1L56.3 104.3L53.5 101.8L51.9 95.9L51.0 88.8L47.6 81.9L46.0 80.1L43.0 77.2L37.5 78.4L31.1 82.4L27.5 83.4L25.9 83.9L20.9 80.0L15.1 73.9L10.6 67.5L9.4 63.8L10.8 59.5L9.2 56.2L6.7 50.1L6.0 45.4L6.0 45.4L33.6 28.6L50.3 19.9L58.3 17.3L58.3 17.3L60.2 26.0L61.8 28.7L63.6 30.5L66.1 30.8L68.8 28.7L73.0 26.5L79.4 27.5L84.1 29.6L85.7 31.7L88.9 33.8L93.3 34.3L102.2 30.3L110.7 24.4L112.9 20.2L113.9 16.4Z"/><circle cx="121.8" cy="70" r="24"/><circle cx="81.8" cy="50" r="19"/><circle cx="125" cy="33" r="15"/><circle class="d" cx="121.8" cy="70" r="3"/><circle class="d" cx="81.8" cy="50" r="3"/><circle class="d" cx="125" cy="33" r="3"/></svg><div class="tags"><b>Bruxelles</b><b>Gand</b><b>Anvers</b></div></div>
-      <div class="card"><span>Kilomètres parcourus</span><i class="meter"><u style="width:62%"></u></i></div>
-      <div class="card"><span>Public touché, estimation</span><i class="meter"><u style="width:44%"></u></i></div>
-      <div class="pbtn">Voir le rapport</div>
-    </div></div>
-    <div class="atx">
-      <h3>Pour les annonceurs</h3>
-      <p>Vous choisissez vos zones avec nous, puis vous les retrouvez dans l'application : où circule votre campagne active, le chemin parcouru et le public qu'elle touche.</p>
-      <ul class="ticks"><li>Vos zones sur la carte</li><li>Vos kilomètres parcourus</li><li>Votre public estimé</li></ul>
-    </div>
-  </div>
-  <div class="arow rev">
-    <div class="ph" aria-hidden="true"><div class="sc">
-      <div class="top"><span>Mon mois</span><span>Conducteur</span></div>
-      <div class="card tall"><span>Objectif du mois</span><i class="meter"><u style="width:78%"></u></i><span>Kilomètres à valider</span></div>
-      <div class="card"><span>Mes grandes zones</span><div class="zt"><b>Bruxelles</b><b>Gand</b></div></div>
-      <div class="card"><span>Kilomètres en plus</span><i class="meter"><u style="width:22%"></u></i></div>
-      <div class="pbtn">Valider mon mois</div>
-    </div></div>
-    <div class="atx">
-      <h3>Pour les conducteurs</h3>
-      <p>Une application pour valider vos kilomètres du mois et indiquer les grandes zones parcourues. Vous roulez comme d'habitude, et chaque kilomètre en plus compte.</p>
-      <ul class="ticks"><li>Vos kilomètres à valider</li><li>Vos grandes zones, sans trajet détaillé</li><li>Votre contrat et votre suivi</li></ul>
-    </div>
-  </div>
-  <p class="fine afine">Écrans de démonstration, sans données réelles. L'application n'est pas encore développée : les méthodes de mesure et la validation des trajets restent à définir.</p>
-</section>
+<div data-sec="hero">
+{{HERO}}
+</div>
+<div data-sec="concept" id="concept">
+{{CONCEPT}}
+</div>
+<div data-sec="formats" id="formats">
+<header class="sh"><p class="eye">Nos styles de campagne</p><h2 class="big">Trois façons d'habiller une voiture</h2></header>
+{{FORMATS}}
+<p class="fine sf">Démonstrations : concepts graphiques fictifs, sans marque ni client. Surfaces à valider techniquement.</p>
+</div>
+<div data-sec="expertise" id="expertise">
+<header class="sh"><p class="eye">De l'idée à la route</p><h2 class="big">Notre expertise</h2></header>
+{{EXPERTISE}}
+</div>
+<div data-sec="app" id="suivi">
+<header class="sh"><p class="eye">Application mobile</p><h2 class="big">Votre campagne, vos zones, dans votre poche</h2></header>
+{{APP}}
+<p class="fine sf">Écrans de démonstration, sans données réelles. L'application n'est pas encore développée : les méthodes de mesure et la validation des trajets restent à définir.</p>
+</div>
 
 <section class="wrapc" id="contact" aria-labelledby="k-t">
   <div class="cta">
     <h2 id="k-t">Votre prochaine campagne prend la route&nbsp;?</h2>
     <p>Dites-nous ce que vous voulez faire connaître et où.</p>
-    <div class="ct2"><a class="btn inv" href="#contact">Créer ma campagne</a><a class="btn gh" href="#conducteur">Devenir conducteur</a></div>
+    <div class="ct2"><a class="btn inv" href="#contact"><span class="rl" data-t="Créer ma campagne">Créer ma campagne</span></a><a class="btn gh" href="#conducteur"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a></div>
   </div>
 </section>
 </main>
 
 <footer id="conducteur">
-  <div class="fl"><a href="#concept">Concept</a><a href="#formats">Formats</a><a href="#expertise">Expertise</a><a href="#suivi">Application</a></div>
-  <div class="fl"><a href="#conducteur">Devenir conducteur</a><a href="../premium-v2/confidentialite/">Données personnelles</a></div>
-  <div><a class="logo" href="#top" aria-label="roam, nom provisoire, retour en haut"><i></i>roam</a><p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p></div>
+  <div class="fl"><a href="#concept"><span class="rl" data-t="Concept">Concept</span></a><a href="#formats"><span class="rl" data-t="Styles">Styles</span></a><a href="#expertise"><span class="rl" data-t="Expertise">Expertise</span></a><a href="#suivi"><span class="rl" data-t="Application">Application</span></a></div>
+  <div class="fl"><a href="#conducteur"><span class="rl" data-t="Devenir conducteur">Devenir conducteur</span></a><a href="../premium-v2/confidentialite/"><span class="rl" data-t="Données personnelles">Données personnelles</span></a></div>
+  <div><a class="logo" href="#top" aria-label="roam, nom provisoire, retour en haut"><i></i><span>roam</span></a><p class="fine">Nom provisoire. Images créées par IA, modèles sans logo. Démonstrations sans client réel.</p></div>
 </footer>
 
-<div class="pal" role="group" aria-label="Couleurs du site" id="pal"><button class="sw" data-c="bleu" aria-label="Bleu" title="Bleu"></button><button class="sw" data-c="brique" aria-label="Brique" title="Brique"></button><button class="sw" data-c="framboise" aria-label="Framboise" title="Framboise"></button><b></b><button data-m="jour">Jour</button><button data-m="nuit">Nuit</button></div>
+<button class="cfgb" id="cfgb" aria-expanded="false" aria-controls="cfg" aria-label="Ouvrir les réglages de la maquette"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
+<aside class="cfg" id="cfg" hidden aria-label="Réglages de la maquette"></aside>
 
+<script src="vendor/gsap.min.js"></script><script src="vendor/ScrollTrigger.min.js"></script>
 <script src="../shared/site.js"></script><script src="app.js"></script>
 </body>
 </html>
