@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Salle de validation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;700;800&family=League+Gothic&display=swap">
+<style>
+/* Mise en page : une salle de validation sobre autour d'un studio vivant. La page reste neutre, le studio porte toute la couleur. */
+@property --p{syntax:'<number>';inherits:true;initial-value:0}
+:root{
+  --bg:#F3F4F8;--fg:#0E1020;--mut:#5A5F75;--line:#D6D9E3;--panel:#FFFFFF;--acc:#1226FF;--ok:#0B7A4B;--warn:#A85A00;--no:#B3261E;
+  --disp:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--body:"Hanken Grotesk",system-ui,-apple-system,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C0E18;--fg:#EEF0F7;--mut:#A0A5BB;--line:#2A2E42;--panel:#14172A;--acc:#8C97FF;--ok:#4FD39A;--warn:#F1B061;--no:#FF8E85;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0C0E18;--fg:#EEF0F7;--mut:#A0A5BB;--line:#2A2E42;--panel:#14172A;--acc:#8C97FF;--ok:#4FD39A;--warn:#F1B061;--no:#FF8E85;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--acc)}
+h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.025em;line-height:1.04;margin:0;text-wrap:balance}
+p{margin:0}
+.band{padding-block:clamp(44px,7vw,84px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:clamp(22px,3vw,34px);min-width:0}
+.eyebrow{font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.lead{font-size:clamp(17px,1.5vw,20px);max-width:62ch}
+.mut{color:var(--mut)}
+.top h1{font-size:clamp(42px,8vw,104px)}
+.asks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-top:1.5px solid var(--fg);list-style:none;margin:0;padding:0;counter-reset:a}
+.asks li{padding:14px 18px 14px 0;counter-increment:a;min-width:0}
+.asks li::before{content:"Décision " counter(a);display:block;font:500 12px var(--mono);color:var(--mut);margin-bottom:6px}
+.asks b{font-family:var(--disp);font-size:20px;display:block;line-height:1.15}
+h2{font-size:clamp(30px,4.4vw,54px)}
+h3{font-size:22px}
+.tbl{overflow-x:auto;border-top:1.5px solid var(--fg)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px}
+th{font:500 12px var(--mono);text-align:left;color:var(--mut);padding:10px 14px 10px 0;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td b{font-family:var(--disp)}
+.d{font:500 12px var(--mono);white-space:nowrap}.d.y{color:var(--ok)}.d.n{color:var(--mut)}
+.st{font:500 12px var(--mono);white-space:nowrap}.st.g{color:var(--ok)}.st.a{color:var(--warn)}.st.r{color:var(--no)}
+.pat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px 34px}
+.pat>div{min-width:0}
+.pat h3{margin-bottom:6px;font-size:21px}
+.refs{font-size:14px;color:var(--mut)}
+.note{border-left:3px solid var(--warn);padding:2px 0 2px 14px;max-width:80ch}
+
+/* Barre de réglages du studio */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-block:1px solid var(--line);padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar .in{max-width:1180px;margin:auto;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.seg{max-width:100%;overflow-x:auto;scrollbar-width:none;display:flex;gap:2px;background:var(--bg);padding:3px;border-radius:9px}
+.seg button{border:0;background:none;color:var(--fg);font:500 14px var(--body);padding:7px 11px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* Studio : chaque territoire a ses jetons, clair et sombre */
+@property --sl{syntax:'<color>';inherits:true;initial-value:#C8A97E}
+#studio{--fs:var(--body);--paper:#FFFFFF;--ink:#0B0C10;--a1:#0B0C10;--a2:#1226FF;--soft:#5F6472;--rule:#E1E3E9;--on1:#fff;--dfont:"Hanken Grotesk",Arial,sans-serif;--dcase:none;--dtrack:-.04em;--dweight:800;--rad:999px;--radimg:22px;background:var(--paper);color:var(--ink);transition:background .35s,color .35s}
+#studio[data-m="dark"]{--paper:#0B0C10;--ink:#F5F6F8;--a1:#FFFFFF;--a2:#8C97FF;--soft:#A0A5B4;--rule:#262833;--on1:#0B0C10}
+#studio[data-t="b"]{--paper:#F7F2E9;--ink:#1B1712;--a1:#1B1712;--a2:#C8A97E;--soft:#6F6658;--rule:#E2D9C8;--on1:#F7F2E9;--dfont:"League Gothic",Impact,sans-serif;--dcase:uppercase;--dtrack:.005em;--dweight:400}
+#studio[data-t="b"][data-m="dark"]{--paper:#14120F;--ink:#F7F2E9;--a1:#F7F2E9;--a2:#C8A97E;--soft:#AFA696;--rule:#2F2B25;--on1:#14120F}
+#studio[data-t="c"]{--paper:#FDEDF5;--ink:#2B0A1D;--a1:#D4177F;--a2:#FF5FB0;--soft:#8A4A6C;--rule:#F2C9DF;--on1:#fff;--dfont:"League Gothic",Impact,sans-serif;--dcase:uppercase;--dtrack:.005em;--dweight:400;--deep:#7C0A4B}
+#studio[data-t="c"][data-m="dark"]{--paper:#0B0A0D;--ink:#FFFFFF;--a1:#FF6DB8;--a2:#D4177F;--soft:#B59DAC;--rule:#2B2230;--on1:#0B0A0D;--deep:#8E1560}
+#studio[data-t="a"] .only-b,#studio[data-t="a"] .only-c,#studio[data-t="b"] .only-a,#studio[data-t="b"] .only-c,#studio[data-t="c"] .only-a,#studio[data-t="c"] .only-b{display:none!important}
+.disp{font-family:var(--dfont);text-transform:var(--dcase);letter-spacing:var(--dtrack);font-weight:var(--dweight);line-height:.95}
+.sw{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Héros plein cadre : l'unité --u garde les proportions au bureau comme dans le téléphone */
+.pin{position:relative}
+#studio[data-mo="imm"] .pin{height:320vh}
+.stick{position:sticky;top:46px;display:flex;justify-content:center}
+.hbox{container-type:size;width:100%;height:calc(100vh - 46px);position:relative;overflow:hidden;background:var(--paper)}
+.hero{--u:min(1cqw,1.78cqh);position:absolute;inset:0;color:var(--ink);overflow:hidden}
+.hnav{position:absolute;inset:calc(var(--u)*1.9) calc(var(--u)*3) auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font:700 calc(var(--u)*1.25) var(--body);z-index:7}
+.hnav nav{display:flex;gap:calc(var(--u)*2.2);font-weight:500}
+.hnav .r{justify-self:end}
+.pill{--_b:var(--a1);--_c:var(--on1);display:inline-block;white-space:nowrap;background:var(--_b);color:var(--_c);font:700 calc(var(--u)*1.3) var(--body);padding:calc(var(--u)*1) calc(var(--u)*2.1);border-radius:999px;text-decoration:none;border:1.5px solid var(--_b)}
+.pill.o{background:transparent;color:var(--_o,var(--ink));border-color:currentColor}
+.cw{position:relative;aspect-ratio:1146/419}
+.cw img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cw .on{clip-path:inset(0 calc((1 - var(--cov,var(--p)))*100%) 0 0)}
+.cw .sh{position:absolute;left:3%;right:3%;bottom:-3.5%;height:10%;background:radial-gradient(closest-side,rgba(0,0,0,.5),transparent);filter:blur(5px)}
+.cw .sq{position:absolute;inset:0;-webkit-mask:url(assets/car_white.webp) center/100% 100% no-repeat;mask:url(assets/car_white.webp) center/100% 100% no-repeat;pointer-events:none}
+.cw .sq::after{content:"";position:absolute;top:0;bottom:0;left:calc(var(--cov,var(--p))*100%);width:1.2%;background:linear-gradient(90deg,transparent,#fff 60%,transparent);opacity:calc(min(var(--cov,var(--p))*12,1)*min((1 - var(--cov,var(--p)))*12,1))}
+
+/* A : Showroom */
+.a-photo{position:absolute;inset:0;background:url(assets/street.webp) center 60%/cover;transform:scale(calc(1.03 + var(--p)*.07))}
+.a-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,26,.62),rgba(6,10,26,.08) 46%,rgba(6,10,26,.5))}
+.a-top{position:absolute;inset:0;color:#fff;display:grid;justify-items:center;align-content:space-between;padding:calc(var(--u)*6.8) calc(var(--u)*3) calc(var(--u)*2.6);text-align:center;z-index:2}
+.a-top h4{margin:0;font:700 calc(var(--u)*4.9)/1.02 var(--body);letter-spacing:-.04em;text-wrap:balance}
+.a-top .row{display:flex;gap:calc(var(--u)*1);justify-content:center}
+.a-top .pill{--_b:#fff;--_c:#0B0C10}
+.a-top .pill.o{--_o:#fff}
+.hero-a>.hnav{color:#fff;z-index:3}
+.hero-a>.hnav .pill{--_b:#fff;--_c:#0B0C10}
+.a-panel .hnav{color:var(--ink)}
+.a-panel .hnav .pill{--_b:var(--ink);--_c:var(--paper)}
+.a-panel{--q:min(1,calc(var(--p)*2.1));--cov:max(0,calc((var(--p) - .5)*2.1));position:absolute;inset:0;background:var(--paper);color:var(--ink);transform:translateY(calc((1 - var(--q))*101%));z-index:4;border-radius:calc((1 - var(--q))*var(--u)*3) calc((1 - var(--q))*var(--u)*3) 0 0;overflow:hidden}
+.a-word{position:absolute;left:0;right:0;top:calc(var(--u)*6);text-align:center;font:800 calc(var(--u)*38)/.8 var(--body);letter-spacing:-.055em;white-space:nowrap}
+.a-panel .main{position:absolute;width:calc(var(--u)*72);left:calc(50cqw - var(--u)*36);top:calc(var(--u)*21)}
+.a-panel .nb{position:absolute;width:calc(var(--u)*62);top:calc(var(--u)*25.6)}
+.a-panel .nb.l{right:calc(50cqw + var(--u)*40)}
+.a-panel .nb.r{left:calc(50cqw + var(--u)*40)}
+.a-info{position:absolute;left:0;right:0;bottom:calc(var(--u)*2.2);display:grid;gap:calc(var(--u)*.9);justify-items:center;text-align:center}
+.a-info b{font:700 calc(var(--u)*1.7)/1.2 var(--body);letter-spacing:-.015em}
+.a-info .row{display:flex;gap:calc(var(--u)*.8)}
+.a-info .pill{--_b:var(--ink);--_c:var(--paper)}
+
+/* B : Carrousel couleur */
+.hero-b{--sl:#C8A97E;background:radial-gradient(70% 62% at 50% 56%,color-mix(in srgb,var(--sl) 78%,#fff),var(--sl) 72%);transition:--sl .8s;color:#FBF6EC}
+#studio[data-t="b"][data-m="dark"] .hero-b{background:radial-gradient(70% 62% at 50% 56%,color-mix(in srgb,var(--sl) 62%,#000),color-mix(in srgb,var(--sl) 28%,#000) 78%)}
+.hero-b .hnav .pill{--_b:#FBF6EC;--_c:#1B1712}
+.b-cap{position:absolute;top:calc(var(--u)*6.4);left:0;right:0;text-align:center;font:500 calc(var(--u)*1)/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;z-index:2}
+.b-words{position:absolute;left:50cqw;top:calc(var(--u)*8.2);display:flex;transform:translateX(calc(var(--u)*-55 - var(--i,0)*var(--u)*110));transition:transform .9s cubic-bezier(.65,0,.2,1);z-index:1}
+.b-words span{flex:none;width:calc(var(--u)*110);text-align:center;font:400 calc(var(--u)*30)/.9 "League Gothic",Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;color:#FBF6EC}
+.b-track{position:absolute;left:50cqw;top:calc(var(--u)*23.5);display:flex;transform:translateX(calc(var(--u)*-38 - var(--i,0)*var(--u)*76));transition:transform .9s cubic-bezier(.65,0,.2,1);z-index:3}
+.b-track .cw{flex:none;width:calc(var(--u)*76);padding-inline:calc(var(--u)*5)}
+.b-track .cw>div{position:relative;aspect-ratio:1146/419}
+.b-track .cw{aspect-ratio:auto}
+.b-tl{position:absolute;left:50cqw;bottom:calc(var(--u)*7);transform:translateX(-50%);width:calc(var(--u)*40);display:flex;justify-content:space-between;align-items:center;z-index:4}
+.b-tl::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor;opacity:.6}
+.b-tl button{position:relative;width:calc(var(--u)*1.3);height:calc(var(--u)*1.3);min-width:13px;min-height:13px;border-radius:50%;border:1.5px solid currentColor;background:var(--sl);color:inherit;padding:0;cursor:pointer}
+.b-tl button[aria-current="true"]{background:currentColor;box-shadow:0 0 0 calc(var(--u)*.35) color-mix(in srgb,#FBF6EC 30%,transparent)}
+.b-cta{position:absolute;left:50cqw;bottom:calc(var(--u)*1.9);transform:translateX(-50%);display:flex;gap:calc(var(--u)*.8);z-index:4}
+.b-cta .pill{--_b:#FBF6EC;--_c:#1B1712}
+.b-cta .pill.o{--_o:#FBF6EC}
+
+/* C : Monochrome */
+.hero-c{background:radial-gradient(62% 56% at 50% 70%,color-mix(in srgb,var(--deep) 62%,transparent),transparent 74%),var(--paper)}
+.c-word{position:absolute;left:0;right:0;top:calc(var(--u)*5.6);text-align:center;font:400 calc(var(--u)*33)/1 "League Gothic",Impact,sans-serif;letter-spacing:.012em;text-transform:uppercase;white-space:nowrap;background:linear-gradient(180deg,var(--a1) 12%,var(--deep) 92%);-webkit-background-clip:text;background-clip:text;color:transparent;transform-origin:top;transform:scaleY(1.06) translateY(calc((1 - var(--p))*var(--u)*2))}
+.hero-c .main{position:absolute;width:calc(var(--u)*68);left:calc(50cqw - var(--u)*34);top:calc(var(--u)*21.4);z-index:3;transform:translateX(calc((1 - var(--p))*var(--u)*9))}
+.c-stats{position:absolute;left:calc(var(--u)*3);right:calc(var(--u)*3);bottom:calc(var(--u)*2.2);display:grid;grid-template-columns:repeat(3,auto) 1fr;gap:calc(var(--u)*4);align-items:end;z-index:4}
+.c-stats div b{display:block;font:500 calc(var(--u)*2.2)/1.1 var(--body);letter-spacing:-.02em}
+.c-stats div span{font-size:calc(var(--u)*1.1);color:var(--soft)}
+.c-stats .row{justify-self:end;display:flex;gap:calc(var(--u)*.8)}
+
+@keyframes loop{0%,14%{--p:0}72%,100%{--p:1}}
+.phone{--p:1;width:280px;max-width:100%;flex:none;background:#0A0B10;border-radius:38px;padding:9px;box-shadow:0 1px 0 #3b3e4a inset,0 22px 50px -24px rgba(0,0,0,.55)}
+.phone .scr{border-radius:30px;overflow:hidden;height:560px;position:relative;background:var(--paper)}
+.phone .hbox{width:100%;height:100%}
+#studio[data-mo="imm"] .phone.hp{animation:loop 7s ease-in-out infinite alternate}
+
+@container (max-aspect-ratio:1/1){
+  .hero{--u:1cqw}
+  .hnav{grid-template-columns:1fr auto;inset:calc(var(--u)*5) calc(var(--u)*5) auto;font-size:calc(var(--u)*3.6)}
+  .hnav nav{display:none}.hnav .r{display:none}
+  .pill{font-size:calc(var(--u)*4.1);padding:calc(var(--u)*2.7) calc(var(--u)*4.6)}
+  .a-top{padding:calc(var(--u)*17) calc(var(--u)*5) calc(var(--u)*7)}
+  .a-top h4{font-size:calc(var(--u)*10.4)}
+  .a-top .row{flex-direction:column;gap:calc(var(--u)*2)}
+  .a-word{top:16cqh;font-size:calc(var(--u)*58)}
+  .a-panel .main{width:calc(var(--u)*104);left:calc(var(--u)*-2);top:32cqh}
+  .a-panel .nb{display:none}
+  .a-info{bottom:calc(var(--u)*7);padding-inline:calc(var(--u)*6);gap:calc(var(--u)*3)}.a-info b{font-size:calc(var(--u)*5)}
+  .a-info .row{flex-direction:column;gap:calc(var(--u)*2)}
+  .b-cap{top:12cqh;font-size:calc(var(--u)*2.7)}
+  .b-words{top:18cqh;transform:translateX(calc(var(--u)*-60 - var(--i,0)*var(--u)*120))}
+  .b-words span{width:calc(var(--u)*120);font-size:calc(var(--u)*33)}
+  .b-track{top:32cqh;transform:translateX(calc(var(--u)*-60 - var(--i,0)*var(--u)*120))}
+  .b-track .cw{width:calc(var(--u)*120);padding-inline:calc(var(--u)*11)}
+  .b-tl{bottom:calc(var(--u)*34);width:calc(var(--u)*62)}.b-tl button{width:calc(var(--u)*3.4);height:calc(var(--u)*3.4)}
+  .b-cta{bottom:calc(var(--u)*7);flex-direction:column;gap:calc(var(--u)*2);align-items:center}
+  .c-word{top:13cqh;font-size:calc(var(--u)*43);transform:scaleY(1.45)}
+  .hero-c .main{width:calc(var(--u)*104);left:calc(var(--u)*-2);top:36cqh}
+  .c-stats{left:calc(var(--u)*6);right:calc(var(--u)*6);bottom:calc(var(--u)*7);grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*3)}
+  .c-stats div b{font-size:calc(var(--u)*4.6)}.c-stats div span{font-size:calc(var(--u)*3)}
+  .c-stats .row{grid-column:1/-1;justify-self:stretch;flex-direction:column;gap:calc(var(--u)*2);text-align:center}
+}
+
+/* Sections communes du studio */
+.sec{max-width:1180px;margin:0 auto;padding-block:clamp(40px,6vw,76px);display:grid;gap:clamp(22px,3vw,36px)}
+.sec h3{font-family:var(--dfont);text-transform:var(--dcase);letter-spacing:var(--dtrack);font-weight:var(--dweight);font-size:clamp(36px,6vw,74px);line-height:.96}
+#studio .eyebrow{color:var(--soft)}
+.ann{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,52px);align-items:center}
+.ann img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;border-radius:var(--radimg,4px)}
+.ann .txt{display:grid;gap:16px;min-width:0;justify-items:start}
+.ann .pill,.drv .pill{font-size:16px;padding:13px 22px}
+.demo{display:grid;gap:16px}
+.demo .stage{background:radial-gradient(70% 90% at 50% 62%,color-mix(in srgb,var(--a2) 22%,var(--paper)),color-mix(in srgb,var(--a2) 8%,var(--paper)));border-radius:var(--radimg,4px);padding:clamp(18px,4vw,44px) clamp(14px,6vw,120px)}
+.demo .cw{max-width:760px;margin:auto}
+.demo .cw .on{clip-path:inset(0 0 0 calc((1 - var(--p))*100%))}
+.fmts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fmts button{font:700 15px var(--fs);padding:10px 16px;border:1.5px solid var(--ink);background:none;color:var(--ink);border-radius:var(--rad);cursor:pointer}
+.fmts button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+#wrapR{width:100%;accent-color:var(--a1)}
+
+/* Interface interne, plus calme, même famille */
+.dash{display:grid;grid-template-columns:190px minmax(0,1fr);border:1px solid var(--rule);border-radius:calc(var(--radimg,4px)*.6);overflow:hidden;font-size:14px;background:var(--paper)}
+.dash aside{border-right:1px solid var(--rule);padding:16px 12px;display:grid;gap:3px;align-content:start}
+.dash aside b{font:500 12px var(--mono);margin-bottom:10px;padding-left:8px}
+.dash aside span{padding:6px 8px;border-radius:6px;color:var(--soft)}
+.dash aside span.on{background:var(--ink);color:var(--paper)}
+.dash main{padding:18px;display:grid;gap:16px;min-width:0}
+.dash .hd{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.dash .hd b{font:var(--dweight) 24px var(--dfont);letter-spacing:var(--dtrack)}
+.demoT{font:500 11px var(--mono);border:1px solid var(--a1);color:var(--a1);padding:2px 7px;border-radius:99px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-block:1px solid var(--rule)}
+.kpis div{padding:10px 12px 10px 0}
+.kpis b{display:block;font:var(--dweight) 30px/1.1 var(--dfont);font-variant-numeric:tabular-nums}
+.kpis span{color:var(--soft);font-size:13px}
+.rows{display:grid}
+.rows>div{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);align-items:center}
+.chip{font:500 11px var(--mono);padding:3px 8px;border-radius:99px;background:color-mix(in srgb,var(--a2) 22%,transparent);white-space:nowrap}
+.chip.m{background:color-mix(in srgb,var(--a1) 18%,transparent)}
+.drv{display:flex;gap:clamp(20px,5vw,60px);flex-wrap:wrap;justify-content:center;align-items:center}
+.drv .txt{flex:1 1 280px;display:grid;gap:14px;justify-items:start;min-width:0}
+.app{position:absolute;inset:0;padding:44px 18px 18px;display:grid;gap:14px;align-content:start;color:var(--ink)}
+.app .st0{font:var(--dweight) 34px/1 var(--dfont);letter-spacing:var(--dtrack)}
+#studio[data-t="b"] .app .st0,#studio[data-t="c"] .app .st0{text-transform:uppercase;font-size:50px}
+.app .box{border:1.5px solid var(--ink);padding:12px;border-radius:12px;font-size:14px;display:grid;gap:4px}
+.app .bar2{height:7px;background:var(--rule);border-radius:9px;overflow:hidden}
+.app .bar2 i{display:block;height:100%;width:60%;background:var(--a1)}
+.app li{margin-bottom:6px}
+.app ul{margin:0;padding-left:18px;font-size:14px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px 40px}
+.spec>div{min-width:0;display:grid;gap:10px;align-content:start}
+.sws{display:flex;gap:0}
+.sws i{flex:1;height:46px;display:block}
+.logos{font-family:"Bricolage Grotesque","Arial Black",sans-serif!important;font-weight:800!important;text-transform:none!important;letter-spacing:-.05em!important;display:flex;flex-wrap:wrap;gap:12px 38px;align-items:baseline;font-size:clamp(40px,6.4vw,76px)}
+.logos b{font-weight:inherit}
+.logos em{font-style:normal;color:var(--a2)}
+#studio[data-m="dark"] .logos em{color:var(--a1)}
+.logos .ll{display:inline-block;transform:skewX(-14deg);color:var(--a1)}
+.pick{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pick select,.pick button{font:500 15px var(--body);padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+.pick button{background:var(--fg);color:var(--bg);border-color:var(--fg);cursor:pointer}
+#ans{font:500 14px var(--mono);user-select:all;flex-basis:100%}
+
+@media (max-width:760px){
+  #studio[data-mo="imm"] .pin{height:280vh}
+  .stick{top:92px}
+  .hbox{height:calc(100vh - 92px)}
+  .ann{grid-template-columns:minmax(0,1fr)}
+  .dash{grid-template-columns:minmax(0,1fr)}.dash aside{display:none}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .deskphone{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.lane{animation:none}.phone{animation:none!important}#studio{transition:none}}
+</style>
+
+</head><body>
+<section class="band top"><div class="wrap">
+  <p class="eyebrow">Maquette de travail · Données de démonstration</p>
+  <h1>Trois directions. Une décision.</h1>
+  <p class="lead">Maquette de direction artistique pour une régie publicitaire sur voitures en Belgique. Trois directions à comparer avec la barre de réglages : scrolle pour voir les animations.</p>
+  
+</div></section>
+
+<section class="band" style="padding-top:0"><div class="wrap">
+  <h2>Ce que tes références disent</h2>
+  <p class="lead">Un motif revient dans 6 images aimées sur 12 : la voiture passe devant un mot immense. Les deux images rejetées ont autre chose en commun : du pastel, des motifs décoratifs et une interface en petites cartes flottantes.</p>
+  <div class="pat">
+    <div><h3>La voiture devant le mot</h3><p class="mut">Le mot donne la marque, la voiture donne la profondeur. Vu dans les références 1, 5, 7, 10, 11 et l'exemple vinyle.</p></div>
+    <div><h3>Une couleur par écran</h3><p class="mut">Le fond change avec chaque voiture dans le GIF. La référence 10 tient sur le seul rose. Pour nous, la couleur est le produit.</p></div>
+    <div><h3>Le cercle</h3><p class="mut">Forme derrière la voiture en référence 3. C'est aussi une roue, un point sur la carte et le point final de tes logos préférés.</p></div>
+    <div><h3>Le logo à une seule idée</h3><p class="mut">Bas de casse, très gras, très serré, avec une seule intervention : la route dans le double N de CONNECT, le demi-cercle de willo.</p></div>
+    <div><h3>Le plan de ville discret</h3><p class="mut">Le pin prioritaire place une carte avec des points derrière la voiture. C'est la bonne façon de parler de zones sans promettre de GPS.</p></div>
+    <div><h3>Ce que je retiens du rejet</h3><p class="mut">Le rose n'est pas le problème, puisque la référence 10 te plaît. J'en déduis, à confirmer, que tu rejettes le pastel et le décoratif.</p></div>
+  </div>
+  <p class="note">Les voitures sont de vrais modèles, ici une Volkswagen Golf GTI, avec tous les logos retirés. Ce sont des images de démonstration créées par IA, et le constructeur n'a aucun lien avec le projet. Avant la mise en ligne publique, il faudra confirmer ce point juridique ou passer à de vraies photos de vos campagnes.</p>
+  
+</div></section>
+
+<div class="bar"><div class="in" role="group" aria-label="Réglages du studio">
+  <div class="seg" id="sT"><button data-v="a" aria-pressed="true">A Showroom</button><button data-v="b" aria-pressed="false">B Carrousel couleur</button><button data-v="c" aria-pressed="false">C Monochrome</button></div>
+  <div class="seg" id="sM"><button data-v="light" aria-pressed="true">Clair</button><button data-v="dark" aria-pressed="false">Sombre</button></div>
+  <div class="seg" id="sO"><button data-v="ess" aria-pressed="false">Essentiel</button><button data-v="imm" aria-pressed="true">Immersif</button></div>
+</div></div>
+
+<div id="studio" data-t="a" data-m="light" data-mo="imm">
+  <div class="pin"><div class="stick"><div class="hbox" id="heroMain">
+    <div class="hero hero-a only-a">
+      <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
+      <div class="a-photo"></div>
+      <div class="a-top"><h4>Votre marque.<br>Partout où la Belgique roule.</h4><div class="row"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div></div>
+      <div class="a-panel">
+        <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
+        <div class="a-word" aria-hidden="true">BXL</div>
+        <div class="cw nb l" aria-hidden="true"><img src="assets/car_ev6.webp" alt=""></div>
+        <div class="cw main"><div class="sh"></div><img src="assets/car_white.webp" alt="Golf blanche sans logo"><img class="on wrapimg" src="assets/car_blue.webp" alt="" aria-hidden="true"><div class="sq"></div></div>
+        <div class="cw nb r" aria-hidden="true"><img src="assets/car_r5.webp" alt=""></div>
+        <div class="a-info"><b>Vos zones, votre durée, vos voitures.</b><div class="row"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div></div>
+      </div>
+    </div>
+    <div class="hero hero-b only-b">
+      <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
+      <p class="b-cap" style="margin:0">Exemples de campagnes · Démonstration</p>
+      <div class="b-words" aria-hidden="true"><span>Bruxelles</span><span>Liège</span><span>Namur</span><span>Anvers</span></div>
+      <div class="b-track">
+        <div class="cw"><div><div class="sh"></div><img src="assets/car_blue.webp" alt="Golf bleue et rose"></div></div>
+        <div class="cw"><div><div class="sh"></div><img src="assets/car_r5.webp" alt="Renault 5 jaune et noire"></div></div>
+        <div class="cw"><div><div class="sh"></div><img src="assets/car_ev6.webp" alt="Kia EV6 verte et blanche"></div></div>
+        <div class="cw"><div><div class="sh"></div><img src="assets/car_red.webp" alt="Golf rouge et blanche"></div></div>
+      </div>
+      <div class="b-tl"><button data-go="0" aria-label="Bruxelles" aria-current="true"></button><button data-go="1" aria-label="Liège"></button><button data-go="2" aria-label="Namur"></button><button data-go="3" aria-label="Anvers"></button></div>
+      <div class="b-cta"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div>
+    </div>
+    <div class="hero hero-c only-c">
+      <div class="hnav"><span>PROJECT_BRAND</span><nav><span>Annonceurs</span><span>Comment ça marche</span><span>Flottes</span><span>FR NL EN</span></nav><a class="pill r" href="#studio">Concevoir ma campagne</a></div>
+      <div class="c-word" aria-hidden="true">PARTOUT</div>
+      <div class="cw main"><div class="sh"></div><img src="assets/car_white.webp" alt="Golf blanche sans logo"><img class="on" src="assets/car_pink.webp" alt="" aria-hidden="true"><div class="sq"></div></div>
+      <div class="c-stats"><div><b>3 formats</b><span>de covering</span></div><div><b>3 à 6 mois</b><span>de campagne</span></div><div><b>FR NL EN</b><span>en Belgique</span></div><div class="row"><a class="pill" href="#studio">Concevoir ma campagne</a><a class="pill o" href="#drv">Devenir conducteur</a></div></div>
+    </div>
+  </div></div></div>
+
+  <div class="sw"><div class="sec">
+    <p class="eyebrow">Simulation · Modèle réel, logos retirés, image de démonstration</p>
+    <h3>Pose le covering</h3>
+    <div class="demo">
+      <div class="stage"><div class="cw" id="demoCw" style="--p:.7"><img src="assets/car_white.webp" alt="Golf blanche sans logo"><img class="on wrapimg" src="assets/car_blue.webp" alt="" aria-hidden="true"></div></div>
+      <label class="eyebrow" for="wrapR">Surface couverte, schéma indicatif</label>
+      <input type="range" id="wrapR" min="0" max="100" value="70">
+      <div class="fmts" id="fmts"><button data-w="28" aria-pressed="false">Classique</button><button data-w="70" aria-pressed="true">Medium</button><button data-w="100" aria-pressed="false">Complet</button></div>
+    </div>
+  </div></div>
+
+  <div class="sw"><div class="sec">
+    <p class="eyebrow">Page annonceur · Exemple</p>
+    <div class="ann">
+      <div class="txt"><h3>Un média qui passe chez vos clients</h3><p>Choisissez vos zones, votre durée et le nombre de voitures. Nous sélectionnons les conducteurs, posons le covering et le retirons en fin de campagne.</p><a class="pill" href="#studio">Demander mon estimation</a><p style="color:var(--soft);font-size:14px">Vos coordonnées d'abord, l'estimation indicative ensuite. Aucun paiement en ligne.</p></div>
+      <img class="only-a" src="assets/street.webp" alt="Golf couverte de bleu et de rose à Bruxelles, image de démonstration">
+      <img class="only-b" src="assets/top.webp" alt="Golf rose vue du dessus sur fond bleu, image de démonstration" style="object-position:center 30%">
+      <img class="only-c" src="assets/pan.webp" alt="Golf rose en mouvement, image de démonstration">
+    </div>
+  </div></div>
+
+  <div class="sw"><div class="sec">
+    <p class="eyebrow">Back-office · Même famille, plus calme</p>
+    <div class="dash">
+      <aside><b>PROJECT_BRAND</b><span class="on">Accueil</span><span>Prospection</span><span>Conducteurs</span><span>Véhicules</span><span>Campagnes</span><span>Studio</span><span>Pose / dépose</span><span>Devis</span><span>Finance</span></aside>
+      <main>
+        <div class="hd"><b>Bonjour</b><span class="demoT">DONNÉES DE DÉMONSTRATION</span></div>
+        <div class="kpis"><div><b>6</b><span>Demandes de devis</span></div><div><b>14</b><span>Conducteurs en attente</span></div><div><b>2</b><span>Brouillons à relire</span></div><div><b>3</b><span>Tâches du jour</span></div></div>
+        <div class="rows">
+          <div><span>Annonceur démo A</span><span style="color:var(--soft)">Brouillon sourcé, à copier</span><span class="chip">Prêt pour envoi manuel</span></div>
+          <div><span>Flotte démo B</span><span style="color:var(--soft)">Relance à prévoir mardi</span><span class="chip m">Contacté à la main</span></div>
+          <div><span>Agence démo C</span><span style="color:var(--soft)">Contact à vérifier</span><span class="chip">Partiellement vérifié</span></div>
+        </div>
+      </main>
+    </div>
+  </div></div>
+
+  <div class="sw" id="drv"><div class="sec">
+    <p class="eyebrow">Mobile · Site et espace conducteur</p>
+    <div class="drv">
+      <div class="phone hp deskphone"><div class="scr" id="phoneHero"></div></div>
+      <div class="phone" style="--p:1;animation:none"><div class="scr"><div class="app">
+        <span class="st0">En attente</span>
+        <p style="font-size:14px;color:var(--soft)">Dossier bien reçu. Nous vous écrirons quand une campagne correspond à votre zone.</p>
+        <div class="box"><b>Dossier complété à 60 %</b><div class="bar2"><i></i></div></div>
+        <ul><li>Profil et zone</li><li>Véhicule</li><li>Photos du véhicule, à ajouter</li><li>Charte, à signer</li></ul>
+        <p style="font-size:13px;color:var(--soft)">L'inscription ne garantit ni campagne ni rémunération.</p>
+      </div></div></div>
+      <div class="txt"><h3>Votre voiture roule déjà.</h3><p>Le parcours conducteur reste discret sur le site, mais il fonctionne : une vraie inscription, puis un statut clair.</p><a class="pill" href="#studio">M'inscrire</a></div>
+    </div>
+  </div></div>
+
+  <div class="sw"><div class="sec">
+    <p class="eyebrow">Fiche du territoire</p>
+    <div class="spec">
+      <div>
+        <h3 class="only-a" style="font-size:44px">A Showroom</h3><h3 class="only-b" style="font-size:44px">B Carrousel couleur</h3><h3 class="only-c" style="font-size:44px">C Monochrome</h3>
+        <p class="only-a">Un vrai site automobile premium. Grande photo de terrain, puis un panneau monte : le mot géant passe derrière la voiture et le covering se pose. La plus crédible face à un grand compte.</p>
+        <p class="only-b">Chaque campagne est une voiture et une couleur de fond. Le mot de la ville glisse à une autre vitesse que la voiture, et les voisines dépassent sur les côtés. La couleur devient le produit.</p>
+        <p class="only-c">Une seule couleur, très forte, sur fond noir. Un mot immense en dégradé et une voiture énorme. La plus spectaculaire et la plus mémorable.</p>
+        <p class="only-a" style="color:var(--soft)">Vient des références 1, 2, 6 et 8.</p><p class="only-b" style="color:var(--soft)">Vient des références 5, 3 et de l'exemple vinyle.</p><p class="only-c" style="color:var(--soft)">Vient des références 10, 7, 9 et 11.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Palette clair, puis sombre</p>
+        <div class="sws only-a"><i style="background:#FFFFFF"></i><i style="background:#0B0C10"></i><i style="background:#1226FF"></i><i style="background:#FF3EA5"></i></div>
+        <div class="sws only-a"><i style="background:#0B0C10"></i><i style="background:#F5F6F8"></i><i style="background:#8C97FF"></i><i style="background:#FF3EA5"></i></div>
+        <div class="sws only-b"><i style="background:#C8A97E"></i><i style="background:#8E8BA8"></i><i style="background:#9DB89F"></i><i style="background:#1E6F6A"></i></div>
+        <div class="sws only-b"><i style="background:#3A2F20"></i><i style="background:#2B2A33"></i><i style="background:#2C352D"></i><i style="background:#0D2F2D"></i></div>
+        <div class="sws only-c"><i style="background:#FDEDF5"></i><i style="background:#2B0A1D"></i><i style="background:#D4177F"></i><i style="background:#FF5FB0"></i></div>
+        <div class="sws only-c"><i style="background:#0B0A0D"></i><i style="background:#FFFFFF"></i><i style="background:#FF6DB8"></i><i style="background:#8E1560"></i></div>
+        <p class="only-a" style="color:var(--soft)">Hanken Grotesk, sous licence libre.</p><p class="only-b" style="color:var(--soft)">League Gothic et Hanken Grotesk, sous licence libre.</p><p class="only-c" style="color:var(--soft)">League Gothic et Hanken Grotesk, sous licence libre.</p>
+      </div>
+      
+    </div>
+  </div></div>
+</div>
+
+<div hidden><select id="nameSel"><option>-</option></select><button id="copy"></button><p id="ans"></p></div>
+<script>
+(function(){
+  var s=document.getElementById('studio'),root=document,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var st={t:'c',m:'dark',o:reduce?'ess':'imm'},names={a:'A Showroom',b:'B Carrousel couleur',c:'C Monochrome'},labM={light:'clair',dark:'sombre'},labO={ess:'essentiel',imm:'immersif'};
+  try{var sv=JSON.parse(localStorage.getItem('gate1-archive')||'null');if(sv){st.t=sv.t||st.t;st.m=sv.m||st.m;if(!reduce)st.o=sv.o||st.o}}catch(e){}
+  function press(id,v){document.querySelectorAll('#'+id+' button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false')})}
+  function apply(){
+    s.dataset.t=st.t;s.dataset.m=st.m;s.dataset.mo=st.o;press('sT',st.t);press('sM',st.m);press('sO',st.o);
+    document.getElementById('ans').textContent='Ma réponse : '+names[st.t]+', '+labM[st.m]+', '+labO[st.o]+', nom : '+document.getElementById('nameSel').value+'.';
+    try{localStorage.setItem('gate1-archive',JSON.stringify(st))}catch(e){}
+    scroll();
+  }
+  function bind(id,k){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(b){st[k]=b.dataset.v;apply()}})}
+  bind('sT','t');bind('sM','m');bind('sO','o');
+  var pin=document.querySelector('.pin'),tones=['#C8A97E','#8E8BA8','#9DB89F','#1E6F6A'];
+  function go(h,i){h.style.setProperty('--i',i);h.style.setProperty('--sl',tones[i]);h.dataset.i=i;h.querySelectorAll('.b-tl button').forEach(function(b,n){b.setAttribute('aria-current',n===i?'true':'false')})}
+  var mainB=document.querySelector('#heroMain .hero-b');
+  function scroll(){
+    if(st.o==='ess'){s.style.setProperty('--p','1');return}
+    var r=pin.getBoundingClientRect(),h=r.height-innerHeight,p=Math.max(0,Math.min(1,(46-r.top)/h));
+    s.style.setProperty('--p',p.toFixed(3));
+    go(mainB,Math.min(3,Math.floor(p*4)));
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(scroll)},{passive:true});addEventListener('resize',scroll);
+  var ph=document.getElementById('heroMain').cloneNode(true);ph.removeAttribute('id');document.getElementById('phoneHero').appendChild(ph);
+  var phB=ph.querySelector('.hero-b');
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)go(b.closest('.hero-b'),+b.dataset.go)});
+  if(!reduce)setInterval(function(){go(phB,((+phB.dataset.i||0)+1)%4);if(st.o==='ess')go(mainB,((+mainB.dataset.i||0)+1)%4)},3600);
+  var r=document.getElementById('wrapR'),cw=document.getElementById('demoCw'),f=document.getElementById('fmts');
+  function setW(v){cw.style.setProperty('--p',(v/100).toFixed(2));f.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.w==v?'true':'false')})}
+  r.addEventListener('input',function(){setW(r.value)});
+  f.addEventListener('click',function(e){var b=e.target.closest('button');if(b){r.value=b.dataset.w;setW(b.dataset.w)}});
+  document.getElementById('nameSel').addEventListener('change',apply);
+  document.getElementById('copy').addEventListener('click',function(){var a=document.getElementById('ans'),t=a.textContent,c=this;navigator.clipboard.writeText(t).then(function(){c.textContent='Copié'},function(){var g=document.createRange();g.selectNodeContents(a);var x=getSelection();x.removeAllRanges();x.addRange(g);c.textContent='Sélectionné, copie manuelle'})});
+  apply();
+})();
+</script>
+</body></html>
