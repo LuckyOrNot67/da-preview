@@ -25,7 +25,8 @@ try{if(sessionStorage.getItem('roam-open'))openC(true);const g=sessionStorage.ge
 /* texte qui roule au survol */
 $$('.rl').forEach(r=>{r.innerHTML=`<span class="rli">${r.innerHTML}</span>`});
 /* titres sur une ligne : la taille s'ajuste pour que le texte ne soit jamais coupé */
-const fit=()=>$$('.fit').forEach(h=>{h.style.fontSize='';if(innerWidth<=760||h.scrollWidth<=h.clientWidth)return;h.style.fontSize=parseFloat(getComputedStyle(h).fontSize)*h.clientWidth/h.scrollWidth*.995+'px'});
+const fit=()=>{const y=$$('.fy .say');y.forEach(x=>x.style.minHeight='');if(y.length){const m=Math.max(...y.map(x=>x.offsetHeight));y.forEach(x=>x.style.minHeight=m+'px')}
+  $$('.fit').forEach(h=>{h.style.fontSize='';if(innerWidth<=760||h.scrollWidth<=h.clientWidth)return;h.style.fontSize=parseFloat(getComputedStyle(h).fontSize)*h.clientWidth/h.scrollWidth*.995+'px'})};
 fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);
 if(!MO||!window.gsap)return;
 gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
@@ -55,19 +56,20 @@ const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240),{w,st}=
     .to(inf,{opacity:1,duration:.3},b+1.1);});t.to({}, {duration:.5});
   cover(f,w,len);
   lit(stW,()=>`top+=${innerHeight*(stack.children.length-2)*.85*.8} top`,w,'top 60px');}
-/* page conducteur : le speech en trois temps, pendant que le film s'étale sur la voiture */
+/* page conducteur : la photo part d'une carte et s'ouvre sur tout l'écran, uniquement en transform */
 const dh=$('.dh'),rd=$('.rd');let dhW,rdW;
-if(dh){const L=$$('.dhs li',dh),cv=$('.cvc',dh),len=small?170:210,S=stage(dh,len,small?0:100),t=gsap.timeline({scrollTrigger:S.st}),pr=i=>$('.pr u',L[i]);dhW=S.w;dhW.style.marginTop=-$('.bar').offsetHeight+'px';
-  gsap.from(cv,{scale:.94,opacity:0,duration:.9,ease:'power3.out'});gsap.from(L,{y:30,duration:.8,stagger:.1,ease:'power3.out'});gsap.set(L.slice(1),{opacity:.25});
-  t.to(pr(0),{scaleX:1,duration:1,ease:'none'},0).to(L[1],{opacity:1,duration:.15},1).to(pr(1),{scaleX:1,duration:1,ease:'none'},1).to($('.top',cv),{clipPath:'inset(0 0% 0 0)',duration:1,ease:'none'},1).to($('.sq',cv),{x:()=>cv.clientWidth+3,duration:1,ease:'none'},1).to(L[2],{opacity:1,duration:.15},2).to(pr(2),{scaleX:1,duration:1,ease:'none'},2);
-  if(!small)cover(dh,S.w,len)}
+if(dh&&!small){const fg=$('.dhi',dh),tx=$('.dht',dh),t2=$('.dh2',dh),len=170,S=stage(dh,len,100),t=gsap.timeline({scrollTrigger:S.st});dhW=S.w;dhW.style.marginTop=-$('.bar').offsetHeight+'px';
+  const B=()=>{const W=dh.offsetWidth,H=dh.offsetHeight,G=parseFloat(getComputedStyle(dh).paddingLeft),e=$('h1',dh),y=tx.offsetTop+e.offsetTop+e.offsetHeight+14,h=H-y-22,w=Math.min(h*W/H,W*.6);return {x:W-G-w,y,s:w/W}};
+  gsap.set(fg,{transformOrigin:'0 0'});gsap.from($('h1',dh),{y:40,opacity:0,duration:.9,ease:'power3.out'});gsap.from(fg,{opacity:0,duration:.9});
+  t.fromTo(fg,{x:()=>B().x,y:()=>B().y,scale:()=>B().s,borderRadius:()=>24/B().s},{x:0,y:0,scale:1,borderRadius:0,duration:1,ease:'power2.inOut'},0).to(tx,{y:-60,opacity:0,duration:.4,ease:'none'},0).fromTo(t2,{opacity:0},{opacity:1,duration:.3,ease:'none'},.75).to({}, {duration:.3});
+  cover(dh,S.w,len)}
 /* les six étapes : la route défile à l'horizontale, le point allume chaque étape en passant */
-if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*50,S=stage(rd,len,100),t=gsap.timeline({scrollTrigger:S.st});rdW=S.w;S.w.classList.add('over');
-  gsap.set(L.slice(1),{opacity:.32});
+if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*45,S=stage(rd,len,100),t=gsap.timeline({scrollTrigger:S.st});rdW=S.w;S.w.classList.add('over');
+  gsap.set(L.slice(1),{opacity:.3});
   t.fromTo(tr,{x:0},{x:()=>-Math.max(0,tr.offsetWidth-$('.rdv',rd).clientWidth),duration:1,ease:'none'},0).fromTo(dot,{x:0},{x:()=>L[L.length-1].offsetLeft,duration:1,ease:'none'},0);
   L.slice(1).forEach((l,i)=>t.to(l,{opacity:1,duration:.05},(i+1)/(L.length-1)-.05));
   cover(rd,S.w,len)}
-if(dh){lit(dhW,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
+if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
 /* cartes : le titre reste, chaque carte arrive, se lit, puis va se poser. Le bouton ouvre le détail sur place, au clic, au toucher et au clavier */
 const ex=$(`[data-sec=expertise]>[data-v="${D.expertise}"]`);
 if(ex){const close=()=>$$('.tk.open',ex).forEach(k=>{k.classList.remove('open');$('.more',k).hidden=true;$('.tkb',k).setAttribute('aria-expanded','false');$('.tkb span',k).textContent='Voir le détail';gsap.to($('.tki',k),{x:0,y:0,rotation:0,scale:1,duration:.35,ease:'power2.out'})});
@@ -95,7 +97,7 @@ const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li
   if(D.app==='1')lit(S.w,'top 60px',S.w,'bottom 60px')}
 /* bloc final : sticky jusqu'au bout, le footer vient se poser dessus sans le cacher entièrement */
 const jw=$('.jnw'),sj=()=>{if(jw)jw.style.top=Math.min(0,innerHeight-jw.offsetHeight)+'px'};sj();addEventListener('resize',sj);
-if($('.endw'))gsap.to('.cta',{scale:.95,ease:'none',scrollTrigger:{trigger:$('.faq2')||'footer',start:'top bottom',end:'max',scrub:true}});
+if($('.endw'))gsap.to('.cta',{scale:.95,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'max',scrub:true}});
 $$('.sb .big,.sb .eye,.cta>h2,.cta>p,.jnh>*,.ct2,.ft').forEach(x=>gsap.from(x,{y:30,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:x,start:'top 88%'}}));
 addEventListener('load',()=>{sj();ScrollTrigger.refresh()});if(document.fonts)document.fonts.ready.then(()=>{sj();ScrollTrigger.refresh()});
 })();
