@@ -33,7 +33,7 @@ MAP=(ROOT/'src/be_path.txt').read_text().strip()
 BAR='<div class="stb"><span>9:41</span><i></i></div>'
 CH=lambda *x:''.join(f'<b>{c}</b>' for c in x)
 ROW=lambda a:f'<li>{a}<i>›</i></li>'
-SC=[('Votre espace annonceur','Un seul endroit pour suivre votre campagne, du lancement au bilan.',f'<div class="pscr">{BAR}<small>Espace annonceur</small><strong class="h">Ma campagne</strong><figure class="thumb"><img src="img/s_a1.webp" alt="" width="2200" height="1238"></figure><ul class="nav2">{ROW("Zones")}{ROW("Kilomètres")}{ROW("Rapports")}</ul></div>'),
+SC=[('Votre espace annonceur','Un seul endroit pour suivre votre campagne, du lancement au bilan.',f'<div class="pscr">{BAR}<small>Espace annonceur</small><strong class="h">Ma campagne</strong><figure class="thumb"><img src="img/s_a1.webp" alt="" width="2200" height="1238"></figure><ul class="nav2">{ROW("Zones")}{ROW("Kilomètres")}{ROW("Rapports")}</ul><div class="pbtn">Ouvrir le bilan</div></div>'),
     ('Vos zones','Voyez où circule votre campagne : villes et grands secteurs, jamais le trajet individuel d\'un conducteur.',f'<div class="pscr map">{BAR}<svg class="bemap" viewBox="0 0 256 210"><path d="{MAP}"/><circle cx="121.8" cy="70" r="26"/><circle cx="81.8" cy="50" r="20"/><circle cx="125" cy="33" r="16"/><circle class="d" cx="121.8" cy="70" r="3.4"/><circle class="d" cx="81.8" cy="50" r="3.4"/><circle class="d" cx="125" cy="33" r="3.4"/></svg><div class="shtp"><small>Zones de la campagne</small><strong>Exemple</strong><div class="tags">{CH("Bruxelles","Gand","Anvers")}</div></div></div>'),
     ('Vos kilomètres','Les kilomètres validés, par zone et par période, pour comparer une ville à une autre.',f'<div class="pscr">{BAR}<small>Cette semaine</small><strong class="h">Kilomètres</strong><svg class="line" viewBox="0 0 200 110" preserveAspectRatio="none"><path class="ar" d="M0 92C24 88 30 60 54 62s34 16 56-4 30-36 52-34 26 2 38-6V110H0z"/><path class="ln2" d="M0 92C24 88 30 60 54 62s34 16 56-4 30-36 52-34 26 2 38-6"/></svg><div class="days"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div><ul class="lst"><li>Bruxelles<u style="--w:70%"></u></li><li>Gand<u style="--w:48%"></u></li><li>Anvers<u style="--w:34%"></u></li></ul></div>'),
     ('Vos indicateurs','Une portée présentée comme une estimation, avec un rapport à garder et à partager.',f'<div class="pscr">{BAR}<small>Indicatif</small><strong class="h">Portée estimée</strong><div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><circle class="v" cx="50" cy="50" r="44" pathLength="100"/></svg></div><div class="pbtn">Voir le rapport</div></div>'),
@@ -42,24 +42,27 @@ PH=lambda inner:f'<div class="ph" aria-hidden="true"><div class="sc">{inner}</di
 screens=''.join(f'<div class="ps">{h}</div>' for _,_,h in SC)
 EX=['Exemple : ouvrir votre campagne et voir d\'un coup d\'œil où elle en est.','Exemple : vérifier que la campagne circule bien à Bruxelles et à Gand.','Exemple : comparer deux villes d\'une semaine à l\'autre.','Exemple : partager le bilan du mois avec votre équipe.','Les estimations restent toujours indiquées comme telles.']
 rows=''.join(f'<li><b>{t}</b><div class="det"><span>{d}</span><em>{EX[i]}</em></div></li>' for i,(t,d,_) in enumerate(SC))
-AX=lambda n,c:f'''<section class="ax {c}" data-v="{n}"><div class="stg"><div class="at"><p class="eye">Espace annonceur</p><h2 class="big">Votre campagne, vos zones, dans votre poche</h2><ol class="ro">{rows}</ol><p class="fine dem">Aperçu de démonstration, sans données réelles. L'espace annonceur est en préparation.</p></div>{PH(screens+'<i class="tap"></i>')}</div></section>'''
+SPL='<span class="spl"><b class="lo"><i></i>roam</b><u><s></s></u></span>'
+AX=lambda n,c:f'''<section class="ax {c}" data-v="{n}"><div class="stg"><div class="at"><div class="ttl"><p class="eye">Espace annonceur</p><h2 class="big">Votre campagne, vos zones, dans votre poche</h2></div><ol class="ro">{rows}</ol><p class="fine dem">Aperçu de démonstration, sans données réelles. L'espace annonceur est en préparation.</p></div>{PH(SPL+screens+'<i class="tap"></i>')}</div></section>'''
 A1=AX(1,'lt');A2=AX(2,'dk')
 t=(ROOT/'src/site_index.html').read_text()
 for k,v in (('HERO',HERO),('CONCEPT',CONCEPT),('FORMATS',[F2]),('EXPERTISE',[E1,E2]),('APP',[A1,A2])):
     t=t.replace('{{'+k+'}}','\n'.join(v))
 (ROOT/'site/index.html').write_text(t)
-# Pages secondaires : mêmes en-tête et pied de page que la homepage
+# Pages secondaires : la page conducteur a son propre en-tête et son propre pied de page
 head=t[:t.index('<main id="top">')]
 endw=t[t.index('<footer id="conducteur">'):t.index('</footer>')+9]
 def fix(h):
     for a,b in (('../shared/','../../shared/'),('href="site.css"','href="../site.css"'),('../premium-v2/','../../premium-v2/'),('href="#','href="../#'),('href="demande/','href="../demande/'),('href="conducteur/','href="../conducteur/')):
         h=h.replace(a,b)
     return h
-def page(slug,title,desc,body,js,end=''):
+def page(slug,title,desc,body,js,end='',bar='',ftx=''):
     h=fix(head).replace('<title>roam · Publicité sur véhicules</title>',f'<title>{title} · roam</title>')
     h=re.sub(r'<meta name="description" content="[^"]*">',f'<meta name="description" content="{desc}">',h)
-    h=h.replace('<a href="#top" class','<a href="../" class').replace('class="logo" href="../#top"','class="logo" href="../"')
+    h=h.replace('<a href="#top" class','<a href="../" class').replace('class="logo" href="../#top"','class="logo" href="../"').replace('class="skip" href="../#top"','class="skip" href="#top"')
+    if bar:h=h[:h.index('<header class="bar">')]+bar
     d=ROOT/'site'/slug;d.mkdir(exist_ok=True)
     ft=fix(endw).replace('href="../#top"','href="../"')
+    if ftx:ft=re.sub(r'<div class="ft">.*?</div>\s*</div>',lambda m:ftx,ft,flags=re.S)
     (d/'index.html').write_text(h+f'<main id="top">{body}</main>\n'+(f'<div class="endw">{end}{ft}</div>' if end else ft)+f'\n<script src="../vendor/gsap.min.js"></script><script src="../vendor/ScrollTrigger.min.js"></script><script src="../../shared/site.js"></script><script src="../../shared/config.js"></script><script src="../forms.js"></script>{js}\n</body>\n</html>\n')
 exec((ROOT/'src/pages.py').read_text())

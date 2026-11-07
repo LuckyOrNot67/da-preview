@@ -24,6 +24,9 @@ try{if(sessionStorage.getItem('roam-open'))openC(true);const g=sessionStorage.ge
 }
 /* texte qui roule au survol */
 $$('.rl').forEach(r=>{r.innerHTML=`<span class="rli">${r.innerHTML}</span>`});
+/* titres sur une ligne : la taille s'ajuste pour que le texte ne soit jamais coupé */
+const fit=()=>$$('.fit').forEach(h=>{h.style.fontSize='';if(innerWidth<=760||h.scrollWidth<=h.clientWidth)return;h.style.fontSize=parseFloat(getComputedStyle(h).fontSize)*h.clientWidth/h.scrollWidth*.995+'px'});
+fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);
 if(!MO||!window.gsap)return;
 gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
 const small=innerWidth<=760;
@@ -31,23 +34,40 @@ const small=innerWidth<=760;
 const stage=(el,len,extra=0)=>{const w=document.createElement('div');w.className='stk';el.before(w);w.append(el);w.style.height=`calc(100svh + ${len+extra}vh)`;return {w,st:{trigger:w,start:'top top',end:`+=${len}%`,scrub:true,invalidateOnRefresh:true}}};
 const cover=(el,w,len,extra=100)=>gsap.fromTo(el,{scale:1},{scale:.95,ease:'none',transformOrigin:'center top',immediateRender:false,scrollTrigger:{trigger:w,start:()=>`top+=${innerHeight*len/100} top`,end:`+=${extra}%`,scrub:true}});
 /* héros : le titre monte derrière la voiture, qui est là dès le début */
-(()=>{const s=$('.h1g'),T=gsap.timeline({defaults:{ease:'power3.out'}});
+(()=>{const s=$('.h1g');if(!s)return;const T=gsap.timeline({defaults:{ease:'power3.out'}});
   T.from('.bar .logo',{y:-14,opacity:0,duration:.6}).from('.links a',{y:-14,opacity:0,duration:.5,stagger:.06},'-=.4').from('.acts>*',{opacity:0,duration:.7},'-=.4')
    .from($$('.ln>span',s),{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.15).from($$('.foot p,.foot a',s),{y:24,opacity:0,duration:.7,stagger:.1},.6)})();
 /* concept : scroll continu, chaque carte ralentit en arrivant, puis tout le paquet monte ensemble */
-const stack=$('.c2s');if(stack){const p=$$('.pg',stack),{st}=stage(stack,(p.length-1)*85),t=gsap.timeline({scrollTrigger:st});
-  p.slice(1).forEach((c,k)=>{const j=k+1;t.fromTo(c,{y:()=>innerHeight},{y:0,duration:1,ease:'sine.out'},k*.92);for(let i=0;i<j;i++)t.to(p[i],{scale:1-.035*(j-i),duration:1,ease:'none'},k*.92)})}
-/* formats et étapes : le nom en grand, puis il remonte et la fiche et les photos arrivent */
+const lit=(trigger,start,endTrigger,end)=>ScrollTrigger.create({trigger,start,endTrigger,end,toggleClass:{targets:'.bar',className:'lite'}});
+const stack=$('.c2s'),sb=$('.sb');let stW,sbW;if(stack){const p=$$('.pg',stack),S=stage(stack,(p.length-1)*85),t=gsap.timeline({scrollTrigger:S.st}),wa=document.createElement('i');stW=S.w;wa.className='wash';stack.prepend(wa);
+  p.slice(1).forEach((c,k)=>{const j=k+1;t.fromTo(c,{y:()=>innerHeight},{y:0,duration:1,ease:'sine.out'},k*.92);for(let i=0;i<j;i++)t.to(p[i],{scale:1-.035*(j-i),duration:1,ease:'none'},k*.92)});
+  /* le fond passe du noir au blanc derrière les cartes, pour rejoindre la page des styles */
+  t.fromTo(wa,{opacity:0},{opacity:1,duration:(p.length-3)*.92+1,ease:'sine.in'},.92)}
+if(sb&&!small)sbW=stage(sb,0,100).w;
+/* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
 const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240),{w,st}=stage(f,len,100),t=gsap.timeline({scrollTrigger:st});
-  A.forEach((a,i)=>{const b=i*3,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal figure,.med',a),cv=$('.cvc',a);
+  if(sbW)w.classList.add('over');
+  A.forEach((a,i)=>{const b=i*3,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal figure',a);
    gsap.set(inf,{opacity:0});gsap.set(m,{y:()=>(innerHeight-74-m.offsetHeight)/2});
    if(i){t.fromTo(a,{yPercent:102},{yPercent:0,duration:1,ease:'none'},b-1).to(A[i-1],{scale:.95,duration:1,ease:'none'},b-1)}
    t.to(m,{y:0,scale:small?.6:.48,duration:.7,ease:'power1.inOut'},b+.3)
     .fromTo(g,{y:()=>innerHeight*.6,opacity:0},{y:0,opacity:1,stagger:.07,duration:.6,ease:'power2.out'},b+.5)
-    .to(inf,{opacity:1,duration:.3},b+1.1);
-   /* pose : le film s'étale sur la voiture, qui ne bouge pas */
-   if(cv)t.to($('.top',cv),{clipPath:'inset(0 0% 0 0)',duration:.9,ease:'none'},b+1.1).to($('.sq',cv),{x:()=>cv.clientWidth,duration:.9,ease:'none'},b+1.1)});t.to({}, {duration:.5});
-  cover(f,w,len)}
+    .to(inf,{opacity:1,duration:.3},b+1.1);});t.to({}, {duration:.5});
+  cover(f,w,len);
+  lit(stW,()=>`top+=${innerHeight*(stack.children.length-2)*.85*.8} top`,w,'top 60px');}
+/* page conducteur : le speech en trois temps, pendant que le film s'étale sur la voiture */
+const dh=$('.dh'),rd=$('.rd');let dhW,rdW;
+if(dh){const L=$$('.dhs li',dh),cv=$('.cvc',dh),len=small?170:210,S=stage(dh,len,small?0:100),t=gsap.timeline({scrollTrigger:S.st}),pr=i=>$('.pr u',L[i]);dhW=S.w;dhW.style.marginTop=-$('.bar').offsetHeight+'px';
+  gsap.from(cv,{scale:.94,opacity:0,duration:.9,ease:'power3.out'});gsap.from(L,{y:30,duration:.8,stagger:.1,ease:'power3.out'});gsap.set(L.slice(1),{opacity:.25});
+  t.to(pr(0),{scaleX:1,duration:1,ease:'none'},0).to(L[1],{opacity:1,duration:.15},1).to(pr(1),{scaleX:1,duration:1,ease:'none'},1).to($('.top',cv),{clipPath:'inset(0 0% 0 0)',duration:1,ease:'none'},1).to($('.sq',cv),{x:()=>cv.clientWidth+3,duration:1,ease:'none'},1).to(L[2],{opacity:1,duration:.15},2).to(pr(2),{scaleX:1,duration:1,ease:'none'},2);
+  if(!small)cover(dh,S.w,len)}
+/* les six étapes : la route défile à l'horizontale, le point allume chaque étape en passant */
+if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*50,S=stage(rd,len,100),t=gsap.timeline({scrollTrigger:S.st});rdW=S.w;S.w.classList.add('over');
+  gsap.set(L.slice(1),{opacity:.32});
+  t.fromTo(tr,{x:0},{x:()=>-Math.max(0,tr.offsetWidth-$('.rdv',rd).clientWidth),duration:1,ease:'none'},0).fromTo(dot,{x:0},{x:()=>L[L.length-1].offsetLeft,duration:1,ease:'none'},0);
+  L.slice(1).forEach((l,i)=>t.to(l,{opacity:1,duration:.05},(i+1)/(L.length-1)-.05));
+  cover(rd,S.w,len)}
+if(dh){lit(dhW,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
 /* cartes : le titre reste, chaque carte arrive, se lit, puis va se poser. Le bouton ouvre le détail sur place, au clic, au toucher et au clavier */
 const ex=$(`[data-sec=expertise]>[data-v="${D.expertise}"]`);
 if(ex){const close=()=>$$('.tk.open',ex).forEach(k=>{k.classList.remove('open');$('.more',k).hidden=true;$('.tkb',k).setAttribute('aria-expanded','false');$('.tkb span',k).textContent='Voir le détail';gsap.to($('.tki',k),{x:0,y:0,rotation:0,scale:1,duration:.35,ease:'power2.out'})});
@@ -64,14 +84,18 @@ else{const X=[-.37,-.14,.12,.37],Y=[.07,.29,.02,.25],Rt=[-7,5,-5,7],k=$$('.tk',e
   k.forEach((c,i)=>{const b=i*1.6;t.fromTo(c,{x:()=>innerWidth*.14,y:()=>innerHeight,rotate:i%2?7:-7},{x:()=>innerWidth*.14,y:()=>innerHeight*.03,rotate:0,duration:.7,ease:'power2.out'},b)
    .to(c,{x:()=>innerWidth*X[i],y:()=>innerHeight*Y[i],scale:.76,rotate:Rt[i],duration:.7,ease:'power2.inOut'},b+1)});t.to({}, {duration:.7});cover(ex,w,400)}}
 /* application : uniquement des transformations et de l'opacité. L'étape active est en grand avec son exemple, les précédentes rétrécissent au-dessus */
-const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li=$$('.ro li',st),ps=$$('.ps',st),tp=$('.tap',st),n=ps.length,S=stage(st,(n-1)*90),t=gsap.timeline({scrollTrigger:S.st}),h=small?0:32;
-  gsap.set(ps,{xPercent:i=>i?100:0});gsap.set(li.slice(1),{opacity:0,y:small?0:40});
-  for(let i=1;i<n;i++){t.fromTo(tp,{opacity:0,scale:1.5},{opacity:1,scale:1,duration:.12},i-.16).to(tp,{opacity:0,scale:.7,duration:.1},i-.03).to(ps[i-1],{xPercent:-28,opacity:.35,duration:.45,ease:'power2.inOut'},i).to(ps[i],{xPercent:0,duration:.45,ease:'power2.inOut'},i);
-   if(small)t.to(li[i-1],{opacity:0,duration:.2},i).to(li[i],{opacity:1,duration:.3},i+.1);
-   else{t.fromTo(li[i],{y:(i-1)*h+40,opacity:0},{y:i*h,opacity:1,duration:.3},i+.1).to($('.det',li[i-1]),{opacity:0,duration:.2},i).to($('b',li[i-1]),{scale:.5,opacity:.5,duration:.3},i+.05).to(li[i-1],{y:(i-1)*h,duration:.3},i+.05)}}
-  t.to({}, {duration:.4})}
+const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li=$$('.ro li',st),ps=$$('.ps',st),tp=$('.tap',st),spl=$('.spl',st),ttl=$('.ttl',st),n=ps.length,S=stage(st,n*90),t=gsap.timeline({scrollTrigger:S.st}),H=()=>small?0:$('b',li[0]).offsetHeight*.5+6;
+  gsap.set(ps,{xPercent:i=>i?100:0});gsap.set(li,{opacity:0,y:small?0:40});
+  /* l'application s'ouvre sur son logo, puis le titre laisse toute la place au parcours */
+  t.to($('s',spl),{scaleX:1,duration:.85,ease:'none'},0).to(spl,{opacity:0,duration:.2},.85).to(ttl,{opacity:0,y:-50,duration:.25,ease:'power1.in'},.85).to(li[0],{opacity:1,y:0,duration:.3},1.12);
+  for(let i=1;i<n;i++){const o=i+1.1;t.fromTo(tp,{opacity:0,scale:1.5},{opacity:1,scale:1,duration:.12},o-.16).to(tp,{opacity:0,scale:.7,duration:.1},o-.03).to(ps[i-1],{xPercent:-28,opacity:.35,duration:.45,ease:'power2.inOut'},o).to(ps[i],{xPercent:0,duration:.45,ease:'power2.inOut'},o);
+   if(small)t.to(li[i-1],{opacity:0,duration:.2},o).to(li[i],{opacity:1,duration:.3},o+.1);
+   else t.fromTo(li[i],{y:()=>(i-1)*H()+40,opacity:0},{y:()=>i*H(),opacity:1,duration:.3},o+.1).to($('.det',li[i-1]),{opacity:0,duration:.2},o).to($('b',li[i-1]),{scale:.5,opacity:.5,duration:.3},o+.05)}
+  t.to({}, {duration:.4});
+  if(D.app==='1')lit(S.w,'top 60px',S.w,'bottom 60px')}
 /* bloc final : sticky jusqu'au bout, le footer vient se poser dessus sans le cacher entièrement */
-if($('.endw'))gsap.to('.cta',{scale:.95,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'max',scrub:true}});
-$$('.sb .big,.sb .eye,.cta h2,.cta p,.ct2,.ft').forEach(x=>gsap.from(x,{y:30,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:x,start:'top 88%'}}));
-addEventListener('load',()=>ScrollTrigger.refresh());if(document.fonts)document.fonts.ready.then(()=>ScrollTrigger.refresh());
+const jw=$('.jnw'),sj=()=>{if(jw)jw.style.top=Math.min(0,innerHeight-jw.offsetHeight)+'px'};sj();addEventListener('resize',sj);
+if($('.endw'))gsap.to('.cta',{scale:.95,ease:'none',scrollTrigger:{trigger:$('.faq2')||'footer',start:'top bottom',end:'max',scrub:true}});
+$$('.sb .big,.sb .eye,.cta>h2,.cta>p,.jnh>*,.ct2,.ft').forEach(x=>gsap.from(x,{y:30,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:x,start:'top 88%'}}));
+addEventListener('load',()=>{sj();ScrollTrigger.refresh()});if(document.fonts)document.fonts.ready.then(()=>{sj();ScrollTrigger.refresh()});
 })();
