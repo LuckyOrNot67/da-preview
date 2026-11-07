@@ -40,10 +40,8 @@ const cover=(el,w,len,extra=100)=>gsap.fromTo(el,{scale:1},{scale:.95,ease:'none
    .from($$('.ln>span',s),{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.15).from($$('.foot p,.foot a',s),{y:24,opacity:0,duration:.7,stagger:.1},.6)})();
 /* concept : scroll continu, chaque carte ralentit en arrivant, puis tout le paquet monte ensemble */
 const lit=(trigger,start,endTrigger,end)=>ScrollTrigger.create({trigger,start,endTrigger,end,toggleClass:{targets:'.bar',className:'lite'}});
-const stack=$('.c2s'),sb=$('.sb');let stW,sbW;if(stack){const p=$$('.pg',stack),S=stage(stack,(p.length-1)*85),t=gsap.timeline({scrollTrigger:S.st}),wa=document.createElement('i');stW=S.w;wa.className='wash';stack.prepend(wa);
-  p.slice(1).forEach((c,k)=>{const j=k+1;t.fromTo(c,{y:()=>innerHeight},{y:0,duration:1,ease:'sine.out'},k*.92);for(let i=0;i<j;i++)t.to(p[i],{scale:1-.035*(j-i),duration:1,ease:'none'},k*.92)});
-  /* le fond passe du noir au blanc derrière les cartes, pour rejoindre la page des styles */
-  t.fromTo(wa,{opacity:0},{opacity:1,duration:(p.length-3)*.92+1,ease:'sine.in'},.92)}
+const stack=$('.c2s'),sb=$('.sb');let sbW;if(stack){const p=$$('.pg',stack),S=stage(stack,(p.length-1)*85),t=gsap.timeline({scrollTrigger:S.st});
+  p.slice(1).forEach((c,k)=>{const j=k+1;t.fromTo(c,{y:()=>innerHeight},{y:0,duration:1,ease:'sine.out'},k*.92);for(let i=0;i<j;i++)t.to(p[i],{scale:1-.035*(j-i),duration:1,ease:'none'},k*.92)})}
 if(sb&&!small)sbW=stage(sb,0,100).w;
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
 const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240),{w,st}=stage(f,len,100),t=gsap.timeline({scrollTrigger:st});
@@ -55,7 +53,8 @@ const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240),{w,st}=
     .fromTo(g,{y:()=>innerHeight*.6,opacity:0},{y:0,opacity:1,stagger:.07,duration:.6,ease:'power2.out'},b+.5)
     .to(inf,{opacity:1,duration:.3},b+1.1);});t.to({}, {duration:.5});
   cover(f,w,len);
-  lit(stW,()=>`top+=${innerHeight*(stack.children.length-2)*.85*.8} top`,w,'top 60px');}
+  /* le menu suit les pages blanches : Classique, puis Complet */
+  const at=x=>()=>`top+=${innerHeight*len/100*x/t.duration()} top`;lit(w,'top 60px',w,at(2.9));lit(w,at(5.9),'[data-sec=expertise]','top 60px');}
 /* page conducteur : la photo part d'une carte et s'ouvre sur tout l'écran, uniquement en transform */
 const dh=$('.dh'),rd=$('.rd');let dhW,rdW;
 if(dh&&!small){const fg=$('.dhi',dh),tx=$('.dht',dh),t2=$('.dh2',dh),len=170,S=stage(dh,len,100),t=gsap.timeline({scrollTrigger:S.st});dhW=S.w;dhW.style.marginTop=-$('.bar').offsetHeight+'px';
@@ -63,11 +62,11 @@ if(dh&&!small){const fg=$('.dhi',dh),tx=$('.dht',dh),t2=$('.dh2',dh),len=170,S=s
   gsap.set(fg,{transformOrigin:'0 0'});gsap.from($('h1',dh),{y:40,opacity:0,duration:.9,ease:'power3.out'});gsap.from(fg,{opacity:0,duration:.9});
   t.fromTo(fg,{x:()=>B().x,y:()=>B().y,scale:()=>B().s,borderRadius:()=>24/B().s},{x:0,y:0,scale:1,borderRadius:0,duration:1,ease:'power2.inOut'},0).to(tx,{y:-60,opacity:0,duration:.4,ease:'none'},0).fromTo(t2,{opacity:0},{opacity:1,duration:.3,ease:'none'},.75).to({}, {duration:.3});
   cover(dh,S.w,len)}
-/* les six étapes : la route défile à l'horizontale, le point allume chaque étape en passant */
-if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*45,S=stage(rd,len,100),t=gsap.timeline({scrollTrigger:S.st});rdW=S.w;S.w.classList.add('over');
+/* les six étapes : toute la liste est visible, le point descend la ligne et allume chaque étape */
+if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*35,S=stage(rd,len,100),t=gsap.timeline({scrollTrigger:S.st}),Y=l=>l.offsetTop+l.offsetHeight/2-8;rdW=S.w;S.w.classList.add('over');
   gsap.set(L.slice(1),{opacity:.3});
-  t.fromTo(tr,{x:0},{x:()=>-Math.max(0,tr.offsetWidth-$('.rdv',rd).clientWidth),duration:1,ease:'none'},0).fromTo(dot,{x:0},{x:()=>L[L.length-1].offsetLeft,duration:1,ease:'none'},0);
-  L.slice(1).forEach((l,i)=>t.to(l,{opacity:1,duration:.05},(i+1)/(L.length-1)-.05));
+  t.fromTo(dot,{y:()=>Y(L[0])},{y:()=>Y(L[L.length-1]),duration:1,ease:'none'},0);
+  L.slice(1).forEach((l,i)=>t.to(l,{opacity:1,duration:.05},(i+1)/(L.length-1)-.05));t.to({}, {duration:.12});
   cover(rd,S.w,len)}
 if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
 /* cartes : le titre reste, chaque carte arrive, se lit, puis va se poser. Le bouton ouvre le détail sur place, au clic, au toucher et au clavier */
