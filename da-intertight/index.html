@@ -1,22 +1,22 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>adsmove · Inter Tight</title><link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Syne:wght@700;800&display=swap">
 <style>*{box-sizing:border-box}body{margin:0;background:#1d1d1d;color:#F4F4F2;font:15px/1.4 system-ui,sans-serif}main{padding:32px clamp(14px,4vw,56px);display:grid;gap:14px}h1{font:700 22px system-ui;margin:0}h2{font:600 13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#9a9a9a;margin:22px 0 0}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}.c{background:#2a2a2a;border-radius:14px;min-height:180px;display:grid;place-items:center;position:relative;padding:20px}.c.l{background:#F4F4F2;color:#111}.c small{position:absolute;left:12px;top:9px;font-size:11px;opacity:.6}
-.w{font-family:'Inter Tight';font-weight:800;letter-spacing:-.055em;line-height:.9;font-size:58px;display:inline-flex;align-items:baseline;white-space:nowrap}
-.k{display:inline-block;flex:none}.st{display:flex;align-items:center;gap:.16em;font-size:58px}.st .w{font-size:1em}.st .w{flex-direction:column;align-items:flex-start;line-height:.84}
-.pal{display:flex;gap:6px;position:absolute;right:12px;top:9px}.pal i{width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1px rgba(128,128,128,.4)}</style></head><body><main>
-<h1>adsmove · Inter Tight</h1>
+.w{font-family:var(--f,'Inter Tight');font-weight:800;letter-spacing:var(--ls,-.055em);line-height:.9;font-size:var(--fs,58px);display:inline-flex;align-items:baseline;white-space:nowrap}
+.k{display:inline-block;flex:none}.st{display:flex;align-items:center;gap:.16em;font-size:var(--fs,58px)}.st .w{font-size:1em}.st .w{flex-direction:column;align-items:flex-start;line-height:.84}
+.pal{display:flex;gap:6px;position:absolute;right:12px;top:9px}.pal i{width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1px rgba(128,128,128,.4)}.syne{--f:Syne;--ls:-.02em;--fs:38px}.syne .w{font-weight:700}.nodot .pt{display:none!important}.bar{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:5;background:#1d1d1d;padding:10px 0}.bar button{min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #F4F4F2;background:none;color:#F4F4F2;font:600 14px system-ui;cursor:pointer}.bar button[aria-pressed=true]{background:#F4F4F2;color:#111}</style></head><body><main>
+<h1>adsmove · Inter Tight et Syne</h1><div class="bar"><button id="fi" aria-pressed="true">Inter Tight</button><button id="fs" aria-pressed="false">Syne (a et d obliques)</button><button id="pt" aria-pressed="true">Avec le point</button></div>
 <h2>Sur une ligne</h2><div class="g" id="A"></div>
 <h2>Sur deux lignes, avec picto</h2><div class="g" id="B"></div>
 <h2>Couleurs possibles</h2><div class="g" id="C"></div>
 </main><script>
-const dot=(c='currentColor',s=.2)=>`<span class="k" style="width:${s}em;height:${s}em;border-radius:50%;background:${c};margin-left:.05em"></span>`;
-const sq=c=>`<span class="k" style="width:.19em;height:.19em;background:${c||'currentColor'};margin-left:.05em"></span>`;
-const ring=`<span class="k" style="width:.2em;height:.2em;border-radius:50%;box-shadow:inset 0 0 0 .055em currentColor;margin-left:.05em"></span>`;
-const trail=(c='currentColor')=>`<span class="k" style="display:inline-flex;align-items:center;gap:.04em;margin-left:.06em"><i style="width:.07em;height:.07em;border-radius:50%;background:${c};opacity:.35"></i><i style="width:.12em;height:.12em;border-radius:50%;background:${c};opacity:.6"></i><i style="width:.2em;height:.2em;border-radius:50%;background:${c}"></i></span>`;
-const arrow=`<svg class="k" viewBox="0 0 24 24" style="width:.34em;height:.34em;margin-left:.06em" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 5l7 7-7 7"/></svg>`;
+const dot=(c='currentColor',s=.2)=>`<span class="k pt" style="width:${s}em;height:${s}em;border-radius:50%;background:${c};margin-left:.05em"></span>`;
+const sq=c=>`<span class="k pt" style="width:.19em;height:.19em;background:${c||'currentColor'};margin-left:.05em"></span>`;
+const ring=`<span class="k pt" style="width:.2em;height:.2em;border-radius:50%;box-shadow:inset 0 0 0 .055em currentColor;margin-left:.05em"></span>`;
+const trail=(c='currentColor')=>`<span class="k pt" style="display:inline-flex;align-items:center;gap:.04em;margin-left:.06em"><i style="width:.07em;height:.07em;border-radius:50%;background:${c};opacity:.35"></i><i style="width:.12em;height:.12em;border-radius:50%;background:${c};opacity:.6"></i><i style="width:.2em;height:.2em;border-radius:50%;background:${c}"></i></span>`;
+const arrow=`<svg class="k pt" viewBox="0 0 24 24" style="width:.34em;height:.34em;margin-left:.06em" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 5l7 7-7 7"/></svg>`;
 const W=(t,after='',pre='')=>`<span class="w">${pre}${t}${after}</span>`;
-const A=[['Le point (original)',W('adsmove',dot())],['Point en couleur',W('adsmove',dot('#FF4D2E'))],['Point qui file',W('adsmove',trail())],['Carré',W('adsmove',sq())],['Anneau',W('adsmove',ring)],['Flèche',W('adsmove',arrow)],['Point de départ',W('adsmove','',`<span class="k" style="width:.2em;height:.2em;border-radius:50%;background:#FF4D2E;margin-right:.08em;align-self:center"></span>`)],['Le o devient le point',`<span class="w">adsm<span class="k" style="width:.5em;height:.5em;border-radius:50%;background:#FF4D2E;margin:0 .02em"></span>ve</span>`],['Majuscule, point',`<span class="w" style="letter-spacing:-.045em">ADSMOVE${dot()}</span>`]];
+const A=[['Le point (original)',W('adsmove',dot())],['Point en couleur',W('adsmove',dot('#FF4D2E'))],['Point qui file',W('adsmove',trail())],['Carré',W('adsmove',sq())],['Anneau',W('adsmove',ring)],['Flèche',W('adsmove',arrow)],['Point de départ',W('adsmove','',`<span class="k pt" style="width:.2em;height:.2em;border-radius:50%;background:#FF4D2E;margin-right:.08em;align-self:center"></span>`)],['Le o devient le point',`<span class="w">adsm<span class="k" style="width:.5em;height:.5em;border-radius:50%;background:#FF4D2E;margin:0 .02em"></span>ve</span>`],['Majuscule, point',`<span class="w" style="letter-spacing:-.045em">ADSMOVE${dot()}</span>`]];
 document.getElementById('A').innerHTML=A.flatMap(([n,h])=>[0,1].map(l=>`<div class="c${l?' l':''}"><small>${n}</small>${h}</div>`)).join('');
 const P={
 dot:`<span class="k" style="width:.62em;height:.62em;border-radius:50%;background:#FF4D2E"></span>`,
@@ -29,4 +29,7 @@ const B=[['Gros point en couleur',S(P.dot)],['Point qui file',S(P.trail)],['Icô
 document.getElementById('B').innerHTML=B.flatMap(([n,h])=>[0,1].map(l=>`<div class="c${l?' l':''}" style="--bg:${l?'#F4F4F2':'#2a2a2a'}"><small>${n}</small>${h}</div>`)).join('');
 const C=[['Noir et blanc','#0B0B0D','#F4F4F2','#F4F4F2'],['Rouge feu','#0B0B0D','#F4F4F2','#FF4D2E'],['Jaune marquage','#0B0B0D','#F4F4F2','#FFD500'],['Bleu électrique','#0D1020','#F4F4F2','#3D5BFF'],['Crème et noir','#EFE8DA','#121212','#121212'],['Lime sur noir','#0B0B0D','#F4F4F2','#C6F432']];
 document.getElementById('C').innerHTML=C.map(([n,bg,fg,ac])=>`<div class="c" style="background:${bg};color:${fg}"><small>${n}</small><span class="pal"><i style="background:${bg}"></i><i style="background:${fg}"></i><i style="background:${ac}"></i></span><span class="w">adsmove${dot(ac)}</span></div>`).join('');
+const B0=document.body,fi=document.getElementById('fi'),fs=document.getElementById('fs'),pb=document.getElementById('pt');
+const font=sy=>{B0.classList.toggle('syne',sy);fi.setAttribute('aria-pressed',!sy);fs.setAttribute('aria-pressed',sy)};fi.onclick=()=>font(false);fs.onclick=()=>font(true);
+pb.onclick=()=>{const on=pb.getAttribute('aria-pressed')!=='true';pb.setAttribute('aria-pressed',on);pb.textContent=on?'Avec le point':'Sans le point';B0.classList.toggle('nodot',!on)};
 </script></body></html>
