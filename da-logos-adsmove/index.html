@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Logos adsmove</title><link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Syne:wght@800&family=Unbounded:wght@800&display=swap">
+<style>
+*{box-sizing:border-box}html{overflow-x:clip}body{margin:0;background:#0B0B0D;color:#F4F4F2;font:400 16px/1.5 Archivo,system-ui,sans-serif}
+h1,h2,p{margin:0}main{padding:40px clamp(16px,5vw,72px) 60px;display:grid;gap:22px}
+h1{font:400 clamp(40px,6vw,84px)/1.1 Anton;text-transform:uppercase}.sub{color:#A2A2A8;max-width:60ch}
+.p{background:#161618;border-radius:22px;padding:clamp(18px,3vw,30px);display:grid;gap:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}.hd h2{font:800 20px Archivo}.hd span{color:#A2A2A8;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,2fr);gap:12px}
+.t{border-radius:16px;min-height:190px;display:grid;place-items:center;padding:20px;overflow:hidden}
+.t svg{display:block}.ic{width:78px;height:78px}
+.pal{display:flex;gap:8px;flex-wrap:wrap}.pal i{display:grid;align-content:end;width:110px;height:64px;border-radius:12px;padding:8px;font:600 11px ui-monospace,monospace;font-style:normal;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.v{display:flex;gap:8px;flex-wrap:wrap}.v label{position:relative}.v input{position:absolute;opacity:0}.v span{display:inline-flex;min-height:38px;align-items:center;padding:0 14px;border-radius:999px;border:1.5px solid #F4F4F2;font-weight:600;font-size:14px;cursor:pointer}.v input:checked+span{background:#F4F4F2;color:#0B0B0D}
+.out button{min-height:48px;padding:0 22px;border-radius:999px;border:0;background:#F4F4F2;color:#0B0B0D;font:600 15px Archivo;cursor:pointer}.out pre{white-space:pre-wrap;background:#161618;padding:14px;border-radius:12px;margin:10px 0 0;font-size:14px;min-height:20px}
+.w{font-weight:900;line-height:1}.uc{font-size:.74em}
+@media (max-width:820px){.row{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>Logos adsmove</h1><p class="sub">Six propositions, chacune avec son picto et sa palette. Le D est toujours dessiné comme une majuscule, à la hauteur des autres lettres. Coche ce que tu aimes et renvoie-moi le résultat.</p>
+<div id="L"></div>
+<div class="out"><button id="c">Copier mes choix</button><pre id="r"></pre></div>
+</main>
+<script>
+// pictos : viewBox 0 0 100 100, couleur = currentColor
+const PI={
+chevron:`<path d="M18 22L46 50L18 78M50 22L78 50L50 78" fill="none" stroke="currentColor" stroke-width="16" stroke-linejoin="miter" stroke-linecap="square"/>`,
+arc:`<path d="M8 92A84 84 0 0 1 92 8" fill="none" stroke="currentColor" stroke-width="18"/><path d="M38 92A54 54 0 0 1 92 38" fill="none" stroke="currentColor" stroke-width="18"/>`,
+voie:`<path d="M30 92L44 10M70 92L56 10" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><path d="M50 88V74M50 60V48M50 36V28" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>`,
+roue:`<circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="18" stroke-dasharray="170 18 30 8"/><circle cx="50" cy="50" r="9" fill="currentColor"/>`,
+point:`<rect x="4" y="44" width="34" height="12" rx="6" fill="currentColor" opacity=".35"/><rect x="18" y="26" width="26" height="10" rx="5" fill="currentColor" opacity=".2"/><rect x="18" y="64" width="26" height="10" rx="5" fill="currentColor" opacity=".2"/><circle cx="70" cy="50" r="24" fill="currentColor"/>`,
+am:`<path d="M10 86L30 18H42L62 86M20 62H52M58 86V18L74 54L90 18V86" fill="none" stroke="currentColor" stroke-width="11" stroke-linejoin="miter"/>`};
+const pic=(k,c,s=78)=>`<svg viewBox="0 0 100 100" width="${s}" height="${s}" style="color:${c}">${PI[k]}</svg>`;
+// mots : D toujours en forme de majuscule
+const W={
+anton:(c)=>`<span class="w" style="font:400 76px/1 Anton;letter-spacing:.01em;color:${c}">ADSMOVE</span>`,
+uni:(c)=>`<span class="w" style="font-family:Archivo;font-size:72px;font-stretch:115%;letter-spacing:-.04em;color:${c}">a<span class="uc">D</span>smove</span>`,
+unb:(c)=>`<span class="w" style="font:800 46px/1 Unbounded;letter-spacing:-.02em;color:${c}">ADSMOVE</span>`,
+syne:(c)=>`<span class="w" style="font:800 44px/1 Syne;letter-spacing:-.02em;white-space:nowrap;color:${c}">ADSM<span style="display:inline-block;width:.78em;vertical-align:-.04em">${pic('roue',c,'100%')}</span>VE</span>`,
+uni2:(c)=>`<span class="w" style="font-family:Archivo;font-size:70px;font-stretch:100%;letter-spacing:-.045em;color:${c}">a<span class="uc">D</span>smove</span>`,
+spaced:(c)=>`<span class="w" style="font:800 30px/1 Archivo;font-stretch:125%;letter-spacing:.32em;color:${c}">ADSMOVE</span>`};
+const lock=(p,w,c,sz=64,gap=18,stack=false)=>`<div style="display:flex;${stack?'flex-direction:column;':''}align-items:center;gap:${gap}px">${p?pic(p,c,sz):''}${W[w](c)}</div>`;
+const P=[
+{n:'Chevron',d:'Les chevrons des marquages au sol : la marque qui avance. Capitales condensées, la police du site.',p:'chevron',w:'anton',pal:[['#0B0B0D','Nuit'],['#F4F4F2','Craie'],['#FFD500','Jaune marquage'],['#2A2A2E','Bitume']],a:'#FFD500',b:'#0B0B0D'},
+{n:'Arc',d:'Les deux arcs reprennent la courbe des covering Medium et Complet. Minuscules larges, avec un D majuscule à la hauteur des autres lettres.',p:'arc',w:'uni',pal:[['#0B0B0D','Nuit'],['#F4F4F2','Craie'],['#E63B2E','Rouge feu'],['#7A7A80','Gris']],a:'#E63B2E',b:'#F4F4F2'},
+{n:'Voie',d:'Une route vue en perspective, avec sa ligne centrale. Capitales rondes et larges, très lisibles sur une portière.',p:'voie',w:'unb',pal:[['#14123A','Nuit bleue'],['#F4F4F2','Craie'],['#5B4BFF','Violet électrique'],['#B9B4FF','Lavande']],a:'#5B4BFF',b:'#F4F4F2'},
+{n:'Roue',d:'Le O devient une roue découpée par le mouvement. Capitales larges et anguleuses.',p:'roue',w:'syne',pal:[['#111111','Noir'],['#FFF6EC','Crème'],['#FF6A13','Orange'],['#3A2A20','Brun']],a:'#FF6A13',b:'#111111',inPic:true},
+{n:'Point',d:'Le point de ton ancien logo, qui file avec sa traînée. Minuscules compactes, avec un D majuscule.',p:'point',w:'uni2',pal:[['#0A1A2F','Marine'],['#F4F4F2','Craie'],['#2F7BFF','Bleu route'],['#9DB8D9','Bleu gris']],a:'#2F7BFF',b:'#F4F4F2'},
+{n:'Monogramme',d:'Le A et le M fusionnés dans un même tracé, en signe. Le nom en capitales espacées à côté, ton agence.',p:'am',w:'spaced',pal:[['#0B0B0D','Nuit'],['#EFE9DF','Lin'],['#C9A46A','Sable'],['#5C5650','Taupe']],a:'#C9A46A',b:'#0B0B0D'}];
+document.getElementById('L').innerHTML=P.map((x,i)=>`<section class="p"><div class="hd"><h2>${i+1}. ${x.n}</h2><span>${x.d}</span></div>
+<div class="row"><div class="t" style="background:${x.b}">${pic(x.p,x.a)}</div><div class="t" style="background:#F4F4F2">${lock(x.inPic?null:x.p,x.w,'#0B0B0D')}</div><div class="t" style="background:${x.pal[0][0]}">${lock(x.inPic?null:x.p,x.w,x.a)}</div></div>
+<div class="pal">${x.pal.map(([h,n])=>`<i style="background:${h};color:${/F4F4F2|FFF6EC|EFE9DF|B9B4FF|9DB8D9|FFD500/.test(h)?'#0B0B0D':'#F4F4F2'}">${n}<br>${h}</i>`).join('')}</div>
+<div class="v">${['J\'adore','Pourquoi pas','Non'].map(v=>`<label><input type="radio" name="v${i}" value="${v}"><span>${v}</span></label>`).join('')}</div></section>`).join('');
+document.getElementById('c').onclick=async()=>{const t=['Logos adsmove'].concat(P.map((x,i)=>{const v=document.querySelector(`[name=v${i}]:checked`);return `${x.n} : ${v?v.value:'pas d\'avis'}`})).join('\n');document.getElementById('r').textContent=t;try{await navigator.clipboard.writeText(t)}catch(e){}};
+</script></body></html>
