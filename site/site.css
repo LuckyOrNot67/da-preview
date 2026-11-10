@@ -1,4 +1,4 @@
-:root{--g:clamp(20px,5vw,80px);--sec:clamp(90px,16vh,170px);--r:18px;--body:Archivo,system-ui,sans-serif}
+:root{--g:clamp(20px,5vw,80px);--sec:clamp(90px,16vh,170px);--r:18px;--body:Inter,system-ui,sans-serif}
 [data-c=noir][data-m=nuit]{--bg:#0B0B0D;--bg2:#161618;--ink:#F4F4F2;--mut:#A2A2A8;--line:#2A2A2E;--a:#F4F4F2;--at:#0B0B0D;--sig:#F4F4F2;--sigt:#0B0B0D}
 [data-c=noir][data-m=jour]{--bg:#FFFFFF;--bg2:#F0F0EE;--ink:#0B0B0D;--mut:#5F5F66;--line:#DEDEDC;--a:#0B0B0D;--at:#FFFFFF;--sig:#0B0B0D;--sigt:#FFFFFF}
 [data-c=violet][data-m=nuit]{--bg:#0B0A14;--bg2:#15132A;--ink:#F3F1FF;--mut:#A9A5C4;--line:#2A2648;--a:#8E7BFF;--at:#0B0A14;--sig:#4B2BFF;--sigt:#FFFFFF}
@@ -9,7 +9,7 @@
 [data-c=orange][data-m=jour]{--bg:#FFF9F2;--bg2:#FDEBD8;--ink:#241305;--mut:#6D5540;--line:#F0DCC6;--a:#C84E00;--at:#FFFFFF;--sig:#FF6A00;--sigt:#140A02}
 [data-c=jaune][data-m=nuit]{--bg:#0B0B08;--bg2:#171710;--ink:#F7F6E8;--mut:#B0AE95;--line:#2D2C1E;--a:#FFE100;--at:#0B0B08;--sig:#FFE100;--sigt:#0B0B08}
 [data-c=jaune][data-m=jour]{--bg:#FFFDF0;--bg2:#FFF5B8;--ink:#14130A;--mut:#5E5C45;--line:#EFE8B8;--a:#14130A;--at:#FFE100;--sig:#FFE100;--sigt:#14130A}
-[data-f="1"]{--d:Anton,Impact,sans-serif;--dw:400;--up:uppercase;--ds:1.16;--lh:1.14;--ls:0}
+[data-f="1"]{--d:'Space Grotesk',system-ui,sans-serif;--dw:700;--up:none;--ds:.94;--lh:1.06;--ls:-.035em}
 [data-f="2"]{--d:Archivo,system-ui,sans-serif;--dw:900;--up:uppercase;--ds:.86;--lh:1.1;--ls:-.03em}
 [data-f="3"]{--d:'Instrument Serif',Georgia,serif;--dw:400;--up:none;--ds:1.1;--lh:1.1;--ls:-.02em}
 [data-f="4"]{--d:'Bricolage Grotesque',system-ui,sans-serif;--dw:800;--up:none;--ds:.92;--lh:1.12;--ls:-.03em}
@@ -279,3 +279,11 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 .hp{position:absolute;left:-9999px;height:0;width:0;opacity:0}
 .st{font-weight:600;min-height:1.4em}.fm .btn{border:0;cursor:pointer;justify-self:start}.fm .btn[disabled]{opacity:.5;cursor:wait}
 @media (max-width:760px){.sim,.cand,.jn,.faq2{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.dh h1{font-size:11.2vw;white-space:normal}.dhp{font-size:16px;max-width:none;order:-1;margin-top:-4px}.dht h1{order:-2}.dht .eye{order:-3}.dh{min-height:0;padding-top:20px}.dhi{flex:none;min-height:0;aspect-ratio:16/10}.dh2{display:block}.dh2 h2{white-space:normal;font-size:calc(36px*var(--ds))}.jn h2{font-size:calc(34px*var(--ds))}.rd .big{font-size:calc(36px*var(--ds))}}
+
+/* logo adsmove (SVG d'Illustrator, couleur du texte) */
+.lg{display:block;background:currentColor;-webkit-mask:var(--lgu,url(img/logo/adsmove.svg)) no-repeat left center/contain;mask:var(--lgu,url(img/logo/adsmove.svg)) no-repeat left center/contain}
+.logo .lg{height:24px;aspect-ratio:822.7/120.65}
+.logo:hover .lg{transform:none}
+.wm .lg{--lgu:url(img/logo/typo.svg);height:calc(min(11vw,22vh)*.62);aspect-ratio:575.02/100.47;max-width:100%}
+.lo .lg{height:30px;aspect-ratio:822.7/120.65;max-width:78%;color:#F4F4F2}
+.lo{justify-content:center}
