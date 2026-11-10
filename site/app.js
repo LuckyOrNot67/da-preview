@@ -4,22 +4,23 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 /* réglages */
 const SEC=[['expertise','Expertise',['Cartes claires','Cartes sombres']],['app','Application',['Fond clair','Fond sombre']]];
 const COL=[['noir','Noir et blanc'],['violet','Violet'],['rouge','Rouge'],['orange','Orange'],['jaune','Jaune']],FONT=[['1','Condensée'],['2','Grasse'],['3','Éditoriale'],['4','Arrondie']];
-const KEYS=['c','m','f',...SEC.map(s=>s[0])];
-const keep=()=>{try{localStorage.setItem('roam-cfg6',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
+const KEYS=['m','ov'];
+const keep=()=>{try{localStorage.setItem('adsmove-cfg1',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
 const row=(key,t,opts)=>`<div><h2>${t}</h2><div class="o" data-k="${key}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${D[key]===v}">${l}</button>`).join('')}</div></div>`;
 const cfg=$('#cfg'),cb=$('#cfgb');
 if(cfg){
 const cfg=$('#cfg'),cb=$('#cfgb');
-cfg.innerHTML=row('m','Mode',[['nuit','Nuit'],['jour','Jour']])+row('c','Couleur du site',COL)+row('f','Police',FONT)+SEC.map(([k,t,o])=>row(k,t,o.map((l,i)=>[String(i+1),`${i+1}. ${l}`]))).join('')+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
+cfg.innerHTML=row('m','Mode',[['nuit','Nuit'],['jour','Jour']])+row('ov','Logo',[['non','OV séparés'],['oui','OV liés']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
 const openC=o=>{cfg.hidden=!o;cb.setAttribute('aria-expanded',o);try{sessionStorage.setItem('roam-open',o?'1':'')}catch(e){}};
 cb.addEventListener('click',()=>openC(cfg.hidden));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb.focus()}});
 cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep();
-  if(['c','m'].includes(k)){location.reload();return}
+  if(k==='m'){location.reload();return}
+  if(k==='ov')return;
   if(k==='f'){window.ScrollTrigger&&ScrollTrigger.refresh();return}
   try{sessionStorage.setItem('roam-go',k)}catch(e){}location.search='';location.reload()});
-$('#cfgc').addEventListener('click',async()=>{const t=['Couleur : '+COL.find(c=>c[0]===D.c)[1]+', '+D.m,'Police : '+FONT.find(f=>f[0]===D.f)[1],...SEC.map(([k,n,o])=>`${n} : ${D[k]}. ${o[D[k]-1]}`)].join('\n');try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
-$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('roam-cfg6')}catch(e){}location.reload()});
+$('#cfgc').addEventListener('click',async()=>{const t='Mode : '+D.m+'\nLogo : OV '+(D.ov==='oui'?'liés':'séparés');try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
+$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg1')}catch(e){}location.reload()});
 try{if(sessionStorage.getItem('roam-open'))openC(true);const g=sessionStorage.getItem('roam-go');if(g){sessionStorage.removeItem('roam-go');addEventListener('load',()=>setTimeout(()=>{const n=$(`[data-sec=${g}]`);if(n)scrollTo(0,n.getBoundingClientRect().top+scrollY-60)},250))}}catch(e){}
 }
 /* texte qui roule au survol */
