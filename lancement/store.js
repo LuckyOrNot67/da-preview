@@ -20,6 +20,7 @@ async function artifactStore(db) {
     watchSignups: watch("inscriptions"),
     updateSignup: (id, patch) => db.doc(`inscriptions/${id}`).update(patch),
     deleteSignup: (id) => db.doc(`inscriptions/${id}`).delete(),
+    sendStatusMail: async () => ({ sent: false, reason: "L'envoi demande le CRM en ligne." }),
     addInvite: async (doc) => {
       const id = uid();
       await db.doc(`invitations/${id}`).set({ ...doc, status: "preparee", at: now() });
@@ -55,6 +56,7 @@ async function apiStore(state) {
     watchSignups: (cb) => { refresh.signups = () => call("inscriptions").then((d) => cb(d.inscriptions), () => cb(null)); return poll("inscriptions", "inscriptions")(cb); },
     updateSignup: (id, patch) => call(`inscriptions/${id}`, "PATCH", patch).then(() => refresh.signups?.()),
     deleteSignup: (id) => call(`inscriptions/${id}`, "DELETE").then(() => refresh.signups?.()),
+    sendStatusMail: (id, kind) => call(`inscriptions/${id}/mail`, "POST", { kind }).then((r) => { refresh.signups?.(); return r; }),
     addInvite: (doc) => call("invitations", "POST", doc).then((d) => { refresh.invites?.(); return d; }),
     watchInvites: (cb) => { refresh.invites = () => call("invitations").then((d) => cb(d.invitations), () => cb(null)); return poll("invitations", "invitations")(cb); },
     deleteInvite: (id) => call(`invitations/${id}`, "DELETE").then(() => refresh.invites?.()),
@@ -78,6 +80,7 @@ function localStore() {
     watchSignups: watch("adsmove-l-ins"),
     updateSignup: async (id, patch) => edit("adsmove-l-ins", (a) => a.map((x) => (x.id === id ? { ...x, ...patch } : x))),
     deleteSignup: async (id) => edit("adsmove-l-ins", (a) => a.filter((x) => x.id !== id)),
+    sendStatusMail: async () => ({ sent: false, reason: "L'envoi demande le CRM en ligne." }),
     addInvite: async (doc) => { const id = uid(); edit("adsmove-l-inv", (a) => [...a, { id, ...doc, status: "preparee", at: now() }]); return { id, sent: false }; },
     watchInvites: watch("adsmove-l-inv"),
     deleteInvite: async (id) => edit("adsmove-l-inv", (a) => a.filter((x) => x.id !== id)),

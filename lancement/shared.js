@@ -200,3 +200,56 @@ export function inviteEmail({ profile, firstName, link }) {
 </table></td></tr></table></body></html>`;
   return { subject, text, html };
 }
+
+/** E-mails à la personne inscrite : `recu` à la réception, puis `retenu` ou `recale` quand l'équipe le décide. */
+export const STATUS_MAILS = ["recu", "retenu", "recale"];
+export function statusEmail({ profile, firstName, kind }) {
+  const p = PROFILES[profile];
+  if (!p || !STATUS_MAILS.includes(kind)) return null;
+  const v = p.vous;
+  const hello = firstName ? `Bonjour ${firstName},` : "Bonjour,";
+  const T = {
+    recu: {
+      subject: v ? "adsmove : votre inscription est bien reçue" : "adsmove : ton inscription est bien reçue",
+      eye: "Inscription reçue",
+      title: "C'est noté.",
+      body: v
+        ? ["Nous avons bien reçu votre inscription au lancement d'adsmove.", "Nous regardons chaque inscription et nous vous recontactons par e-mail ou par téléphone."]
+        : ["On a bien reçu ton inscription au lancement d'adsmove.", "On regarde chaque inscription et on te recontacte par e-mail ou par téléphone."],
+    },
+    retenu: {
+      subject: v ? "adsmove : votre inscription est retenue" : "adsmove : ton inscription est retenue",
+      eye: "Inscription retenue",
+      title: v ? "Vous êtes parmi les premiers." : "Tu es parmi les premiers.",
+      body: v
+        ? ["Votre inscription au lancement d'adsmove est retenue.", "Nous vous recontactons pour la suite. Ce message n'est ni un contrat ni l'attribution d'une campagne."]
+        : ["Ton inscription au lancement d'adsmove est retenue.", "On te recontacte pour la suite. Ce message n'est ni un contrat ni l'attribution d'une campagne."],
+    },
+    recale: {
+      subject: v ? "adsmove : suite à votre inscription" : "adsmove : suite à ton inscription",
+      eye: "Suite à ton inscription".replace("ton", v ? "votre" : "ton"),
+      title: "Pas pour ce lancement.",
+      body: v
+        ? ["Merci pour votre inscription. Pour ce lancement, nous ne pouvons pas la retenir.", "Cela ne dit rien de la suite : d'autres zones et d'autres campagnes ouvriront."]
+        : ["Merci pour ton inscription. Pour ce lancement, on ne peut pas la retenir.", "Ça ne dit rien de la suite : d'autres zones et d'autres campagnes ouvriront."],
+    },
+  }[kind];
+  const foot = v
+    ? "Vous recevez ce message parce que vous vous êtes inscrit au lancement d'adsmove. Pour faire supprimer vos informations, répondez simplement à cet e-mail."
+    : "Tu reçois ce message parce que tu t'es inscrit au lancement d'adsmove. Pour faire supprimer tes informations, réponds simplement à cet e-mail.";
+  const text = `${hello}\n\n${T.body.join("\n\n")}\n\n${foot}\n\nadsmove`;
+  const para = (t) => `<p style="margin:0 0 12px;font:400 16px/1.5 Inter,Arial,sans-serif;color:#F4F4F2;">${esc(t)}</p>`;
+  const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>${esc(T.subject)}</title></head>
+<body style="margin:0;padding:0;background:#0B0B0D;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0B0B0D;"><tr><td align="center" style="padding:32px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;">
+<tr><td style="padding:0 4px 28px;font:800 22px/1 'Inter Tight','Arial Black',Arial,sans-serif;letter-spacing:-0.02em;color:#F4F4F2;">adsmove</td></tr>
+<tr><td style="padding:32px 28px 22px;border-radius:24px;background:#161618;">
+<p style="margin:0 0 10px;font:600 12px/1.4 Inter,Arial,sans-serif;letter-spacing:0.1em;text-transform:uppercase;color:#A2A2A8;">${esc(T.eye)} · ${esc(p.label)}</p>
+<h1 style="margin:0 0 18px;font:800 30px/1.02 'Inter Tight','Arial Black',Arial,sans-serif;letter-spacing:-0.02em;text-transform:uppercase;color:#F4F4F2;">${esc(T.title)}</h1>
+${para(hello)}${T.body.map(para).join("")}
+</td></tr>
+<tr><td style="padding:22px 6px 0;font:400 13px/1.5 Inter,Arial,sans-serif;color:#A2A2A8;">${esc(foot)}</td></tr>
+</table></td></tr></table></body></html>`;
+  return { subject: T.subject, text, html };
+}

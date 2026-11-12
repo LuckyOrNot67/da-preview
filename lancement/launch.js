@@ -1,5 +1,5 @@
 // Formulaires de lancement (un par profil) et CRM adsmove, dans la même page. La vue dépend de l'ancre : #particulier, #crm…
-import { PROFILES, PROFILE_IDS, STATUSES, fieldsOf, validateSignup, validateInvite, inviteEmail, formLink } from "./shared.js";
+import { PROFILES, PROFILE_IDS, STATUSES, fieldsOf, validateSignup, validateInvite, inviteEmail, statusEmail, formLink } from "./shared.js";
 import { openStore } from "./store.js";
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -188,6 +188,7 @@ function paintCrm() {
   root.innerHTML = `<div class="crm-bar">${back}<span class="logo" role="img" aria-label="adsmove"></span><span class="tag">${where}</span></div>
     <div class="crm-w">${crm.view === "fiche" ? crmFiche() : crm.view === "form" ? crmForm() : crmHome()}</div>`;
   if (crm.view === "form" && crm.draft) paintMail();
+  if (crm.view === "fiche") paintStatusMail();
   if (keep) { const el = document.getElementById(keep.id); if (el) { el.value = keep.value; el.focus(); try { el.setSelectionRange(keep.at, keep.at); } catch {} } }
 }
 
@@ -251,6 +252,17 @@ function paintMail() {
   shadow.querySelectorAll("a").forEach((a) => a.addEventListener("click", (e) => e.preventDefault()));
 }
 
+const openSignup = () => (crm.signups ?? []).find((x) => x.id === crm.open);
+const statusMailOf = (s) => statusEmail({ profile: s.profile, firstName: s.answers?.firstName, kind: stageOf(s) });
+function paintStatusMail() {
+  const host = $("#smail");
+  const s = openSignup();
+  const mail = s && statusMailOf(s);
+  if (!host || !mail) return;
+  const shadow = host.shadowRoot ?? host.attachShadow({ mode: "open" });
+  shadow.innerHTML = `<div style="background:#0B0B0D">${mail.html.replace(/^[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*$/, "")}</div>`;
+}
+
 // --- Fiche d'une inscription
 function crmFiche() {
   const s = (crm.signups ?? []).find((x) => x.id === crm.open);
@@ -267,6 +279,9 @@ function crmFiche() {
       ${groups.map((g) => `<div class="card pad"><h2>${esc(g.title)}</h2><dl class="kv">${g.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`).join("")}
       <div class="card pad agree"><h2>Accord</h2><p><span class="okm">${CHECK}</span>Accord donné à l'envoi du formulaire, le ${esc(date(s.at))}, pour être recontacté au sujet du lancement.</p></div>
     </div>
+    ${st === "retenu" || st === "recale" ? `<section class="blk"><h2>Prévenir par e-mail</h2><p class="sub">${s.mailed === st ? `L'e-mail « ${esc(STATUSES[st])} » a été envoyé à ${esc(s.answers?.email)}.` : `La personne ne voit pas son suivi. Cet e-mail lui annonce que son inscription est ${st === "retenu" ? "retenue" : "recalée"}.`}</p>
+      <div class="inv"><div id="smail" class="mail" data-kind="${st}"></div><div class="mail-box"><div class="acts">${store.canSend && s.mailed !== st ? `<button class="btn" data-act="send-status">Envoyer cet e-mail</button>` : ""}<button class="btn line" data-act="copy-status">Copier le texte</button></div>
+      <p class="fine">${store.canSend ? "L'e-mail part depuis adsmove, via Resend, à cette seule personne." : "L'envoi automatique demande le CRM en ligne avec une clé Resend. En attendant, copie le texte et envoie-le toi-même."}</p></div></div></section>` : st === "nouveau" && s.mailed === "recu" ? `<p class="note">Un accusé de réception a été envoyé à ${esc(s.answers?.email)}.</p>` : ""}
     <div class="fld"><label for="n-note">Note interne</label><textarea id="n-note" data-note="${esc(s.id)}" placeholder="Visible par l'équipe uniquement">${esc(s.note ?? "")}</textarea></div>
     <div><button class="txt danger" data-del="${esc(s.id)}">Supprimer cette inscription</button></div>`;
 }
@@ -307,6 +322,19 @@ document.addEventListener("click", async (e) => {
   if (cp) return copy(cp.dataset.copy);
   const act = t.closest("[data-act]")?.dataset.act;
   if (act === "csv") return copy(csv(), "Liste copiée.");
+  if (act === "copy-status") { const m = statusMailOf(openSignup()); return copy(`${m.subject}\n\n${m.text}`, "Texte copié."); }
+  if (act === "send-status") {
+    const b = t.closest("button");
+    const s = openSignup();
+    if (b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = `Confirmer l'envoi à ${s.answers?.email}`; return; }
+    b.disabled = true;
+    try {
+      const r = await store.sendStatusMail(s.id, stageOf(s));
+      toast(r.sent ? "E-mail envoyé." : r.reason || "E-mail non envoyé.");
+      if (r.sent) s.mailed = stageOf(s);
+    } catch (err) { toast(err.message || "Envoi impossible."); }
+    return paintCrm();
+  }
   if (act === "save-base") { crm.base = $("#b-base").value.trim() || null; await store.setBase(crm.base).catch(() => {}); toast("Adresse enregistrée."); return paintCrm(); }
   if (act === "copy-link") return copy(formLink(baseUrl(), crm.draft.profile, crm.draft.id), "Lien copié.");
   if (act === "copy-mail") { const m = inviteEmail({ ...crm.draft, link: formLink(baseUrl(), crm.draft.profile, crm.draft.id) }); return copy(`${m.subject}\n\n${m.text}`, "Texte copié."); }
