@@ -29,10 +29,13 @@ $$('.rl').forEach(r=>{r.innerHTML=`<span class="rli">${r.innerHTML}</span>`});
 const fit=()=>{const y=$$('.fy .say');y.forEach(x=>x.style.minHeight='');if(y.length){const m=Math.max(...y.map(x=>x.offsetHeight));y.forEach(x=>x.style.minHeight=m+'px')}
   $$('.fit').forEach(h=>{h.style.fontSize='';if(innerWidth<=760||h.scrollWidth<=h.clientWidth)return;h.style.fontSize=parseFloat(getComputedStyle(h).fontSize)*h.clientWidth/h.scrollWidth*.995+'px'})};
 fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);
-/* concept : un volet ouvert à la fois, au clic, au survol et au clavier ; l'image suit */
-const nc=$('.nc');if(nc&&!(D.b&&innerWidth>760)){const I=$$('.nc-i',nc),V=$$('.nc-v img',nc);nc.classList.add('js');
-  const show=i=>{I.forEach((x,k)=>{x.classList.toggle('on',k===i);$('.nc-t',x).setAttribute('aria-expanded',k===i)});V.forEach((x,k)=>x.classList.toggle('on',k===i))};
-  I.forEach((x,i)=>{const b=$('.nc-t',x);b.addEventListener('click',()=>show(i));b.addEventListener('focus',()=>show(i));if(matchMedia('(hover:hover)').matches)x.addEventListener('mouseenter',()=>show(i))})}
+/* concept : les volets s'ouvrent au clic sur téléphone ; sur ordinateur, la photo plein cadre change au défilement (plus bas) */
+const nc=$('.nc'),wide=innerWidth>760;let showNc=null;
+if(nc){const I=$$('.nc-i',nc),V=$$('.nc-v img',nc);let cur=-1;nc.classList.add('js');
+  showNc=i=>{if(i===cur)return;cur=i;I.forEach((x,k)=>{x.classList.toggle('on',k===i);$('.nc-t',x).setAttribute('aria-expanded',k===i)});V.forEach((x,k)=>x.classList.toggle('on',k===i))};
+  if(wide&&MO&&window.gsap){nc.classList.add('vb','vb2');const n=document.createElement('ol');n.className='vb-n';n.setAttribute('aria-hidden','true');n.innerHTML=I.map((x,k)=>`<li>${String(k+1).padStart(2,'0')}</li>`).join('');$('.nc-b',nc).append(n)}
+  else I.forEach((x,i)=>$('.nc-t',x).addEventListener('click',()=>showNc(i)));
+  showNc(0)}
 if(!MO||!window.gsap)return;
 gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
 const small=innerWidth<=760;
@@ -44,40 +47,40 @@ const cover=(el,w,len,extra=100)=>gsap.fromTo(el,{scale:1},{scale:.95,ease:'none
   T.from('.bar .logo',{y:-14,opacity:0,duration:.6}).from('.links a',{y:-14,opacity:0,duration:.5,stagger:.06},'-=.4').from('.acts>*',{opacity:0,duration:.7},'-=.4')
    .from($$('.ln>span',s),{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.15).from($$('.foot p,.foot a',s),{y:24,opacity:0,duration:.7,stagger:.1},.6)})();
 const lit=(trigger,start,endTrigger,end)=>ScrollTrigger.create({trigger,start,endTrigger,end,toggleClass:{targets:'.bar',className:'lite'}});
-/* haut de page vers le Concept : le titre s'efface, le fond passe au clair et la voiture se réduit pour se poser au-dessus du Concept */
-const h1g=$('.h1g');let heroW=null;
-if(h1g&&!small){const S=stage(h1g,110),art=$('.art',h1g),t=gsap.timeline({scrollTrigger:{...S.st,onLeave:()=>h1g.classList.add('done'),onEnterBack:()=>h1g.classList.remove('done')}});heroW=S.w;
-  const fitArt=()=>{const r=art.getBoundingClientRect(),cx=innerWidth/2-(r.left+r.width/2),cy=innerHeight*.56-(r.top+r.height/2);return {x:cx,y:cy}};
-  t.to($$('h1 .ln>span',h1g),{yPercent:-110,opacity:0,stagger:.06,duration:.5,ease:'power2.in'},0)
-   .to($$('.foot',h1g),{y:-30,opacity:0,duration:.35,ease:'power1.in'},0)
-   .to(h1g,{backgroundColor:()=>getComputedStyle(document.documentElement).getPropertyValue('--sig'),color:()=>getComputedStyle(document.documentElement).getPropertyValue('--sigt'),duration:.6,ease:'none'},.25)
-   .to(art,{x:()=>fitArt().x,y:()=>fitArt().y,scale:.62,duration:1,ease:'power2.inOut'},.1)
-   .to({}, {duration:.15});
-  lit(S.w,()=>`top+=${innerHeight*.45} top`,'.nc','bottom 60px')}
 /* concept : scroll continu, chaque carte ralentit en arrivant, puis tout le paquet monte ensemble */
 const sb=$('.sb');let sbW;
-if(nc&&(small||!h1g))lit('.nc','top 60px','.nc','bottom 60px');
-if(nc&&!(D.b&&!small)){gsap.from($$('.nc-h>*',nc),{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:nc,start:'top 78%'}});gsap.from($$('.nc-i,.nc-v',nc),{y:40,opacity:0,duration:.8,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:$('.nc-b',nc),start:'top 82%'}})}
+/* concept sur ordinateur : on descend, la photo plein cadre arrive, puis chaque volet prend sa place au défilement */
+if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,210),L=$$('.vb-n li',b);
+  gsap.from($$('.nc-h>*',nc),{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:nc,start:'top 78%'}});
+  gsap.fromTo($('.nc-v',b),{clipPath:'inset(14% 10% 14% 10% round 32px)'},{clipPath:'inset(0% 0% 0% 0% round 26px)',ease:'none',scrollTrigger:{trigger:S.w,start:'top 85%',end:'top top',scrub:true}});
+  ScrollTrigger.create({...S.st,onUpdate:s=>{const i=Math.min(2,Math.floor(s.progress*3));showNc(i);L.forEach((x,k)=>x.classList.toggle('on',k===i))}})}
+if(nc&&small){gsap.from($$('.nc-h>*',nc),{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:nc,start:'top 78%'}});gsap.from($$('.nc-i,.nc-v',nc),{y:40,opacity:0,duration:.8,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:$('.nc-b',nc),start:'top 82%'}})}
 if(sb&&!small){const big=$('.big',sb),txt=big.textContent;big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
   big.innerHTML=txt.split(' ').map(w=>`<span class="w" aria-hidden="true">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ');
   const S=stage(sb,140,100);sbW=S.w;sb.classList.add('run');const ch=$$('.ch',big),travel=()=>-(big.scrollWidth-innerWidth+parseFloat(getComputedStyle(sb).paddingLeft)*2);
-  const t=gsap.timeline({scrollTrigger:S.st});
-  t.fromTo(ch,{yPercent:120,opacity:0,rotate:8},{yPercent:0,opacity:1,rotate:0,stagger:.012,duration:.35,ease:'back.out(1.6)'},0)
-   .fromTo(big,{x:()=>innerWidth*.12},{x:travel,duration:1,ease:'none'},.15)
-   .fromTo($$('.lead2',sb),{y:30,opacity:0},{y:0,opacity:1,duration:.25},.95)}
+  /* les lettres arrivent pendant que la section monte, pour qu'il n'y ait jamais d'écran vide ; une fois en place, le titre traverse */
+  gsap.fromTo(ch,{yPercent:120,opacity:0,rotate:8},{yPercent:0,opacity:1,rotate:0,stagger:.02,ease:'back.out(1.6)',scrollTrigger:{trigger:S.w,start:'top 75%',end:'top 5%',scrub:.5}});
+  gsap.fromTo(big,{x:()=>innerWidth*.06},{x:travel,ease:'none',scrollTrigger:S.st})}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
-const f=D.d?null:$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240)+(small?0:60),{w,st}=stage(f,len,0),t=gsap.timeline({scrollTrigger:st});
+/* formats : une photo principale par format, on passe à la suivante avec les flèches, au clavier ou en glissant */
+$$('.fy .gal').forEach(g=>{const F=$$('figure',g);let i=0;g.classList.add('car');
+  const nav=document.createElement('div');nav.className='car-n';nav.innerHTML=`<button class="car-b" data-d="-1" aria-label="Photo précédente">‹</button><span class="car-d">${F.map(()=>'<i></i>').join('')}</span><button class="car-b" data-d="1" aria-label="Photo suivante">›</button>`;g.append(nav);
+  const D2=$$('.car-d i',nav),go=k=>{i=(k+F.length)%F.length;F.forEach((x,n)=>x.classList.toggle('on',n===i));D2.forEach((x,n)=>x.classList.toggle('on',n===i))};
+  nav.addEventListener('click',e=>{const b=e.target.closest('.car-b');if(b)go(i+ +b.dataset.d)});
+  g.tabIndex=0;g.setAttribute('aria-label','Photos du format, flèches gauche et droite pour changer');g.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
+  let x0=null;g.addEventListener('pointerdown',e=>{x0=e.clientX});g.addEventListener('pointerup',e=>{if(x0!=null&&Math.abs(e.clientX-x0)>40)go(i+(e.clientX<x0?1:-1));x0=null});
+  go(0)});
+const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240)+(small?0:60),{w,st}=stage(f,len,0),t=gsap.timeline({scrollTrigger:st});
   if(sbW)w.classList.add('over');
-  A.forEach((a,i)=>{const b=i*3,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal figure',a);
+  A.forEach((a,i)=>{const b=i*3,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal',a);
    gsap.set(inf,{opacity:0});gsap.set(m,{y:()=>(innerHeight-74-m.offsetHeight)/2});
    if(i){t.fromTo(a,{yPercent:102},{yPercent:0,duration:1,ease:'none'},b-1).to(A[i-1],{scale:.95,duration:1,ease:'none'},b-1)}
    t.to(m,{y:0,scale:small?.6:.48,duration:.7,ease:'power1.inOut'},b+.3)
     .fromTo(g,{y:()=>innerHeight*.6,opacity:0},{y:0,opacity:1,stagger:.07,duration:.6,ease:'power2.out'},b+.5)
     .to(inf,{opacity:1,duration:.3},b+1.1);});t.to({}, {duration:.5});
-  /* fin de Complet : la fiche s'efface et le fond suit la couleur de l'Expertise */
-  const last=A[A.length-1];if(!small)t.to(last.children,{opacity:0,y:-40,duration:.5,ease:'power1.in'}).to(last,{backgroundColor:()=>getComputedStyle(document.documentElement).getPropertyValue('--bg'),duration:.5,ease:'none'},'<.1');
+
   /* le menu suit les pages blanches : Classique, puis Complet */
-  const at=x=>()=>`top+=${innerHeight*len/100*x/t.duration()} top`;lit(w,'top 60px',w,at(2.9));lit(w,at(5.9),w,at(t.duration()-.6));}
+  const at=x=>()=>`top+=${innerHeight*len/100*x/t.duration()} top`;lit(w,'top 60px',w,at(2.9));lit(w,at(5.9),'.nx','bottom 60px');}
 /* page conducteur : la photo part d'une carte et s'ouvre sur tout l'écran, uniquement en transform */
 const dh=$('.dh'),rd=$('.rd');let dhW,rdW;
 if(dh&&!small){const fg=$('.dhi',dh),tx=$('.dht',dh),t2=$('.dh2',dh),len=170,S=stage(dh,len,100),t=gsap.timeline({scrollTrigger:S.st});dhW=S.w;dhW.style.marginTop=-$('.bar').offsetHeight+'px';
@@ -95,7 +98,10 @@ if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 6
 /* expertise : les quatre étapes arrivent l'une après l'autre ; la section reste en place pendant que la suivante passe par-dessus */
 const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
   if(small||innerWidth<=1000)C.forEach(k=>gsap.from(k,{y:40,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:k,start:'top 88%'}}));
-  else gsap.from([$('.nx-h',nx),...C],{y:60,opacity:0,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:nx,start:'top 70%'}})}
+  else{const T=gsap.timeline({scrollTrigger:{trigger:nx,start:'top 65%',end:'top 5%',scrub:.6}});
+   T.from($$('.nx-h>*',nx),{y:80,opacity:0,stagger:.1,duration:.5,ease:'power2.out'},0)
+    .from(C,{'--l':0,duration:.6,stagger:.12,ease:'power2.inOut'},.2)
+    .from(C.map(c=>[...c.children]),{y:40,opacity:0,stagger:.04,duration:.4,ease:'power2.out'},.35)}}
 /* application : uniquement des transformations et de l'opacité. L'étape active est en grand avec son exemple, les précédentes rétrécissent au-dessus */
 const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li=$$('.ro li',st),ps=$$('.ps',st),tp=$('.tap',st),spl=$('.spl',st),ttl=$('.ttl',st),n=ps.length,S=stage(st,n*90),t=gsap.timeline({scrollTrigger:S.st}),H=()=>small?0:$('b',li[0]).offsetHeight*.5+6;
   gsap.set(ps,{xPercent:i=>i?100:0});gsap.set(li,{opacity:0,y:small?0:40});

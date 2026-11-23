@@ -325,56 +325,45 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 }
 
 /* Passe du 23 novembre : haut de page qui se pose, Concept sur fond clair, titre qui traverse, plus de volet vers l'Expertise */
-.h1g{background:var(--bg);color:var(--ink);will-change:background-color}
-.h1g .art{transform-origin:center center}
-.nc{background:var(--sig);color:var(--sigt)}.nc .eye{color:inherit;opacity:.7}
-.nc .nc-t{color:color-mix(in srgb,var(--sigt) 45%,transparent)}.nc .nc-i.on .nc-t,.nc .nc-t:hover{color:var(--sigt)}
-.nc .nc-l,.nc .nc-i{border-color:color-mix(in srgb,var(--sigt) 18%,transparent)}
-.nc .nc-v{background:color-mix(in srgb,var(--sigt) 8%,transparent)}
-.mo .h1g{min-height:100svh;padding-top:84px}
 .sb.run{overflow:hidden;justify-content:center}
 .sb.run .big{white-space:nowrap;max-width:none;font-size:calc(min(15vw,26vh)*var(--ds));line-height:1.05;width:max-content}
 .sb.run .w{display:inline-block;white-space:nowrap}.sb.run .ch{display:inline-block}
-.mo .nx{border-radius:0;box-shadow:none}
 
-/* Variantes à comparer : volets du Concept (?b=) et formats (?d=) */
-.vb .nc-b{height:calc(100svh - 0px);padding:96px 0 32px;margin-top:0;align-items:stretch}
-.vb3 .nc-b{height:auto;padding:0;align-items:start}
+/* Passe du 24 novembre */
+/* Concept sur ordinateur : la photo plein cadre change au défilement, le texte du volet actif est posé dessus */
+.vb .nc-b{height:100svh;padding:84px 0 24px;margin-top:0}
 .vb .nc-t{pointer-events:none}.vb .nc-t i{display:none}
-.vb1 .nc-i{position:relative}
-.vb1 .nc-i:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:currentColor;transform-origin:left;transform:scaleX(var(--p,0))}
-.vb2 .nc-b{position:relative;display:block;padding:84px 0 24px}
-.vb2 .nc-v{position:absolute;inset:84px 0 24px;min-height:0}
+.vb2 .nc-b{position:relative;display:block}
+.vb2 .nc-v{position:absolute;inset:84px 0 24px;min-height:0;will-change:clip-path}
 .vb2 .nc-v:after{content:"";position:absolute;inset:0;background:linear-gradient(to right,rgba(11,11,13,.86),rgba(11,11,13,.2) 62%)}
 .vb2 .nc-l{position:absolute;z-index:2;left:clamp(20px,3vw,48px);top:120px;bottom:60px;width:min(460px,40%);color:#F4F4F2;border:0;justify-content:center}
 .vb2 .nc-i{border:0}.vb2 .nc-i:not(.on){display:none}.vb2 .nc-t,.vb2 .nc-i.on .nc-t{color:#F4F4F2}
+.vb2 .nc-p,.vb2.js .nc-p{grid-template-rows:1fr}
 .vb2 .nc-p .pts li{border-color:rgba(244,244,242,.3)}
+.vb2 .nc-i.on .nc-p>div>*{animation:vbin .6s cubic-bezier(.2,.8,.2,1) both}.vb2 .nc-i.on .nc-p>div>:nth-child(2){animation-delay:.06s}
+.vb2 .nc-i.on .nc-t{animation:vbin .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes vbin{from{opacity:0;transform:translateY(20px)}}
 .vb-n{position:absolute;z-index:2;right:clamp(20px,3vw,48px);top:108px;display:flex;gap:8px;list-style:none;padding:0;margin:0}
-.vb-n li{font-size:13px;font-weight:600;color:#F4F4F2;opacity:.45;padding:6px 10px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(244,244,242,.5)}.vb-n li.on{opacity:1;background:#F4F4F2;color:#0B0B0D}
-.vb3 .nc-p,.vb3.js .nc-p{grid-template-rows:1fr}
-.vb3 .nc-i{min-height:72vh;padding-bottom:6vh;opacity:.35;transition:opacity .4s}.vb3 .nc-i.on{opacity:1}
-.vb3 .nc-v{position:sticky;top:96px;height:calc(100svh - 130px)}
-.vd{background:var(--sig);color:var(--sigt);padding:clamp(70px,10vh,110px) var(--g) clamp(40px,8vh,80px)}
-.vd .sur{margin-top:22px}
-.vd-n{font-family:var(--d);font-weight:var(--dw);text-transform:var(--up);letter-spacing:var(--ls);line-height:.95;font-size:calc(clamp(40px,6vw,96px)*var(--ds))}
-.vd .say{margin:10px 0 16px}
-.vd-dl{display:grid;grid-template-columns:1fr;gap:0;margin:0}.vd-dl>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid color-mix(in srgb,var(--sigt) 18%,transparent)}
-.vd-dl dt{opacity:.6;font-size:14px}.vd-dl dd{margin:0;font-size:15px}
-.vd .zs li.on{background:var(--sigt);color:var(--sig)}
-.vd1{padding:0}.vd-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,64px);height:100svh;padding:96px var(--g) 32px;align-items:center}
-.vd1.flat .vd-in{height:auto}
-.vd-t{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:0}
-.vd-k{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 22px}.vd-k li{font-size:13px;font-weight:600;padding:6px 12px;border-radius:99px;box-shadow:inset 0 0 0 1px currentColor;opacity:.45}.vd-k li.on{opacity:1;background:var(--sigt);color:var(--sig);box-shadow:none}
-.vd-f{display:none}.vd-f.on{display:block;animation:vdin .5s cubic-bezier(.2,.8,.2,1)}
-@keyframes vdin{from{opacity:0;transform:translateY(18px)}}
-.vd-p{position:relative;height:min(64vh,640px);border-radius:clamp(18px,2.4vw,32px);background:#E2E4E8;overflow:hidden}
-.vd-p img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:5%;opacity:0;transform:scale(1.04);transition:opacity .5s,transform .8s cubic-bezier(.2,.8,.2,1)}.vd-p img.on{opacity:1;transform:none}
-.vd-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
-.vd-c figure{margin:0 0 18px;aspect-ratio:16/10;border-radius:20px;background:#E2E4E8;overflow:hidden}.vd-c img{width:100%;height:100%;object-fit:contain;padding:5%}
-.vd2 .vd-n{font-size:calc(clamp(32px,3.6vw,56px)*var(--ds))}
-.vd-tabs{display:inline-flex;gap:4px;padding:5px;border-radius:999px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--sigt) 25%,transparent);margin-bottom:28px}
-.vd-tabs button{min-height:44px;padding:0 22px;border-radius:999px;font-weight:600;color:inherit;background:none}
-.vd-tabs button[aria-selected=true]{background:var(--sigt);color:var(--sig)}
-.vd-pn{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,64px);align-items:center}
-.vd-pn figure{margin:0;aspect-ratio:16/10;border-radius:clamp(18px,2.4vw,32px);background:#E2E4E8;overflow:hidden}.vd-pn img{width:100%;height:100%;object-fit:contain;padding:5%}
-@media (max-width:900px){.vd-g{grid-template-columns:1fr}.vd-pn,.vd-in{grid-template-columns:1fr;height:auto}.vd-p{height:52vw}}
+.vb-n li{font-size:13px;font-weight:600;color:#F4F4F2;opacity:.45;padding:6px 10px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(244,244,242,.5);transition:all .3s}.vb-n li.on{opacity:1;background:#F4F4F2;color:#0B0B0D}
+/* « Trois façons d'habiller une voiture » : le titre seul */
+.sb.run{min-height:100svh}
+/* Formats : une seule grande photo, des flèches et des points pour passer aux autres ; fiche allégée */
+.gal.car{display:block;position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#E2E4E8;outline:none}
+.gal.car:focus-visible{box-shadow:0 0 0 3px currentColor}
+.gal.car figure{position:absolute;inset:0;min-height:0;border-radius:0;opacity:0;transform:scale(1.03);transition:opacity .45s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.gal.car figure.on{opacity:1;transform:none}
+.gal.car img{object-fit:cover;padding:0}.gal.car .g0 img,.gal.car .g1 img{object-fit:contain;padding:5%}
+.car-n{position:absolute;z-index:2;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:6px;border-radius:999px;background:rgba(11,11,13,.72);color:#F4F4F2;backdrop-filter:blur(6px)}
+.car-b{width:34px;height:34px;border-radius:50%;background:rgba(244,244,242,.14);color:inherit;font:600 20px/1 var(--body);display:grid;place-items:center;cursor:pointer}
+.car-b:hover{background:rgba(244,244,242,.28)}
+.car-d{display:flex;gap:6px}.car-d i{width:7px;height:7px;border-radius:50%;background:rgba(244,244,242,.4);transition:all .3s}.car-d i.on{width:20px;border-radius:4px;background:#F4F4F2}
+.fy dl dt.xt,.fy dl dd.xt,.fy dl dt:nth-of-type(5),.fy dl dd:nth-of-type(5){display:none}
+.fb{grid-template-columns:minmax(0,4fr) minmax(0,6fr)}
+/* Expertise : fond blanc, les traits se tracent puis les étapes arrivent */
+.nx{background:var(--sig);color:var(--sigt)}
+.nx .eye{color:inherit;opacity:.65}
+.nx-c{--l:1;border-top:0;position:relative}
+.nx-c:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:currentColor;transform-origin:left;transform:scaleX(var(--l))}
+.nx-n,.nx-c p{color:color-mix(in srgb,currentColor 62%,transparent)}
+.nx-m li{border-color:color-mix(in srgb,currentColor 18%,transparent)}
+.vb2{padding-bottom:0}.sb.run{padding-top:0;padding-bottom:0}
