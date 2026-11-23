@@ -367,3 +367,16 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 .nx-n,.nx-c p{color:color-mix(in srgb,currentColor 62%,transparent)}
 .nx-m li{border-color:color-mix(in srgb,currentColor 18%,transparent)}
 .vb2{padding-bottom:0}.sb.run{padding-top:0;padding-bottom:0}
+/* Passe du 24 novembre (2) */
+/* Expertise : le fond blanc continue, sans coins ni ombre */
+.mo .nx{border-radius:0;box-shadow:none}
+.mo .f2 .stk,.f2 .stk{background:var(--sig)}
+/* Concept : la photo glisse de droite à gauche d'un volet à l'autre */
+.vb2 .nc-v img{opacity:1;scale:1;transform:translateX(100%);transition:transform .75s cubic-bezier(.65,0,.35,1)}
+.vb2 .nc-v img.on{transform:none}.vb2 .nc-v img.past{transform:translateX(-100%)}
+/* Formats : la colonne de gauche est regroupée et centrée, sans grand vide */
+.fb{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.fy .inf{justify-content:center;gap:clamp(14px,2.4vh,26px)}
+.fy .say{font-size:clamp(24px,min(2.6vw,4.6vh),40px);line-height:1.1;letter-spacing:-0.01em}
+.fy dl{font-size:clamp(15px,min(1.25vw,2.5vh),18px);gap:12px 18px}
+.fy .zs{margin:4px 0 0}.fy .zs li{font-size:13px;padding:5px 12px}
