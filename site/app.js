@@ -107,7 +107,7 @@ const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
    const dr={trigger:S0.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};$$('.l',hb).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*.03},{x:()=>-s*innerWidth*.035,ease:'none',scrollTrigger:dr})});
    const g=$('.nx-g',nx),box=document.createElement('div');box.className='ms-b v-'+(D.xp||'fil');g.before(box);box.append(g);
    const ft=document.createElement('div');ft.className='ms-f';ft.setAttribute('aria-hidden','true');ft.innerHTML=`<b>01</b><span>/ ${String(C.length).padStart(2,'0')}</span><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;box.append(ft);
-   const B=$('b',ft),I=$$('.nx-bar i',ft);let cur=-1;const show=i=>{if(i===cur)return;cur=i;B.textContent=String(i+1).padStart(2,'0');C.forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('past',k<i)});I.forEach((x,k)=>x.classList.toggle('on',k<=i))};
+   const B=$('b',ft),I=$$('.nx-bar i',ft);let cur=-1;const show=i=>{if(i===cur)return;cur=i;B.textContent=String(i+1).padStart(2,'0');C.forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('past',k<i)});I.forEach((x,k)=>x.classList.toggle('on',k<=i));g.style.setProperty('--p',i/(C.length-1))};
    show(0);const S=stage(box,300,0);ScrollTrigger.create({...S.st,onUpdate:s=>show(Math.min(C.length-1,Math.floor(s.progress*(C.length+.4))))})}
   else{nx.classList.add('story');const big=document.createElement('div');big.className='nx-big';big.setAttribute('aria-hidden','true');
    big.innerHTML=`<b>01</b><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;$('.nx-g',nx).before(big);

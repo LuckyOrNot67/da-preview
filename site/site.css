@@ -631,3 +631,19 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
   .ms-b.v-num .nx-c.on{transform:none;opacity:1}.ms-b.v-num .nx-c.past{transform:translateY(-50px);opacity:0}
   .ms-b.v-num .nx-n{top:0;left:-4px;right:auto;font-size:calc(min(50vw,30vh)*var(--ds));color:var(--ink);-webkit-text-stroke:0;letter-spacing:-.05em}
 }
+/* la phrase courte de chaque étape n'apparaît que dans le fil, sur téléphone */
+.nx-s{display:none}
+@media (max-width:760px){
+  .ms-b.v-fil{justify-content:center}
+  .ms-b.v-fil .nx-g{flex:none;padding-left:34px;gap:clamp(18px,4vh,34px)}
+  .ms-b.v-fil .nx-g:before{left:5px;top:24px;bottom:24px}
+  .ms-b.v-fil .nx-g:after{content:"";position:absolute;left:5px;top:24px;bottom:24px;width:1.5px;background:var(--ink);transform-origin:top;transform:scaleY(var(--p,0));transition:transform .6s cubic-bezier(.65,0,.35,1)}
+  .ms-b.v-fil .nx-c,.ms-b.v-fil .nx-c.past{padding:0}
+  .ms-b.v-fil .nx-c:after{left:-34px;top:12px;z-index:1}
+  .ms-b.v-fil .nx-c p:not(.nx-s),.ms-b.v-fil .nx-c .nx-m,.ms-b.v-fil .nx-n{display:none}
+  .ms-b.v-fil .nx-c h3{font-size:calc(30px*var(--ds));line-height:1.05;color:rgba(244,244,242,.32)}
+  .ms-b.v-fil .nx-c.past h3{color:rgba(244,244,242,.6)}
+  .ms-b.v-fil .nx-c.on h3{color:var(--ink)}
+  .ms-b.v-fil .nx-s{display:block;max-height:none;opacity:.3;margin:8px 0 0;font-size:16px;color:var(--ink);transition:opacity .4s}
+  .ms-b.v-fil .nx-c.on .nx-s{opacity:.75}
+}
