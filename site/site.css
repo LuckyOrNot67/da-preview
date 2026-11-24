@@ -610,3 +610,24 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
   .ms-f span:not(.nx-bar){color:var(--mut)}
   .ms-f .nx-bar{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-left:10px;max-width:none}
 }
+/* Expertise sur téléphone : variantes « fil » et « grand numéro » */
+@media (max-width:760px){
+  /* Fil : les quatre étapes l'une sous l'autre sur un fil ; l'étape en cours s'ouvre, les autres restent fermées */
+  .ms-b.v-fil .ms-f{display:none}
+  .ms-b.v-fil .nx-g{display:flex;flex-direction:column;justify-content:center;padding-left:26px}
+  .ms-b.v-fil .nx-g:before{content:"";position:absolute;left:5px;top:10%;bottom:10%;width:1.5px;background:rgba(244,244,242,.16)}
+  .ms-b.v-fil .nx-c,.ms-b.v-fil .nx-c.past{position:relative;inset:auto;transform:none;background:none;box-shadow:none;border-radius:0;padding:14px 0;gap:0;justify-content:flex-start}
+  .ms-b.v-fil .nx-c:after{content:"";position:absolute;left:-26px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1.5px rgba(244,244,242,.35);transition:background .4s,box-shadow .4s}
+  .ms-b.v-fil .nx-c.on:after,.ms-b.v-fil .nx-c.past:after{background:var(--ink);box-shadow:none}
+  .ms-b.v-fil .nx-n{position:static;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--mut);-webkit-text-stroke:0;margin-bottom:4px}
+  .ms-b.v-fil .nx-c>svg{display:none}
+  .ms-b.v-fil .nx-c h3{font-size:calc(26px*var(--ds));color:var(--mut);transition:color .4s}
+  .ms-b.v-fil .nx-c.on h3{color:var(--ink)}
+  .ms-b.v-fil .nx-c p,.ms-b.v-fil .nx-m{max-height:0;overflow:hidden;opacity:0;margin:0;transition:max-height .6s cubic-bezier(.65,0,.35,1),opacity .4s,margin .6s}
+  .ms-b.v-fil .nx-c.on p{max-height:120px;opacity:1;margin-top:10px}
+  .ms-b.v-fil .nx-c.on .nx-m{max-height:260px;opacity:1;margin-top:12px}
+  /* Grand numéro : le numéro en plein, en haut ; l'étape monte en bas, sans cadre */
+  .ms-b.v-num .nx-c{box-shadow:none;border-radius:0;padding:0;transform:translateY(50px);opacity:0;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .45s}
+  .ms-b.v-num .nx-c.on{transform:none;opacity:1}.ms-b.v-num .nx-c.past{transform:translateY(-50px);opacity:0}
+  .ms-b.v-num .nx-n{top:0;left:-4px;right:auto;font-size:calc(min(50vw,30vh)*var(--ds));color:var(--ink);-webkit-text-stroke:0;letter-spacing:-.05em}
+}

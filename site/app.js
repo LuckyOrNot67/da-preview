@@ -4,16 +4,16 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 /* réglages */
 const SEC=[];
 const COL=[['noir','Noir et blanc'],['violet','Violet'],['rouge','Rouge'],['orange','Orange'],['jaune','Jaune']],FONT=[['1','Condensée'],['2','Grasse'],['3','Éditoriale'],['4','Arrondie']];
-const KEYS=['bf','bl'];
+const KEYS=['bf','bl','xp'];
 const keep=()=>{try{localStorage.setItem('adsmove-cfg3',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
 const row=(key,t,opts)=>`<div><h2>${t}</h2><div class="o" data-k="${key}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${D[key]===v}">${l}</button>`).join('')}</div></div>`;
 const cfg=$('#cfg'),cb=$('#cfgb');
 if(cfg){
-cfg.innerHTML=row('bf','Barre et pied de page',[['ant','Anthracite'],['noir','Noir du site'],['blanc','Blanc']])+row('bl','Trait sous la barre',[['oui','Oui'],['non','Non']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
+cfg.innerHTML=row('bf','Barre et pied de page',[['ant','Anthracite'],['noir','Noir du site'],['blanc','Blanc']])+row('bl','Trait sous la barre',[['oui','Oui'],['non','Non']])+row('xp','Expertise sur téléphone',[['fil','Fil'],['num','Grand numéro'],['cartes','Cartes']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
 const openC=o=>{cfg.hidden=!o;cb.setAttribute('aria-expanded',o)};
 cb.addEventListener('click',()=>openC(cfg.hidden));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb.focus()}});
-cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep()});
+cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep();if(k==='xp')location.reload()});
 const NM={ant:'anthracite',noir:'noir du site',blanc:'blanc'};
 $('#cfgc').addEventListener('click',async()=>{const t='Barre et pied de page : '+NM[D.bf]+'\nTrait sous la barre : '+D.bl;try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
 $('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg3')}catch(e){}location.reload()});
@@ -105,7 +105,7 @@ const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
    hb.innerHTML=['Notre','expertise'].map((l,k)=>`<span class="l l${k}" aria-hidden="true"><span class="w">${[...l].map(c=>`<span class="ch">${c}</span>`).join('')}</span></span>`).join('');
    const S0=stage(h,100,0);gsap.timeline({scrollTrigger:S0.st}).fromTo($$('.ch',hb),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.03,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
    const dr={trigger:S0.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};$$('.l',hb).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*.03},{x:()=>-s*innerWidth*.035,ease:'none',scrollTrigger:dr})});
-   const g=$('.nx-g',nx),box=document.createElement('div');box.className='ms-b';g.before(box);box.append(g);
+   const g=$('.nx-g',nx),box=document.createElement('div');box.className='ms-b v-'+(D.xp||'fil');g.before(box);box.append(g);
    const ft=document.createElement('div');ft.className='ms-f';ft.setAttribute('aria-hidden','true');ft.innerHTML=`<b>01</b><span>/ ${String(C.length).padStart(2,'0')}</span><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;box.append(ft);
    const B=$('b',ft),I=$$('.nx-bar i',ft);let cur=-1;const show=i=>{if(i===cur)return;cur=i;B.textContent=String(i+1).padStart(2,'0');C.forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('past',k<i)});I.forEach((x,k)=>x.classList.toggle('on',k<=i))};
    show(0);const S=stage(box,300,0);ScrollTrigger.create({...S.st,onUpdate:s=>show(Math.min(C.length-1,Math.floor(s.progress*(C.length+.4))))})}
