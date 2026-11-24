@@ -45,7 +45,7 @@ const cover=(el,w,len,extra=100)=>gsap.fromTo(el,{scale:1},{scale:.95,ease:'none
 /* héros : le titre monte derrière la voiture, qui est là dès le début */
 (()=>{const s=$('.h1g');if(!s)return;const T=gsap.timeline({defaults:{ease:'power3.out'}});
   T.from('.bar .logo',{y:-14,opacity:0,duration:.6}).from('.links a',{y:-14,opacity:0,duration:.5,stagger:.06},'-=.4').from('.acts>*',{opacity:0,duration:.7},'-=.4')
-   .from($$('.ln>span',s),{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.15).from($$('.foot p,.foot a',s),{y:24,opacity:0,duration:.7,stagger:.1},.6)})();
+   .from($$('.ln>span',s),{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.15).from($('.art',s),{x:160,opacity:0,duration:1.3,ease:'power3.out'},.1).from($$('.foot p,.foot a',s),{y:24,opacity:0,duration:.7,stagger:.1},.6)})();
 const lit=(trigger,start,endTrigger,end)=>ScrollTrigger.create({trigger,start,endTrigger,end,toggleClass:{targets:'.bar',className:'lite'}});
 /* concept : scroll continu, chaque carte ralentit en arrivant, puis tout le paquet monte ensemble */
 const sb=$('.sb');let sbW;
@@ -54,12 +54,14 @@ if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,210),L=$$('
   gsap.from($$('.nc-h>*',nc),{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:nc,start:'top 78%'}});
   ScrollTrigger.create({...S.st,onUpdate:s=>{const i=Math.min(2,Math.floor(s.progress*3));showNc(i);L.forEach((x,k)=>x.classList.toggle('on',k===i))}})}
 if(nc&&small){gsap.from($$('.nc-h>*',nc),{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:nc,start:'top 78%'}});gsap.from($$('.nc-i,.nc-v',nc),{y:40,opacity:0,duration:.8,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:$('.nc-b',nc),start:'top 82%'}})}
-if(sb&&!small){const big=$('.big',sb),txt=big.textContent;big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
-  big.innerHTML=txt.split(' ').map(w=>`<span class="w" aria-hidden="true">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ');
-  const S=stage(sb,140,100);sbW=S.w;sb.classList.add('run');const ch=$$('.ch',big),travel=()=>-(big.scrollWidth-innerWidth+parseFloat(getComputedStyle(sb).paddingLeft)*2);
+if(sb&&!small){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
+  const cut=txt.indexOf(' ',txt.indexOf(' ')+1),L=[txt.slice(0,cut),txt.slice(cut+1)];
+  big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
+  const S=stage(sb,120,100);sbW=S.w;sb.classList.add('run');const ch=$$('.ch',big);
   const t=gsap.timeline({scrollTrigger:S.st});
-  t.fromTo(ch,{yPercent:120,opacity:0,rotate:8},{yPercent:0,opacity:1,rotate:0,stagger:.012,duration:.35,ease:'back.out(1.6)'},0)
-   .fromTo(big,{x:()=>innerWidth*.12},{x:travel,duration:1,ease:'none'},.15)}
+  t.fromTo(ch,{yPercent:110,opacity:0},{yPercent:0,opacity:1,stagger:.012,duration:.3,ease:'power3.out'},0)
+   .fromTo($('.l0',big),{x:()=>innerWidth*.06},{x:()=>-innerWidth*.06,duration:1,ease:'none'},0)
+   .fromTo($('.l1',big),{x:()=>-innerWidth*.06},{x:()=>innerWidth*.06,duration:1,ease:'none'},0)}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
 /* formats : une photo principale par format, on passe à la suivante avec les flèches, au clavier ou en glissant */
 $$('.fy .gal').forEach(g=>{const F=$$('figure',g);let i=0;g.classList.add('car');
@@ -79,7 +81,7 @@ const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240)+(small?
     .to(parts,{opacity:1,y:0,stagger:.035,duration:.35,ease:'power2.out'},b+.75);});t.to({}, {duration:.5});
 
   /* le menu suit les pages blanches : Classique, puis Complet */
-  const at=x=>()=>`top+=${innerHeight*len/100*x/t.duration()} top`;lit(w,'top 60px',w,at(2.9));lit(w,at(5.9),'.nx','bottom 60px');}
+  const at=x=>()=>`top+=${innerHeight*len/100*x/t.duration()} top`;lit(w,'top 60px',w,at(2.9));lit(w,at(5.9),w,()=>`bottom top`);}
 /* page conducteur : la photo part d'une carte et s'ouvre sur tout l'écran, uniquement en transform */
 const dh=$('.dh'),rd=$('.rd');let dhW,rdW;
 if(dh&&!small){const fg=$('.dhi',dh),tx=$('.dht',dh),t2=$('.dh2',dh),len=170,S=stage(dh,len,100),t=gsap.timeline({scrollTrigger:S.st});dhW=S.w;dhW.style.marginTop=-$('.bar').offsetHeight+'px';
@@ -97,10 +99,17 @@ if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 6
 /* expertise : les quatre étapes arrivent l'une après l'autre ; la section reste en place pendant que la suivante passe par-dessus */
 const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
   if(small||innerWidth<=1000)C.forEach(k=>gsap.from(k,{y:40,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:k,start:'top 88%'}}));
-  else{const T=gsap.timeline({scrollTrigger:{trigger:nx,start:'top 65%',end:'top 5%',scrub:.6}});
-   T.from($$('.nx-h>*',nx),{y:80,opacity:0,stagger:.1,duration:.5,ease:'power2.out'},0)
-    .from(C,{'--l':0,duration:.6,stagger:.12,ease:'power2.inOut'},.2)
-    .from(C.map(c=>[...c.children]),{y:40,opacity:0,stagger:.04,duration:.4,ease:'power2.out'},.35)}}
+  else{nx.classList.add('story');const big=document.createElement('div');big.className='nx-big';big.setAttribute('aria-hidden','true');
+   big.innerHTML=`<b>01</b><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;$('.nx-g',nx).before(big);
+   const B=$('b',big),I=$$('.nx-bar i',big),css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+   let cur=-1;const show=i=>{if(i===cur)return;const back=i<cur;cur=i;B.textContent=String(i+1).padStart(2,'0');
+     C.forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('past',k<i)});I.forEach((x,k)=>x.classList.toggle('on',k<=i));
+     gsap.fromTo(B,{yPercent:back?-60:60,opacity:0},{yPercent:0,opacity:1,duration:.45,ease:'power3.out'})};
+   show(0);const len=320,S=stage(nx,len);
+   gsap.timeline({scrollTrigger:{...S.st,onUpdate:s=>show(Math.min(C.length-1,Math.floor(s.progress*C.length*1.0001)))}})
+    .fromTo(nx,{backgroundColor:()=>css('--sig'),color:()=>css('--sigt')},{backgroundColor:()=>css('--bg'),color:()=>css('--ink'),ease:'power1.inOut',duration:.12,immediateRender:false},.44).to({},{duration:.44});
+   gsap.from([$('.nx-h',nx),big],{y:60,opacity:0,duration:.8,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:S.w,start:'top 70%'}});
+   lit(S.w,'top 60px',S.w,`+=${len*.45}%`)}}
 /* application : uniquement des transformations et de l'opacité. L'étape active est en grand avec son exemple, les précédentes rétrécissent au-dessus */
 const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li=$$('.ro li',st),ps=$$('.ps',st),tp=$('.tap',st),spl=$('.spl',st),ttl=$('.ttl',st),n=ps.length,S=stage(st,n*90),t=gsap.timeline({scrollTrigger:S.st}),H=()=>small?0:$('b',li[0]).offsetHeight*.5+6;
   gsap.set(ps,{xPercent:i=>i?100:0});gsap.set(li,{opacity:0,y:small?0:40});
