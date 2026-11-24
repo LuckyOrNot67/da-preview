@@ -380,3 +380,12 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 .fy .say{font-size:clamp(24px,min(2.6vw,4.6vh),40px);line-height:1.1;letter-spacing:-0.01em}
 .fy dl{font-size:clamp(15px,min(1.25vw,2.5vh),18px);gap:12px 18px}
 .fy .zs{margin:4px 0 0}.fy .zs li{font-size:13px;padding:5px 12px}
+/* Concept : le texte glisse avec sa photo */
+.vb2 .nc-l{display:block}
+.vb2 .nc-i,.vb2 .nc-i:not(.on){display:flex;flex-direction:column;justify-content:center;position:absolute;inset:0;transform:translateX(calc(100vw));transition:transform .75s cubic-bezier(.65,0,.35,1)}
+.vb2 .nc-i.on{transform:none}.vb2 .nc-i.past{transform:translateX(-100vw)}
+.vb2 .nc-i.on .nc-p>div>*,.vb2 .nc-i.on .nc-t{animation:none}
+.vb2 .nc-l{left:0;right:0;top:84px;bottom:24px;width:auto;overflow:hidden;border-radius:26px}
+.vb2 .nc-i,.vb2 .nc-i:not(.on){padding:0 clamp(20px,3vw,48px);transform:translateX(100%)}
+.vb2 .nc-i.on{transform:none}.vb2 .nc-i.past{transform:translateX(-100%)}
+.vb2 .nc-i>*{max-width:min(460px,42%)}

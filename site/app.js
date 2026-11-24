@@ -32,7 +32,7 @@ fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then
 /* concept : les volets s'ouvrent au clic sur téléphone ; sur ordinateur, la photo plein cadre change au défilement (plus bas) */
 const nc=$('.nc'),wide=innerWidth>760;let showNc=null;
 if(nc){const I=$$('.nc-i',nc),V=$$('.nc-v img',nc);let cur=-1;nc.classList.add('js');
-  showNc=i=>{if(i===cur)return;cur=i;I.forEach((x,k)=>{x.classList.toggle('on',k===i);$('.nc-t',x).setAttribute('aria-expanded',k===i)});V.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)})};
+  showNc=i=>{if(i===cur)return;cur=i;I.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i);$('.nc-t',x).setAttribute('aria-expanded',k===i)});V.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)})};
   if(wide&&MO&&window.gsap){nc.classList.add('vb','vb2');const n=document.createElement('ol');n.className='vb-n';n.setAttribute('aria-hidden','true');n.innerHTML=I.map((x,k)=>`<li>${String(k+1).padStart(2,'0')}</li>`).join('');$('.nc-b',nc).append(n)}
   else I.forEach((x,i)=>$('.nc-t',x).addEventListener('click',()=>showNc(i)));
   showNc(0)}
