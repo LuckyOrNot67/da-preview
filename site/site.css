@@ -460,3 +460,49 @@ footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 
 .fst .fy,.fst .fy:nth-child(2),.fst .fy:first-child{box-shadow:inset 0 1px 0 rgba(244,244,242,.22)}
 /* « Trois façons » : pas une carte, juste le fond noir ; elle recule quand même sous Classique */
 .sb.card{border-radius:0;box-shadow:none}
+/* Mobile (24 novembre) : les mêmes principes que sur ordinateur, mis en page pour le téléphone */
+@media (max-width:760px){
+  /* Concept : photo plein cadre, le texte posé en bas, photo et texte glissent ensemble */
+  .vb .nc-b{height:100svh;padding:72px 0 12px;margin-top:0}
+  .vb2 .nc-b{display:block;grid-template-columns:none}
+  .vb2 .nc-v{display:block;inset:72px 10px 12px;border-radius:22px;overflow:hidden}
+  .vb2 .nc-v:after{background:linear-gradient(to top,rgba(11,11,13,.92),rgba(11,11,13,.55) 45%,rgba(11,11,13,.05) 75%)}
+  .vb2 .nc-v img{width:100%;height:100%;object-fit:cover}
+  .vb2 .nc-l{top:72px;bottom:12px;left:10px;right:10px;border-radius:22px}
+  .vb2 .nc-i,.vb2 .nc-i:not(.on){justify-content:flex-end;padding:0 20px 26px}
+  .vb2 .nc-i>*{max-width:none}
+  .vb2 .nc-m{display:none}
+  .vb2 .nc-t{font-size:calc(30px*var(--ds));padding-bottom:6px}
+  .vb2 .nc-p .pts li{font-size:14px}
+  .vb-n{top:88px;right:24px}.vb-n li{font-size:12px;padding:5px 9px}
+  .nc .stk{margin-top:clamp(48px,8vh,90px)}
+  /* « Trois façons » : trois lignes, les lettres arrivent puis glissent en sens contraire */
+  .sb.run .big{font-size:calc(13.5vw*var(--ds));line-height:1.04;white-space:normal}
+  .sb.run .l{white-space:nowrap}
+  /* Formats : le nom en haut, la photo en grand, la fiche dessous */
+  .mo .fb{top:calc(76px + min(19vw,16vh)*var(--ds)*.6 + 12px);bottom:14px;left:var(--g);right:var(--g);display:flex;flex-direction:column;gap:14px;grid-template-columns:none}
+  .fb .gal{order:-1;flex:none;aspect-ratio:16/11;height:auto;display:block}
+  .fy .inf{gap:10px;justify-content:flex-start;min-height:0}
+  .fy .say{font-size:calc(21px*var(--ds));line-height:1.12}
+  .fy dl{font-size:13.5px;gap:6px 12px;grid-template-columns:auto 1fr}
+  .fy .zs{gap:6px}.fy .zs li{font-size:11.5px;padding:4px 10px}
+  .fy .sur{display:block;font-size:12px}
+  .car-n{bottom:8px}
+  /* Expertise : le grand numéro et la barre en haut, une étape à la fois dessous */
+  .nx.story{height:100svh;padding:76px var(--g) 22px;grid-template-columns:1fr;grid-template-rows:auto auto 1fr;row-gap:16px}
+  .nx.story .nx-h{grid-column:1;grid-row:1}
+  .nx-big{grid-column:1;grid-row:2;display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+  .nx-big b{font-size:calc(min(30vw,17vh)*var(--ds))}
+  .nx-bar{flex:1;max-width:none;margin-bottom:10px}
+  .nx.story .nx-g{grid-column:1;grid-row:3}
+  .nx.story .nx-c{justify-content:flex-start}
+  .nx.story .nx-c h3{font-size:calc(30px*var(--ds))}
+  .nx.story .nx-c p{font-size:16px}
+  .nx.story .nx-m li{font-size:14px}
+}
+@media (max-width:760px){
+  .sb.run .big{font-size:calc(12.5vw*var(--ds))}
+  .fb .gal{flex:1 1 auto;aspect-ratio:auto;min-height:180px}
+  .fy .inf{flex:none}
+  .h1g .art{width:100%;margin:6px 0 0}
+}

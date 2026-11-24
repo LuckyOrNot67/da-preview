@@ -33,7 +33,7 @@ fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then
 const nc=$('.nc'),wide=innerWidth>760;let showNc=null;
 if(nc){const I=$$('.nc-i',nc),V=$$('.nc-v img',nc);let cur=-1;nc.classList.add('js');
   showNc=i=>{if(i===cur)return;cur=i;I.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i);$('.nc-t',x).setAttribute('aria-expanded',k===i)});V.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)})};
-  if(wide&&MO&&window.gsap){nc.classList.add('vb','vb2');const n=document.createElement('ol');n.className='vb-n';n.setAttribute('aria-hidden','true');n.innerHTML=I.map((x,k)=>`<li>${String(k+1).padStart(2,'0')}</li>`).join('');$('.nc-b',nc).append(n)}
+  if(MO&&window.gsap){nc.classList.add('vb','vb2');const n=document.createElement('ol');n.className='vb-n';n.setAttribute('aria-hidden','true');n.innerHTML=I.map((x,k)=>`<li>${String(k+1).padStart(2,'0')}</li>`).join('');$('.nc-b',nc).append(n)}
   else I.forEach((x,i)=>$('.nc-t',x).addEventListener('click',()=>showNc(i)));
   showNc(0)}
 if(!MO||!window.gsap)return;
@@ -50,19 +50,18 @@ const lit=(trigger,start,endTrigger,end)=>ScrollTrigger.create({trigger,start,en
 /* concept : scroll continu, chaque carte ralentit en arrivant, puis tout le paquet monte ensemble */
 const sb=$('.sb');let sbW;
 /* concept sur ordinateur : on descend, la photo plein cadre arrive, puis chaque volet prend sa place au défilement */
-if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,290),L=$$('.vb-n li',b);
+if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,250),L=$$('.vb-n li',b);
   gsap.fromTo($$('.nc-h>*',nc),{y:70,opacity:0},{y:0,opacity:1,stagger:.12,ease:'power2.out',scrollTrigger:{trigger:$('.nc-h',nc),start:'top 85%',end:'top 35%',scrub:.6}});
-  ScrollTrigger.create({...S.st,onUpdate:s=>{const i=Math.min(2,Math.floor(s.progress*3.5));showNc(i);L.forEach((x,k)=>x.classList.toggle('on',k===i))}})}
-if(nc&&small){gsap.from($$('.nc-h>*',nc),{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:nc,start:'top 78%'}});gsap.from($$('.nc-i,.nc-v',nc),{y:40,opacity:0,duration:.8,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:$('.nc-b',nc),start:'top 82%'}})}
-if(sb&&!small){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
-  const cut=txt.indexOf(' ',txt.indexOf(' ')+1),L=[txt.slice(0,cut),txt.slice(cut+1)];
+  ScrollTrigger.create({...S.st,onUpdate:s=>{const i=Math.min(2,Math.floor(s.progress*3.25));showNc(i);L.forEach((x,k)=>x.classList.toggle('on',k===i))}})}
+if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
+  const W=txt.split(' '),L=small?[W.slice(0,2).join(' '),W.slice(2,3).join(' '),W.slice(3).join(' ')]:[W.slice(0,2).join(' '),W.slice(2).join(' ')];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
   const S=stage(sb,120,100);sbW=S.w;sb.classList.add('run');const ch=$$('.ch',big);
   const t=gsap.timeline({scrollTrigger:S.st});
   t.fromTo(ch,{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.2});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};
   gsap.fromTo($('.l0',big),{x:()=>innerWidth*.12},{x:()=>-innerWidth*.14,ease:'none',scrollTrigger:drift});
-  gsap.fromTo($('.l1',big),{x:()=>-innerWidth*.12},{x:()=>innerWidth*.14,ease:'none',scrollTrigger:drift});
+  $$('.l',big).forEach((l,k)=>{if(!k)return;const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*.12},{x:()=>-s*innerWidth*.14,ease:'none',scrollTrigger:drift})});
   sb.classList.add('card');cover(sb,S.w,120,100);
   gsap.fromTo(sb,{opacity:1},{opacity:.3,ease:'none',immediateRender:false,scrollTrigger:{trigger:S.w,start:()=>`top+=${innerHeight*1.2} top`,end:'+=100%',scrub:true}})}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
@@ -74,14 +73,14 @@ $$('.fy .gal').forEach(g=>{const F=$$('figure',g);let i=0;g.classList.add('car')
   g.tabIndex=0;g.setAttribute('aria-label','Photos du format, flèches gauche et droite pour changer');g.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
   let x0=null;g.addEventListener('pointerdown',e=>{x0=e.clientX});g.addEventListener('pointerup',e=>{if(x0!=null&&Math.abs(e.clientX-x0)>40)go(i+(e.clientX<x0?1:-1));x0=null});
   go(0)});
-const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?284:320)+(small?60:120),{w,st}=stage(f,len,0),t=gsap.timeline({scrollTrigger:st});
+const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?248:280)+(small?40:90),{w,st}=stage(f,len,0),t=gsap.timeline({scrollTrigger:st});
   if(sbW)w.classList.add('over');
-  A.forEach((a,i)=>{const b=i*4,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal',a),parts=[$('.say',inf),...$$('dl>*',inf),...$$('.zs li',inf),$('.sur',inf)].filter(Boolean);
+  A.forEach((a,i)=>{const b=i*3.5,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal',a),parts=[$('.say',inf),...$$('dl>*',inf),...$$('.zs li',inf),$('.sur',inf)].filter(Boolean);
    gsap.set(parts,{opacity:0,y:24});gsap.set(m,{y:()=>(innerHeight-74-m.offsetHeight)/2});
    if(i){t.fromTo(a,{yPercent:102},{yPercent:0,duration:1,ease:'power1.inOut'},b-1).to(A[i-1],{scale:.94,duration:1,ease:'power1.inOut'},b-1)}
    t.to(m,{y:0,scale:small?.6:.48,duration:.7,ease:'power1.inOut'},b+.3)
     .fromTo(g,{y:()=>innerHeight*.5,opacity:0,scale:.82,rotate:-2},{y:0,opacity:1,scale:1,rotate:0,duration:.7,ease:'power3.out'},b+1.05)
-    .to(parts,{opacity:1,y:0,stagger:.035,duration:.35,ease:'power2.out'},b+1.3);});t.to({}, {duration:1.4});
+    .to(parts,{opacity:1,y:0,stagger:.035,duration:.35,ease:'power2.out'},b+1.3);});t.to({}, {duration:.95});
 
   /* le menu suit les pages blanches : Classique, puis Complet */
 }
@@ -101,8 +100,7 @@ if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*
 if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
 /* expertise : les quatre étapes arrivent l'une après l'autre ; la section reste en place pendant que la suivante passe par-dessus */
 const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
-  if(small||innerWidth<=1000)C.forEach(k=>gsap.from(k,{y:40,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:k,start:'top 88%'}}));
-  else{nx.classList.add('story');const big=document.createElement('div');big.className='nx-big';big.setAttribute('aria-hidden','true');
+  {nx.classList.add('story');const big=document.createElement('div');big.className='nx-big';big.setAttribute('aria-hidden','true');
    big.innerHTML=`<b>01</b><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;$('.nx-g',nx).before(big);
    const B=$('b',big),I=$$('.nx-bar i',big),css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
    let cur=-1;const show=i=>{if(i===cur)return;const back=i<cur;cur=i;B.textContent=String(i+1).padStart(2,'0');
