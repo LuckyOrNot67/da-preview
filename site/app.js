@@ -101,7 +101,15 @@ if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*
 if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
 /* expertise : les quatre étapes arrivent l'une après l'autre ; la section reste en place pendant que la suivante passe par-dessus */
 const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
-  {nx.classList.add('story');const big=document.createElement('div');big.className='nx-big';big.setAttribute('aria-hidden','true');
+  if(small){nx.classList.add('ms');const h=$('.nx-h',nx),hb=$('.big',h);hb.setAttribute('aria-label',hb.textContent.trim());
+   hb.innerHTML=['Notre','expertise'].map((l,k)=>`<span class="l l${k}" aria-hidden="true"><span class="w">${[...l].map(c=>`<span class="ch">${c}</span>`).join('')}</span></span>`).join('');
+   const S0=stage(h,100,0);gsap.timeline({scrollTrigger:S0.st}).fromTo($$('.ch',hb),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.03,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
+   const dr={trigger:S0.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};$$('.l',hb).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*.03},{x:()=>-s*innerWidth*.035,ease:'none',scrollTrigger:dr})});
+   const g=$('.nx-g',nx),box=document.createElement('div');box.className='ms-b';g.before(box);box.append(g);
+   const ft=document.createElement('div');ft.className='ms-f';ft.setAttribute('aria-hidden','true');ft.innerHTML=`<b>01</b><span>/ ${String(C.length).padStart(2,'0')}</span><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;box.append(ft);
+   const B=$('b',ft),I=$$('.nx-bar i',ft);let cur=-1;const show=i=>{if(i===cur)return;cur=i;B.textContent=String(i+1).padStart(2,'0');C.forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('past',k<i)});I.forEach((x,k)=>x.classList.toggle('on',k<=i))};
+   show(0);const S=stage(box,300,0);ScrollTrigger.create({...S.st,onUpdate:s=>show(Math.min(C.length-1,Math.floor(s.progress*(C.length+.4))))})}
+  else{nx.classList.add('story');const big=document.createElement('div');big.className='nx-big';big.setAttribute('aria-hidden','true');
    big.innerHTML=`<b>01</b><span class="nx-bar">${C.map(()=>'<i></i>').join('')}</span>`;$('.nx-g',nx).before(big);
    const B=$('b',big),I=$$('.nx-bar i',big),css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
    let cur=-1;const show=i=>{if(i===cur)return;const back=i<cur;cur=i;B.textContent=String(i+1).padStart(2,'0');

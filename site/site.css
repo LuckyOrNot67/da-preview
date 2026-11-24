@@ -590,3 +590,23 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 }
 .nc-h.run .huge{font-size:calc(min(4.2vw,11vh)*var(--ds))}
 @media (max-width:760px){.nc-h.run .huge{font-size:calc(9.6vw*var(--ds))}}
+/* Expertise sur téléphone : écran titre, puis une carte par étape qui glisse de droite à gauche */
+@media (max-width:760px){
+  .nx.ms{display:block;height:auto;min-height:0;padding:0;border-radius:0;box-shadow:none;background:var(--bg);color:var(--ink)}
+  .nx.ms .nx-h{height:100svh;margin:0;padding:72px 0 12px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .nx.ms .nx-h .big{font-size:calc(17vw*var(--ds));line-height:1;display:grid;justify-items:center;margin:0;color:var(--ink);letter-spacing:-.02em}
+  .nx.ms .l{display:block;white-space:nowrap}.nx.ms .w,.nx.ms .ch{display:inline-block}
+  .ms-b{height:100svh;position:relative;padding:80px var(--g) 22px;display:flex;flex-direction:column;gap:18px;overflow:hidden}
+  .ms-b .nx-g{position:relative;flex:1;display:block;margin:0;height:auto}
+  .ms-b .nx-c{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:26px 22px;border:0;border-radius:24px;box-shadow:inset 0 0 0 1px rgba(244,244,242,.14);background:var(--bg);opacity:1;pointer-events:auto;transform:translateX(112%);transition:transform .7s cubic-bezier(.65,0,.35,1)}
+  .ms-b .nx-c:before{display:none}
+  .ms-b .nx-c.on{transform:none}.ms-b .nx-c.past{transform:translateX(-112%)}
+  .ms-b .nx-n{display:block;position:absolute;top:10px;right:18px;font-family:var(--d);font-weight:var(--dw);font-size:calc(min(36vw,22vh)*var(--ds));line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(244,244,242,.28)}
+  .ms-b .nx-c>svg{width:38px;height:38px;margin:0 0 4px}
+  .ms-b .nx-c h3{font-size:calc(30px*var(--ds));margin:0}
+  .ms-b .nx-c p{font-size:16px;color:var(--mut);margin:0;max-width:none;opacity:1}
+  .ms-b .nx-m{margin-top:8px}.ms-b .nx-m li{font-size:15px}
+  .ms-f{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+  .ms-f span:not(.nx-bar){color:var(--mut)}
+  .ms-f .nx-bar{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-left:10px;max-width:none}
+}
