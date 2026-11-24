@@ -452,3 +452,11 @@ footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 
 /* Passe du 24 novembre (6) : la carte Classique se voit passer par-dessus « Trois façons » */
 .fst .fy:first-child{box-shadow:0 -1px 0 rgba(244,244,242,.22),0 -30px 80px rgba(0,0,0,.9);border-radius:clamp(20px,3vw,40px) clamp(20px,3vw,40px) 0 0}
 .sb.card{box-shadow:inset 0 0 0 1px rgba(244,244,242,.10)}
+/* Passe du 24 novembre (7) */
+/* Barre et pied de page : blancs ensemble ou noirs ensemble */
+[data-ft=blanc] .bar{background:var(--sig);color:var(--sigt)}[data-ft=blanc] .bar .logo i{background:currentColor}[data-ft=blanc] .bar .btn{background:var(--sigt);color:var(--sig)}
+/* « Trois façons » : une carte blanche posée dans le noir, pour qu'on voie Classique passer dessus */
+.sb.card{background:var(--sig);color:var(--sigt);box-shadow:none;clip-path:inset(clamp(72px,9vh,86px) clamp(12px,1.4vw,22px) clamp(12px,1.4vw,22px) round clamp(20px,3vw,40px))}
+/* Formats : de vraies cartes découpées, sans fond noir dans les coins, avec le même liseré clair sur toute la largeur */
+.mo .f2 .stk,.f2 .stk,.f2 .stk.over{background:transparent}
+.fst .fy,.fst .fy:nth-child(2),.fst .fy:first-child{box-shadow:inset 0 1px 0 rgba(244,244,242,.22)}
