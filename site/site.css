@@ -506,3 +506,40 @@ footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 
   .fy .inf{flex:none}
   .h1g .art{width:100%;margin:6px 0 0}
 }
+/* Passe du 25 novembre : plus de panneau de réglages ; menu mobile qui se déroule ; pages mobiles pleines */
+.bar{padding-left:var(--g)}
+.cfgb,.cfg{display:none!important}
+@media (max-width:1000px){
+  .bar .acts .btn.sm,.bar .acts .drv{display:none}
+  .menu.burg{display:inline-grid;place-content:center;gap:6px;width:44px;height:44px;min-height:0;padding:0;margin-right:-10px;border-radius:0;box-shadow:none;background:none;color:inherit}
+  .burg i{display:block;width:20px;height:1.5px;border-radius:2px;background:currentColor;transition:transform .35s cubic-bezier(.65,0,.35,1)}
+  .burg.x i:first-child{transform:translateY(3.75px) rotate(45deg)}.burg.x i:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+  .sheet.sh2{display:flex;justify-content:flex-start;gap:0;padding:84px var(--g) 30px;background:var(--bg);visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .5s cubic-bezier(.65,0,.35,1),visibility 0s .5s}
+  .sheet.sh2.open{visibility:visible;clip-path:inset(0 0 0 0);transition:clip-path .5s cubic-bezier(.65,0,.35,1)}
+  .sh2 a{font-family:var(--d);font-weight:var(--dw);font-size:calc(34px*var(--ds));letter-spacing:-.02em;text-transform:uppercase;padding:10px 0;color:var(--ink);opacity:0;transform:translateY(-14px);transition:opacity .25s,transform .25s}
+  .sh2.open a{opacity:1;transform:none;transition:opacity .4s calc(.12s + var(--i)*.045s),transform .5s cubic-bezier(.2,.8,.2,1) calc(.12s + var(--i)*.045s)}
+  .sh2 a[href*="demande"],.sh2 a[href*="conducteur"],.sh2 a[href="../"]{font-family:var(--b,Inter),system-ui,sans-serif;font-weight:600;font-size:17px;letter-spacing:0;text-transform:none;color:var(--mut);padding:8px 0}
+  .sh2 a[href*="demande"]{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+}
+@media (max-width:760px){
+  /* haut de page : le titre en haut, la voiture au centre, le texte et les boutons en bas, sur tout l'écran */
+  .h1g{display:flex;flex-direction:column;min-height:calc(100svh - 68px);padding-top:18px;padding-bottom:28px}
+  .mo .h1g{min-height:calc(100svh - 68px);padding-top:18px}
+  .h1g .art{margin:auto 0;width:100%}
+  .h1g .foot{margin-top:0}
+  /* formats : une photo plus petite, la fiche aérée, le tout centré dans la page */
+  .mo .fb{justify-content:center;gap:22px}
+  .fb .gal{flex:none;aspect-ratio:16/10;min-height:0}
+  .fy .inf{flex:none;gap:16px}
+  .fy .say{font-size:calc(23px*var(--ds))}
+  .fy dl{font-size:15px;gap:10px 14px}
+  .fy .zs li{font-size:12.5px;padding:5px 11px}
+  .fy .sur{font-size:13px}
+  /* expertise : l'étape est centrée dans la place qui reste */
+  .nx.story{row-gap:clamp(14px,3vh,28px);padding-bottom:clamp(24px,5vh,48px)}
+  .nx.story .nx-c{justify-content:center}
+  .nx.story .nx-c h3{font-size:calc(34px*var(--ds))}
+  .nx.story .nx-c p{font-size:17px}
+  .nx.story .nx-m li{font-size:16px}
+  .nx-big b{font-size:calc(min(34vw,19vh)*var(--ds))}
+}
