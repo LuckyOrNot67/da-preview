@@ -443,3 +443,9 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 .nx .eye{color:var(--mut);opacity:1}
 /* Formats : le même noir que le reste du site ; seul un liseré et l'ombre marquent la page qui arrive */
 .fst .fy,.fst .fy:nth-child(2){background:var(--bg);box-shadow:0 -1px 0 var(--line),0 -24px 60px rgba(0,0,0,.6)}
+/* « Trois façons » recule comme une carte quand Classique passe dessus */
+.sb.card{background:var(--bg);transform-origin:center top;border-radius:clamp(20px,3vw,40px)}
+/* Pied de page : noir (par défaut) ou blanc, au choix dans le panneau de réglages */
+footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 -1px 0 var(--line),0 -24px 60px rgba(0,0,0,.6)}
+[data-ft=blanc] footer{background:var(--sig);color:var(--sigt);box-shadow:0 -24px 60px rgba(0,0,0,.5)}
+[data-ft=blanc] footer .fine{color:color-mix(in srgb,var(--sigt) 60%,transparent)}

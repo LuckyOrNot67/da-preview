@@ -4,22 +4,22 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 /* réglages */
 const SEC=[];
 const COL=[['noir','Noir et blanc'],['violet','Violet'],['rouge','Rouge'],['orange','Orange'],['jaune','Jaune']],FONT=[['1','Condensée'],['2','Grasse'],['3','Éditoriale'],['4','Arrondie']];
-const KEYS=['m','ov'];
+const KEYS=['m','ov','ft'];
 const keep=()=>{try{localStorage.setItem('adsmove-cfg1',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
 const row=(key,t,opts)=>`<div><h2>${t}</h2><div class="o" data-k="${key}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${D[key]===v}">${l}</button>`).join('')}</div></div>`;
 const cfg=$('#cfg'),cb=$('#cfgb');
 if(cfg){
 const cfg=$('#cfg'),cb=$('#cfgb');
-cfg.innerHTML=row('m','Mode',[['nuit','Nuit'],['jour','Jour']])+row('ov','Logo',[['non','OV séparés'],['oui','OV liés']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
+cfg.innerHTML=row('m','Mode',[['nuit','Nuit'],['jour','Jour']])+row('ov','Logo',[['non','OV séparés'],['oui','OV liés']])+row('ft','Pied de page',[['noir','Noir'],['blanc','Blanc']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
 const openC=o=>{cfg.hidden=!o;cb.setAttribute('aria-expanded',o);try{sessionStorage.setItem('roam-open',o?'1':'')}catch(e){}};
 cb.addEventListener('click',()=>openC(cfg.hidden));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb.focus()}});
 cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep();
   if(k==='m'){location.reload();return}
-  if(k==='ov')return;
+  if(k==='ov'||k==='ft')return;
   if(k==='f'){window.ScrollTrigger&&ScrollTrigger.refresh();return}
   try{sessionStorage.setItem('roam-go',k)}catch(e){}location.search='';location.reload()});
-$('#cfgc').addEventListener('click',async()=>{const t='Mode : '+D.m+'\nLogo : OV '+(D.ov==='oui'?'liés':'séparés');try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
+$('#cfgc').addEventListener('click',async()=>{const t='Mode : '+D.m+'\nLogo : OV '+(D.ov==='oui'?'liés':'séparés')+'\nPied de page : '+(D.ft==='blanc'?'blanc':'noir');try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
 $('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg1')}catch(e){}location.reload()});
 try{if(sessionStorage.getItem('roam-open'))openC(true);const g=sessionStorage.getItem('roam-go');if(g){sessionStorage.removeItem('roam-go');addEventListener('load',()=>setTimeout(()=>{const n=$(`[data-sec=${g}]`);if(n)scrollTo(0,n.getBoundingClientRect().top+scrollY-60)},250))}}catch(e){}
 }
@@ -62,7 +62,8 @@ if(sb&&!small){const big=$('.big',sb),txt=big.textContent.trim();big.classList.r
   t.fromTo(ch,{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.2});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};
   gsap.fromTo($('.l0',big),{x:()=>innerWidth*.12},{x:()=>-innerWidth*.14,ease:'none',scrollTrigger:drift});
-  gsap.fromTo($('.l1',big),{x:()=>-innerWidth*.12},{x:()=>innerWidth*.14,ease:'none',scrollTrigger:drift})}
+  gsap.fromTo($('.l1',big),{x:()=>-innerWidth*.12},{x:()=>innerWidth*.14,ease:'none',scrollTrigger:drift});
+  sb.classList.add('card');cover(sb,S.w,120,100)}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
 /* formats : une photo principale par format, on passe à la suivante avec les flèches, au clavier ou en glissant */
 $$('.fy .gal').forEach(g=>{const F=$$('figure',g);let i=0;g.classList.add('car');
