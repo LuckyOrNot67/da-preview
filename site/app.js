@@ -64,7 +64,7 @@ if(sb&&!small){const big=$('.big',sb),txt=big.textContent.trim();big.classList.r
   gsap.fromTo($('.l0',big),{x:()=>innerWidth*.12},{x:()=>-innerWidth*.14,ease:'none',scrollTrigger:drift});
   gsap.fromTo($('.l1',big),{x:()=>-innerWidth*.12},{x:()=>innerWidth*.14,ease:'none',scrollTrigger:drift});
   sb.classList.add('card');cover(sb,S.w,120,100);
-  gsap.fromTo(sb,{opacity:1},{opacity:.55,ease:'none',immediateRender:false,scrollTrigger:{trigger:S.w,start:()=>`top+=${innerHeight*1.2} top`,end:'+=100%',scrub:true}})}
+  gsap.fromTo(sb,{opacity:1},{opacity:.3,ease:'none',immediateRender:false,scrollTrigger:{trigger:S.w,start:()=>`top+=${innerHeight*1.2} top`,end:'+=100%',scrub:true}})}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
 /* formats : une photo principale par format, on passe à la suivante avec les flèches, au clavier ou en glissant */
 $$('.fy .gal').forEach(g=>{const F=$$('figure',g);let i=0;g.classList.add('car');
