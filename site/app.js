@@ -76,10 +76,10 @@ const f=$('.fst');if(f){const A=$$('.fy',f),len=A.length*(small?213:240)+(small?
   if(sbW)w.classList.add('over');
   A.forEach((a,i)=>{const b=i*3,m=$('.mega',a),inf=$('.inf',a),g=$$('.gal',a),parts=[$('.say',inf),...$$('dl>*',inf),...$$('.zs li',inf),$('.sur',inf)].filter(Boolean);
    gsap.set(parts,{opacity:0,y:24});gsap.set(m,{y:()=>(innerHeight-74-m.offsetHeight)/2});
-   if(i){t.fromTo(a,{yPercent:102},{yPercent:0,duration:1,ease:'power1.inOut'},b-1).to(A[i-1],{scale:.94,opacity:.25,duration:1,ease:'power1.inOut'},b-1)}
+   if(i){t.fromTo(a,{yPercent:102},{yPercent:0,duration:1,ease:'power1.inOut'},b-1).to(A[i-1],{scale:.94,duration:1,ease:'power1.inOut'},b-1)}
    t.to(m,{y:0,scale:small?.6:.48,duration:.7,ease:'power1.inOut'},b+.3)
-    .fromTo(g,{y:()=>innerHeight*.5,opacity:0,scale:.82,rotate:-2},{y:0,opacity:1,scale:1,rotate:0,duration:.7,ease:'power3.out'},b+.45)
-    .to(parts,{opacity:1,y:0,stagger:.035,duration:.35,ease:'power2.out'},b+.75);});t.to({}, {duration:.5});
+    .fromTo(g,{y:()=>innerHeight*.5,opacity:0,scale:.82,rotate:-2},{y:0,opacity:1,scale:1,rotate:0,duration:.7,ease:'power3.out'},b+1.05)
+    .to(parts,{opacity:1,y:0,stagger:.035,duration:.35,ease:'power2.out'},b+1.3);});t.to({}, {duration:.5});
 
   /* le menu suit les pages blanches : Classique, puis Complet */
 }

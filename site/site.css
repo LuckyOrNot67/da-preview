@@ -441,3 +441,5 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 .mo .f2 .stk,.f2 .stk{background:var(--bg)}
 .nx,.nx.story{background:var(--bg);color:var(--ink)}
 .nx .eye{color:var(--mut);opacity:1}
+/* Formats : le même noir que le reste du site ; seul un liseré et l'ombre marquent la page qui arrive */
+.fst .fy,.fst .fy:nth-child(2){background:var(--bg);box-shadow:0 -1px 0 var(--line),0 -24px 60px rgba(0,0,0,.6)}
