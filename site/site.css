@@ -573,3 +573,20 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
   .nx.story .nx-c{justify-content:flex-start}
 }
 .cfgb{left:auto;right:12px}.cfg{left:auto;right:12px}
+/* Passe du 25 novembre (3) : titre du Concept animé, Expertise mobile en bloc centré */
+.nc{padding-top:0}.nc .stk{margin-top:0}
+.nc-h.run{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:84px 0 22px;overflow:hidden}
+.nc-h.run .huge{max-width:none;font-size:calc(min(4.8vw,12vh)*var(--ds));line-height:1.04;display:grid;justify-items:center}
+.nc-h.run .l{display:block;white-space:nowrap}.nc-h.run .w{display:inline-block;white-space:nowrap}.nc-h.run .ch{display:inline-block}
+@media (max-width:760px){
+  .nc-h,.nc-h.run{min-height:100svh;padding:72px 0 12px}
+  .nc-h.run .huge{font-size:calc(11.5vw*var(--ds));line-height:1.06}
+  /* Expertise : titre, numéro et étape forment un seul bloc au milieu de l'écran, loin de la barre */
+  .nx.story{grid-template-rows:minmax(0,1fr) auto auto auto minmax(0,1fr);padding-top:84px}
+  .nx.story .nx-h{grid-row:2;margin-bottom:clamp(6px,1.5vh,14px)}
+  .nx.story .nx-h .big{font-size:calc(22px*var(--ds));letter-spacing:.02em;color:var(--mut)}
+  .nx-big{grid-row:3}
+  .nx.story .nx-g{grid-row:4}
+}
+.nc-h.run .huge{font-size:calc(min(4.2vw,11vh)*var(--ds))}
+@media (max-width:760px){.nc-h.run .huge{font-size:calc(9.6vw*var(--ds))}}

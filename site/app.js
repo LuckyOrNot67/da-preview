@@ -5,7 +5,7 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 const SEC=[];
 const COL=[['noir','Noir et blanc'],['violet','Violet'],['rouge','Rouge'],['orange','Orange'],['jaune','Jaune']],FONT=[['1','Condensée'],['2','Grasse'],['3','Éditoriale'],['4','Arrondie']];
 const KEYS=['bf','bl'];
-const keep=()=>{try{localStorage.setItem('adsmove-cfg2',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
+const keep=()=>{try{localStorage.setItem('adsmove-cfg3',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
 const row=(key,t,opts)=>`<div><h2>${t}</h2><div class="o" data-k="${key}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${D[key]===v}">${l}</button>`).join('')}</div></div>`;
 const cfg=$('#cfg'),cb=$('#cfgb');
 if(cfg){
@@ -16,7 +16,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb
 cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep()});
 const NM={ant:'anthracite',noir:'noir du site',blanc:'blanc'};
 $('#cfgc').addEventListener('click',async()=>{const t='Barre et pied de page : '+NM[D.bf]+'\nTrait sous la barre : '+D.bl;try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
-$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg2')}catch(e){}location.reload()});
+$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg3')}catch(e){}location.reload()});
 }
 /* texte qui roule au survol */
 $$('.rl').forEach(r=>{r.innerHTML=`<span class="rli">${r.innerHTML}</span>`});
@@ -46,8 +46,14 @@ const lit=()=>{};/* la barre reste noire partout */
 const sb=$('.sb');let sbW;
 /* concept sur ordinateur : on descend, la photo plein cadre arrive, puis chaque volet prend sa place au défilement */
 if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,250),L=$$('.vb-n li',b);
-  gsap.fromTo($$('.nc-h>*',nc),{y:70,opacity:0},{y:0,opacity:1,stagger:.12,ease:'power2.out',scrollTrigger:{trigger:$('.nc-h',nc),start:'top 85%',end:'top 35%',scrub:.6}});
   ScrollTrigger.create({...S.st,onUpdate:s=>{const i=Math.min(2,Math.floor(s.progress*3.25));showNc(i);L.forEach((x,k)=>x.classList.toggle('on',k===i))}})}
+{const nh=$('.nc-h');if(nh){const big=$('.huge',nh),txt=big.textContent.trim();big.setAttribute('aria-label',txt);
+  const L=small?['Des voitures','roulent déjà.',"Autant qu'elles",'parlent de vous.']:['Des voitures roulent déjà.',"Autant qu'elles parlent de vous."];
+  big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
+  const S=stage(nh,110,0);nh.classList.add('run');
+  gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',big),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
+  const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
+  $$('.l',big).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})}}
 if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
   const W=txt.split(' '),L=small?[W.slice(0,2).join(' '),W.slice(2,3).join(' '),W.slice(3).join(' ')]:[W.slice(0,2).join(' '),W.slice(2).join(' ')];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
