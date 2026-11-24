@@ -16,7 +16,7 @@ cb.addEventListener('click',()=>openC(cfg.hidden));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb.focus()}});
 cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep();
   if(k==='m'){location.reload();return}
-  if(k==='ov'||k==='ft')return;
+  if(k==='ft'&&window.ftBar)ftBar();if(k==='ov'||k==='ft')return;
   if(k==='f'){window.ScrollTrigger&&ScrollTrigger.refresh();return}
   try{sessionStorage.setItem('roam-go',k)}catch(e){}location.search='';location.reload()});
 $('#cfgc').addEventListener('click',async()=>{const t='Mode : '+D.m+'\nLogo : OV '+(D.ov==='oui'?'liés':'séparés')+'\nPied de page : '+(D.ft==='blanc'?'blanc':'noir');try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
@@ -63,7 +63,8 @@ if(sb&&!small){const big=$('.big',sb),txt=big.textContent.trim();big.classList.r
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};
   gsap.fromTo($('.l0',big),{x:()=>innerWidth*.12},{x:()=>-innerWidth*.14,ease:'none',scrollTrigger:drift});
   gsap.fromTo($('.l1',big),{x:()=>-innerWidth*.12},{x:()=>innerWidth*.14,ease:'none',scrollTrigger:drift});
-  sb.classList.add('card');cover(sb,S.w,120,100)}
+  sb.classList.add('card');cover(sb,S.w,120,100);
+  gsap.fromTo(sb,{opacity:1},{opacity:.3,ease:'none',immediateRender:false,scrollTrigger:{trigger:S.w,start:()=>`top+=${innerHeight*1.2} top`,end:'+=100%',scrub:true}})}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
 /* formats : une photo principale par format, on passe à la suivante avec les flèches, au clavier ou en glissant */
 $$('.fy .gal').forEach(g=>{const F=$$('figure',g);let i=0;g.classList.add('car');
@@ -122,6 +123,8 @@ const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li
   if(D.app==='1')lit(S.w,'top 60px',S.w,'bottom 60px')}
 /* bloc final : sticky jusqu'au bout, le footer vient se poser dessus sans le cacher entièrement */
 const jw=$('.jnw'),sj=()=>{if(jw)jw.style.top=Math.min(0,innerHeight-jw.offsetHeight)+'px'};sj();addEventListener('resize',sj);
+{const ft=$('footer');if(ft){let on=false;window.ftBar=()=>$('.bar')&&$('.bar').classList.toggle('lite',on&&D.ft==='blanc');
+ ScrollTrigger.create({trigger:ft,start:'top 75%',end:'bottom top',onToggle:s=>{on=s.isActive;ftBar()}})}}
 if($('.endw'))gsap.to('.cta',{scale:.95,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'max',scrub:true}});
 $$('.sb .big,.sb .eye,.cta>h2,.cta>p,.jnh>*,.ct2,.ft').forEach(x=>gsap.from(x,{y:30,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:x,start:'top 88%'}}));
 addEventListener('load',()=>{sj();ScrollTrigger.refresh()});if(document.fonts)document.fonts.ready.then(()=>{sj();ScrollTrigger.refresh()});
