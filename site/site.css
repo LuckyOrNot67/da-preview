@@ -508,7 +508,6 @@ footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 
 }
 /* Passe du 25 novembre : plus de panneau de réglages ; menu mobile qui se déroule ; pages mobiles pleines */
 .bar{padding-left:var(--g)}
-.cfgb,.cfg{display:none!important}
 @media (max-width:1000px){
   .bar .acts .btn.sm,.bar .acts .drv{display:none}
   .menu.burg{display:inline-grid;place-content:center;gap:6px;width:44px;height:44px;min-height:0;padding:0;margin-right:-10px;border-radius:0;box-shadow:none;background:none;color:inherit}
@@ -543,3 +542,34 @@ footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 
   .nx.story .nx-m li{font-size:16px}
   .nx-big b{font-size:calc(min(34vw,19vh)*var(--ds))}
 }
+/* Passe du 25 novembre (2) */
+/* Barre et pied de page : une couleur à part pour qu'on les distingue toujours du contenu */
+:root{--barbg:#1A1A1D}
+[data-bf=noir]{--barbg:var(--bg)}
+.bar,[data-bf] .bar{background:var(--barbg);color:var(--ink)}
+footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
+[data-bf=blanc] .bar{background:var(--sig);color:var(--sigt)}[data-bf=blanc] .bar .logo i{background:currentColor}[data-bf=blanc] .bar .btn{background:var(--sigt);color:var(--sig)}
+[data-bf=blanc] footer{background:var(--sig);color:var(--sigt)}
+[data-bf=blanc] footer .fine{color:color-mix(in srgb,var(--sigt) 60%,transparent)}
+[data-bl=oui] .bar{box-shadow:0 1px 0 rgba(244,244,242,.1)}
+[data-bl=oui][data-bf=blanc] .bar{box-shadow:0 1px 0 rgba(11,11,13,.12)}
+.sheet.sh2{background:var(--barbg)}
+[data-bf=blanc] .sheet.sh2{background:var(--sig)}[data-bf=blanc] .sh2 a{color:var(--sigt)}[data-bf=blanc] .sh2 a[href*="demande"],[data-bf=blanc] .sh2 a[href*="conducteur"]{color:color-mix(in srgb,var(--sigt) 65%,transparent)}
+/* bouton des réglages en bas à gauche, pour ne pas gêner la barre */
+.cfgb{top:auto;bottom:12px}
+.cfg{top:auto;height:auto;max-height:70vh;bottom:64px;left:12px;border-radius:14px;padding:18px 16px}
+@media (max-width:760px){
+  /* haut de page : le texte et les boutons remontent un peu */
+  .h1g,.mo .h1g{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
+  /* Concept : le titre a son propre écran noir, il arrive en fondu, puis la photo */
+  .nc{padding-top:0}
+  .nc-h{min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+  .nc .stk{margin-top:0}
+  /* Expertise : le numéro et l'étape forment un bloc centré dans l'écran */
+  .nx.story{grid-template-rows:auto minmax(0,1fr) auto auto minmax(0,1fr);row-gap:0}
+  .nx.story .nx-h{grid-row:1}
+  .nx-big{grid-row:3}
+  .nx.story .nx-g{grid-row:4;align-self:start;margin-top:clamp(20px,4vh,36px)}
+  .nx.story .nx-c{justify-content:flex-start}
+}
+.cfgb{left:auto;right:12px}.cfg{left:auto;right:12px}

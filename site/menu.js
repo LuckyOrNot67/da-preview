@@ -4,8 +4,8 @@ const old=document.querySelector('[data-menu]'),sn=document.querySelector('[data
 const mb=old.cloneNode(false);old.replaceWith(mb);
 mb.classList.add('burg');mb.setAttribute('aria-label','Ouvrir le menu');mb.innerHTML='<i></i><i></i>';
 sn.classList.add('sh2');[...sn.children].forEach((a,i)=>a.style.setProperty('--i',i));
-const set=o=>{sn.classList.toggle('open',o);mb.classList.toggle('x',o);mb.setAttribute('aria-expanded',o);mb.setAttribute('aria-label',o?'Fermer le menu':'Ouvrir le menu');document.body.style.overflow=o?'hidden':'';sn.inert=!o};
-sn.inert=true;
+const set=o=>{sn.classList.toggle('open',o);mb.classList.toggle('x',o);mb.setAttribute('aria-expanded',o);mb.setAttribute('aria-label',o?'Fermer le menu':'Ouvrir le menu');sn.inert=!o};
+sn.inert=true;['touchmove','wheel'].forEach(t=>sn.addEventListener(t,e=>e.preventDefault(),{passive:false}));
 mb.addEventListener('click',()=>set(!sn.classList.contains('open')));
 sn.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&sn.classList.contains('open')){set(false);mb.focus()}});

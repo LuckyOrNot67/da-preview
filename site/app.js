@@ -4,24 +4,19 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 /* réglages */
 const SEC=[];
 const COL=[['noir','Noir et blanc'],['violet','Violet'],['rouge','Rouge'],['orange','Orange'],['jaune','Jaune']],FONT=[['1','Condensée'],['2','Grasse'],['3','Éditoriale'],['4','Arrondie']];
-const KEYS=['m','ov','ft'];
-const keep=()=>{try{localStorage.setItem('adsmove-cfg1',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
+const KEYS=['bf','bl'];
+const keep=()=>{try{localStorage.setItem('adsmove-cfg2',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
 const row=(key,t,opts)=>`<div><h2>${t}</h2><div class="o" data-k="${key}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${D[key]===v}">${l}</button>`).join('')}</div></div>`;
 const cfg=$('#cfg'),cb=$('#cfgb');
 if(cfg){
-const cfg=$('#cfg'),cb=$('#cfgb');
-cfg.innerHTML=row('m','Mode',[['nuit','Nuit'],['jour','Jour']])+row('ov','Logo',[['non','OV séparés'],['oui','OV liés']])+row('ft','Barre et pied de page',[['noir','Noirs'],['blanc','Blancs']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
-const openC=o=>{cfg.hidden=!o;cb.setAttribute('aria-expanded',o);try{sessionStorage.setItem('roam-open',o?'1':'')}catch(e){}};
+cfg.innerHTML=row('bf','Barre et pied de page',[['ant','Anthracite'],['noir','Noir du site'],['blanc','Blanc']])+row('bl','Trait sous la barre',[['oui','Oui'],['non','Non']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
+const openC=o=>{cfg.hidden=!o;cb.setAttribute('aria-expanded',o)};
 cb.addEventListener('click',()=>openC(cfg.hidden));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb.focus()}});
-cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep();
-  if(k==='m'){location.reload();return}
-  if(k==='ov'||k==='ft')return;
-  if(k==='f'){window.ScrollTrigger&&ScrollTrigger.refresh();return}
-  try{sessionStorage.setItem('roam-go',k)}catch(e){}location.search='';location.reload()});
-$('#cfgc').addEventListener('click',async()=>{const t='Mode : '+D.m+'\nLogo : OV '+(D.ov==='oui'?'liés':'séparés')+'\nBarre et pied de page : '+(D.ft==='blanc'?'blancs':'noirs');try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
-$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg1')}catch(e){}location.reload()});
-try{if(sessionStorage.getItem('roam-open'))openC(true);const g=sessionStorage.getItem('roam-go');if(g){sessionStorage.removeItem('roam-go');addEventListener('load',()=>setTimeout(()=>{const n=$(`[data-sec=${g}]`);if(n)scrollTo(0,n.getBoundingClientRect().top+scrollY-60)},250))}}catch(e){}
+cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep()});
+const NM={ant:'anthracite',noir:'noir du site',blanc:'blanc'};
+$('#cfgc').addEventListener('click',async()=>{const t='Barre et pied de page : '+NM[D.bf]+'\nTrait sous la barre : '+D.bl;try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
+$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg2')}catch(e){}location.reload()});
 }
 /* texte qui roule au survol */
 $$('.rl').forEach(r=>{r.innerHTML=`<span class="rli">${r.innerHTML}</span>`});
@@ -38,7 +33,7 @@ if(nc){const I=$$('.nc-i',nc),V=$$('.nc-v img',nc);let cur=-1;nc.classList.add('
   showNc(0)}
 if(!MO||!window.gsap)return;
 gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
-const small=innerWidth<=760;
+const small=innerWidth<=760;matchMedia('(max-width:760px)').addEventListener('change',()=>location.reload());
 /* scène sticky : le navigateur fixe la section, sans recalcul à chaque image. len = durée en % d'écran, extra = temps laissé à la section suivante pour passer par-dessus */
 const stage=(el,len,extra=0)=>{const w=document.createElement('div');w.className='stk';el.before(w);w.append(el);w.style.height=`calc(100svh + ${len+extra}vh)`;return {w,st:{trigger:w,start:'top top',end:`+=${len}%`,scrub:true,invalidateOnRefresh:true}}};
 const cover=(el,w,len,extra=100)=>gsap.fromTo(el,{scale:1},{scale:.95,ease:'none',transformOrigin:'center top',immediateRender:false,scrollTrigger:{trigger:w,start:()=>`top+=${innerHeight*len/100} top`,end:`+=${extra}%`,scrub:true}});
@@ -60,8 +55,8 @@ if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('f
   const t=gsap.timeline({scrollTrigger:S.st});
   t.fromTo(ch,{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.2});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};
-  gsap.fromTo($('.l0',big),{x:()=>innerWidth*.12},{x:()=>-innerWidth*.14,ease:'none',scrollTrigger:drift});
-  $$('.l',big).forEach((l,k)=>{if(!k)return;const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*.12},{x:()=>-s*innerWidth*.14,ease:'none',scrollTrigger:drift})});
+  const dA=small?.04:.12,dB=small?.05:.14;gsap.fromTo($('.l0',big),{x:()=>innerWidth*dA},{x:()=>-innerWidth*dB,ease:'none',scrollTrigger:drift});
+  $$('.l',big).forEach((l,k)=>{if(!k)return;const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})});
   sb.classList.add('card');cover(sb,S.w,120,100);
   gsap.fromTo(sb,{opacity:1},{opacity:.3,ease:'none',immediateRender:false,scrollTrigger:{trigger:S.w,start:()=>`top+=${innerHeight*1.2} top`,end:'+=100%',scrub:true}})}
 /* formats : le nom en grand, puis il remonte et la fiche et les photos arrivent */
@@ -106,7 +101,8 @@ const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
    let cur=-1;const show=i=>{if(i===cur)return;const back=i<cur;cur=i;B.textContent=String(i+1).padStart(2,'0');
      C.forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('past',k<i)});I.forEach((x,k)=>x.classList.toggle('on',k<=i));
      gsap.fromTo(B,{yPercent:back?-60:60,opacity:0},{yPercent:0,opacity:1,duration:.45,ease:'power3.out'})};
-   show(0);const len=320,S=stage(nx,len);
+   show(0);if(small){const g=$('.nx-g',nx),fitG=()=>{g.style.height='';g.style.height=Math.max(...C.map(c=>{c.style.position='static';const v=c.offsetHeight;c.style.position='';return v}))+'px'};fitG();addEventListener('resize',fitG);if(document.fonts)document.fonts.ready.then(fitG)}
+   const len=320,S=stage(nx,len);
    ScrollTrigger.create({...S.st,onUpdate:s=>show(Math.min(C.length-1,Math.floor(s.progress*C.length*1.0001)))});
    gsap.from([$('.nx-h',nx),big],{y:60,opacity:0,duration:.8,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:S.w,start:'top 70%'}});}}
 /* application : uniquement des transformations et de l'opacité. L'étape active est en grand avec son exemple, les précédentes rétrécissent au-dessus */
