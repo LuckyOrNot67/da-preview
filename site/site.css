@@ -458,3 +458,5 @@ footer,[data-ft=noir] footer{background:var(--bg);color:var(--ink);box-shadow:0 
 /* Formats : de vraies cartes découpées, sans fond noir dans les coins, avec le même liseré clair sur toute la largeur */
 .mo .f2 .stk,.f2 .stk,.f2 .stk.over{background:transparent}
 .fst .fy,.fst .fy:nth-child(2),.fst .fy:first-child{box-shadow:inset 0 1px 0 rgba(244,244,242,.22)}
+/* « Trois façons » : pas une carte, juste le fond noir ; elle recule quand même sous Classique */
+.sb.card{border-radius:0;box-shadow:none}
