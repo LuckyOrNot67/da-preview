@@ -426,3 +426,18 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:600;margin-b
 @media (min-width:761px){.h1g{grid-template-columns:minmax(0,6fr) minmax(0,6fr)}[data-sec=hero] h1{font-size:calc(min(5.4vw,11vh)*var(--ds))}.h1g .art{width:112%}}
 @media (min-width:761px){.h1g{grid-template-rows:1fr 1fr;align-items:stretch}.h1g h1{align-self:end;font-size:calc(min(6vw,12vh)*var(--ds))}.h1g .art{width:130%;align-self:center;margin-left:-6%}}
 @media (min-width:761px){.h1g h1{font-size:calc(min(4.6vw,10vh)*var(--ds))}.h1g h1 .ln>span{white-space:nowrap}.h1g .art{width:116%;margin-left:-4%}}
+/* Passe du 24 novembre (4) : tout le site sur fond noir ; le blanc reste pour les photos et quelques blocs */
+.nc{background:var(--bg);color:var(--ink);padding-top:clamp(140px,34vh,360px)}
+.nc .eye{color:var(--mut);opacity:1}
+.nc .nc-t{color:var(--mut)}.nc .nc-i.on .nc-t,.nc .nc-t:hover{color:var(--ink)}
+.nc .nc-l,.nc .nc-i{border-color:var(--line)}
+.nc .nc-v{background:var(--bg2)}
+.nc .stk{margin-top:clamp(120px,26vh,280px)}
+.sb.run .l1{opacity:1}
+.fst .fy{background:var(--bg2);color:var(--ink);box-shadow:0 -1px 0 var(--line)}
+.fst .fy:nth-child(2){background:#1C1C1F}
+.fst .fy .zs li{box-shadow:inset 0 0 0 1px var(--line)}
+.fst .fy .zs li.on{background:var(--ink);color:var(--bg);box-shadow:none}
+.mo .f2 .stk,.f2 .stk{background:var(--bg)}
+.nx,.nx.story{background:var(--bg);color:var(--ink)}
+.nx .eye{color:var(--mut);opacity:1}
