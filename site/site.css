@@ -730,3 +730,5 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
   .xm-t{font-size:calc(11vw*var(--ds));line-height:1.04}
   .xm-s{font-size:16px;gap:8px 12px}
 }
+/* noms des formats un peu plus petits sur mobile, jamais bord à bord */
+@media (max-width:760px){.fy .mega{font-size:calc(min(15vw,14vh)*var(--ds))}.mo .fb{top:calc(76px + min(15vw,14vh)*var(--ds)*.6 + 12px)}}

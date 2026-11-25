@@ -29,21 +29,21 @@ const cover=(el,w,len,extra=100)=>gsap.fromTo(el,{scale:1},{scale:.95,ease:'none
    .from($$('.ln>span',s),{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.15).from($('.art',s),{x:160,opacity:0,duration:1.3,ease:'power3.out'},.1).from($$('.foot p,.foot a',s),{y:24,opacity:0,duration:.7,stagger:.1},.6)})();
 const lit=()=>{};/* la barre reste noire partout */
 /* concept : scroll continu, chaque carte ralentit en arrivant, puis tout le paquet monte ensemble */
-const sb=$('.sb');let sbW;
+const sb=$('.sb');let sbW;const AN={};
 /* concept sur ordinateur : on descend, la photo plein cadre arrive, puis chaque volet prend sa place au défilement */
 if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,250),L=$$('.vb-n li',b);
   ScrollTrigger.create({...S.st,onUpdate:s=>{const i=Math.min(2,Math.floor(s.progress*3.25));showNc(i);L.forEach((x,k)=>x.classList.toggle('on',k===i))}})}
 {const nh=$('.nc-h');if(nh){const big=$('.huge',nh),txt=big.textContent.trim();big.setAttribute('aria-label',txt);
   const L=small?['Des voitures','roulent déjà.',"Autant qu'elles",'parlent de vous.']:['Des voitures roulent déjà.',"Autant qu'elles parlent de vous."];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
-  const S=stage(nh,110,0);nh.classList.add('run');
+  const S=stage(nh,110,0);AN.concept=[S.w,110];nh.classList.add('run');
   gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',big),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
   $$('.l',big).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})}}
 if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
   const W=txt.split(' '),L=small?[W.slice(0,2).join(' '),W.slice(2,3).join(' '),W.slice(3).join(' ')]:[W.slice(0,2).join(' '),W.slice(2).join(' ')];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
-  const S=stage(sb,120,100);sbW=S.w;sb.classList.add('run');const ch=$$('.ch',big);
+  const S=stage(sb,120,100);sbW=S.w;AN.formats=[S.w,120];sb.classList.add('run');const ch=$$('.ch',big);
   const t=gsap.timeline({scrollTrigger:S.st});
   t.fromTo(ch,{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.2});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true};
@@ -95,7 +95,7 @@ const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
   {nx.classList.add('xm');const box=document.createElement('div');box.className='xm-b';
    const L=small?['Vous apportez','le message.',"On s'occupe",'du reste.']:['Vous apportez le message.',"On s'occupe du reste."];
    box.innerHTML=`<h2 class="xm-t" aria-label="Vous apportez le message. On s'occupe du reste.">${L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('')}</h2><p class="xm-s">${ST.map(s=>`<span>${s.w==='Covering'?'Pose':s.w==='Diffusion'?'Conducteurs':s.w==='Conception'?'Création':s.w}</span>`).join('<i>·</i>')}</p>`;
-   nx.append(box);const S=stage(box,110,0),sub=$$('.xm-s>*',box);
+   nx.append(box);const S=stage(box,110,0);AN.expertise=[S.w,110];const sub=$$('.xm-s>*',box);
    gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',box),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.015,duration:.35,ease:'power1.out'},0).fromTo(sub,{y:14,opacity:0},{y:0,opacity:1,stagger:.04,duration:.3,ease:'power2.out'},.55).to({}, {duration:.3});
    const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
    $$('.xm-t .l',box).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})}
@@ -114,5 +114,7 @@ const ax=$(`[data-sec=app]>[data-v="${D.app}"]`);if(ax){const st=$('.stg',ax),li
 const jw=$('.jnw'),sj=()=>{if(jw)jw.style.top=Math.min(0,innerHeight-jw.offsetHeight)+'px'};sj();addEventListener('resize',sj);
 if($('.endw'))gsap.to('.cta',{scale:.95,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'max',scrub:true}});
 $$('.sb .big,.sb .eye,.cta>h2,.cta>p,.jnh>*,.ct2,.ft').forEach(x=>gsap.from(x,{y:30,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:x,start:'top 88%'}}));
-addEventListener('load',()=>{sj();ScrollTrigger.refresh()});if(document.fonts)document.fonts.ready.then(()=>{sj();ScrollTrigger.refresh()});
+const anY=h=>{const a=AN[h];return a?a[0].getBoundingClientRect().top+scrollY+innerHeight*a[1]/100*.92:null};
+document.addEventListener('click',e=>{const a=e.target.closest('a[href*="#"]');if(!a)return;const u=new URL(a.href,location.href);if(u.pathname!==location.pathname)return;const y=anY(u.hash.slice(1));if(y==null)return;e.preventDefault();scrollTo({top:y,behavior:'instant'});history.replaceState(null,'',u.hash)});
+addEventListener('load',()=>{sj();ScrollTrigger.refresh();const y=anY(location.hash.slice(1));if(y!=null)setTimeout(()=>{scrollTo({top:anY(location.hash.slice(1)),behavior:'instant'})},60)});if(document.fonts)document.fonts.ready.then(()=>{sj();ScrollTrigger.refresh()});
 })();
