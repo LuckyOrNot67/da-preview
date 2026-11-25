@@ -683,3 +683,37 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
   .xc-c p{font-size:13px}
 }
 @media (max-width:760px){.xc-t{font-size:calc(9vw*var(--ds))}.xc-c b{font-size:calc(5.3vw*var(--ds))}}
+/* Expertise « repères sur la voiture » */
+.nx.xv{display:block;height:auto;min-height:0;padding:0;border-radius:0;box-shadow:none;background:var(--bg);color:var(--ink)}
+.nx.xv>.nx-h,.nx.xv>.nx-g{display:none}
+.xv-b{height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:clamp(10px,2.4vh,26px);padding:84px var(--g) 28px;overflow:hidden}
+.xv-t{margin:0;text-align:center;font-family:var(--d);font-weight:var(--dw);text-transform:uppercase;font-size:calc(min(4.6vw,9vh)*var(--ds));line-height:1;letter-spacing:-.03em}
+.xv-t .l{display:block;white-space:nowrap}.xv-t .w,.xv-t .ch{display:inline-block}
+.xv-car{position:relative;width:min(80vw,calc(54vh*2600/1188))}
+.xv-car img{display:block;width:100%;height:auto}
+.xv-d{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-15px,-50%) scale(.6);opacity:0;transition:opacity .4s,transform .5s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.xv-d.l{flex-direction:row-reverse;transform:translate(calc(-100% + 15px),-50%) scale(.6);transform-origin:right center}
+.xv-d.on,.xv-d.past{opacity:1;transform:translate(-15px,-50%)}
+.xv-d.l.on,.xv-d.l.past{transform:translate(calc(-100% + 15px),-50%)}
+.xv-d i{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:13px;background:var(--bg);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink),0 4px 14px rgba(0,0,0,.45)}
+.xv-d.on i{background:var(--ink);color:var(--bg);animation:xvp 1.6s ease-out infinite}
+@keyframes xvp{0%{box-shadow:0 0 0 0 rgba(244,244,242,.7),0 4px 14px rgba(0,0,0,.45)}100%{box-shadow:0 0 0 18px rgba(244,244,242,0),0 4px 14px rgba(0,0,0,.45)}}
+.xv-d em{font-style:normal;font-weight:600;font-size:14px;padding:6px 12px;border-radius:99px;white-space:nowrap;background:rgba(11,11,13,.88);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(244,244,242,.3)}
+.xv-d.on em{background:var(--ink);color:var(--bg);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.xv-p{position:relative;width:100%;max-width:620px;height:4.4em;text-align:center}
+.xv-p p{position:absolute;inset:0;margin:0;display:grid;gap:6px;align-content:start;opacity:0;transform:translateY(10px);transition:opacity .4s,transform .5s}
+.xv-p p.on{opacity:1;transform:none}
+.xv-p b{font-size:clamp(17px,1.5vw,22px);font-weight:600}
+.xv-p span{font-size:clamp(15px,1.2vw,18px);color:var(--mut)}
+@media (max-width:760px){
+  .xv-b{padding:76px var(--g) 22px;gap:clamp(14px,3vh,28px)}
+  .xv-t{font-size:calc(10vw*var(--ds))}
+  .xv-car{width:calc(100% + 8px)}
+  .xv-d i{width:26px;height:26px;font-size:12px}
+  .xv-d{transform:translate(-13px,-50%) scale(.6)}.xv-d.on,.xv-d.past{transform:translate(-13px,-50%)}
+  .xv-d.l{transform:translate(calc(-100% + 13px),-50%) scale(.6)}.xv-d.l.on,.xv-d.l.past{transform:translate(calc(-100% + 13px),-50%)}
+  .xv-d em{font-size:12px;padding:5px 9px}
+  .xv-p{height:5.4em}
+}
+.xv-car{width:min(76vw,calc(50vh*2600/1188));margin-top:clamp(8px,3vh,36px)}
+@media (max-width:760px){.xv-car{width:calc(100% + 8px);margin-top:0}}
