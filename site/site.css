@@ -717,3 +717,16 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 }
 .xv-car{width:min(76vw,calc(50vh*2600/1188));margin-top:clamp(8px,3vh,36px)}
 @media (max-width:760px){.xv-car{width:calc(100% + 8px);margin-top:0}}
+/* Phrase manifeste à la place de l'Expertise */
+.nx.xm{display:block;height:auto;min-height:0;padding:0;border-radius:0;box-shadow:none;background:var(--bg);color:var(--ink)}
+.nx.xm>.nx-h,.nx.xm>.nx-g{display:none}
+.xm-b{height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:clamp(22px,5vh,48px);padding:84px 0 28px;overflow:hidden}
+.xm-t{margin:0;font-family:var(--d);font-weight:var(--dw);text-transform:uppercase;font-size:calc(min(5.4vw,12vh)*var(--ds));line-height:1.02;letter-spacing:-.03em;display:grid;justify-items:center}
+.xm-t .l{display:block;white-space:nowrap}.xm-t .w,.xm-t .ch{display:inline-block}
+.xm-s{margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 16px;font-size:clamp(16px,1.3vw,20px);font-weight:500;color:var(--mut);padding:0 var(--g)}
+.xm-s i{font-style:normal;opacity:.5}
+@media (max-width:760px){
+  .xm-b{padding:76px 0 22px}
+  .xm-t{font-size:calc(11vw*var(--ds));line-height:1.04}
+  .xm-s{font-size:16px;gap:8px 12px}
+}

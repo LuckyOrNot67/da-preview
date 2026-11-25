@@ -5,18 +5,18 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 const SEC=[];
 const COL=[['noir','Noir et blanc'],['violet','Violet'],['rouge','Rouge'],['orange','Orange'],['jaune','Jaune']],FONT=[['1','Condensée'],['2','Grasse'],['3','Éditoriale'],['4','Arrondie']];
 const KEYS=['bf','bl','xp'];
-const keep=()=>{try{localStorage.setItem('adsmove-cfg5',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
+const keep=()=>{try{localStorage.setItem('adsmove-cfg6',JSON.stringify(Object.fromEntries(KEYS.map(k=>[k,D[k]]))))}catch(e){}};
 const row=(key,t,opts)=>`<div><h2>${t}</h2><div class="o" data-k="${key}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${D[key]===v}">${l}</button>`).join('')}</div></div>`;
 const cfg=$('#cfg'),cb=$('#cfgb');
 if(cfg){
-cfg.innerHTML=row('bf','Barre et pied de page',[['ant','Anthracite'],['noir','Noir du site'],['blanc','Blanc']])+row('bl','Trait sous la barre',[['oui','Oui'],['non','Non']])+row('xp','Expertise',[['voiture','Repères sur la voiture'],['mots','Mots qui défilent'],['grille','Grille'],['fil','Fil (téléphone)']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
+cfg.innerHTML=row('bf','Barre et pied de page',[['ant','Anthracite'],['noir','Noir du site'],['blanc','Blanc']])+row('bl','Trait sous la barre',[['oui','Oui'],['non','Non']])+row('xp','Expertise',[['phrase','Phrase manifeste'],['voiture','Repères sur la voiture'],['mots','Mots qui défilent'],['grille','Grille'],['fil','Fil (téléphone)']])+'<div class="ln2"><button id="cfgc">Copier mes choix</button><button id="cfgr">Réinitialiser</button><span class="ok" id="cfgs" role="status"></span></div>';
 const openC=o=>{cfg.hidden=!o;cb.setAttribute('aria-expanded',o)};
 cb.addEventListener('click',()=>openC(cfg.hidden));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!cfg.hidden){openC(false);cb.focus()}});
 cfg.addEventListener('click',e=>{const b=e.target.closest('.o button');if(!b)return;const k=b.parentElement.dataset.k;D[k]=b.dataset.v;$$('button',b.parentElement).forEach(x=>x.setAttribute('aria-pressed',x===b));keep();if(k==='xp')location.reload()});
 const NM={ant:'anthracite',noir:'noir du site',blanc:'blanc'};
 $('#cfgc').addEventListener('click',async()=>{const t='Barre et pied de page : '+NM[D.bf]+'\nTrait sous la barre : '+D.bl;try{await navigator.clipboard.writeText(t);$('#cfgs').textContent='Copié.'}catch(e){$('#cfgs').textContent=t}});
-$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg5')}catch(e){}location.reload()});
+$('#cfgr').addEventListener('click',()=>{try{localStorage.removeItem('adsmove-cfg6')}catch(e){}location.reload()});
 }
 /* texte qui roule au survol */
 $$('.rl').forEach(r=>{r.innerHTML=`<span class="rli">${r.innerHTML}</span>`});
@@ -100,12 +100,20 @@ if(rd&&!small){const tr=$('.rt',rd),L=$$('li',tr),dot=$('.rdd',tr),len=L.length*
   cover(rd,S.w,len)}
 if(dh){lit(dhW||dh,-1,rdW||rd,'top 60px');lit('.sim','top 60px','.sim','bottom 60px')}
 /* expertise : les quatre étapes arrivent l'une après l'autre ; la section reste en place pendant que la suivante passe par-dessus */
-const nx=$('.nx');if(nx){const C=$$('.nx-c',nx),XP=D.xp||'voiture';
+const nx=$('.nx');if(nx){const C=$$('.nx-c',nx),XP=D.xp||'phrase';
   const chars=el=>{el.innerHTML=el.innerHTML.split('<br>').map(l=>`<span class="l">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');return $$('.ch',el)};
   const ST=C.map(c=>({w:$('h3',c).textContent.trim().split(' ')[0],n:$('h3',c).textContent.trim(),s:($('.nx-s',c)||{}).textContent||''})),pad=i=>String(i+1).padStart(2,'0');
   /* Mots qui défilent : « Notre expertise » en grand, puis chaque étape prend sa place, à la même taille */
   /* Repères sur la voiture : la voiture du haut de page, chaque service s'allume à son endroit */
-  if(XP==='voiture'){nx.classList.add('xv');const box=document.createElement('div');box.className='xv-b';
+  /* Phrase manifeste : une seule idée, en grand, puis la liste de ce qu'on prend en charge */
+  if(XP==='phrase'){nx.classList.add('xm');const box=document.createElement('div');box.className='xm-b';
+   const L=small?['Vous apportez','le message.',"On s'occupe",'du reste.']:['Vous apportez le message.',"On s'occupe du reste."];
+   box.innerHTML=`<h2 class="xm-t" aria-label="Vous apportez le message. On s'occupe du reste.">${L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('')}</h2><p class="xm-s">${ST.map(s=>`<span>${s.w==='Covering'?'Pose':s.w==='Diffusion'?'Conducteurs':s.w==='Conception'?'Création':s.w}</span>`).join('<i>·</i>')}</p>`;
+   nx.append(box);const S=stage(box,110,0),sub=$$('.xm-s>*',box);
+   gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',box),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.015,duration:.35,ease:'power1.out'},0).fromTo(sub,{y:14,opacity:0},{y:0,opacity:1,stagger:.04,duration:.3,ease:'power2.out'},.55).to({}, {duration:.3});
+   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
+   $$('.xm-t .l',box).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})}
+  else if(XP==='voiture'){nx.classList.add('xv');const box=document.createElement('div');box.className='xv-b';
    const P=[[66,44,0],[22,33,0],[50,77,0],[89,31,1]];
    box.innerHTML=`<h3 class="xv-t">Notre expertise</h3><div class="xv-car"><img src="img/hero.webp" alt="" width="2600" height="1188">${ST.map((s,i)=>`<span class="xv-d${P[i][2]?' l':''}" style="left:${P[i][0]}%;top:${P[i][1]}%"><i>${i+1}</i><em>${s.w}</em></span>`).join('')}</div><div class="xv-p">${ST.map((s,i)=>`<p><b>${pad(i)} · ${s.n}</b><span>${s.s}</span></p>`).join('')}</div>`;
    nx.append(box);const Dt=$$('.xv-d',box),Pp=$$('.xv-p p',box),n=ST.length,dur=n+1.4,ch=chars($('.xv-t',box));
