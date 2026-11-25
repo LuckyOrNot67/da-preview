@@ -732,3 +732,48 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 }
 /* noms des formats un peu plus petits sur mobile, jamais bord à bord */
 @media (max-width:760px){.fy .mega{font-size:calc(min(15vw,14vh)*var(--ds))}.mo .fb{top:calc(76px + min(15vw,14vh)*var(--ds)*.6 + 12px)}}
+/* Pages Conducteur et Demande : même base que l'accueil (26 novembre) */
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.op input:checked+span{background:var(--ink);color:var(--bg)}
+/* écrans titres */
+.tw{margin:0;padding:clamp(80px,14vh,140px) var(--g) 20px}
+.tw.run{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:84px 0 22px;overflow:hidden}
+.tw .huge{margin:0}
+.tw.run .huge{max-width:none;font-size:calc(min(4.8vw,11vh)*var(--ds));line-height:1.04;display:grid;justify-items:center}
+.tw.run .l{display:block;white-space:nowrap}.tw.run .w,.tw.run .ch{display:inline-block}
+/* conducteur : haut de page comme l'accueil, titre sur trois lignes */
+@media (min-width:761px){.drh h1{font-size:calc(min(4vw,9vh)*var(--ds))}}
+/* conducteur : les six étapes sans titre à gauche, la liste au centre */
+.mo .rd.notitle{grid-template-columns:minmax(0,720px);justify-content:center}
+.rd.notitle .rt{width:100%}
+/* conducteur : estimation sur fond noir */
+.sim{background:var(--bg);color:var(--ink);min-height:0}
+.sim .lead2{color:var(--mut)}
+.res{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(244,244,242,.16)}
+.rg input{accent-color:var(--ink)}
+/* demande : titre et étapes à gauche, formulaire dans une carte blanche à droite */
+.dq{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,90px);align-items:center;min-height:calc(100svh - 66px);padding:clamp(28px,6vh,64px) var(--g) clamp(40px,8vh,80px)}
+.dq-t{margin:0;font-size:calc(min(4.8vw,10vh)*var(--ds));line-height:1}
+.dq-t .ln>span{white-space:nowrap}
+.dq-l{margin:clamp(16px,3vh,26px) 0 0;max-width:34ch;font-size:clamp(17px,1.4vw,21px);line-height:1.35;color:var(--mut)}
+.dq-n{list-style:none;margin:clamp(28px,6vh,56px) 0 0;padding:0;display:grid;gap:0;max-width:420px}
+.dq-n li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line);font-size:16px}
+.dq-n li:last-child{border-bottom:1px solid var(--line)}
+.dq-n b{font-size:13px;letter-spacing:.06em;color:var(--mut)}
+.dq-f{--ink:var(--sigt);--mut:color-mix(in srgb,var(--sigt) 62%,transparent);--line:color-mix(in srgb,var(--sigt) 22%,transparent);--a:var(--sigt);--at:var(--sig);--bg:var(--sig);--bg2:var(--sig);background:var(--sig);color:var(--sigt);border-radius:clamp(20px,2.4vw,32px);padding:clamp(22px,3vw,44px);gap:16px}
+.dq-f .fd input:not([type=checkbox]),.dq-f .fd textarea{background:transparent;border-color:var(--line)}
+.dq-f .fd input:focus,.dq-f .fd textarea:focus{outline:none;border-color:var(--sigt)}
+.dq-f .ck a{color:inherit}
+.dq-o{border:0;margin:0;padding:0}.dq-o legend{font-weight:600;font-size:15px;margin-bottom:8px;padding:0}
+.dq-o .op span{min-height:40px;font-size:14px;box-shadow:inset 0 0 0 1px var(--line)}
+.dq-f .btn{justify-self:start;background:var(--sigt);color:var(--sig)}
+@media (max-width:760px){
+  .tw.run .huge{font-size:calc(10.5vw*var(--ds))}
+  .dq{grid-template-columns:1fr;min-height:0;padding-top:28px;gap:28px}
+  .dq-t{font-size:calc(12vw*var(--ds))}
+  .dq-n{margin-top:24px}
+  .dq-f{padding:20px 16px}
+}
+@media (min-width:761px){.dq-t{font-size:calc(min(3.9vw,9vh)*var(--ds))}}
+@media (max-width:760px){.dq{grid-template-columns:minmax(0,1fr)}.dq-t{font-size:calc(10.5vw*var(--ds))}}
+@media (max-width:760px){.dq-t{font-size:calc(9.6vw*var(--ds))}}

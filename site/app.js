@@ -40,6 +40,13 @@ if(nc&&nc.classList.contains('vb2')){const b=$('.nc-b',nc),S=stage(b,250),L=$$('
   gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',big),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
   $$('.l',big).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})}}
+$$('.tw').forEach(tw=>{const big=$('.huge',tw),txt=big.textContent.trim();big.setAttribute('aria-label',txt);
+  const L=((small&&tw.dataset.lm)||tw.dataset.l).split('|');
+  big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
+  const S=stage(tw,110,0);if(tw.id)AN[tw.id]=[S.w,110];tw.classList.add('run');
+  gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',big),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
+  const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
+  $$('.l',big).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})});
 if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
   const W=txt.split(' '),L=small?[W.slice(0,2).join(' '),W.slice(2,3).join(' '),W.slice(3).join(' ')]:[W.slice(0,2).join(' '),W.slice(2).join(' ')];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
