@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-bf="noir" data-bl="non" data-xp="phrase" data-c="noir" data-m="nuit" data-f="1" data-expertise="1" data-app="1" data-ov="non">
+<html lang="fr" data-bf="noir" data-bl="non" data-c="noir" data-m="nuit" data-f="1" data-expertise="1" data-app="1" data-ov="non">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800;900&display=swap">
-<script>(()=>{const R=document.documentElement,u=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.getItem('adsmove-cfg6'))||{}}catch(e){}for(const k of ['bf','bl','xp']){const v=u.get(k)||s[k];if(v)R.dataset[k]=v}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('mo')})()</script>
+<script>(()=>{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('mo')})()</script>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -59,8 +59,6 @@
 </div>
 
 
-<button class="cfgb" id="cfgb" aria-expanded="false" aria-controls="cfg" aria-label="Ouvrir les réglages de la maquette"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
-<aside class="cfg" id="cfg" hidden aria-label="Réglages de la maquette"></aside>
 <script src="vendor/gsap.min.js"></script><script src="vendor/ScrollTrigger.min.js"></script>
 <script src="../shared/site.js"></script><script src="menu.js"></script><script src="app.js"></script>
 </body>
