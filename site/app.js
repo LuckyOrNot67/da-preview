@@ -52,7 +52,7 @@ $$('.dfm').forEach(d=>{gsap.from($$('.dfm-h>*',d),{y:30,opacity:0,duration:.7,st
 $$('.tt').forEach(t=>{[...t.children].forEach(l=>{l.innerHTML=`<span class="mk"><span>${l.innerHTML}</span></span>`})});
 const enter=(trigger,els,o={})=>els.length&&gsap.fromTo(els,{y:o.y||40,opacity:0,scale:o.s||1},{y:0,opacity:1,scale:1,duration:o.d||.9,stagger:o.st||.09,ease:'power3.out',scrollTrigger:{trigger,start:o.start||'top 80%'}});
 $$('.pr,.ob,.su,.fq').forEach(sec=>{
-  const head=[...$$('.ey',sec).slice(0,1)],lines=$$('.tt .mk>span',sec),txt=$$('.pr-p,.hd .cp-p,.pr-a',sec),cards=$$('.g3>.cd,.g4>.cd,.su-r>.cd,.qa',sec),ph=$$('.phx',sec);
+  const head=[...$$('.ey',sec).slice(0,1)],lines=$$('.tt .mk>span',sec),txt=$$('.pr-p,.hd .cp-p,.pr-a',sec),cards=$$('.g3>.cd,.g4>.cd,.su-b>.cd,.su-r>.cd,.qa',sec),ph=$$('.phx',sec);
   const t=gsap.timeline({scrollTrigger:{trigger:sec,start:'top 72%'}});
   t.from(head,{opacity:0,y:14,duration:.5,ease:'power2.out'},0)
    .from(lines,{yPercent:110,duration:1,stagger:.12,ease:'power4.out'},.05)

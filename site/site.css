@@ -939,3 +939,20 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 .cs.run .cp.on .phx.it{transform:none}
 /* questions : le titre ne reste plus figé pendant le défilement */
 .fq>div:first-child{position:static}
+/* Espace conducteur (26 novembre) */
+.fm2 .g3 .cd img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;margin:-4px 0 4px}
+.fm2 .g3 h3{margin-top:0}
+.sm2{display:grid;gap:22px;align-content:center;padding:clamp(22px,2.6vw,40px)}
+.sm2 label{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:16px}
+.sm2 output{font-family:var(--d);font-weight:var(--dw);font-size:calc(min(2vw,4vh)*var(--ds))}
+.sm2 input{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(to right,var(--ink) var(--p,40%),rgba(244,244,242,.16) var(--p,40%));outline-offset:6px}
+.sm2 input::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 6px rgba(244,244,242,.12);cursor:grab}
+.sm2 input::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:var(--ink);cursor:grab}
+.sm2-r{margin:8px 0 0;display:grid;gap:4px}.sm2-r span{color:var(--mut);font-size:15px}
+.sm2-r b{font-family:var(--d);font-weight:var(--dw);text-transform:uppercase;font-size:calc(min(4.4vw,8vh)*var(--ds));line-height:1;letter-spacing:-.02em}
+.br ul{list-style:none;margin:14px 0 0;padding:0}
+.br li{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:12px;color:var(--mut);font-size:15px;transition:background-color .3s,color .3s}
+.br li b{font-weight:600;color:inherit}
+.br li.on{background:var(--ink);color:var(--bg)}
+.su .nt{margin-top:4px}
+@media (max-width:760px){.sm2 output{font-size:calc(20px*var(--ds))}.sm2-r b{font-size:calc(12vw*var(--ds))}}

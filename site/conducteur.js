@@ -1,9 +1,10 @@
-/* Page conducteur : estimation indicative. Les animations sont communes avec la homepage (app.js). */
+/* Espace conducteur : estimation selon le barème indicatif (kilomètres validés par mois). Montants provisoires, à confirmer dans chaque contrat. */
 (()=>{
-const $=s=>document.querySelector(s);
-/* Montants à renseigner une fois validés : {min, max} en euros par mois pour le niveau maximal. Tant que c'est vide, aucun montant n'est affiché. */
-const RATES=null,LV=['Faible','Moyen','Élevé'];
-const f=$('.sf'),gau=$('#gau'),lvl=$('#lvl'),amt=$('#amt'),km=$('#simkm'),kmo=$('#kmo');
-const up=()=>{const z=+f.z.value,c=+f.f.value,k=+km.value,s=(z/3*.35+c/3*.35+(k-200)/2800*.3);kmo.textContent=k.toLocaleString('fr-BE')+' km';gau.style.transform=`scaleX(${s})`;lvl.textContent=LV[s<.5?0:s<.78?1:2];if(RATES)amt.textContent=`De ${Math.round(RATES.min*s)} à ${Math.round(RATES.max*s)} € par mois, à titre indicatif`};
-f.addEventListener('input',up);up();
+const T=[[0,50],[750,75],[1000,100],[1500,125],[2000,150],[2500,175]],MAX=200;
+const km=document.getElementById('simkm'),out=document.getElementById('kmo'),amt=document.getElementById('amt'),L=[...document.querySelectorAll('.br li')];
+if(!km)return;
+const up=()=>{const k=+km.value;let i=0;T.forEach((t,n)=>{if(k>=t[0])i=n});const lo=T[i][1],hi=Math.min(lo+25,MAX);
+  out.textContent=k.toLocaleString('fr-BE')+' km';amt.textContent=`Entre ${lo} et ${hi} €`;L.forEach((l,n)=>l.classList.toggle('on',n===i));
+  km.style.setProperty('--p',((k-km.min)/(km.max-km.min)*100)+'%')};
+km.addEventListener('input',up);up();
 })();
