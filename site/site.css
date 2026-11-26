@@ -1106,3 +1106,32 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 }
 .rows .dv-fc img{height:min(14.5vh,160px)}
 .dv-pr b span.n,.rows .dv-pr b span.n{font-size:inherit!important;color:inherit}
+/* iPhone en CSS : cadre titane, Dynamic Island, barre d'état, boutons latéraux, reflet */
+.iph{--w:260px;position:relative;width:var(--w);padding:calc(var(--w)*.03);border-radius:calc(var(--w)*.165);
+ background:linear-gradient(140deg,#5b5b61 0%,#2a2a2e 9%,#141416 30%,#0d0d0f 55%,#1c1c1f 80%,#4e4e54 96%,#6a6a70 100%);
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset 0 0 0 calc(var(--w)*.011) #050506,inset 0 0 0 calc(var(--w)*.013) rgba(255,255,255,.06),0 0 0 .5px #000,0 60px 120px -30px rgba(0,0,0,.75),0 30px 50px -25px rgba(0,0,0,.6)}
+.iph:before{content:"";position:absolute;right:calc(var(--w)*-.011);top:30%;width:calc(var(--w)*.012);height:15%;border-radius:0 4px 4px 0;background:linear-gradient(90deg,#1a1a1d,#5e5e64 60%,#2a2a2e)}
+.iph:after{content:"";position:absolute;left:calc(var(--w)*-.011);top:19%;width:calc(var(--w)*.012);height:4.5%;border-radius:4px 0 0 4px;background:linear-gradient(270deg,#1a1a1d,#5e5e64 60%,#2a2a2e);box-shadow:0 calc(var(--w)*.16) 0 0 #3c3c41,0 calc(var(--w)*.31) 0 0 #3c3c41}
+.iph-scr{position:relative;overflow:hidden;border-radius:calc(var(--w)*.135);aspect-ratio:390/891;background:#F4F4F2;isolation:isolate}
+.iph-scr.dk{background:#0B0B0D}
+.iph-scr:after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;border-radius:inherit;background:linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.03) 28%,transparent 42%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.iph-isl{position:absolute;z-index:6;top:calc(var(--w)*.056);left:50%;transform:translateX(-50%);width:calc(var(--w)*.3);height:calc(var(--w)*.087);border-radius:99px;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.iph-isl:after{content:"";position:absolute;right:16%;top:50%;width:calc(var(--w)*.026);height:calc(var(--w)*.026);border-radius:50%;transform:translateY(-50%);background:radial-gradient(circle at 35% 35%,#2b3b55,#0a0d14 70%)}
+.iph-sb{position:absolute;z-index:4;top:0;left:0;right:0;height:5.3%;display:flex;align-items:center;justify-content:space-between;padding:0 9% 0 11%;font:600 calc(var(--w)*.05)/1 -apple-system,"SF Pro Text",Inter,sans-serif;color:#0B0B0D;letter-spacing:-.01em}
+.iph-scr.dk .iph-sb{color:#fff}
+.iph-ic{display:flex;gap:calc(var(--w)*.016);align-items:center}.iph-ic svg{height:calc(var(--w)*.038);width:auto;fill:currentColor}.iph-ic svg:last-child{height:calc(var(--w)*.044)}
+.iph-im{position:absolute;left:0;right:0;bottom:0;width:100%;height:94.7%;object-fit:cover;display:block}
+.iph-fr{position:absolute;left:0;right:0;bottom:0;height:94.7%;overflow:hidden;opacity:0;transition:opacity .5s}
+.iph-scr.live .iph-fr{opacity:1}.iph-scr.live .sy-fb{opacity:0;transition:opacity .5s}
+.iph-fr iframe{position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform-origin:0 0;pointer-events:none;background:#F4F4F2}
+/* section application : les trois iPhone en éventail */
+.dv-ph .iph{--w:clamp(190px,17vw,270px)}.dv-ph .iph.p1{--w:clamp(210px,19vw,300px)}
+.dv-ph .iph{padding:calc(var(--w)*.03);background-clip:padding-box}
+.phn.iph img{border-radius:0}
+/* parcours */
+.sy-ph .iph{--w:calc(min(66vh,640px)*.44)}
+@media (max-width:760px){.dv-ph .iph{--w:29vw}.dv-ph .iph.p1{--w:34vw}.sy-ph .iph{--w:calc(min(46svh,420px)*.44)}}
+.dv-ph .iph.p1{z-index:2}
+.iph-isl{width:calc(var(--w)*.26);height:calc(var(--w)*.078);top:calc(var(--w)*.06)}
+.iph-sb{padding:0 7.5% 0 12%;height:5.6%}
+.iph-ic{gap:calc(var(--w)*.013)}.iph-ic svg{height:calc(var(--w)*.034)}.iph-ic svg:last-child{height:calc(var(--w)*.04)}
