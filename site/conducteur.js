@@ -26,13 +26,16 @@ $$('.dv-fc').forEach(c=>{const N=$$('.n',c),t=gsap.timeline({scrollTrigger:on(c,
   .from($('img',c),{x:-120,opacity:0,duration:1.1,ease:'power3.out'},.1)
   .from($$('.dv-fi>*',c),{x:30,opacity:0,duration:.7,stagger:.07,ease:'power3.out'},.25)
   .add(()=>N.forEach(n=>{const v=+n.dataset.v,o={v:0};gsap.to(o,{v,duration:1,ease:'power2.out',onUpdate:()=>n.textContent=Math.round(o.v)})}),.35)});
-/* frise : la section reste à l'écran, la ligne avance au défilement et chaque étape s'allume quand la ligne touche son point */
-{const sec=$('.dv-tl'),ol=sec&&$('ol',sec);if(ol){const L=$$('li',ol),D=$$('li i',ol),len=small?140:160;
+/* étapes : la section reste à l'écran ; le téléphone change d'écran, le texte arrive une fois à gauche, une fois à droite */
+{const sec=$('.dv-sy');if(sec){const S=$$('.sy-s',sec),T=$$('.sy-t',sec),Dd=$$('.sy-d li',sec),n=S.length,len=small?260:300;
  const w=document.createElement('div');w.className='dv-tlw';w.style.height=`calc(100svh + ${len}vh)`;sec.before(w);w.append(sec);sec.classList.add('pin');
- const geo=()=>{const r=ol.getBoundingClientRect(),c=D.map(d=>{const b=d.getBoundingClientRect();return small?b.top+b.height/2-r.top:b.left+b.width/2-r.left});ol.style.setProperty('--a',c[0]+'px');ol.style.setProperty('--z',c[c.length-1]+'px');return c};
- let C=geo();addEventListener('resize',()=>{C=geo()});
- gsap.from($$('.dv-tl h2'),{y:30,opacity:0,duration:.8,ease:'power3.out',scrollTrigger:on(w,'top 70%')});
- ScrollTrigger.create({trigger:w,start:'top top',end:`+=${len}%`,scrub:true,onRefresh:()=>{C=geo()},onUpdate:s=>{const p=Math.min(1,s.progress*1.15);ol.style.setProperty('--d',p);const x=C[0]+(C[C.length-1]-C[0])*p;L.forEach((l,k)=>l.classList.toggle('on',x>=C[k]-1))}});}}
+ let cur=-1;const show=i=>{if(i===cur)return;const back=i<cur;cur=i;sec.classList.toggle('back',back);
+  S.forEach((x,k)=>{x.classList.toggle('on',k===i);x.classList.toggle('past',k<i)});T.forEach((x,k)=>x.classList.toggle('on',k===i));Dd.forEach((x,k)=>x.classList.toggle('on',k<=i))};
+ show(0);
+ gsap.from([$('h2',sec),$('.phn',sec)],{y:60,opacity:0,duration:1,stagger:.12,ease:'power3.out',scrollTrigger:on(w,'top 70%')});
+ const pts=[...Array(n)].map((_,k)=>(k+.5)/n);
+ ScrollTrigger.create({trigger:w,start:'top top',end:`+=${len}%`,onUpdate:s=>show(Math.min(n-1,Math.floor(s.progress*n))),
+  snap:{snapTo:v=>pts.reduce((a,b)=>Math.abs(b-v)<Math.abs(a-v)?b:a),duration:{min:.2,max:.5},delay:.1,ease:'power1.inOut'}})}}
 /* vie privée et questions */
 gsap.from($$('.dv-pvt>*'),{yPercent:30,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:on('.dv-pv')});
 gsap.from($$('.dv-pv li'),{y:30,opacity:0,duration:.7,stagger:.08,ease:'power3.out',scrollTrigger:on('.dv-pv ul','top 85%')});
