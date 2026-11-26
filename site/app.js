@@ -51,10 +51,12 @@ $$('.sv').forEach(sv=>gsap.from($$('.sv-l,.sv-i,.sv-f',sv),{y:40,opacity:0,durat
 $$('.dfm').forEach(d=>{gsap.from($$('.dfm-h>*',d),{y:30,opacity:0,duration:.7,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:d,start:'top 80%'}});gsap.from($$('.dfm-c',d),{y:60,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:$('.dfm-g',d),start:'top 85%'}})});
 $$('.rv').forEach(x=>gsap.from(x,{y:36,opacity:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:x,start:'top 88%'}}));
 /* dispositif : sur ordinateur, chaque écran (message, véhicules, zones) glisse vers la gauche au défilement */
-{const cs=$('.cs');if(cs&&!small){const P=$$('.cp',cs),S=stage(cs,260);cs.classList.add('run');let cur=-1;
+{const cs=$('.cs');if(cs&&!small){const P=$$('.cp',cs),S=stage(cs,360);cs.classList.add('run');let cur=-1;
   const show=i=>{if(i===cur)return;cur=i;P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i)})};show(0);
-  ScrollTrigger.create({...S.st,onUpdate:s=>show(Math.min(P.length-1,Math.floor(s.progress*3.25)))})}
+  ScrollTrigger.create({...S.st,snap:{snapTo:[0,.47,1],duration:{min:.25,max:.6},delay:.12,ease:'power1.inOut'},onUpdate:s=>show(Math.min(P.length-1,Math.floor(s.progress*3.1)))})}
  else if(cs)$$('.cp',cs).forEach(p=>gsap.from(p.children,{y:36,opacity:0,duration:.8,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:p,start:'top 82%'}}))}
+/* questions : une seule ouverte à la fois */
+$$('.qa').forEach(q=>$('.qq',q).addEventListener('click',()=>{const o=!q.classList.contains('open');$$('.qa.open').forEach(x=>{x.classList.remove('open');$('.qq',x).setAttribute('aria-expanded','false')});if(o){q.classList.add('open');$('.qq',q).setAttribute('aria-expanded','true')}}));
 if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
   const W=txt.split(' '),L=small?[W.slice(0,2).join(' '),W.slice(2,3).join(' '),W.slice(3).join(' ')]:[W.slice(0,2).join(' '),W.slice(2).join(' ')];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');

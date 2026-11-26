@@ -907,3 +907,21 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 .cs.run .cp-b .phx{height:100%}
 @media (max-width:760px){.pr .tt,.ob .tt,.su .tt,.fq .tt{font-size:calc(9vw*var(--ds))}}
 .cs.run .cp1{align-content:center}
+/* Retours du 26 novembre (2) */
+/* méthode : sans bandeau, le bloc est centré dans l'écran */
+.ob{min-height:100svh;align-content:center}
+/* suivi : photo à gauche */
+.su-ph{min-height:clamp(360px,52vh,560px)}.su-ph img{position:absolute;inset:0}
+/* questions : une colonne, toutes de la même hauteur, la réponse glisse */
+.fq-g{grid-template-columns:minmax(0,1fr);gap:10px}
+.qa{background:#141417;border-radius:clamp(14px,1.4vw,20px);box-shadow:inset 0 0 0 1px rgba(244,244,242,.07)}
+.qq{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:68px;padding:0 clamp(18px,1.8vw,26px);text-align:left;font:inherit;font-weight:600;font-size:clamp(15px,1.15vw,17px);color:var(--ink);background:none;border:0;cursor:pointer}
+.qq i{flex:none;position:relative;width:16px;height:16px}
+.qq i:before,.qq i:after{content:"";position:absolute;left:0;right:0;top:7px;height:2px;background:currentColor;border-radius:2px;transition:transform .4s cubic-bezier(.65,0,.35,1)}
+.qq i:after{transform:rotate(90deg)}.qa.open .qq i:after{transform:rotate(0)}
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.65,0,.35,1)}
+.qa.open .qa-a{grid-template-rows:1fr}
+.qa-a>div{overflow:hidden}
+.qa-a p{margin:0;padding:0 clamp(18px,1.8vw,26px) clamp(18px,1.8vw,24px);color:var(--mut);font-size:15px;line-height:1.5;max-width:68ch;opacity:0;transform:translateY(-6px);transition:opacity .35s,transform .45s}
+.qa.open .qa-a p{opacity:1;transform:none;transition-delay:.12s}
+@media (max-width:760px){.ob{min-height:0}.su-ph{min-height:260px}.qq{min-height:60px}}
