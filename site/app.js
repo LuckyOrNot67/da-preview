@@ -102,8 +102,8 @@ const nx=$('.nx');if(nx){const C=$$('.nx-c',nx);
   /* Repères sur la voiture : la voiture du haut de page, chaque service s'allume à son endroit */
   /* Phrase manifeste : une seule idée, en grand, puis la liste de ce qu'on prend en charge */
   {nx.classList.add('xm');const box=document.createElement('div');box.className='xm-b';
-   const L=small?['Vous apportez','le message.',"On s'occupe",'du reste.']:['Vous apportez le message.',"On s'occupe du reste."];
-   box.innerHTML=`<h2 class="xm-t" aria-label="Vous apportez le message. On s'occupe du reste.">${L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('')}</h2><p class="xm-s">${ST.map(s=>`<span>${s.w==='Covering'?'Pose':s.w==='Diffusion'?'Conducteurs':s.w==='Conception'?'Création':s.w}</span>`).join('<i>·</i>')}</p>`;
+   const L=small?['Vous apportez',"l'objectif.",'On construit','le reste.']:["Vous apportez l'objectif.",'On construit le reste.'];
+   box.innerHTML=`<h2 class="xm-t" aria-label="Vous apportez l'objectif. On construit le reste.">${L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('')}</h2><p class="xm-s"><span>Une seule campagne.</span><span>Plusieurs métiers coordonnés.</span></p>`;
    nx.append(box);const S=stage(box,110,0);AN.expertise=[S.w,110];const sub=$$('.xm-s>*',box);
    gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',box),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.015,duration:.35,ease:'power1.out'},0).fromTo(sub,{y:14,opacity:0},{y:0,opacity:1,stagger:.04,duration:.3,ease:'power2.out'},.55).to({}, {duration:.3});
    const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;

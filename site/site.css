@@ -806,3 +806,10 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
   .dfm-g{grid-template-columns:minmax(0,1fr);gap:30px}
   .dfm-c h3{font-size:calc(26px*var(--ds))}
 }
+/* Accueil : questions avant de se lancer, plan de travail sous la phrase manifeste */
+.fqa{background:var(--bg);color:var(--ink);padding:clamp(70px,14vh,140px) var(--g)}
+.fqa h2{margin:0;font-size:calc(min(3.8vw,8vh)*var(--ds));max-width:9em}
+.fqa details p{color:var(--mut);max-width:62ch}
+.xm-s span+span:before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;vertical-align:middle;margin:0 14px 0 0}
+@media (max-width:760px){.fqa h2{font-size:calc(9vw*var(--ds))}}
+@media (max-width:760px){.xm-s{flex-direction:column;gap:4px}.xm-s span+span:before{display:none}}
