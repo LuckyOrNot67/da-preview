@@ -47,6 +47,8 @@ $$('.tw').forEach(tw=>{const big=$('.huge',tw),txt=big.textContent.trim();big.se
   gsap.timeline({scrollTrigger:S.st}).fromTo($$('.ch',big),{yPercent:60,opacity:0},{yPercent:0,opacity:1,stagger:.02,duration:.35,ease:'power1.out'},0).to({}, {duration:.25});
   const drift={trigger:S.w,start:'top bottom',end:'bottom top',scrub:true,invalidateOnRefresh:true},dA=small?.03:.05,dB=small?.035:.06;
   $$('.l',big).forEach((l,k)=>{const s=k%2?-1:1;gsap.fromTo(l,{x:()=>s*innerWidth*dA},{x:()=>-s*innerWidth*dB,ease:'none',scrollTrigger:drift})})});
+$$('.sv').forEach(sv=>gsap.from($$('.sv-l,.sv-i,.sv-f',sv),{y:40,opacity:0,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:sv,start:'top 78%'}}));
+$$('.dfm').forEach(d=>{gsap.from($$('.dfm-h>*',d),{y:30,opacity:0,duration:.7,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:d,start:'top 80%'}});gsap.from($$('.dfm-c',d),{y:60,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:$('.dfm-g',d),start:'top 85%'}})});
 if(sb){const big=$('.big',sb),txt=big.textContent.trim();big.classList.remove('fit');big.style.fontSize='';big.setAttribute('aria-label',txt);
   const W=txt.split(' '),L=small?[W.slice(0,2).join(' '),W.slice(2,3).join(' '),W.slice(3).join(' ')]:[W.slice(0,2).join(' '),W.slice(2).join(' ')];
   big.innerHTML=L.map((l,k)=>`<span class="l l${k}" aria-hidden="true">${l.split(' ').map(w=>`<span class="w">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' ')}</span>`).join('');
