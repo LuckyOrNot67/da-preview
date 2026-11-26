@@ -813,3 +813,97 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 .xm-s span+span:before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;vertical-align:middle;margin:0 14px 0 0}
 @media (max-width:760px){.fqa h2{font-size:calc(9vw*var(--ds))}}
 @media (max-width:760px){.xm-s{flex-direction:column;gap:4px}.xm-s span+span:before{display:none}}
+/* Accueil : disposition reprise de la proposition annonceurs, dans la DA adsmove (26 novembre) */
+#concept,#expertise,#suivi,#questions,#dispositif{scroll-margin-top:60px}
+.ey{margin:0;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.tt{margin:0;font-family:var(--d);font-weight:var(--dw);text-transform:uppercase;font-size:calc(min(4.2vw,8vh)*var(--ds));line-height:1;letter-spacing:-.025em}
+.tt span,.tt em{display:block}.tt em{font-style:normal;color:var(--mut)}
+.cd{background:#141417;border-radius:clamp(16px,1.6vw,24px);box-shadow:inset 0 0 0 1px rgba(244,244,242,.07);padding:clamp(18px,1.8vw,28px)}
+.cd h3,.cd h4{margin:0;font-family:var(--d);font-weight:var(--dw);text-transform:uppercase;letter-spacing:-.015em;line-height:1.02}
+.cd p{margin:0;color:var(--mut);line-height:1.45}
+.no{font-size:13px;font-weight:600;color:var(--mut);letter-spacing:.04em}
+.ic{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.lk{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
+.cp-p,.pr-p{margin:0;font-size:clamp(16px,1.3vw,20px);line-height:1.45;color:var(--mut);max-width:44ch}
+.pr-p{color:var(--ink);max-width:58ch;margin-top:clamp(16px,2.6vh,28px)}
+/* 01 le principe */
+.pr,.ob,.su,.fq{padding:clamp(90px,16vh,170px) var(--g) clamp(40px,8vh,90px);display:grid;gap:clamp(18px,3vh,32px)}
+.pr-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:clamp(24px,4vw,70px);align-items:end}
+.pr-a{display:grid;gap:18px}.pr-a p{color:var(--ink);font-size:16px}
+.g3,.g4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.2vw,18px)}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3 .cd,.g4 .cd{display:grid;gap:12px;align-content:start;min-height:clamp(200px,28vh,280px)}
+.g3 .ic,.g4 .ic{margin-top:6px}
+.g3 h3,.g4 h3{font-size:calc(min(1.9vw,3.8vh)*var(--ds));margin-top:auto}.g3 p,.g4 p{font-size:15px;max-width:36ch}
+/* 02-04 le dispositif */
+.cs{position:relative;background:var(--bg)}
+.cp{padding:clamp(80px,12vh,110px) var(--g) clamp(20px,4vh,40px);display:grid;gap:clamp(14px,2.4vh,26px);align-content:start}
+.cp .tt{font-size:calc(min(3.8vw,7vh)*var(--ds))}
+.phx{position:relative;margin:0;border-radius:clamp(16px,1.6vw,24px);overflow:hidden;min-height:0}
+.phx img{display:block;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:clamp(12px,1.4vw,22px);bottom:clamp(12px,1.4vw,22px);max-width:min(80%,460px);background:var(--ink);color:var(--bg);font-weight:600;font-size:clamp(13px,1vw,15px);line-height:1.35;padding:12px 16px;border-radius:12px}
+.cp1{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,70px);align-items:center}
+.cp-l{display:grid;gap:clamp(14px,2.4vh,24px)}
+.cp-li{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cp-li .cd{display:grid;grid-template-columns:44px 1fr;padding:14px 18px}.cp-li p{font-size:15px}.cp-li strong{color:var(--ink)}
+.cp1 .phx{aspect-ratio:3/2}
+.cp-h{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:clamp(24px,4vw,70px);align-items:end}
+.cp-b{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(12px,1.4vw,20px);min-height:0}
+.cp-st{display:grid;gap:10px;align-content:stretch}
+.cp-st .cd{display:grid;gap:6px;align-content:center;padding:clamp(14px,1.4vw,22px)}
+.cp-st h4{font-size:calc(min(1.7vw,3.4vh)*var(--ds))}.cp-st p{font-size:14.5px}
+.cd-n{grid-template-columns:40px 1fr}
+.nt{margin:0;font-size:13.5px;color:var(--mut)}
+.cs.run{height:100svh;overflow:hidden}
+.cs.run .cs-t{position:absolute;inset:0}
+.cs.run .cp{position:absolute;inset:0;height:100svh;transform:translateX(100%);transition:transform .85s cubic-bezier(.65,0,.35,1)}
+.cs.run .cp.on{transform:none}.cs.run .cp.past{transform:translateX(-100%)}
+.cs.run .cp2,.cs.run .cp3{grid-template-rows:auto minmax(0,1fr) auto}
+.cs.run .cp-b{height:100%}
+/* 06 l'objectif */
+.hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:clamp(24px,4vw,70px);align-items:end;margin-bottom:clamp(10px,2vh,20px)}
+.bn{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px clamp(18px,1.8vw,28px)}.bn p{color:var(--ink);font-weight:600;font-size:clamp(16px,1.3vw,19px)}
+/* 07 le suivi */
+.su-b{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(12px,1.4vw,20px)}
+.rp{background:var(--sig);color:var(--sigt);border-radius:clamp(18px,1.8vw,28px);padding:clamp(20px,2.4vw,36px);display:grid;gap:10px;align-content:start}
+.rp-h{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
+.rp-s{margin:4px 0 0;opacity:.6}
+.rp-t{margin:0 0 clamp(14px,3vh,30px);font-family:var(--d);font-weight:var(--dw);text-transform:uppercase;font-size:calc(min(3.6vw,6.6vh)*var(--ds));line-height:1;letter-spacing:-.025em;max-width:10em}
+.rp-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(11,11,13,.18);border-bottom:1px solid rgba(11,11,13,.18)}
+.rp-g>div{padding:18px 16px 22px 0;display:grid;gap:8px;align-content:start}.rp-g>div+div{border-left:1px solid rgba(11,11,13,.18);padding-left:16px}
+.rp-g b{font-size:13px;opacity:.55}.rp-g h4{margin:6px 0 0;font-size:16px}.rp-g p{margin:0;font-size:14px;opacity:.7}
+.rp-f{margin:12px 0 0;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
+.su-r{display:grid;gap:10px}.su-r .cd{display:grid;gap:8px}
+.su-r h4{font-size:calc(min(1.8vw,3.6vh)*var(--ds))}.su-r p{font-size:15px}
+.cd2{background:transparent}
+/* 08 les questions */
+.fq{grid-template-columns:minmax(0,4fr) minmax(0,7fr);align-items:start;gap:clamp(24px,4vw,70px)}
+.fq>div:first-child{display:grid;gap:clamp(18px,3vh,30px);position:sticky;top:110px}
+.fq-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.fq-g details{border:0;padding:0}
+.fq-g summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:clamp(18px,1.8vw,26px);font-weight:600;font-size:clamp(15px,1.15vw,17px);cursor:pointer}
+.fq-g summary::-webkit-details-marker{display:none}
+.fq-g summary i{flex:none;position:relative;width:16px;height:16px}
+.fq-g summary i:before,.fq-g summary i:after{content:"";position:absolute;left:0;right:0;top:7px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s}
+.fq-g summary i:after{transform:rotate(90deg)}.fq-g details[open] summary i:after{transform:none}
+.fq-g details p{padding:0 clamp(18px,1.8vw,26px) clamp(18px,1.8vw,26px);font-size:15px}
+@media (max-width:1000px){
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .tt,.cp .tt{font-size:calc(9vw*var(--ds))}
+  .pr,.ob,.su,.fq{padding:clamp(70px,12vh,110px) var(--g) 30px}
+  .pr-top,.hd,.cp-h,.cp-b,.cp1,.su-b,.fq,.g3,.g4,.fq-g{grid-template-columns:minmax(0,1fr)}
+  .g3 .cd,.g4 .cd{min-height:0}.g3 h3,.g4 h3{font-size:calc(24px*var(--ds));margin-top:4px}
+  .cp{padding:clamp(56px,10vh,90px) var(--g) 10px}
+  .cp1 .phx,.cp-b .phx{aspect-ratio:4/3}
+  .cp-st h4{font-size:calc(21px*var(--ds))}
+  .bn{flex-direction:column;align-items:flex-start}
+  .rp-t{font-size:calc(10vw*var(--ds))}
+  .rp-g{grid-template-columns:minmax(0,1fr)}.rp-g>div+div{border-left:0;border-top:1px solid rgba(11,11,13,.18);padding-left:0}
+  .su-r h4{font-size:calc(21px*var(--ds))}
+  .fq>div:first-child{position:static}
+}
+.pr .tt,.ob .tt,.su .tt,.fq .tt{font-size:calc(min(3.6vw,7vh)*var(--ds))}
+.cs.run .cp-b .phx{height:100%}
+@media (max-width:760px){.pr .tt,.ob .tt,.su .tt,.fq .tt{font-size:calc(9vw*var(--ds))}}
+.cs.run .cp1{align-content:center}
