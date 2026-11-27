@@ -1135,3 +1135,4 @@ footer,[data-bf] footer{background:var(--barbg);color:var(--ink)}
 .iph-isl{width:calc(var(--w)*.26);height:calc(var(--w)*.078);top:calc(var(--w)*.06)}
 .iph-sb{padding:0 7.5% 0 12%;height:5.6%}
 .iph-ic{gap:calc(var(--w)*.013)}.iph-ic svg{height:calc(var(--w)*.034)}.iph-ic svg:last-child{height:calc(var(--w)*.04)}
+@media (min-width:761px){.dv-sy h2{font-size:calc(min(3.3vw,6.4vh)*var(--ds));white-space:nowrap}}

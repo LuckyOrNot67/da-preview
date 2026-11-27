@@ -29,20 +29,14 @@ $$('.dv-fc').forEach(c=>{const N=$$('.n',c),t=gsap.timeline({scrollTrigger:on(c,
 /* étapes : l'app réelle tourne dans l'iPhone ; le défilement la pilote (inscription, campagnes, fiche, participation, accueil) */
 {const sec=$('.dv-sy');if(sec){const T=$$('.sy-t',sec),Dd=$$('.sy-d li',sec),n=T.length,len=small?300:360,scr=$('.sy-i .iph-scr',sec),box=$('.iph-fr',sec),fr=$('iframe',sec);
  const w=document.createElement('div');w.className='dv-tlw';w.style.height=`calc(100svh + ${len}vh)`;sec.before(w);w.append(sec);sec.classList.add('pin');
- const HASH=['#/inscription/1','#/campagnes','#/campagne/studio-nord','#/'],TONE=['lt','lt','dk','dk'];
+ const HASH=['#/','#/campagnes','#/campagne/studio-nord','#/profil'],TONE=['dk','lt','dk','lt'];
  let W=null,ready=false,P=0,cur=-1,sheet=false;
  const fit=()=>{const r=box.getBoundingClientRect();if(r.width)fr.style.transform=`scale(${r.width/390})`};addEventListener('resize',fit);
  const q=(s,all)=>{const d=W.document;const l=[...d.querySelectorAll(s)].filter(e=>e.offsetParent!==null);return all?l:l.pop()};
  const apply=()=>{const ph=Math.min(n-1,Math.floor(P*n)),lp=Math.min(1,P*n-ph);
   if(ph!==cur){cur=ph;T.forEach((x,k)=>x.classList.toggle('on',k===ph));Dd.forEach((x,k)=>x.classList.toggle('on',k<=ph));scr.classList.toggle('dk',TONE[ph]==='dk');scr.classList.toggle('lt',TONE[ph]==='lt')}
   if(!ready)return;
-  try{
-   if(sheet&&!(ph===2&&lp>.55)){W.document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}));sheet=false}
-   if(W.location.hash!==HASH[ph])W.location.hash=HASH[ph];
-   if(ph===0){const i=q('input[type=text],input:not([type])');if(i){const v='Sam'.slice(0,Math.round(Math.min(1,lp*1.8)*3));if(i.value!==v)i.value=v}}
-   if(ph===1){const c=q('.clist');if(c)c.scrollTop=lp*(c.scrollHeight-c.clientHeight)}
-   if(ph===2){const c=q('[data-dscroll]');if(c)c.scrollTop=Math.min(1,lp/.5)*(c.scrollHeight-c.clientHeight)*.6;
-    if(lp>.55&&!sheet){const btn=q('[data-sheet=participer]');if(btn){btn.click();sheet=true}}}
+  try{if(W.location.hash!==HASH[ph])W.location.hash=HASH[ph]
   }catch(e){}};
  fr.addEventListener('load',()=>{W=fr.contentWindow;fit();
   const start=()=>{const d=W.document,demo=[...d.querySelectorAll('button,a')].find(b=>/profil d.exemple/i.test(b.textContent));if(demo)demo.click();
